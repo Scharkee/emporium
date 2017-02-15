@@ -22,11 +22,7 @@ public class AssignTiles : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
-
- 
-
-    }
+	
 
 
 
@@ -35,11 +31,12 @@ public class AssignTiles : MonoBehaviour {
   
 
         string evtStringRows = evt.data.ToString();
+        Debug.Log(evtStringRows);
 
         StringBuilder builder = new StringBuilder(evtStringRows);///////////////////////////////////////////////////////
         builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
         string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
-
+      
 
         Database.tile = JsonHelper.FromJson<Tile>(evtStringItems);//converting & assignment
 
@@ -49,6 +46,26 @@ public class AssignTiles : MonoBehaviour {
         plotsel.SpawnPlotSelectors();
 
         SpawnTiles();
+
+    }
+
+
+    public void AssignTileInformation(SocketIOEvent evt)
+    {
+
+
+        string evtStringRows = evt.data.ToString();
+        Debug.Log(evtStringRows);
+
+        StringBuilder builder = new StringBuilder(evtStringRows);///////////////////////////////////////////////////////
+        builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
+        string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
+
+
+        Database.buildinginfo = JsonHelper.FromJson<Building>(evtStringItems);//converting & assignment
+
+        Debug.Log(Database.buildinginfo[0].PROG_AMOUNT);
+
 
     }
 
@@ -63,7 +80,7 @@ public class AssignTiles : MonoBehaviour {
          //   if (Database.tile[i].NAME == "obuolys_1"|| Database.tile[i].NAME == "kriause_1") { xRot = -90f; }// for models that need rotations. Spearate with ||.
 
             GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(Database.tile[i].X, 0f, Database.tile[i].Z),Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)) ,GameObject.Find("Tiles").transform) as GameObject;
-            Debug.Log("random rot is " + Random.rotation);
+            currentTile.GetComponent<BuildingScript>().thistile = Database.tile[i];
 
             i++;
         }

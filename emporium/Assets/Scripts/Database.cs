@@ -18,12 +18,12 @@ public class Database : MonoBehaviour
 
     //FULL TILE DATABASE
     public static Tile[] tile;
+    public static Building[] buildinginfo;
 
 
     //BUILDING-UPGRADE-FRUIT INFORMATION
     //augalai
-
-    public static Building[] building;
+    
 
     public static Building apelsinas_1 = new Building();
     public static Building obelis_1 = new Building();
@@ -96,19 +96,20 @@ public class Tile
 {
     public int ID;
     public string NAME;
-    public int PROGRESS;
+    public int START_OF_GROWTH;
     public float X;
     public float Z;
-    public float FERTILISED;
+    public float FERTILISED_UNTIL;
+    public int COUNT;
 
 }
 
 [System.Serializable]
 public class Building
 {
-    public string Name;
-    public float Cost;
-    public int progressceiling;
+    public string NAME = "";
+    public float COST;
+    public int PROG_AMOUNT;
 
 }
 

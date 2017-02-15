@@ -29,10 +29,6 @@ public class LoginCheck : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update () {
-	
-	}
 
  //TODO: check for dupe username
 

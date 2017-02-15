@@ -16,7 +16,8 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
     public static int UserPlotSize;
     GlobalControl globalcontr;
     Database db;
-  
+    HelperScripts helperscript;
+    AssignTiles assigner;
     
 
     SocketIOComponent socket;
@@ -25,6 +26,8 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
     void Start () {
 
         db = gameObject.GetComponent<Database>();
+
+        assigner = gameObject.GetComponent<AssignTiles>();
 
         GameObject go = GameObject.Find("SocketIO");
         socket = go.GetComponent<SocketIOComponent>();
@@ -35,18 +38,14 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
         socket.On("connectedToNode", GetStats);
         socket.On("RETRIEVE_STATS", ReceiveStats);
         socket.On("RECEIVE_TILES", ReceiveTileData);
+        socket.On("RECEIVE_TILE_INFORMATION", ReceiveTileInformation);
 
-        
 
-        
+
+
     }
 	
 	// Update is called once per frame
-	void Update () {
-        
-
-    }
-
 
  
     void LoadEverythingAndSetUI()
@@ -87,7 +86,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
         Dictionary<string, string>  data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Uname;
         
-        Debug.Log(globalcontr.ConnectedOnceNoDupeStatRequests);
+       
 
         if (globalcontr.ConnectedOnceNoDupeStatRequests)
         {
@@ -122,6 +121,8 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Uname;
         Debug.Log("asking for tile data");
+
+        socket.Emit("GET_TILE_INFORMATION", new JSONObject(data));
         socket.Emit("GET_TILE_DATA", new JSONObject(data));
 
 
@@ -132,13 +133,18 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
     void ReceiveTileData(SocketIOEvent evt)
     {
       
-        AssignTiles assigner = gameObject.GetComponent<AssignTiles>();
+        
         assigner.AssignReceivedTiles(evt);
 
     }
 
- 
+    void ReceiveTileInformation(SocketIOEvent evt)
+    {
 
+        
+        assigner.AssignTileInformation(evt);
+
+    }
 
 
 }

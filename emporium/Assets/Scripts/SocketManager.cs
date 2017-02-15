@@ -13,7 +13,8 @@ public class SocketManager : MonoBehaviour {
     GlobalControl globalcontr;
     Database db;
     bool ver = false;
-    int unix;
+    public int unix;
+    HelperScripts helperscript;
     
 
     SocketIOComponent socket;
@@ -35,6 +36,9 @@ public class SocketManager : MonoBehaviour {
 
         socket.On("BUILD_TILE", GameObject.Find("_ManagerialScripts").GetComponent<AssignTiles>().BuildTile);
 
+
+        StartCoroutine(UnixUpdater());
+
         
 
     }
@@ -42,6 +46,25 @@ public class SocketManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+    }
+
+    IEnumerator UnixUpdater()
+    {
+        while (true)
+        {
+            GetUnix();
+            yield return new WaitForSeconds(1f);
+
+
+        }
+
+
+    }
+
+    void GetUnix()
+    {
+        socket.Emit("GET_UNIX");
 
     }
 
@@ -83,6 +106,41 @@ public class SocketManager : MonoBehaviour {
 
     }
 
+    public void UpdateUI(SocketIOEvent evt)
+    {
+
+        Text moneytext = GameObject.Find("MoneyEdit").GetComponent<Text>();
+        Text usertext = GameObject.Find("PlayingAsEdit").GetComponent<Text>();
+
+        
+        int dollars = int.Parse(evt.data.GetField("dollars").ToString());
+        
+
+        moneytext.text = Database.UserDollars.ToString();
+        Debug.Log("setting dollar UI text to " + dollars);
+        usertext.text = GlobalControl.Uname;
+        Debug.Log("setting username UI text to " + GlobalControl.Uname);
+
+
+    }
+
+    public void UpdatePlotSize(SocketIOEvent evt)
+    {
+
+        RotationScript rotscript = GameObject.Find("Main Camera").GetComponent<RotationScript>();
+        rotscript.SetCurrentRotCenter(helperscript.LyginisPlotsize());//also sets ground transform
+
+        GameObject.Find("Ground").transform.localScale = new Vector3(Database.UserPlotSize, 0.1f, Database.UserPlotSize);
+    }
+
+    public void VerifyHarvest(int ID)
+    {
+        //LEFTOFF: send to server and send back fruit delete order + update fruit count somewhere. Also new columns in stats (oranges,apples, t.t).
+
+    }
+
+
+
     void DiscrepancyAction(SocketIOEvent evt)
     {
         //TODO: show diecrepency alert, mb shut down game even.
@@ -90,28 +148,18 @@ public class SocketManager : MonoBehaviour {
 
     }
 
-    public int GetUnix()
-    {
-        int unixx;
-
-      
-
-        socket.Emit("GET_UNIX");
-
-        while (unix==0)
-        {
-           //FIX THIS, test by pressing U ingame.
-        }
-
-        unixx = unix;
-        unix = 0;
-
-        return unixx;
-    }
+   
 
     void ReceiveUnix(SocketIOEvent evt)
     {
-        unix = int.Parse(evt.data.GetField("unixTime").ToString());
+        Debug.Log(evt);
+     
+
+
+      
+        unix = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", "")); //FIXME this is dumb
+
+  
     }
 
 
