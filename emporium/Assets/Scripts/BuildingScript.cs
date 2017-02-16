@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SocketIO;
+using System.Text.RegularExpressions;
+using System;
 
 public class BuildingScript : MonoBehaviour {
 
@@ -10,19 +13,30 @@ public class BuildingScript : MonoBehaviour {
     SocketManager socman;
     public bool TileGrown;
 
+    SocketIOComponent socket;
+    UIManager uiManager;
 
+    public int idInTileDatabase; //norint pasiekti savo tile bendrame tile array
+    private int idInTileInfoDatabase;  // norint pasiekti savo tile informacija bendrame BuildingInfo array
 
 
 
     // Use this for initialization
     void Start () {
-        socman = GameObject.Find("_ManagerialScripts").GetComponent<SocketManager>();
+        GameObject managerial = GameObject.Find("_ManagerialScripts");
+        socman = managerial.GetComponent<SocketManager>();
+        uiManager = managerial.GetComponent<UIManager>();
+
+        GameObject go = GameObject.Find("SocketIO");
+        socket = go.GetComponent<SocketIOComponent>();
 
         AssignTileValues();
         StartCoroutine(CheckForGrowthCompletionRepeat());
         RetrieveTileInfo();
 
         TileGrown = false;
+
+        socket.On("RESET_TILE_GROWTH", ResetGrowth);
         
 
     }
@@ -56,7 +70,7 @@ public class BuildingScript : MonoBehaviour {
 
             Debug.Log("harvesting");
 
-            socman.VerifyHarvest(thistile.ID);
+            VerifyHarvest();
         }
 
 
@@ -85,33 +99,20 @@ public class BuildingScript : MonoBehaviour {
 
                 GameObject vaisiaiPrefab = Resources.Load("Plants/done/" + thistile.NAME + "_vaisiai") as GameObject;
 
-
                 GameObject vaisiai = Instantiate(vaisiaiPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), gameObject.transform.rotation, gameObject.transform) as GameObject;
 
             }
           
       
-
-
-
-
-            
-           
-
         }
-        else
-        {
-
-            Debug.Log("medis neuzauges, " +socman.unix +" yra daugiau uz " + prog);
-
-        }
+        
 
 
     }
 
     void AssignTileValues()
     {
-
+        //?????
     }
 
 
@@ -125,14 +126,61 @@ public class BuildingScript : MonoBehaviour {
             thistileInfo.NAME = Database.buildinginfo[i].NAME;
 
 
-            Debug.Log(Database.buildinginfo[i].NAME);
-            Debug.Log(thistileInfo.NAME);
             
         }
 
         thistileInfo = Database.buildinginfo[i];
+        idInTileInfoDatabase = i;
 
-        Debug.Log("final tile progress from thistileinfo is: " + thistileInfo.PROG_AMOUNT);
+     
+    }
+
+
+    private void VerifyHarvest()
+    {
+        
+        Dictionary<string, string> data;
+        data = new Dictionary<string, string>();
+   
+        data["Uname"] = Database.UserUsername;
+        data["TileID"] = thistile.ID.ToString();
+
+
+        socket.Emit("VERIFY_COLLECT_TILE", new JSONObject(data));
+    }
+
+    private void ResetGrowth(SocketIOEvent evt)
+    {
+
+        Debug.Log(thistile.NAME + " " + thistile.ID + " vs " + int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")));
+      
+
+        if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
+        {
+
+            uiManager.ChangeUIText(thistileInfo.TILEPRODUCENAME + "_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
+            Debug.Log("ressetting tile ");
+
+
+            Destroy(transform.FindChild(thistile.NAME + "_vaisiai(Clone)").gameObject);
+            Debug.Log("destroying fruits: " + thistile.NAME + "_vaisiai(Clone)");
+
+
+            Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+
+            TileGrown = false;
+
+
+            thistile = Database.tile[idInTileDatabase];
+
+
+
+        }
+        else
+        {
+            Debug.Log("fucked uuuuuuuuup");
+        }
+
 
 
 

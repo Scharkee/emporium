@@ -9,20 +9,26 @@ public class BuyButtonScript : MonoBehaviour
 
     public Color panelimage;
 
-    [SerializeField]
-    private GameObject opgrid;
+  
+     GameObject opgrid;
 
 
 
 
     void Start()
     {
-       
 
+     
 
        opgrid.SetActive(false);
 
 
+    }
+
+    void Awake()
+    {
+
+        opgrid = GameObject.Find("OptionGrid").gameObject;
     }
 
     public void TheClick()

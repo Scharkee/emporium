@@ -133,11 +133,7 @@ public class SocketManager : MonoBehaviour {
         GameObject.Find("Ground").transform.localScale = new Vector3(Database.UserPlotSize, 0.1f, Database.UserPlotSize);
     }
 
-    public void VerifyHarvest(int ID)
-    {
-        //LEFTOFF: send to server and send back fruit delete order + update fruit count somewhere. Also new columns in stats (oranges,apples, t.t).
-
-    }
+   
 
 
 

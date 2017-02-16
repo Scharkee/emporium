@@ -7,15 +7,18 @@ using System.Text;
 
 public class AssignTiles : MonoBehaviour {
 
- 
+
+    UIManager uiManager;
 
 
     // Use this for initialization
     void Start () {
 
 
-
+        GameObject managerial = GameObject.Find("_ManagerialScripts");
        
+        uiManager = managerial.GetComponent<UIManager>();
+
 
 
 
@@ -64,7 +67,29 @@ public class AssignTiles : MonoBehaviour {
 
         Database.buildinginfo = JsonHelper.FromJson<Building>(evtStringItems);//converting & assignment
 
-        Debug.Log(Database.buildinginfo[0].PROG_AMOUNT);
+ 
+
+    }
+
+    public void AssignInventory(SocketIOEvent evt)
+    {
+
+
+        string evtStringRows = evt.data.ToString();
+        Debug.Log(evtStringRows);
+
+        StringBuilder builder = new StringBuilder(evtStringRows);///////////////////////////////////////////////////////
+        builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
+        string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
+
+
+        Database.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);//converting & assignment
+
+        uiManager.ChangeUIText("apelsinai_Editable", Database.inventory[0].apelsinai.ToString());
+        uiManager.ChangeUIText("kriauses_Editable", Database.inventory[0].kriauses.ToString());  //EXPAND
+        uiManager.ChangeUIText("slyvos_Editable", Database.inventory[0].slyvos.ToString());
+
+
 
 
     }
@@ -81,6 +106,8 @@ public class AssignTiles : MonoBehaviour {
 
             GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(Database.tile[i].X, 0f, Database.tile[i].Z),Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)) ,GameObject.Find("Tiles").transform) as GameObject;
             currentTile.GetComponent<BuildingScript>().thistile = Database.tile[i];
+            currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
+
 
             i++;
         }

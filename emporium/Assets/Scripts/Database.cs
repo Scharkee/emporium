@@ -16,15 +16,18 @@ public class Database : MonoBehaviour
 
 
 
-    //FULL TILE DATABASE
+    //MAIN DATBASES
     public static Tile[] tile;
     public static Building[] buildinginfo;
+    public static Inventory[] inventory;
+
+
 
 
     //BUILDING-UPGRADE-FRUIT INFORMATION
     //augalai
     
-
+/*
     public static Building apelsinas_1 = new Building();
     public static Building obelis_1 = new Building();
     public static Building krause_1 = new Building();
@@ -42,6 +45,7 @@ public class Database : MonoBehaviour
     public static Building braskes_1 = new Building();
     public static Building morka_1 = new Building();
 
+*/
 
     //irenginiai
 
@@ -108,8 +112,10 @@ public class Tile
 public class Building
 {
     public string NAME = "";
-    public float COST;
+    public float PRICE;
     public int PROG_AMOUNT;
+    public string TILEPRODUCENAME;
+
 
 }
 
@@ -117,6 +123,22 @@ public class Building
 public class BuyButtons
 {
     public string NAME;
+}
+
+[System.Serializable]
+public class Inventory
+{
+    
+   
+    public float apelsinai;
+    public float obuoliai;
+    public float vysnios;
+    public float slyvos;
+    public float bananai;
+    public float arbuzai;
+    public float kriauses;
+
+
 }
 
 

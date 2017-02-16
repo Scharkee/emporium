@@ -39,8 +39,8 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
         socket.On("RETRIEVE_STATS", ReceiveStats);
         socket.On("RECEIVE_TILES", ReceiveTileData);
         socket.On("RECEIVE_TILE_INFORMATION", ReceiveTileInformation);
-
-
+        socket.On("RECEIVE_INVENTORY", ReceiveInventory);
+        
 
 
     }
@@ -54,9 +54,8 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
         Text usertext = GameObject.Find("PlayingAsEdit").GetComponent<Text>();
 
         moneytext.text = Database.UserDollars.ToString();
-        Debug.Log("setting dollar UI text to "+ UserDollars);
         usertext.text = GlobalControl.Uname;
-        Debug.Log("setting username UI text to " + GlobalControl.Uname);
+     
 
         RotationScript rotscript = GameObject.Find("Main Camera").GetComponent<RotationScript>();
         rotscript.SetCurrentRotCenter(lygusnelygusPlot());//also sets ground transform
@@ -143,6 +142,14 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
 
         
         assigner.AssignTileInformation(evt);
+
+    }
+
+    void ReceiveInventory(SocketIOEvent evt)
+    {
+
+
+        assigner.AssignInventory(evt);
 
     }
 
