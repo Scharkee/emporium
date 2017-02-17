@@ -13,6 +13,8 @@ public class RotationScript : MonoBehaviour {
     public float speed;      //multiplier for the mouse wheel input
     private Vector3 storePos; //stores the rotation of the attached gameObject
 
+    BuyButtonScript buybuttonscript;
+
 
     private Vector3 axispoint;
     // Use this for initialization
@@ -27,22 +29,35 @@ public class RotationScript : MonoBehaviour {
         speed = 10000.0f;
         storePos = gameObject.transform.eulerAngles;  //keeps storePos up to date 
 
+        buybuttonscript= GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
+
 
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+
         transform.LookAt(axispoint);
 
         rotOld = rot;
 
-        rot = Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
+
+
+
+
+
+        if (!buybuttonscript.panelEnabled)
+        {
+            rot = Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
+
+        }
+        else { rot = 0; }
 
         rot = Mathf.LerpAngle(rotOld, rot, 0.03f);
+
         transform.RotateAround(currentCenter, Vector3.up, rot);
 
-    
     }
 
     public void SetCurrentRotCenter(bool lygnelyg)

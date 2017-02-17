@@ -23,6 +23,8 @@ public class BuildingScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+       
         GameObject managerial = GameObject.Find("_ManagerialScripts");
         socman = managerial.GetComponent<SocketManager>();
         uiManager = managerial.GetComponent<UIManager>();
@@ -30,11 +32,15 @@ public class BuildingScript : MonoBehaviour {
         GameObject go = GameObject.Find("SocketIO");
         socket = go.GetComponent<SocketIOComponent>();
 
+        CheckForGrowthCompletion();
+
         AssignTileValues();
         StartCoroutine(CheckForGrowthCompletionRepeat());
         RetrieveTileInfo();
 
         TileGrown = false;
+
+       
 
         socket.On("RESET_TILE_GROWTH", ResetGrowth);
         

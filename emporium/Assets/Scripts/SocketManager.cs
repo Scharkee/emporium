@@ -28,7 +28,8 @@ public class SocketManager : MonoBehaviour {
         socket = go.GetComponent<SocketIOComponent>();
         globalcontr = GameObject.Find("GlobalObject").GetComponent<GlobalControl>();
 
-   
+        StartCoroutine(UnixUpdater());
+
         socket.On("LASTONLINE_PING", SendAutosaveVerify);
         socket.On("VERIFY", Verification);
         socket.On("DISCREPANCY", DiscrepancyAction);
@@ -36,26 +37,22 @@ public class SocketManager : MonoBehaviour {
 
         socket.On("BUILD_TILE", GameObject.Find("_ManagerialScripts").GetComponent<AssignTiles>().BuildTile);
 
-
-        StartCoroutine(UnixUpdater());
+       
+        
 
         
 
     }
 	
-	// Update is called once per frame
-	void Update () {
-
-
-    }
+	
 
     IEnumerator UnixUpdater()
     {
         while (true)
         {
-            GetUnix();
+            Debug.Log("asking for unix");
             yield return new WaitForSeconds(1f);
-
+            GetUnix();
 
         }
 
@@ -64,6 +61,7 @@ public class SocketManager : MonoBehaviour {
 
     void GetUnix()
     {
+        Debug.Log("asking for unix");
         socket.Emit("GET_UNIX");
 
     }
@@ -148,10 +146,9 @@ public class SocketManager : MonoBehaviour {
 
     void ReceiveUnix(SocketIOEvent evt)
     {
-        Debug.Log(evt);
+        Debug.Log(evt.data);
      
-
-
+        
       
         unix = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", "")); //FIXME this is dumb
 

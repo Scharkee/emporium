@@ -9,19 +9,21 @@ public class BuyButtonScript : MonoBehaviour
 
     public Color panelimage;
 
+    public bool panelEnabled;
+
   
      GameObject opgrid;
 
-
+    GameObject menupanel;
 
 
     void Start()
     {
 
-     
+     menupanel = GameObject.Find("BuyMenuPanel");
 
        opgrid.SetActive(false);
-
+        panelEnabled = false;
 
     }
 
@@ -41,11 +43,12 @@ public class BuyButtonScript : MonoBehaviour
 
     IEnumerator BuyMenuPanelFader()
     {
-        GameObject menupanel = GameObject.Find("BuyMenuPanel");
+       menupanel = GameObject.Find("BuyMenuPanel");
 
         if (menupanel.GetComponent<CanvasGroup>().alpha<1f)
         {
             activateOpGrid(true);
+            panelEnabled = true; // used to stop rotation when viewing panel
 
             while (menupanel.GetComponent<CanvasGroup>().alpha < 1f)
             {
@@ -65,7 +68,7 @@ public class BuyButtonScript : MonoBehaviour
         }
         else if (menupanel.GetComponent<CanvasGroup>().alpha > 0f)
         {
-            
+            panelEnabled = false;
 
             while (menupanel.GetComponent<CanvasGroup>().alpha > 0f)
             {
