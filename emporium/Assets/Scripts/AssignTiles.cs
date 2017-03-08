@@ -83,7 +83,8 @@ public class AssignTiles : MonoBehaviour {
         string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
 
 
-        Database.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);//converting & assignment
+        Database.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);// assignment
+       
 
         uiManager.ChangeUIText("apelsinai_Editable", Database.inventory[0].apelsinai.ToString());
         uiManager.ChangeUIText("kriauses_Editable", Database.inventory[0].kriauses.ToString());  //EXPAND
@@ -181,6 +182,8 @@ public class AssignTiles : MonoBehaviour {
         
 
     }
+
+
 }
 
 

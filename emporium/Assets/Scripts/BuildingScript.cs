@@ -88,6 +88,8 @@ public class BuildingScript : MonoBehaviour {
 
     void CheckForGrowthCompletion()
     {
+
+        if(thistile.BUILDING_TYPE == 0) { // augalas
         int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT;
 
         if (socman.unix >= prog)
@@ -110,8 +112,19 @@ public class BuildingScript : MonoBehaviour {
             }
           
       
+          }
+
+        }else if (thistile.BUILDING_TYPE == 1) // pastatas
+        {
+            //TODO: kaip pastatas checkina for completion.
+
+
+
+
+
+
         }
-        
+
 
 
     }
@@ -158,6 +171,12 @@ public class BuildingScript : MonoBehaviour {
     private void ResetGrowth(SocketIOEvent evt)
     {
 
+        if(thistile.BUILDING_TYPE == 0)//augalas
+        {
+
+
+        
+
         Debug.Log(thistile.NAME + " " + thistile.ID + " vs " + int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")));
       
 
@@ -188,7 +207,17 @@ public class BuildingScript : MonoBehaviour {
         }
 
 
+        }else if(thistile.BUILDING_TYPE == 1)//pastatas
+        {
+            //kaip pastatas reaguos, kai atsius resetint progresa
+            //TODO
+
+
+        }
+
 
 
     }
+
+
 }

@@ -19,7 +19,10 @@ public class Database : MonoBehaviour
     //MAIN DATBASES
     public static Tile[] tile;
     public static Building[] buildinginfo;
-    public static Inventory[] inventory;
+    public static Inventory[] inventory; //one main inventory
+
+
+
 
 
 
@@ -105,7 +108,7 @@ public class Tile
     public float Z;
     public float FERTILISED_UNTIL;
     public int COUNT;
-
+    public int BUILDING_TYPE;
 }
 
 [System.Serializable]
@@ -115,6 +118,7 @@ public class Building
     public float PRICE;
     public int PROG_AMOUNT;
     public string TILEPRODUCENAME;
+  
 
 
 }
@@ -125,21 +129,30 @@ public class BuyButtons
     public string NAME;
 }
 
+
 [System.Serializable]
 public class Inventory
 {
-    
-   
+
+
     public float apelsinai;
+    public float apelsinai_sultys;
     public float obuoliai;
+    public float obuoliai_sultys;
     public float vysnios;
+    public float vysnios_sultys;
     public float slyvos;
+    public float slyvos_sultys;
     public float bananai;
+    public float bananai_sultys;
     public float arbuzai;
+    public float arbuzai_sultys;
     public float kriauses;
+    public float kriauses_sultys;
 
 
 }
+
 
 
 
