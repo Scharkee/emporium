@@ -108,7 +108,8 @@ public class Tile
     public float Z;
     public float FERTILISED_UNTIL;
     public int COUNT;
-    public int BUILDING_TYPE;
+    public int BUILDING_CURRENT_WORK_AMOUNT;
+    public string WORK_NAME;
 }
 
 [System.Serializable]
@@ -118,7 +119,7 @@ public class Building
     public float PRICE;
     public int PROG_AMOUNT;
     public string TILEPRODUCENAME;
-  
+    public int BUILDING_TYPE;
 
 
 }

@@ -10,20 +10,31 @@ public class UIManager : MonoBehaviour {
     Text usernameText;
     Text apelsinaiText;
 
+    public GameObject PressContextPanel;
+
 	// Use this for initialization
 	void Start () {
 
+        DisablePanels();
+
+        
 
 
 
 
-		
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    void Awake()
+    {
+        //grab all panels 
+        PressContextPanel = GameObject.Find("PressContextPanel");
+
+    }
 
     public void ChangeUIText(string TextObjName, string newtext)
     {
@@ -32,6 +43,13 @@ public class UIManager : MonoBehaviour {
         text.text = newtext;
 
 
+    }
+
+    private void DisablePanels()
+    {// disable all panels at start
+
+
+        PressContextPanel.SetActive(false);
     }
 
 

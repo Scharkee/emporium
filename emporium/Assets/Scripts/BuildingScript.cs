@@ -8,13 +8,24 @@ using System;
 
 public class BuildingScript : MonoBehaviour {
 
+
+
+    //plant
+    public bool TileGrown;
+
+    //building
+    public bool WorkDone;
+    public string WorkName;
+    public bool WorkAssigned;
+
+
+    //both
+    SocketIOComponent socket;
+    UIManager uiManager;
+
     public Tile thistile;
     public Building thistileInfo;
     SocketManager socman;
-    public bool TileGrown;
-
-    SocketIOComponent socket;
-    UIManager uiManager;
 
     public int idInTileDatabase; //norint pasiekti savo tile bendrame tile array
     private int idInTileInfoDatabase;  // norint pasiekti savo tile informacija bendrame BuildingInfo array
@@ -39,7 +50,8 @@ public class BuildingScript : MonoBehaviour {
         RetrieveTileInfo();
 
         TileGrown = false;
-
+        WorkDone = false;
+        WorkAssigned = false;
        
 
         socket.On("RESET_TILE_GROWTH", ResetGrowth);
@@ -89,7 +101,7 @@ public class BuildingScript : MonoBehaviour {
     void CheckForGrowthCompletion()
     {
 
-        if(thistile.BUILDING_TYPE == 0) { // augalas
+        if(thistileInfo.BUILDING_TYPE == 0) { // augalas
         int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT;
 
         if (socman.unix >= prog)
@@ -114,9 +126,34 @@ public class BuildingScript : MonoBehaviour {
       
           }
 
-        }else if (thistile.BUILDING_TYPE == 1) // pastatas
+        }else if (thistileInfo.BUILDING_TYPE == 1) // pastatas
         {
-            //TODO: kaip pastatas checkina for completion.
+
+            int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT*(thistile.BUILDING_CURRENT_WORK_AMOUNT/100);
+
+
+            if (socman.unix >= prog)
+            {
+
+                WorkDone = true; //TODO: maybe change to building type of thing
+
+
+                if (transform.FindChild(thistile.NAME + "_done(Clone)"))
+                {
+
+                }
+                else
+                {
+
+
+                    GameObject DonePrefab = Resources.Load("Plants/done/" + thistile.NAME + "_done") as GameObject;
+
+                    GameObject done = Instantiate(DonePrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), gameObject.transform.rotation, gameObject.transform) as GameObject;
+
+                }
+
+
+            }
 
 
 
@@ -164,20 +201,30 @@ public class BuildingScript : MonoBehaviour {
         data["Uname"] = Database.UserUsername;
         data["TileID"] = thistile.ID.ToString();
 
+        if (thistileInfo.BUILDING_TYPE == 0)//plant
+        {
+            socket.Emit("VERIFY_COLLECT_TILE", new JSONObject(data));
 
-        socket.Emit("VERIFY_COLLECT_TILE", new JSONObject(data));
+        }else if (thistileInfo.BUILDING_TYPE == 1)//presas
+        {
+            socket.Emit("VERIFY_COLLECT_PRESS_WORK", new JSONObject(data));
+
+
+        }
+
+
+
     }
 
     private void ResetGrowth(SocketIOEvent evt)
     {
 
-        if(thistile.BUILDING_TYPE == 0)//augalas
+        if(thistileInfo.BUILDING_TYPE == 0)//augalas
         {
 
 
         
 
-        Debug.Log(thistile.NAME + " " + thistile.ID + " vs " + int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")));
       
 
         if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
@@ -201,16 +248,38 @@ public class BuildingScript : MonoBehaviour {
 
 
         }
-        else
-        {
-            Debug.Log("fucked uuuuuuuuup");
-        }
+      
 
 
-        }else if(thistile.BUILDING_TYPE == 1)//pastatas
+        }else if(thistileInfo.BUILDING_TYPE == 1)//presas
         {
-            //kaip pastatas reaguos, kai atsius resetint progresa
+            //kaip presas reaguos, kai atsius resetint progresa
             //TODO
+
+
+
+            if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
+            {
+
+                uiManager.ChangeUIText(WorkName + "_Juice_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
+           
+
+
+                Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
+                Debug.Log("destroying done status: " + thistile.NAME + "_done(Clone)");
+
+
+                Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+
+                WorkAssigned = false;
+                WorkDone = false;
+
+
+                thistile = Database.tile[idInTileDatabase];
+
+
+
+            }
 
 
         }

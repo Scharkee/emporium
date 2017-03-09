@@ -99,11 +99,14 @@ public class AssignTiles : MonoBehaviour {
     {
         int i = 0;
 
+
+
         while (i < Database.tile.Length)
         {
+           
             GameObject currentTilePrefab = Resources.Load("Plants/"+Database.tile[i].NAME) as GameObject;
             float xRot=0;
-         //   if (Database.tile[i].NAME == "obuolys_1"|| Database.tile[i].NAME == "kriause_1") { xRot = -90f; }// for models that need rotations. Spearate with ||.
+       
 
             GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(Database.tile[i].X, 0f, Database.tile[i].Z),Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)) ,GameObject.Find("Tiles").transform) as GameObject;
             currentTile.GetComponent<BuildingScript>().thistile = Database.tile[i];
@@ -131,17 +134,8 @@ public class AssignTiles : MonoBehaviour {
         int i = 0;
         int count = 1;
 
-    /*    while (i < Database.tile.Length)
-        {
-            if (Database.tile[i].X==X&& Database.tile[i].Z == Z)
-            {
-                count++;
 
-            }
-            i++;
-        }
-       */                    //FIXME /\
-        
+
         if (count == 1) //single plant
         {
             SpawnATile(tilename, X, Z);
