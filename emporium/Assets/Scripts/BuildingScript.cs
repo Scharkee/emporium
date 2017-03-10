@@ -83,12 +83,23 @@ public class BuildingScript : MonoBehaviour {
 
     void OnMouseDown()
     {
+
+        if (thistileInfo.BUILDING_TYPE == 0) { 
         if (TileGrown)
         {
 
             Debug.Log("harvesting");
 
             VerifyHarvest();
+        }
+
+        }else if(thistileInfo.BUILDING_TYPE == 1)
+        {
+
+            if (WorkDone)
+            {
+                VerifyHarvest();
+            }
         }
 
 
@@ -126,11 +137,11 @@ public class BuildingScript : MonoBehaviour {
       
           }
 
-        }else if (thistileInfo.BUILDING_TYPE == 1) // pastatas
+        }else if (thistileInfo.BUILDING_TYPE == 1) // presas
         {
 
             int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT*(thistile.BUILDING_CURRENT_WORK_AMOUNT/100);
-
+            Debug.Log(prog + " " + socman.unix);
 
             if (socman.unix >= prog)
             {
@@ -154,10 +165,6 @@ public class BuildingScript : MonoBehaviour {
 
 
             }
-
-
-
-
 
 
         }
@@ -223,10 +230,6 @@ public class BuildingScript : MonoBehaviour {
         {
 
 
-        
-
-      
-
         if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
         {
 
@@ -270,9 +273,11 @@ public class BuildingScript : MonoBehaviour {
 
 
                 Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+                Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT= int.Parse(evt.data.GetField("currentWorkAmmount").ToString());
+                Database.tile[idInTileDatabase].WORK_NAME = evt.data.GetField("currentWorkName").ToString();
 
-                WorkAssigned = false;
-                WorkDone = false;
+
+        
 
 
                 thistile = Database.tile[idInTileDatabase];
@@ -280,6 +285,43 @@ public class BuildingScript : MonoBehaviour {
 
 
             }
+
+
+        }
+
+
+
+    }
+
+
+    private void AssignTileWork(SocketIOEvent evt)
+    {
+
+
+        if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
+        {
+
+          
+
+
+
+          
+      
+
+
+            Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+            Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = int.Parse(evt.data.GetField("currentWorkAmmount").ToString());
+            Database.tile[idInTileDatabase].WORK_NAME = evt.data.GetField("currentWorkName").ToString();
+
+
+            //start some sort of work effects.
+
+
+
+
+
+            thistile = Database.tile[idInTileDatabase];
+
 
 
         }
