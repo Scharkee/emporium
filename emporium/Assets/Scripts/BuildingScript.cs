@@ -15,7 +15,6 @@ public class BuildingScript : MonoBehaviour {
 
     //building
     public bool WorkDone;
-    public string WorkName;
     public bool WorkAssigned;
 
 
@@ -141,7 +140,7 @@ public class BuildingScript : MonoBehaviour {
         {
 
             int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT*(thistile.BUILDING_CURRENT_WORK_AMOUNT/100);
-            Debug.Log(prog + " " + socman.unix);
+
 
             if (socman.unix >= prog)
             {
@@ -260,15 +259,17 @@ public class BuildingScript : MonoBehaviour {
             //TODO
 
 
-
             if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
             {
+                Debug.Log("press received reset request ID VERIFIED");
+                Debug.Log(thistile.WORK_NAME + "_Juice_Editable");
+                uiManager.ChangeUIText(thistile.WORK_NAME + "_Juice_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
 
-                uiManager.ChangeUIText(WorkName + "_Juice_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
-           
-
+                Debug.Log(thistile.NAME + "_done(Clone)");
 
                 Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
+
+
                 Debug.Log("destroying done status: " + thistile.NAME + "_done(Clone)");
 
 

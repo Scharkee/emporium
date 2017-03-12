@@ -50,7 +50,7 @@ public class SocketManager : MonoBehaviour {
     {
         while (true)
         {
-            Debug.Log("asking for unix");
+
             yield return new WaitForSeconds(1f);
             GetUnix();
 
@@ -61,7 +61,7 @@ public class SocketManager : MonoBehaviour {
 
     void GetUnix()
     {
-        Debug.Log("asking for unix");
+      
         socket.Emit("GET_UNIX");
 
     }
@@ -146,7 +146,7 @@ public class SocketManager : MonoBehaviour {
 
     void ReceiveUnix(SocketIOEvent evt)
     {
-        Debug.Log(evt.data);
+
      
         
       
