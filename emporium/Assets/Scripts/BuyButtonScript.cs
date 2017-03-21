@@ -91,7 +91,7 @@ public class BuyButtonScript : MonoBehaviour
 
     }
 
-    void activateOpGrid(bool bb)
+    public void activateOpGrid(bool bb)
     {
 
        opgrid.SetActive(bb);

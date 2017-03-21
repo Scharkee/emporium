@@ -12,12 +12,22 @@ public class BuyMode : MonoBehaviour {
     GameObject menupanell;
 
     Material light_skybox;
-
+    BuyButtonScript buybuttonscript;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
+
+        buybuttonscript.panelEnabled = false;
+
+    }
+
+    void Awake()
+    {
+
+        menupanell = GameObject.Find("BuyMenuPanel");
+        buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -42,11 +52,13 @@ public class BuyMode : MonoBehaviour {
                     GameObject.Find("PlotSelectors").SetActive(false);
                  
                     StartCoroutine(liftcamera());
-                 
+                    buybuttonscript.panelEnabled = false;
+
                     RenderSettings.skybox = light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
 
                     menupanell.SetActive(true);
 
+                    buybuttonscript.activateOpGrid(false);
 
                     GameObject.Find("BuyScript").GetComponent<BuyScript>().ChoosePlot(buildingName, X, Z);
 
@@ -74,8 +86,8 @@ public class BuyMode : MonoBehaviour {
     {
         
         buildingName = name;
-        menupanell = menupanel;
-
+     
+        buybuttonscript.panelEnabled = false;
 
 
         //effects and pltoselectors

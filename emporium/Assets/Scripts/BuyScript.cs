@@ -26,13 +26,14 @@ public class BuyScript : MonoBehaviour {
     }
 
     public void EnableSelector(string tilename) {
+
+
         GameObject menupanel = GameObject.Find("BuyMenuPanel");
         menupanel.GetComponent<CanvasGroup>().alpha = 0f;
         
        
 
 
-        Debug.Log("activating plot chooser");
         
 
         GameObject.Find("Selector").GetComponent<BuyMode>().enabled = true;
@@ -46,7 +47,7 @@ public class BuyScript : MonoBehaviour {
 
         Debug.Log("trying to build "+buildingname+" at "+X+" "+Z);
 
-
+        
 
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Uname;
