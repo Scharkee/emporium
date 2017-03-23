@@ -46,7 +46,7 @@ public class RotationScript : MonoBehaviour {
 
 
 
-        Debug.Log(buybuttonscript.panelEnabled);
+
 
         if (!buybuttonscript.panelEnabled)
         {
