@@ -1,0 +1,760 @@
+fileFormatVersion: 2
+guid: baa85a183231d8d45b2b12af3d3e6174
+timeCreated: 1490537151
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature_002
+    100002: Armature_003
+    100004: Armature_004
+    100006: Armature_005
+    100008: Armature_006
+    100010: Armature_007
+    100012: Armature_008
+    100014: Armature_009
+    100016: Armature_010
+    100018: Armature_011
+    100020: Armature_012
+    100022: Armature_013
+    100024: Armature_014
+    100026: Armature_015
+    100028: Armature_016
+    100030: Armature_017
+    100032: Armature_018
+    100034: Armature_019
+    100036: Armature_020
+    100038: Armature_021
+    100040: Armature_022
+    100042: Armature_023
+    100044: Armature_024
+    100046: Armature_025
+    100048: Armature_026
+    100050: Armature_027
+    100052: Armature_028
+    100054: Armature_029
+    100056: Armature_030
+    100058: Armature_031
+    100060: Armature_032
+    100062: Armature_033
+    100064: Armature_034
+    100066: Armature_035
+    100068: Armature_036
+    100070: Armature_037
+    100072: Armature_038
+    100074: Armature_039
+    100076: Armature_040
+    100078: Armature_041
+    100080: Armature_042
+    100082: Armature_043
+    100084: Armature_044
+    100086: Armature_045
+    100088: Armature_046
+    100090: Armature_047
+    100092: //RootNode
+    100094: Bone
+    100096: Bone_0
+    100098: Bone_1
+    100100: Bone_10
+    100102: Bone_11
+    100104: Bone_12
+    100106: Bone_13
+    100108: Bone_14
+    100110: Bone_15
+    100112: Bone_16
+    100114: Bone_17
+    100116: Bone_18
+    100118: Bone_19
+    100120: Bone_2
+    100122: Bone_20
+    100124: Bone_21
+    100126: Bone_22
+    100128: Bone_23
+    100130: Bone_24
+    100132: Bone_25
+    100134: Bone_26
+    100136: Bone_27
+    100138: Bone_28
+    100140: Bone_29
+    100142: Bone_3
+    100144: Bone_30
+    100146: Bone_31
+    100148: Bone_32
+    100150: Bone_33
+    100152: Bone_34
+    100154: Bone_35
+    100156: Bone_36
+    100158: Bone_37
+    100160: Bone_38
+    100162: Bone_39
+    100164: Bone_4
+    100166: Bone_40
+    100168: Bone_41
+    100170: Bone_42
+    100172: Bone_43
+    100174: Bone_44
+    100176: Bone_5
+    100178: Bone_6
+    100180: Bone_7
+    100182: Bone_8
+    100184: Bone_9
+    100186: Icosphere_003
+    100188: Icosphere_004
+    100190: Icosphere_005
+    100192: Icosphere_006
+    100194: Icosphere_007
+    100196: Icosphere_008
+    100198: Icosphere_009
+    100200: Icosphere_010
+    100202: Icosphere_011
+    100204: Icosphere_012
+    100206: Icosphere_013
+    100208: Icosphere_014
+    100210: Icosphere_015
+    100212: Icosphere_016
+    100214: Icosphere_017
+    100216: Icosphere_018
+    100218: Icosphere_019
+    100220: Icosphere_020
+    100222: Icosphere_021
+    100224: Icosphere_022
+    100226: Icosphere_023
+    100228: Icosphere_024
+    100230: Icosphere_025
+    100232: Icosphere_026
+    100234: Icosphere_027
+    100236: Icosphere_028
+    100238: Icosphere_029
+    100240: Icosphere_030
+    100242: Icosphere_031
+    100244: Icosphere_032
+    100246: Icosphere_033
+    100248: Icosphere_034
+    100250: Icosphere_035
+    100252: Icosphere_036
+    100254: Icosphere_037
+    100256: Icosphere_038
+    100258: Icosphere_039
+    100260: Icosphere_040
+    100262: Icosphere_041
+    100264: Icosphere_042
+    100266: Icosphere_043
+    100268: Icosphere_044
+    100270: Icosphere_045
+    100272: Icosphere_046
+    100274: Icosphere_047
+    100276: Icosphere_048
+    100278: Icosphere_049
+    400000: Armature_002
+    400002: Armature_003
+    400004: Armature_004
+    400006: Armature_005
+    400008: Armature_006
+    400010: Armature_007
+    400012: Armature_008
+    400014: Armature_009
+    400016: Armature_010
+    400018: Armature_011
+    400020: Armature_012
+    400022: Armature_013
+    400024: Armature_014
+    400026: Armature_015
+    400028: Armature_016
+    400030: Armature_017
+    400032: Armature_018
+    400034: Armature_019
+    400036: Armature_020
+    400038: Armature_021
+    400040: Armature_022
+    400042: Armature_023
+    400044: Armature_024
+    400046: Armature_025
+    400048: Armature_026
+    400050: Armature_027
+    400052: Armature_028
+    400054: Armature_029
+    400056: Armature_030
+    400058: Armature_031
+    400060: Armature_032
+    400062: Armature_033
+    400064: Armature_034
+    400066: Armature_035
+    400068: Armature_036
+    400070: Armature_037
+    400072: Armature_038
+    400074: Armature_039
+    400076: Armature_040
+    400078: Armature_041
+    400080: Armature_042
+    400082: Armature_043
+    400084: Armature_044
+    400086: Armature_045
+    400088: Armature_046
+    400090: Armature_047
+    400092: //RootNode
+    400094: Bone
+    400096: Bone_0
+    400098: Bone_1
+    400100: Bone_10
+    400102: Bone_11
+    400104: Bone_12
+    400106: Bone_13
+    400108: Bone_14
+    400110: Bone_15
+    400112: Bone_16
+    400114: Bone_17
+    400116: Bone_18
+    400118: Bone_19
+    400120: Bone_2
+    400122: Bone_20
+    400124: Bone_21
+    400126: Bone_22
+    400128: Bone_23
+    400130: Bone_24
+    400132: Bone_25
+    400134: Bone_26
+    400136: Bone_27
+    400138: Bone_28
+    400140: Bone_29
+    400142: Bone_3
+    400144: Bone_30
+    400146: Bone_31
+    400148: Bone_32
+    400150: Bone_33
+    400152: Bone_34
+    400154: Bone_35
+    400156: Bone_36
+    400158: Bone_37
+    400160: Bone_38
+    400162: Bone_39
+    400164: Bone_4
+    400166: Bone_40
+    400168: Bone_41
+    400170: Bone_42
+    400172: Bone_43
+    400174: Bone_44
+    400176: Bone_5
+    400178: Bone_6
+    400180: Bone_7
+    400182: Bone_8
+    400184: Bone_9
+    400186: Icosphere_003
+    400188: Icosphere_004
+    400190: Icosphere_005
+    400192: Icosphere_006
+    400194: Icosphere_007
+    400196: Icosphere_008
+    400198: Icosphere_009
+    400200: Icosphere_010
+    400202: Icosphere_011
+    400204: Icosphere_012
+    400206: Icosphere_013
+    400208: Icosphere_014
+    400210: Icosphere_015
+    400212: Icosphere_016
+    400214: Icosphere_017
+    400216: Icosphere_018
+    400218: Icosphere_019
+    400220: Icosphere_020
+    400222: Icosphere_021
+    400224: Icosphere_022
+    400226: Icosphere_023
+    400228: Icosphere_024
+    400230: Icosphere_025
+    400232: Icosphere_026
+    400234: Icosphere_027
+    400236: Icosphere_028
+    400238: Icosphere_029
+    400240: Icosphere_030
+    400242: Icosphere_031
+    400244: Icosphere_032
+    400246: Icosphere_033
+    400248: Icosphere_034
+    400250: Icosphere_035
+    400252: Icosphere_036
+    400254: Icosphere_037
+    400256: Icosphere_038
+    400258: Icosphere_039
+    400260: Icosphere_040
+    400262: Icosphere_041
+    400264: Icosphere_042
+    400266: Icosphere_043
+    400268: Icosphere_044
+    400270: Icosphere_045
+    400272: Icosphere_046
+    400274: Icosphere_047
+    400276: Icosphere_048
+    400278: Icosphere_049
+    2300000: Icosphere_003
+    3300000: Icosphere_003
+    4300000: Icosphere_003
+    4300002: Icosphere_004
+    4300004: Icosphere_005
+    4300006: Icosphere_006
+    4300008: Icosphere_007
+    4300010: Icosphere_008
+    4300012: Icosphere_009
+    4300014: Icosphere_010
+    4300016: Icosphere_011
+    4300018: Icosphere_012
+    4300020: Icosphere_013
+    4300022: Icosphere_014
+    4300024: Icosphere_015
+    4300026: Icosphere_016
+    4300028: Icosphere_017
+    4300030: Icosphere_018
+    4300032: Icosphere_019
+    4300034: Icosphere_020
+    4300036: Icosphere_021
+    4300038: Icosphere_022
+    4300040: Icosphere_023
+    4300042: Icosphere_024
+    4300044: Icosphere_025
+    4300046: Icosphere_026
+    4300048: Icosphere_027
+    4300050: Icosphere_028
+    4300052: Icosphere_029
+    4300054: Icosphere_030
+    4300056: Icosphere_031
+    4300058: Icosphere_032
+    4300060: Icosphere_033
+    4300062: Icosphere_034
+    4300064: Icosphere_035
+    4300066: Icosphere_036
+    4300068: Icosphere_037
+    4300070: Icosphere_038
+    4300072: Icosphere_039
+    4300074: Icosphere_040
+    4300076: Icosphere_041
+    4300078: Icosphere_042
+    4300080: Icosphere_043
+    4300082: Icosphere_044
+    4300084: Icosphere_045
+    4300086: Icosphere_046
+    4300088: Icosphere_047
+    4300090: Icosphere_048
+    4300092: Icosphere_049
+    7400000: Kiviai_growth
+    9500000: //RootNode
+    13700000: Icosphere_004
+    13700002: Icosphere_005
+    13700004: Icosphere_006
+    13700006: Icosphere_007
+    13700008: Icosphere_008
+    13700010: Icosphere_009
+    13700012: Icosphere_010
+    13700014: Icosphere_011
+    13700016: Icosphere_012
+    13700018: Icosphere_013
+    13700020: Icosphere_014
+    13700022: Icosphere_015
+    13700024: Icosphere_016
+    13700026: Icosphere_017
+    13700028: Icosphere_018
+    13700030: Icosphere_019
+    13700032: Icosphere_020
+    13700034: Icosphere_021
+    13700036: Icosphere_022
+    13700038: Icosphere_023
+    13700040: Icosphere_024
+    13700042: Icosphere_025
+    13700044: Icosphere_026
+    13700046: Icosphere_027
+    13700048: Icosphere_028
+    13700050: Icosphere_029
+    13700052: Icosphere_030
+    13700054: Icosphere_031
+    13700056: Icosphere_032
+    13700058: Icosphere_033
+    13700060: Icosphere_034
+    13700062: Icosphere_035
+    13700064: Icosphere_036
+    13700066: Icosphere_037
+    13700068: Icosphere_038
+    13700070: Icosphere_039
+    13700072: Icosphere_040
+    13700074: Icosphere_041
+    13700076: Icosphere_042
+    13700078: Icosphere_043
+    13700080: Icosphere_044
+    13700082: Icosphere_045
+    13700084: Icosphere_046
+    13700086: Icosphere_047
+    13700088: Icosphere_048
+    13700090: Icosphere_049
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Kiviai_growth
+      takeName: Default Take
+      firstFrame: -1
+      lastFrame: 8
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature_002
+        weight: 1
+      - path: Armature_002/Bone
+        weight: 1
+      - path: Armature_003
+        weight: 1
+      - path: Armature_003/Bone_0
+        weight: 1
+      - path: Armature_004
+        weight: 1
+      - path: Armature_004/Bone_1
+        weight: 1
+      - path: Armature_005
+        weight: 1
+      - path: Armature_005/Bone_2
+        weight: 1
+      - path: Armature_006
+        weight: 1
+      - path: Armature_006/Bone_3
+        weight: 1
+      - path: Armature_007
+        weight: 1
+      - path: Armature_007/Bone_4
+        weight: 1
+      - path: Armature_008
+        weight: 1
+      - path: Armature_008/Bone_5
+        weight: 1
+      - path: Armature_009
+        weight: 1
+      - path: Armature_009/Bone_6
+        weight: 1
+      - path: Armature_010
+        weight: 1
+      - path: Armature_010/Bone_7
+        weight: 1
+      - path: Armature_011
+        weight: 1
+      - path: Armature_011/Bone_8
+        weight: 1
+      - path: Armature_012
+        weight: 1
+      - path: Armature_012/Bone_9
+        weight: 1
+      - path: Armature_013
+        weight: 1
+      - path: Armature_013/Bone_10
+        weight: 1
+      - path: Armature_014
+        weight: 1
+      - path: Armature_014/Bone_11
+        weight: 1
+      - path: Armature_015
+        weight: 1
+      - path: Armature_015/Bone_12
+        weight: 1
+      - path: Armature_016
+        weight: 1
+      - path: Armature_016/Bone_13
+        weight: 1
+      - path: Armature_017
+        weight: 1
+      - path: Armature_017/Bone_14
+        weight: 1
+      - path: Armature_018
+        weight: 1
+      - path: Armature_018/Bone_15
+        weight: 1
+      - path: Armature_019
+        weight: 1
+      - path: Armature_019/Bone_16
+        weight: 1
+      - path: Armature_020
+        weight: 1
+      - path: Armature_020/Bone_17
+        weight: 1
+      - path: Armature_021
+        weight: 1
+      - path: Armature_021/Bone_18
+        weight: 1
+      - path: Armature_022
+        weight: 1
+      - path: Armature_022/Bone_19
+        weight: 1
+      - path: Armature_023
+        weight: 1
+      - path: Armature_023/Bone_20
+        weight: 1
+      - path: Armature_024
+        weight: 1
+      - path: Armature_024/Bone_21
+        weight: 1
+      - path: Armature_025
+        weight: 1
+      - path: Armature_025/Bone_22
+        weight: 1
+      - path: Armature_026
+        weight: 1
+      - path: Armature_026/Bone_23
+        weight: 1
+      - path: Armature_027
+        weight: 1
+      - path: Armature_027/Bone_24
+        weight: 1
+      - path: Armature_028
+        weight: 1
+      - path: Armature_028/Bone_25
+        weight: 1
+      - path: Armature_029
+        weight: 1
+      - path: Armature_029/Bone_26
+        weight: 1
+      - path: Armature_030
+        weight: 1
+      - path: Armature_030/Bone_27
+        weight: 1
+      - path: Armature_031
+        weight: 1
+      - path: Armature_031/Bone_28
+        weight: 1
+      - path: Armature_032
+        weight: 1
+      - path: Armature_032/Bone_29
+        weight: 1
+      - path: Armature_033
+        weight: 1
+      - path: Armature_033/Bone_30
+        weight: 1
+      - path: Armature_034
+        weight: 1
+      - path: Armature_034/Bone_31
+        weight: 1
+      - path: Armature_035
+        weight: 1
+      - path: Armature_035/Bone_32
+        weight: 1
+      - path: Armature_036
+        weight: 1
+      - path: Armature_036/Bone_33
+        weight: 1
+      - path: Armature_037
+        weight: 1
+      - path: Armature_037/Bone_34
+        weight: 1
+      - path: Armature_038
+        weight: 1
+      - path: Armature_038/Bone_35
+        weight: 1
+      - path: Armature_039
+        weight: 1
+      - path: Armature_039/Bone_36
+        weight: 1
+      - path: Armature_040
+        weight: 1
+      - path: Armature_040/Bone_37
+        weight: 1
+      - path: Armature_041
+        weight: 1
+      - path: Armature_041/Bone_38
+        weight: 1
+      - path: Armature_042
+        weight: 1
+      - path: Armature_042/Bone_39
+        weight: 1
+      - path: Armature_043
+        weight: 1
+      - path: Armature_043/Bone_40
+        weight: 1
+      - path: Armature_044
+        weight: 1
+      - path: Armature_044/Bone_41
+        weight: 1
+      - path: Armature_045
+        weight: 1
+      - path: Armature_045/Bone_42
+        weight: 1
+      - path: Armature_046
+        weight: 1
+      - path: Armature_046/Bone_43
+        weight: 1
+      - path: Armature_047
+        weight: 1
+      - path: Armature_047/Bone_44
+        weight: 1
+      - path: Icosphere_003
+        weight: 1
+      - path: Icosphere_004
+        weight: 1
+      - path: Icosphere_005
+        weight: 1
+      - path: Icosphere_006
+        weight: 1
+      - path: Icosphere_007
+        weight: 1
+      - path: Icosphere_008
+        weight: 1
+      - path: Icosphere_009
+        weight: 1
+      - path: Icosphere_010
+        weight: 1
+      - path: Icosphere_011
+        weight: 1
+      - path: Icosphere_012
+        weight: 1
+      - path: Icosphere_013
+        weight: 1
+      - path: Icosphere_014
+        weight: 1
+      - path: Icosphere_015
+        weight: 1
+      - path: Icosphere_016
+        weight: 1
+      - path: Icosphere_017
+        weight: 1
+      - path: Icosphere_018
+        weight: 1
+      - path: Icosphere_019
+        weight: 1
+      - path: Icosphere_020
+        weight: 1
+      - path: Icosphere_021
+        weight: 1
+      - path: Icosphere_022
+        weight: 1
+      - path: Icosphere_023
+        weight: 1
+      - path: Icosphere_024
+        weight: 1
+      - path: Icosphere_025
+        weight: 1
+      - path: Icosphere_026
+        weight: 1
+      - path: Icosphere_027
+        weight: 1
+      - path: Icosphere_028
+        weight: 1
+      - path: Icosphere_029
+        weight: 1
+      - path: Icosphere_030
+        weight: 1
+      - path: Icosphere_031
+        weight: 1
+      - path: Icosphere_032
+        weight: 1
+      - path: Icosphere_033
+        weight: 1
+      - path: Icosphere_034
+        weight: 1
+      - path: Icosphere_035
+        weight: 1
+      - path: Icosphere_036
+        weight: 1
+      - path: Icosphere_037
+        weight: 1
+      - path: Icosphere_038
+        weight: 1
+      - path: Icosphere_039
+        weight: 1
+      - path: Icosphere_040
+        weight: 1
+      - path: Icosphere_041
+        weight: 1
+      - path: Icosphere_042
+        weight: 1
+      - path: Icosphere_043
+        weight: 1
+      - path: Icosphere_044
+        weight: 1
+      - path: Icosphere_045
+        weight: 1
+      - path: Icosphere_046
+        weight: 1
+      - path: Icosphere_047
+        weight: 1
+      - path: Icosphere_048
+        weight: 1
+      - path: Icosphere_049
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
