@@ -16,6 +16,9 @@ public class BuildingScript : MonoBehaviour {
     //building
     public bool WorkDone;
     public bool WorkAssigned;
+    public bool ContextOpen;
+
+
 
 
     //both
@@ -47,13 +50,16 @@ public class BuildingScript : MonoBehaviour {
         AssignTileValues();
         StartCoroutine(CheckForGrowthCompletionRepeat());
         RetrieveTileInfo();
-
+        AssignBuildingSpecificValues();
         TileGrown = false;
         WorkDone = false;
         WorkAssigned = false;
+        ContextOpen = false;
        
 
         socket.On("RESET_TILE_GROWTH", ResetGrowth);
+
+        Debug.Log(thistile.NAME+" "+thistileInfo.BUILDING_TYPE);
         
 
     }
@@ -87,7 +93,7 @@ public class BuildingScript : MonoBehaviour {
         if (TileGrown)
         {
 
-            Debug.Log("harvesting");
+            Debug.Log("harvesting plant");
 
             VerifyHarvest();
         }
@@ -95,9 +101,27 @@ public class BuildingScript : MonoBehaviour {
         }else if(thistileInfo.BUILDING_TYPE == 1)
         {
 
-            if (WorkDone)
+            if (WorkDone && WorkAssigned)
             {
+                Debug.Log("harvesting building");
+
                 VerifyHarvest();
+            }else if (!WorkAssigned)
+            {  // spaudziama ant neturincio darbo preso, ismesti job assign menu
+                Debug.Log("Assign job right now");
+                //ismetamaas meniu, todel sitas true iki value returno arba menu close*
+                ContextOpen = true;
+
+                ContextManager.StartPressContext(WorkAssigned);
+
+            }
+            else if (!WorkDone)
+            {  
+                // spaudziama ant nebaigusio spausti preso, ismesti context menu su stats
+                Debug.Log("Checking stats on press progress");
+
+                ContextManager.StartPressContext(WorkAssigned);
+
             }
         }
 
@@ -142,7 +166,7 @@ public class BuildingScript : MonoBehaviour {
             int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT*(thistile.BUILDING_CURRENT_WORK_AMOUNT/100);
 
 
-            if (socman.unix >= prog)
+            if (socman.unix >= prog && WorkAssigned)
             {
 
                 WorkDone = true; //TODO: maybe change to building type of thing
@@ -186,10 +210,12 @@ public class BuildingScript : MonoBehaviour {
         {
             i++;
             thistileInfo.NAME = Database.buildinginfo[i].NAME;
+            Debug.Log(Database.buildinginfo[i].NAME);
 
 
-            
         }
+
+        
 
         thistileInfo = Database.buildinginfo[i];
         idInTileInfoDatabase = i;
@@ -302,13 +328,7 @@ public class BuildingScript : MonoBehaviour {
         if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
         {
 
-          
-
-
-
-          
-      
-
+         
 
             Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
             Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = int.Parse(evt.data.GetField("currentWorkAmmount").ToString());
@@ -325,6 +345,73 @@ public class BuildingScript : MonoBehaviour {
 
 
 
+        }
+
+
+
+    }
+
+
+    void AssignBuildingSpecificValues()
+    {
+
+        if (thistileInfo.BUILDING_TYPE==1) // cia pastatas, reikia priskirtii pastatui specifisku parametrus
+        {
+
+
+            if (thistile.WORK_NAME == "nieko")
+            {
+                WorkAssigned = false;
+
+            }
+
+
+        }
+
+    }
+
+
+
+
+    public void ReceiveWork(PressWorkPKG pkg) //parejo broadcastas, kazkam duota darbo
+    {
+        if (ContextOpen) //sitoj tile buvo atidarytas context, todel imam info
+        {
+            Debug.Log("got work");
+            ContextOpen = false;
+            AskForWork(pkg.workName, pkg.workAmount);
+
+
+
+        }
+
+
+
+    }
+
+    private void AskForWork(string workName, int workAmount)
+    {
+
+        Dictionary<string, string> data;
+        data = new Dictionary<string, string>();
+
+        data["Uname"] = Database.UserUsername;
+        data["TileID"] = thistile.ID.ToString();
+        data["WorkName"] = workName;
+        data["WorkAmount"] = workAmount.ToString();
+
+     
+        if (thistileInfo.BUILDING_TYPE == 1)//last verification
+        {
+            socket.Emit("TILE_ASSIGN_WORK", new JSONObject(data));
+
+            Debug.Log("sending stuff out");
+        }
+        else
+        {
+
+
+            Debug.Log("--------------ELUL AUGALAS PRASO DARBO ------------");
         }
 
 

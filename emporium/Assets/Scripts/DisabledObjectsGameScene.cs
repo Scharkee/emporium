@@ -7,6 +7,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public static GameObject PressContextPanel;
     public static GameObject LoadingPanel;
     public static GameObject Inventory_Fruit_panel;
+    public static GameObject Tiles;
 
     // Use this for initialization
     void Start () {
@@ -18,7 +19,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         PressContextPanel = GameObject.Find("PressContextPanel");
         LoadingPanel = GameObject.Find("LoadingPanel");
         Inventory_Fruit_panel = GameObject.Find("Inventory_Fruit_panel");
-
+        Tiles= GameObject.Find("Tiles");
 
 
     }

@@ -25,8 +25,6 @@ public class Database : MonoBehaviour
 
 
 
-
-
     //BUILDING-UPGRADE-FRUIT INFORMATION
     //augalai
     
@@ -89,12 +87,7 @@ public class Database : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+ 
 
 }
 
