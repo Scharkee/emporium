@@ -53,11 +53,12 @@ public class BuildingScript : MonoBehaviour {
         AssignBuildingSpecificValues();
         TileGrown = false;
         WorkDone = false;
-        WorkAssigned = false;
+        
         ContextOpen = false;
        
 
         socket.On("RESET_TILE_GROWTH", ResetGrowth);
+        socket.On("ASSIGN_TILE_WORK", AssignTileWork);
 
         Debug.Log(thistile.NAME+" "+thistileInfo.BUILDING_TYPE);
         
@@ -165,7 +166,8 @@ public class BuildingScript : MonoBehaviour {
 
             int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT*(thistile.BUILDING_CURRENT_WORK_AMOUNT/100);
 
-
+            Debug.Log(socman.unix+" and "+prog);
+            Debug.Log("work assigned = "+WorkAssigned);
             if (socman.unix >= prog && WorkAssigned)
             {
 
@@ -287,9 +289,17 @@ public class BuildingScript : MonoBehaviour {
 
             if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
             {
-                Debug.Log("press received reset request ID VERIFIED");
-                Debug.Log(thistile.WORK_NAME + "_Juice_Editable");
-                uiManager.ChangeUIText(thistile.WORK_NAME + "_Juice_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
+               
+
+
+                Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+                Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT= int.Parse(evt.data.GetField("currentWorkAmmount").ToString());
+                Database.tile[idInTileDatabase].WORK_NAME = Regex.Replace(evt.data.GetField("currentWorkName").ToString(), "[^0-9]", "") ;
+                thistile = Database.tile[idInTileDatabase];
+
+                Debug.Log("press received reset request ID VERIFIED " + Regex.Replace(thistile.WORK_NAME, "[^0-9]", "") + "_Sultys_Editable");
+
+                uiManager.ChangeUIText(Regex.Replace(thistile.WORK_NAME, "[^0-9]", "") + "_Sultys_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilos
 
                 Debug.Log(thistile.NAME + "_done(Clone)");
 
@@ -299,15 +309,10 @@ public class BuildingScript : MonoBehaviour {
                 Debug.Log("destroying done status: " + thistile.NAME + "_done(Clone)");
 
 
-                Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
-                Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT= int.Parse(evt.data.GetField("currentWorkAmmount").ToString());
-                Database.tile[idInTileDatabase].WORK_NAME = evt.data.GetField("currentWorkName").ToString();
 
 
-        
 
-
-                thistile = Database.tile[idInTileDatabase];
+                
 
 
 
@@ -325,23 +330,39 @@ public class BuildingScript : MonoBehaviour {
     {
 
 
+
+
         if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
         {
+
+            Debug.Log("GOT THE CALLBACK ");
 
          
 
             Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
-            Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = int.Parse(evt.data.GetField("currentWorkAmmount").ToString());
+            Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = int.Parse(Regex.Replace(evt.data.GetField("currentWorkAmount").ToString(), "[^0-9]", ""));
             Database.tile[idInTileDatabase].WORK_NAME = evt.data.GetField("currentWorkName").ToString();
+
+            thistile = Database.tile[idInTileDatabase];
+
+            Debug.Log("curent work amount = " + Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT);
+
+            WorkAssigned = true;
+            WorkDone = false;
 
 
             //start some sort of work effects.
+           
+
+            transform.FindChild("PressCube").GetComponent<Renderer>().material.color = new Color(1f,0.1f,0.2f);
 
 
 
 
 
-            thistile = Database.tile[idInTileDatabase];
+
+
+            
 
 
 
@@ -359,10 +380,14 @@ public class BuildingScript : MonoBehaviour {
         {
 
 
-            if (thistile.WORK_NAME == "nieko")
+            if (thistile.WORK_NAME == "nieko"|| thistile.WORK_NAME == "")
             {
                 WorkAssigned = false;
 
+            }else
+            {
+                Debug.Log("woop");
+                WorkAssigned = true;
             }
 
 
@@ -380,6 +405,8 @@ public class BuildingScript : MonoBehaviour {
             Debug.Log("got work");
             ContextOpen = false;
             AskForWork(pkg.workName, pkg.workAmount);
+
+            ContextManager.CloseAndResetPressContext();
 
 
 

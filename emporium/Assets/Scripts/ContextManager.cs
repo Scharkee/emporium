@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class ContextManager : MonoBehaviour {
@@ -28,6 +29,20 @@ public class ContextManager : MonoBehaviour {
 
 
     }
-	
+
+    public static void CloseAndResetPressContext()
+    {
+
+        DisabledObjectsGameScene.PressContextPanel.transform.FindChild("Press_AssignJob_InputField").GetComponent<InputField>().text="";
+        DisabledObjectsGameScene.PressContextPanel.transform.FindChild("Press_AssignJob_ProdTypeDropdown").GetComponent<Dropdown>().value = 0;
+
+        DisabledObjectsGameScene.PressContextPanel.SetActive(false);
+
+
+        
+
+
+    }
+
 
 }
