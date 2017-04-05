@@ -8,10 +8,14 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public static GameObject LoadingPanel;
     public static GameObject Inventory_Fruit_panel;
     public static GameObject Tiles;
+    public static GameObject BuyMenuPanel;
+    public static GameObject Selector;
 
     // Use this for initialization
     void Start () {
-       // Inventory_Fruit_panel.SetActive(false);  TODO: should disable this but without breaking data transfer
+
+        StartCoroutine(delayedDisable());
+        
 
     }
     void Awake()
@@ -20,8 +24,24 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         LoadingPanel = GameObject.Find("LoadingPanel");
         Inventory_Fruit_panel = GameObject.Find("Inventory_Fruit_panel");
         Tiles= GameObject.Find("Tiles");
+        BuyMenuPanel = GameObject.Find("BuyMenuPanel");
+        Selector = GameObject.Find("Selector");
 
 
+    }
+
+    IEnumerator delayedDisable() //should test if works against bad 
+    {
+
+        while (DisabledObjectsGameScene.LoadingPanel)
+        {
+            yield return new WaitForSeconds(0.1f);
+           
+
+        }
+
+        GameObject.Find("InventoryDropDown").GetComponent<CanvasGroup>().alpha = 1f;
+        Inventory_Fruit_panel.SetActive(false);
     }
 
 

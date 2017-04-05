@@ -9,7 +9,6 @@ public class BuyMode : MonoBehaviour {
     string TileName;
     bool darken;
     int camspeed = 10;
-    GameObject menupanell;
 
     Material light_skybox;
     BuyButtonScript buybuttonscript;
@@ -25,7 +24,7 @@ public class BuyMode : MonoBehaviour {
     void Awake()
     {
 
-        menupanell = GameObject.Find("BuyMenuPanel");
+    
         buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
     }
 	
@@ -56,7 +55,7 @@ public class BuyMode : MonoBehaviour {
 
                     RenderSettings.skybox = light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
 
-                    menupanell.SetActive(true);
+                    DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
 
                     buybuttonscript.activateOpGrid(false);
 
@@ -82,7 +81,7 @@ public class BuyMode : MonoBehaviour {
 
     }
 
-    public void receiveName(string name, GameObject menupanel)
+    public void receiveName(string name)
     {
         
         buildingName = name;
@@ -137,6 +136,21 @@ public class BuyMode : MonoBehaviour {
         }
         
 }
+
+    public void DisableBuyMode()
+    {
+        GameObject.Find("PlotSelectors").SetActive(false);
+
+        StartCoroutine(liftcamera());
+        buybuttonscript.panelEnabled = false;
+
+        RenderSettings.skybox = light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
+
+        DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
+
+        buybuttonscript.activateOpGrid(false);
+
+    }
 
     
 }

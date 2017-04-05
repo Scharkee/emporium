@@ -36,6 +36,13 @@ public class BuyButtonScript : MonoBehaviour
     public void TheClick()
     {
 
+        if(Camera.main.transform.position.y > 3) //buy mode is enabled. Cancel buy mode.
+        {
+
+            DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().DisableBuyMode();
+            DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().enabled = false;
+        }
+
         StartCoroutine(BuyMenuPanelFader());
     }
 
