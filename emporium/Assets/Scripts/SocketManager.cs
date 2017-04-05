@@ -37,10 +37,10 @@ public class SocketManager : MonoBehaviour {
 
         socket.On("BUILD_TILE", GameObject.Find("_ManagerialScripts").GetComponent<AssignTiles>().BuildTile);
 
-       
-        
+        socket.On("NO_FUNDS", NoFundsAlert);
 
-        
+
+
 
     }
 	
@@ -153,6 +153,12 @@ public class SocketManager : MonoBehaviour {
         unix = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", "")); //FIXME this is dumb
 
   
+    }
+
+    void NoFundsAlert(SocketIOEvent evt)
+    {
+
+
     }
 
 

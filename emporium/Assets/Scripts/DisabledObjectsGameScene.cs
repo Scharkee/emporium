@@ -10,9 +10,15 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public static GameObject Tiles;
     public static GameObject BuyMenuPanel;
     public static GameObject Selector;
+    public static GameObject alertPanel;
+
+
+
 
     // Use this for initialization
     void Start () {
+
+        alertPanel.SetActive(false);
 
         StartCoroutine(delayedDisable());
         
@@ -26,7 +32,8 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         Tiles= GameObject.Find("Tiles");
         BuyMenuPanel = GameObject.Find("BuyMenuPanel");
         Selector = GameObject.Find("Selector");
-
+        alertPanel = GameObject.Find("alertPanel");
+        
 
     }
 

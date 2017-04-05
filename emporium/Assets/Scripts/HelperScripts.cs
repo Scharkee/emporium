@@ -17,11 +17,8 @@ public class HelperScripts : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Dictionary<string, string> data = new Dictionary<string, string>();
-            data["Uname"] = GlobalControl.Uname;
-            Debug.Log("Received lastlogged ping from server");
-            socket.Emit("AUTOSAVE_PUSH_LASTLOGGED", new JSONObject(data));
-
+            GameAlerts.AlertWithMessage("test123123");
+      
     
         }
 
