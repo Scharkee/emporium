@@ -9,6 +9,7 @@ public class AssignTiles : MonoBehaviour {
 
 
     UIManager uiManager;
+    SocketManager socman;
 
 
     // Use this for initialization
@@ -18,7 +19,7 @@ public class AssignTiles : MonoBehaviour {
         GameObject managerial = GameObject.Find("_ManagerialScripts");
        
         uiManager = managerial.GetComponent<UIManager>();
-
+        socman = managerial.GetComponent<SocketManager>();
 
 
 
@@ -165,15 +166,20 @@ public class AssignTiles : MonoBehaviour {
     {
         tilename = tilename.Replace("\"", ""); //formatting to get rid of quotation marks
         float xRot = 0;
-      //  if (tilename == "obuolys_1" || tilename == "kriause_1") { xRot = -90f; }// for models that need rotations. Spearate with ||.
 
    
        
 
         GameObject currentTilePrefab = Resources.Load("Plants/" + tilename) as GameObject;
         GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(X, 0f, Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject;
-       // currentTile.transform.localScale = new Vector3(Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f));  FIXME: ask unity teacher y not workin
-        
+        // currentTile.transform.localScale = new Vector3(Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f));  FIXME: ask unity teacher y not workin
+
+
+
+        currentTile.GetComponent<BuildingScript>().thistile.START_OF_GROWTH = socman.unix;
+        currentTile.GetComponent<BuildingScript>().thistile.NAME = tilename;
+
+
 
     }
 

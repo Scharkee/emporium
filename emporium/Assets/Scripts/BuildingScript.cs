@@ -28,6 +28,7 @@ public class BuildingScript : MonoBehaviour {
     public Tile thistile;
     public Building thistileInfo;
     SocketManager socman;
+    public bool justSpawned;
 
     public int idInTileDatabase; //norint pasiekti savo tile bendrame tile array
     private int idInTileInfoDatabase;  // norint pasiekti savo tile informacija bendrame BuildingInfo array
@@ -36,8 +37,8 @@ public class BuildingScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        justSpawned = true;
 
-       
         GameObject managerial = GameObject.Find("_ManagerialScripts");
         socman = managerial.GetComponent<SocketManager>();
         uiManager = managerial.GetComponent<UIManager>();
@@ -45,11 +46,12 @@ public class BuildingScript : MonoBehaviour {
         GameObject go = GameObject.Find("SocketIO");
         socket = go.GetComponent<SocketIOComponent>();
 
-        CheckForGrowthCompletion();
 
-        AssignTileValues();
-        StartCoroutine(CheckForGrowthCompletionRepeat());
+
+      
+    
         RetrieveTileInfo();
+        StartCoroutine(CheckForGrowthCompletionRepeat());
         AssignBuildingSpecificValues();
         TileGrown = false;
         WorkDone = false;
@@ -65,10 +67,7 @@ public class BuildingScript : MonoBehaviour {
 
     }
 	
-	// Update is called once per frame
-	void Update () {
-      
-	}
+
 
 
     IEnumerator CheckForGrowthCompletionRepeat()
@@ -139,7 +138,7 @@ public class BuildingScript : MonoBehaviour {
         if(thistileInfo.BUILDING_TYPE == 0) { // augalas
         int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT;
 
-        if (socman.unix >= prog)
+        if (socman.unix >= prog && !justSpawned)
         {
 
             TileGrown = true;
@@ -167,7 +166,7 @@ public class BuildingScript : MonoBehaviour {
             int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT*(thistile.BUILDING_CURRENT_WORK_AMOUNT/100);
 
           
-            if (socman.unix >= prog && WorkAssigned)
+            if (socman.unix >= prog && WorkAssigned && !justSpawned)
             {
 
                 WorkDone = true; //TODO: maybe change to building type of thing
@@ -197,10 +196,6 @@ public class BuildingScript : MonoBehaviour {
 
     }
 
-    void AssignTileValues()
-    {
-        //?????
-    }
 
 
 
@@ -220,6 +215,8 @@ public class BuildingScript : MonoBehaviour {
 
         thistileInfo = Database.buildinginfo[i];
         idInTileInfoDatabase = i;
+
+        justSpawned = false;
 
      
     }

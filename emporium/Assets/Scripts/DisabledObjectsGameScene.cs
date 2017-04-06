@@ -12,8 +12,8 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public static GameObject Selector;
     public static GameObject alertPanel;
 
-
-
+    public static GameObject gridPlants;
+    public static GameObject gridBuildings;
 
     // Use this for initialization
     void Start () {
@@ -33,7 +33,11 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         BuyMenuPanel = GameObject.Find("BuyMenuPanel");
         Selector = GameObject.Find("Selector");
         alertPanel = GameObject.Find("alertPanel");
-        
+
+
+        gridPlants = GameObject.Find("OptionGrid");
+        gridBuildings = GameObject.Find("OptionGridBuildings");
+
 
     }
 

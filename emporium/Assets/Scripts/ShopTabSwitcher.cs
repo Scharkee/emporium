@@ -5,38 +5,29 @@ using UnityEngine;
 public class ShopTabSwitcher : MonoBehaviour {
 
 
-    GameObject gridPlants;
-    GameObject gridBuildings;
-   
-
+  
 	// Use this for initialization
 	void Start () {
 
 
 
 
-        gridBuildings.SetActive(false);
+        DisabledObjectsGameScene.gridBuildings.SetActive(false);
     }
 
-    void Awake()
-    {
-
-        gridPlants = GameObject.Find("OptionGrid");
-        gridBuildings = GameObject.Find("OptionGridBuildings");
-    }
 
     public void ReceivePlantTabButtonClick()
     {
 
-        if (gridPlants.activeSelf)
+        if (DisabledObjectsGameScene.gridPlants.activeSelf)
         {
 
 
         }else
         {
 
-            gridBuildings.SetActive(false);
-            gridPlants.SetActive(true);
+            DisabledObjectsGameScene.gridBuildings.SetActive(false);
+            DisabledObjectsGameScene.gridPlants.SetActive(true);
 
         }
 
@@ -47,16 +38,16 @@ public class ShopTabSwitcher : MonoBehaviour {
     {
 
 
-        if (gridBuildings.activeSelf)
+        if (DisabledObjectsGameScene.gridBuildings.activeSelf)
         {
 
 
         }
         else
         {
-
-            gridBuildings.SetActive(true);
-            gridPlants.SetActive(false);
+            DisabledObjectsGameScene.gridPlants.SetActive(false);
+            DisabledObjectsGameScene.gridBuildings.SetActive(true);
+           
 
         }
 

@@ -55,9 +55,9 @@ public class BuyMode : MonoBehaviour {
 
                     RenderSettings.skybox = light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
 
-                    DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
+                    DisabledObjectsGameScene.BuyMenuPanel.SetActive(false);
 
-                    buybuttonscript.activateOpGrid(false);
+                  
 
                     GameObject.Find("BuyScript").GetComponent<BuyScript>().ChoosePlot(buildingName, X, Z);
 
@@ -66,11 +66,7 @@ public class BuyMode : MonoBehaviour {
             }
             else
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                   //MAKEME reset view (build cancelled)
-
-                }
+                
             }
 
        
