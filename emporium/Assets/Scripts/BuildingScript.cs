@@ -18,6 +18,10 @@ public class BuildingScript : MonoBehaviour {
     public bool WorkAssigned;
     public bool ContextOpen;
 
+    AudioSource audiosource;
+
+    public AudioClip yeh;
+    public AudioClip noh;
 
 
 
@@ -46,10 +50,11 @@ public class BuildingScript : MonoBehaviour {
         GameObject go = GameObject.Find("SocketIO");
         socket = go.GetComponent<SocketIOComponent>();
 
+        audiosource = GetComponent<AudioSource>();
 
 
-      
-    
+
+
         RetrieveTileInfo();
         StartCoroutine(CheckForGrowthCompletionRepeat());
         AssignBuildingSpecificValues();
@@ -92,11 +97,18 @@ public class BuildingScript : MonoBehaviour {
         if (thistileInfo.BUILDING_TYPE == 0) { 
         if (TileGrown)
         {
+                audiosource.clip = yeh;
+                audiosource.Play();
 
             Debug.Log("harvesting plant");
 
             VerifyHarvest();
-        }
+            }else
+            {
+                audiosource.clip = noh;
+                audiosource.Play();
+
+            }
 
         }else if(thistileInfo.BUILDING_TYPE == 1)
         {
@@ -256,7 +268,7 @@ public class BuildingScript : MonoBehaviour {
         if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
         {
 
-            uiManager.ChangeUIText(thistileInfo.TILEPRODUCENAME + "_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
+            UIManager.ChangeUIText(thistileInfo.TILEPRODUCENAME + "_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
             Debug.Log("ressetting tile ");
 
 
@@ -292,11 +304,13 @@ public class BuildingScript : MonoBehaviour {
 
                 Debug.Log("press received reset request ID VERIFIED " + Regex.Replace(thistile.WORK_NAME, "[^0-9]", "") + "_Sultys_Editable");
                 Debug.Log(thistile.WORK_NAME);
-                uiManager.ChangeUIText(thistile.WORK_NAME+ "_Sultys_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilos
+                UIManager.ChangeUIText(thistile.WORK_NAME+ "_Sultys_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilos
                 Debug.Log("4");
                 Debug.Log(thistile.NAME + "_done(Clone)");
 
                 Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
+
+                //TODO: pridet i ingame inventoriu IR sutvarkyt inventory expander (kad disablintu o ne nuimtu alpha iki 0)
 
 
                 Debug.Log("destroying done status: " + thistile.NAME + "_done(Clone)");

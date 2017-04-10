@@ -11,17 +11,20 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public static GameObject BuyMenuPanel;
     public static GameObject Selector;
     public static GameObject alertPanel;
+    public static GameObject StatsContextPanel;
 
     public static GameObject gridPlants;
     public static GameObject gridBuildings;
+
+    public static GameObject managerialScripts;
 
     // Use this for initialization
     void Start () {
 
         alertPanel.SetActive(false);
+        StatsContextPanel.SetActive(false);
+      //  StartCoroutine(delayedDisable());
 
-        StartCoroutine(delayedDisable());
-        
 
     }
     void Awake()
@@ -33,10 +36,13 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         BuyMenuPanel = GameObject.Find("BuyMenuPanel");
         Selector = GameObject.Find("Selector");
         alertPanel = GameObject.Find("alertPanel");
-
+        managerialScripts= GameObject.Find("_ManagerialScripts");
+        StatsContextPanel = GameObject.Find("StatsContextPanel");
 
         gridPlants = GameObject.Find("OptionGrid");
         gridBuildings = GameObject.Find("OptionGridBuildings");
+
+        
 
 
     }

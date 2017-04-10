@@ -14,15 +14,16 @@ public class InvExpander : MonoBehaviour {
  
 
 
-    public void expandContract()
+    public void expandContract() //TODO: make normal disables and not alpha shit
     {
 
-        if (DisabledObjectsGameScene.Inventory_Fruit_panel.activeSelf)
+        if (DisabledObjectsGameScene.Inventory_Fruit_panel.GetComponent<CanvasGroup>().alpha == 0)
         {
-            DisabledObjectsGameScene.Inventory_Fruit_panel.SetActive(false);
+
+            DisabledObjectsGameScene.Inventory_Fruit_panel.GetComponent<CanvasGroup>().alpha = 1;
         }else
         {
-            DisabledObjectsGameScene.Inventory_Fruit_panel.SetActive(true);
+            DisabledObjectsGameScene.Inventory_Fruit_panel.GetComponent<CanvasGroup>().alpha = 0;
         }
     }
 

@@ -87,9 +87,7 @@ public class AssignTiles : MonoBehaviour {
         Database.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);// assignment
        
 
-        uiManager.ChangeUIText("apelsinai_Editable", Database.inventory[0].apelsinai.ToString());
-        uiManager.ChangeUIText("kriauses_Editable", Database.inventory[0].kriauses.ToString());  //EXPAND
-        uiManager.ChangeUIText("slyvos_Editable", Database.inventory[0].slyvos.ToString());
+
 
 
 

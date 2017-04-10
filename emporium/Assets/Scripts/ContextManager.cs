@@ -44,5 +44,20 @@ public class ContextManager : MonoBehaviour {
 
     }
 
+    public void CancelOutContextPanels()
+    {
+
+        if (DisabledObjectsGameScene.PressContextPanel.GetComponent<PressContextPanelScript>().aliveForHalfSec)
+        {
+            CloseAndResetPressContext();  //preso conteksta uzdarom
+
+        }
+
+       
+        //stats konteksta uzdarom ir t.t
+
+
+    }
+
 
 }

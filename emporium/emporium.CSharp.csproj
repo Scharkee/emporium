@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\BuyMode.cs" />
     <Compile Include="Assets\Scripts\BuyScript.cs" />
     <Compile Include="Assets\Scripts\BuyTile.cs" />
+    <Compile Include="Assets\Scripts\CancelContext.cs" />
     <Compile Include="Assets\Scripts\ContextManager.cs" />
     <Compile Include="Assets\Scripts\Database.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsGameScene.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Assets\Scripts\IDHelper.cs" />
     <Compile Include="Assets\Scripts\IdentifierScript.cs" />
     <Compile Include="Assets\Scripts\InvExpander.cs" />
+    <Compile Include="Assets\Scripts\InventoryPanel.cs" />
     <Compile Include="Assets\Scripts\Languages.cs" />
     <Compile Include="Assets\Scripts\LoginCheck.cs" />
     <Compile Include="Assets\Scripts\PlayerInfoLoaderBank.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Assets\Scripts\RotationScript.cs" />
     <Compile Include="Assets\Scripts\ShopTabSwitcher.cs" />
     <Compile Include="Assets\Scripts\SocketManager.cs" />
+    <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\UnamePassInputScript.cs" />
     <Compile Include="Assets\Scripts\alertPanelScript.cs" />

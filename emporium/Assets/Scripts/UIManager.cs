@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour {
 
     }
 
-    public void ChangeUIText(string TextObjName, string newtext)
+    public static void ChangeUIText(string TextObjName, string newtext)
     {
         Text text = GameObject.Find(TextObjName).GetComponent<Text>();
 

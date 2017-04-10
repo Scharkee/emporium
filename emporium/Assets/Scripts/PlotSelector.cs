@@ -30,7 +30,7 @@ public class PlotSelector : MonoBehaviour {
 
 
 
-        while (Physics.CheckSphere(new Vector3(currentX, -0.07f, currentZ), 0.1f))
+        while (Physics.CheckSphere(new Vector3(currentX, -0.07f, currentZ), 0.3f))
         {
             currentZ--;
         }

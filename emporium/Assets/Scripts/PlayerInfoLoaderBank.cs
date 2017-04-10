@@ -60,7 +60,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
         RotationScript rotscript = GameObject.Find("Main Camera").GetComponent<RotationScript>();
         rotscript.SetCurrentRotCenter(lygusnelygusPlot());//also sets ground transform
 
-        GameObject.Find("Ground").transform.localScale = new Vector3(Database.UserPlotSize, 0.1f, Database.UserPlotSize) ;
+        GameObject.Find("Ground").transform.localScale = new Vector3(Database.UserPlotSize, 1f, Database.UserPlotSize) ;
 
 
     }
@@ -111,6 +111,13 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
 
         string lastOnline = Regex.Replace(evt.data.GetField("lastonline").ToString(), "[^0-9]", "");
         Database.UserLastOnline=int.Parse(lastOnline);
+
+        if (bool.Parse((evt.data.GetField("firstPlay").ToString()))){
+
+
+            DisabledObjectsGameScene.managerialScripts.GetComponent<TutorialManager>().StartTutorial();
+
+        }
 
     
 

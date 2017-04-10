@@ -5,10 +5,23 @@ using UnityEngine.UI;
 
 public class PressContextPanelScript : MonoBehaviour {
 
+    public bool aliveForHalfSec;
+
 	// Use this for initialization
 	void Start () {
-		
-	}
+        aliveForHalfSec = false;
+        StartCoroutine(waitForALittleBeforeAllowingCancellationsOfPanel());
+
+
+
+    }
+
+    void OnEnable()
+    {
+        aliveForHalfSec = false;
+        StartCoroutine(waitForALittleBeforeAllowingCancellationsOfPanel());
+
+    }
 	
 
 
@@ -43,6 +56,14 @@ public class PressContextPanelScript : MonoBehaviour {
 
 
 
+    }
+
+
+    IEnumerator waitForALittleBeforeAllowingCancellationsOfPanel()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        aliveForHalfSec = true;
     }
 
 
