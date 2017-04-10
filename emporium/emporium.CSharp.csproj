@@ -110,6 +110,7 @@
     <Compile Include="Assets\Scripts\RotationScript.cs" />
     <Compile Include="Assets\Scripts\ShopTabSwitcher.cs" />
     <Compile Include="Assets\Scripts\SocketManager.cs" />
+    <Compile Include="Assets\Scripts\TileOperator.cs" />
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\UnamePassInputScript.cs" />

@@ -21,6 +21,8 @@ public class Database : MonoBehaviour
     public static Building[] buildinginfo;
     public static Inventory[] inventory; //one main inventory
 
+    public static List<GameObject> ActiveTiles = new List<GameObject>(); //tiles su kuriom daromos operacijos main update cikle.
+
 
 
 

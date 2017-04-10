@@ -56,7 +56,7 @@ public class BuildingScript : MonoBehaviour {
 
 
         RetrieveTileInfo();
-        StartCoroutine(CheckForGrowthCompletionRepeat());
+  
         AssignBuildingSpecificValues();
         TileGrown = false;
         WorkDone = false;
@@ -75,20 +75,6 @@ public class BuildingScript : MonoBehaviour {
 
 
 
-    IEnumerator CheckForGrowthCompletionRepeat()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            CheckForGrowthCompletion();
-
-
-            
-
-
-
-        }
-    }
 
 
     void OnMouseDown()
@@ -144,69 +130,7 @@ public class BuildingScript : MonoBehaviour {
 
 
 
-    void CheckForGrowthCompletion()
-    {
-
-        if(thistileInfo.BUILDING_TYPE == 0) { // augalas
-        int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT;
-
-        if (socman.unix >= prog && !justSpawned)
-        {
-
-            TileGrown = true;
-
-
-            if (transform.FindChild(thistile.NAME + "_vaisiai(Clone)"))
-            {
-               
-            }else
-            {
-
-
-                GameObject vaisiaiPrefab = Resources.Load("Plants/done/" + thistile.NAME + "_vaisiai") as GameObject;
-
-                GameObject vaisiai = Instantiate(vaisiaiPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), gameObject.transform.rotation, gameObject.transform) as GameObject;
-
-            }
-          
-      
-          }
-
-        }else if (thistileInfo.BUILDING_TYPE == 1) // presas
-        {
-
-            int prog = thistile.START_OF_GROWTH + thistileInfo.PROG_AMOUNT*(thistile.BUILDING_CURRENT_WORK_AMOUNT/100);
-
-          
-            if (socman.unix >= prog && WorkAssigned && !justSpawned)
-            {
-
-                WorkDone = true; //TODO: maybe change to building type of thing
-
-
-                if (transform.FindChild(thistile.NAME + "_done(Clone)"))
-                {
-
-                }
-                else
-                {
-
-
-                    GameObject DonePrefab = Resources.Load("Plants/done/" + thistile.NAME + "_done") as GameObject;
-
-                    GameObject done = Instantiate(DonePrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), gameObject.transform.rotation, gameObject.transform) as GameObject;
-
-                }
-
-
-            }
-
-
-        }
-
-
-
-    }
+   
 
 
 
@@ -269,11 +193,10 @@ public class BuildingScript : MonoBehaviour {
         {
 
             UIManager.ChangeUIText(thistileInfo.TILEPRODUCENAME + "_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
-            Debug.Log("ressetting tile ");
 
 
             Destroy(transform.FindChild(thistile.NAME + "_vaisiai(Clone)").gameObject);
-            Debug.Log("destroying fruits: " + thistile.NAME + "_vaisiai(Clone)");
+
 
 
             Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
@@ -305,7 +228,7 @@ public class BuildingScript : MonoBehaviour {
                 Debug.Log("press received reset request ID VERIFIED " + Regex.Replace(thistile.WORK_NAME, "[^0-9]", "") + "_Sultys_Editable");
                 Debug.Log(thistile.WORK_NAME);
                 UIManager.ChangeUIText(thistile.WORK_NAME+ "_Sultys_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilos
-                Debug.Log("4");
+             
                 Debug.Log(thistile.NAME + "_done(Clone)");
 
                 Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
@@ -317,12 +240,12 @@ public class BuildingScript : MonoBehaviour {
 
 
                 Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
-                Debug.Log("1");
+                
 
                 Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = 0;
 
                 Database.tile[idInTileDatabase].WORK_NAME = "";
-                Debug.Log("3");
+              
                 thistile = Database.tile[idInTileDatabase];
 
                 WorkAssigned = false;

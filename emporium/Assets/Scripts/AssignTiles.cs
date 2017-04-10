@@ -107,9 +107,13 @@ public class AssignTiles : MonoBehaviour {
             float xRot=0;
        
 
-            GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(Database.tile[i].X, 0f, Database.tile[i].Z),Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)) ,GameObject.Find("Tiles").transform) as GameObject;
+            GameObject currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.tile[i].X, 0f, Database.tile[i].Z),Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)) ,GameObject.Find("Tiles").transform) as GameObject).gameObject;
             currentTile.GetComponent<BuildingScript>().thistile = Database.tile[i];
             currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
+
+            Debug.Log("crapashoot");
+            Database.ActiveTiles.Add(currentTile);
+            Debug.Log("crapashoot");
 
 
             i++;
