@@ -17,7 +17,7 @@ public class HelperScripts : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameAlerts.AlertWithMessage("test123123");
+            Debug.Log(Database.inventory[0].kriauses);
       
     
         }
@@ -40,5 +40,37 @@ public class HelperScripts : MonoBehaviour {
             lygnelyg = false;
         }
         return lygnelyg;
+    }
+
+    public static Dictionary<string,float> ReassignInventory(Inventory inv)
+    {
+        Dictionary<string, float> dic = new Dictionary<string, float>();
+
+        //ADD NEW JUICES AND FRUITS
+
+        dic.Add("kriauses",inv.kriauses);
+        dic.Add("kriauses_sultys", inv.kriauses_sultys);
+        dic.Add("apelsinai", inv.apelsinai);
+        dic.Add("apelsinai_sultys", inv.apelsinai_sultys);
+        dic.Add("arbuzai", inv.arbuzai);
+        dic.Add("arbuzai_sultys", inv.arbuzai_sultys);
+        dic.Add("bananai", inv.bananai);
+        dic.Add("bananai_sultys", inv.bananai_sultys);
+        dic.Add("obuoliai", inv.obuoliai);
+        dic.Add("obuoliai_sultys", inv.obuoliai_sultys);
+        dic.Add("slyvos", inv.slyvos);
+        dic.Add("slyvos_sultys", inv.slyvos_sultys);
+        dic.Add("vysnios", inv.vysnios);
+        dic.Add("vysnios_sultys", inv.vysnios_sultys);
+        dic.Add("persikai", inv.persikai);
+        dic.Add("persikai_sultys", inv.persikai_sultys);
+        dic.Add("kiviai", inv.kiviai);
+        dic.Add("kiviai_sultys", inv.kiviai_sultys);
+        dic.Add("nektarinai", inv.nektarinai);
+        dic.Add("nektarinai_sultys", inv.nektarinai_sultys);
+
+
+
+        return dic;
     }
 }

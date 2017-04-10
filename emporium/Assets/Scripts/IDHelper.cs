@@ -48,4 +48,10 @@ public class IDHelper : MonoBehaviour {
 
         return name;
     }
+
+    public static string NameToRealName(string name)
+    {
+        
+        return GlobalControl.currentLangDict[name];
+    }
 }

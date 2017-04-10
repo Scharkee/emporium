@@ -77,7 +77,7 @@ public class TileOperator : MonoBehaviour {
             else if (tileScript.thistileInfo.BUILDING_TYPE == 1) // presas
             {
 
-                int prog = tileScript.thistile.START_OF_GROWTH + tileScript.thistileInfo.PROG_AMOUNT * (tileScript.thistile.BUILDING_CURRENT_WORK_AMOUNT / 100);
+                int prog = tileScript.thistile.START_OF_GROWTH + tileScript.thistile.BUILDING_CURRENT_WORK_AMOUNT * (tileScript.thistileInfo.PROG_AMOUNT / 100);
 
 
                 if (socman.unix >= prog && tileScript.WorkAssigned && !tileScript.justSpawned)

@@ -85,9 +85,9 @@ public class AssignTiles : MonoBehaviour {
 
 
         Database.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);// assignment
-       
 
 
+        Database.Inventory = HelperScripts.ReassignInventory(Database.inventory[0]);
 
 
 
@@ -111,9 +111,9 @@ public class AssignTiles : MonoBehaviour {
             currentTile.GetComponent<BuildingScript>().thistile = Database.tile[i];
             currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
-            Debug.Log("crapashoot");
+           
             Database.ActiveTiles.Add(currentTile);
-            Debug.Log("crapashoot");
+
 
 
             i++;

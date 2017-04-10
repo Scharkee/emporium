@@ -19,7 +19,9 @@ public class Database : MonoBehaviour
     //MAIN DATBASES
     public static Tile[] tile;
     public static Building[] buildinginfo;
-    public static Inventory[] inventory; //one main inventory
+    public static Inventory[] inventory; //one temp invo for JSON conversion
+    public static Dictionary<string, float> Inventory;  // main inventory
+
 
     public static List<GameObject> ActiveTiles = new List<GameObject>(); //tiles su kuriom daromos operacijos main update cikle.
 
@@ -145,6 +147,12 @@ public class Inventory
     public float arbuzai_sultys;
     public float kriauses;
     public float kriauses_sultys;
+    public float nektarinai_sultys;
+    public float nektarinai;
+    public float kiviai;
+    public float kiviai_sultys;
+    public float persikai;
+    public float persikai_sultys;
 
 
 }

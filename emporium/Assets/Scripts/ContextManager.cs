@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 
 public class ContextManager : MonoBehaviour {
 
+    static SocketManager socman;
+
+    Color normal;
+    Color invisText;
+
 	// Use this for initialization
 	void Start () {
+
+        socman = GameObject.Find("_ManagerialScripts").GetComponent<SocketManager>();
 		
 	}
 
@@ -55,6 +63,84 @@ public class ContextManager : MonoBehaviour {
 
        
         //stats konteksta uzdarom ir t.t
+
+
+    }
+
+    public static void CloseStatPanel()
+    {
+
+        DisabledObjectsGameScene.StatsContextPanel.SetActive(false);
+
+    }
+
+    public static void ShowStats(GameObject building)
+    {
+        BuildingScript buildingscript = building.GetComponent<BuildingScript>();
+
+        if (!DisabledObjectsGameScene.StatsContextPanel.activeSelf) //jei nera ijungtasa stat panel tai ijungiam
+        {
+            DisabledObjectsGameScene.StatsContextPanel.SetActive(true);
+        }
+            
+
+            if (buildingscript.thistileInfo.BUILDING_TYPE == 0) //augalas
+            {
+            string finishedString;
+
+            int time = (buildingscript.thistile.START_OF_GROWTH + buildingscript.thistileInfo.PROG_AMOUNT) - socman.unix;
+            TimeSpan ts = TimeSpan.FromSeconds(time);
+
+            if (time <= 0)
+            {
+                finishedString = GlobalControl.currentLangDict["done_plant_growth"];
+            }else
+            {
+                finishedString = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+            }
+               
+
+
+                DisabledObjectsGameScene.StatsContextPanel.SetActive(true);
+                DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.NameToRealName(buildingscript.thistile.NAME);
+                DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
+                DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = "";
+
+        }
+        else if(buildingscript.thistileInfo.BUILDING_TYPE == 1) //pastatas
+        {
+
+            string finishedString;
+
+            int time = (buildingscript.thistile.START_OF_GROWTH + buildingscript.thistile.BUILDING_CURRENT_WORK_AMOUNT * (buildingscript.thistileInfo.PROG_AMOUNT / 100)) - socman.unix;
+            
+            TimeSpan ts = TimeSpan.FromSeconds(time);
+
+
+            if (time <= 0)
+            {
+                finishedString = GlobalControl.currentLangDict["done_collect"];
+            }
+            else
+            {
+                finishedString = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+            }
+
+
+
+            DisabledObjectsGameScene.StatsContextPanel.SetActive(true);
+            DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.NameToRealName( buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+            DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME;
+
+
+
+        }
+
+
+
+
+
 
 
     }

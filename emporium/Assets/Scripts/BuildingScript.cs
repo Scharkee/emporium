@@ -67,7 +67,7 @@ public class BuildingScript : MonoBehaviour {
         socket.On("RESET_TILE_GROWTH", ResetGrowth);
         socket.On("ASSIGN_TILE_WORK", AssignTileWork);
 
-        Debug.Log(thistile.NAME+" "+thistileInfo.BUILDING_TYPE);
+
         
 
     }
@@ -142,7 +142,7 @@ public class BuildingScript : MonoBehaviour {
         {
             i++;
             thistileInfo.NAME = Database.buildinginfo[i].NAME;
-            Debug.Log(Database.buildinginfo[i].NAME);
+
 
 
         }
@@ -191,11 +191,11 @@ public class BuildingScript : MonoBehaviour {
 
         if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
         {
+               
+           Database.Inventory[thistileInfo.TILEPRODUCENAME]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory
 
-            UIManager.ChangeUIText(thistileInfo.TILEPRODUCENAME + "_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilo's
-
-
-            Destroy(transform.FindChild(thistile.NAME + "_vaisiai(Clone)").gameObject);
+          
+                Destroy(transform.FindChild(thistile.NAME + "_vaisiai(Clone)").gameObject);
 
 
 
@@ -224,12 +224,10 @@ public class BuildingScript : MonoBehaviour {
                 Debug.Log("this just in");
 
 
-
-                Debug.Log("press received reset request ID VERIFIED " + Regex.Replace(thistile.WORK_NAME, "[^0-9]", "") + "_Sultys_Editable");
-                Debug.Log(thistile.WORK_NAME);
-                UIManager.ChangeUIText(thistile.WORK_NAME+ "_Sultys_Editable", evt.data.GetField("currentProduceAmount").ToString()); //setting text to represent kilos
+    
+                Database.Inventory[thistileInfo.TILEPRODUCENAME+"_sultys"]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
              
-                Debug.Log(thistile.NAME + "_done(Clone)");
+                
 
                 Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
 

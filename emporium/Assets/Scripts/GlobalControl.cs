@@ -10,7 +10,7 @@ public class GlobalControl : MonoBehaviour
     public static string Pass;
     public static int Logincount;
     public static int Userlanguage;
-    private Dictionary<string,string> currentLangDict;
+    public static Dictionary<string,string> currentLangDict;
     public static GlobalControl Instance;
     public bool ConnectedOnceNoDupeStatRequests = false;
 
@@ -20,6 +20,8 @@ public class GlobalControl : MonoBehaviour
         Logincount = 1;
 
         Languages.initDicts();
+
+        currentLangDict = Languages.english;
     }
 
     void Awake()
@@ -63,7 +65,7 @@ public class GlobalControl : MonoBehaviour
                     break;
             }
 
-            if (SceneManager.GetActiveScene().name == "Main") // pakeista login screene
+            if (SceneManager.GetActiveScene().name == "Main") // pakeista login screene (tik ten ir galima keisti is esmes)
             {
                 GameObject.Find("LoginButtonText").GetComponent<Text>().text = currentLangDict["login"];
                 GameObject.Find("tempLoginButtonText").GetComponent<Text>().text = currentLangDict["templog"];
