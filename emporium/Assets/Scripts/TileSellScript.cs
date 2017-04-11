@@ -134,7 +134,7 @@ public class TileSellScript : MonoBehaviour {
                 yield return new WaitForSeconds(0.001f);
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f), step);
             }
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f);
+        
 
             yield break;
         }
@@ -146,7 +146,8 @@ public class TileSellScript : MonoBehaviour {
                 yield return new WaitForSeconds(0.0001f);
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f), step);
             }
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f);
+        
+
             yield break;
         }
 

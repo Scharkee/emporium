@@ -93,6 +93,7 @@ public class BuyMode : MonoBehaviour {
 
         //effects and pltoselectors
         StartCoroutine(liftcamera());
+        RenderSettings.skybox = DisabledObjectsGameScene.dark_skybox;
         GameObject.Find("_GameScripts").GetComponent<PlotSelector>().plotselectors.SetActive(true);
 
 
@@ -118,7 +119,7 @@ public class BuyMode : MonoBehaviour {
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f), step);
 
             }
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f);
+          
 
             yield break;
 
@@ -135,7 +136,7 @@ public class BuyMode : MonoBehaviour {
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f), step);
             }
 
-            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f);
+           
 
             yield break;
         }

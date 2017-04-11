@@ -40,6 +40,7 @@ public class SocketManager : MonoBehaviour {
         socket.On("NO_FUNDS", NoFundsAlert);
 
         socket.On("ADD_FUNDS", AddFunds);
+        socket.On("UPDATE_PLOT_SIZE", UpdatePlotSize);
 
 
     }
@@ -108,11 +109,29 @@ public class SocketManager : MonoBehaviour {
 
     public void UpdatePlotSize(SocketIOEvent evt)
     {
+        Debug.Log("1");
+        Database.UserPlotSize++;
+        Debug.Log("21");
+
+        GameObject.Find("PlotSelectors").SetActive(true); //kliuna cia
+
+        Debug.Log("2221");
+        foreach (Transform child in GameObject.Find("PlotSelectors").transform)
+        {
+            Debug.Log("destroying");
+            Destroy(child);
+        }
+
+
+        GameObject.Find("Ground").transform.localScale = new Vector3(Database.UserPlotSize, 1f, Database.UserPlotSize);
+
+        Debug.Log("222");
+        GameObject.Find("_GameScripts").GetComponent<PlotSelector>().SpawnPlotSelectors();
 
         RotationScript rotscript = GameObject.Find("Main Camera").GetComponent<RotationScript>();
         rotscript.SetCurrentRotCenter(helperscript.LyginisPlotsize());//also sets ground transform
 
-        GameObject.Find("Ground").transform.localScale = new Vector3(Database.UserPlotSize, 0.1f, Database.UserPlotSize);
+        
     }
 
    
@@ -148,6 +167,14 @@ public class SocketManager : MonoBehaviour {
         Database.UserDollars += additive;
 
 
+
+    }
+
+    public void ExpandPlotsize()
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data["Uname"] = GlobalControl.Uname;
+        socket.Emit("VERIFY_EXPAND_PLOTSIZE", new JSONObject(data));
 
     }
 
