@@ -31,10 +31,6 @@ public class TileOperator : MonoBehaviour {
             CheckForGrowthCompletion();
 
 
-
-
-
-
         }
     }
 
@@ -68,11 +64,8 @@ public class TileOperator : MonoBehaviour {
 
                         GameObject vaisiai = Instantiate(vaisiaiPrefab, new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z), tile.transform.rotation, tile.transform) as GameObject;
 
-                    }
-
-
+                    }       
                 }
-
             }
             else if (tileScript.thistileInfo.BUILDING_TYPE == 1) // presas
             {
@@ -93,24 +86,12 @@ public class TileOperator : MonoBehaviour {
                     else
                     {
 
-
-                        GameObject DonePrefab = Resources.Load("Plants/done/" + tileScript.thistile.NAME + "_done") as GameObject;
-
+                        GameObject DonePrefab = Resources.Load("Plants/done/" + tileScript.thistile.NAME + "_done") as GameObject;                 
                         GameObject done = Instantiate(DonePrefab, new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z), tile.transform.rotation, tile.transform) as GameObject;
-
                     }
-
-
                 }
-
-
             }
-
         }
-
-      
-
-
 
     }
 }

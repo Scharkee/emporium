@@ -176,7 +176,7 @@ public class AssignTiles : MonoBehaviour {
         GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(X, 0f, Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject;
         // currentTile.transform.localScale = new Vector3(Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f));  FIXME: ask unity teacher y not workin
 
-
+        Database.ActiveTiles.Add(currentTile);
 
         currentTile.GetComponent<BuildingScript>().thistile.START_OF_GROWTH = socman.unix;
         currentTile.GetComponent<BuildingScript>().thistile.NAME = tilename;

@@ -39,7 +39,7 @@ public class SocketManager : MonoBehaviour {
 
         socket.On("NO_FUNDS", NoFundsAlert);
 
-
+        socket.On("ADD_FUNDS", AddFunds);
 
 
     }
@@ -157,6 +157,14 @@ public class SocketManager : MonoBehaviour {
 
     void NoFundsAlert(SocketIOEvent evt)
     {
+
+
+    }
+    void AddFunds(SocketIOEvent evt)
+    {
+        int additive = int.Parse(evt.data.GetField("addFunds").ToString());
+        Database.UserDollars += additive;
+
 
 
     }

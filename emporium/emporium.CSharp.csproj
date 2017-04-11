@@ -104,6 +104,7 @@
     <Compile Include="Assets\Scripts\InventoryPanel.cs" />
     <Compile Include="Assets\Scripts\Languages.cs" />
     <Compile Include="Assets\Scripts\LoginCheck.cs" />
+    <Compile Include="Assets\Scripts\MoneyTracker.cs" />
     <Compile Include="Assets\Scripts\PlayerInfoLoaderBank.cs" />
     <Compile Include="Assets\Scripts\PlotSelector.cs" />
     <Compile Include="Assets\Scripts\PressContextPanelScript.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Assets\Scripts\SocketManager.cs" />
     <Compile Include="Assets\Scripts\StatContextManager.cs" />
     <Compile Include="Assets\Scripts\TileOperator.cs" />
+    <Compile Include="Assets\Scripts\TileSellScript.cs" />
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\UnamePassInputScript.cs" />

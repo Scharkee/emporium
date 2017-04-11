@@ -130,7 +130,7 @@ public class ContextManager : MonoBehaviour {
 
             DisabledObjectsGameScene.StatsContextPanel.SetActive(true);
             DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.NameToRealName( buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+            DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
             DisabledObjectsGameScene.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME;
 
 

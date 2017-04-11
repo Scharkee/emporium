@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SocketIO;
 
 public class DisabledObjectsGameScene : MonoBehaviour {
 
+    //issaugomi ivairus objektai kuriu reikia kitoms klasems. Islieka references net kai disablinami patys objektai
     public static GameObject PressContextPanel;
     public static GameObject LoadingPanel;
     public static GameObject Inventory_Fruit_panel;
@@ -15,8 +17,9 @@ public class DisabledObjectsGameScene : MonoBehaviour {
 
     public static GameObject gridPlants;
     public static GameObject gridBuildings;
-
     public static GameObject managerialScripts;
+    public static SocketIOComponent socket;
+    public static GameObject moneyEdit;
 
     // Use this for initialization
     void Start () {
@@ -24,6 +27,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         alertPanel.SetActive(false);
         StatsContextPanel.SetActive(false);
       //  StartCoroutine(delayedDisable());
+
 
 
     }
@@ -41,8 +45,10 @@ public class DisabledObjectsGameScene : MonoBehaviour {
 
         gridPlants = GameObject.Find("OptionGrid");
         gridBuildings = GameObject.Find("OptionGridBuildings");
+        socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
 
-        
+        moneyEdit = GameObject.Find("MoneyEdit");
+
 
 
     }
