@@ -20,13 +20,21 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public static GameObject managerialScripts;
     public static SocketIOComponent socket;
     public static GameObject moneyEdit;
+    public static GameObject tileSellScript;
+    public static GameObject PlotSelectors;
+
+    public static Material light_skybox;
+    public static Material dark_skybox;
 
     // Use this for initialization
     void Start () {
 
         alertPanel.SetActive(false);
         StatsContextPanel.SetActive(false);
-      //  StartCoroutine(delayedDisable());
+        //  StartCoroutine(delayedDisable());
+
+        dark_skybox = Resources.Load("Materials/Skybox_mat_darkened") as Material;
+        light_skybox = RenderSettings.skybox;
 
 
 
@@ -48,7 +56,8 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
 
         moneyEdit = GameObject.Find("MoneyEdit");
-
+        tileSellScript = GameObject.Find("SellScript");
+        PlotSelectors = GameObject.Find("PlotSelectors");
 
 
     }

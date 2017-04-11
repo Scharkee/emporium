@@ -5,9 +5,8 @@ using SocketIO;
 
 public class TileSellScript : MonoBehaviour {
 
-    bool sellModeEnabled;
-    Material light_skybox;
-    Material dark_skybox;
+    public bool sellModeEnabled;
+   
     SocketIOComponent socket;
 
     void Start()
@@ -15,8 +14,8 @@ public class TileSellScript : MonoBehaviour {
 
         sellModeEnabled = false;
 
-        dark_skybox= Resources.Load("Materials/Skybox_mat_darkened") as Material;
-        light_skybox = RenderSettings.skybox;
+      
+     
 
         socket = DisabledObjectsGameScene.socket;
 
@@ -25,11 +24,28 @@ public class TileSellScript : MonoBehaviour {
 
     public void TheClick()
     {
+
+
+        if (DisabledObjectsGameScene.BuyMenuPanel.activeSelf) //buymenu panel is currently open
+        {
+            StartCoroutine(GameObject.Find("BuyButton").GetComponent<BuyButtonScript>().BuyMenuPanelFader());
+
+        }
+        if (Globals.cameraUp && DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
+        {
+
+            DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().DisableBuyMode();
+           
+        }
+
         EnableDisableSellMode();
+
+
+
     }
 
 
-    private void EnableDisableSellMode()
+    public void EnableDisableSellMode()
     {
 
         if (sellModeEnabled)
@@ -50,13 +66,13 @@ public class TileSellScript : MonoBehaviour {
 
         if (sell)
         {
-            RenderSettings.skybox = dark_skybox;
+            RenderSettings.skybox = DisabledObjectsGameScene.dark_skybox;
             StartCoroutine(moveCamera());
 
         }else
         {
             StartCoroutine(moveCamera());
-            RenderSettings.skybox = light_skybox;
+            RenderSettings.skybox = DisabledObjectsGameScene.light_skybox;
 
         }
 
@@ -84,10 +100,7 @@ public class TileSellScript : MonoBehaviour {
                     }
 
             }
-            else
-            {
-
-            }
+            
 
         }
 
@@ -113,23 +126,27 @@ public class TileSellScript : MonoBehaviour {
     {
         float step = 10 * Time.deltaTime;
 
-        if (Camera.main.transform.position.y < 3)  //raise cam
+        if (!Globals.cameraUp)  //raise cam
         {
+            Globals.cameraUp = true;
             while (Camera.main.transform.position.y < 3.2f)
             {
                 yield return new WaitForSeconds(0.001f);
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f), step);
             }
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f);
 
             yield break;
         }
-        else if (Camera.main.transform.position.y > 3)  //lower cam
+        else if (Globals.cameraUp)  //lower cam
         {
+            Globals.cameraUp = false;
             while (Camera.main.transform.position.y > 1.7f)
             {
                 yield return new WaitForSeconds(0.0001f);
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f), step);
             }
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f);
             yield break;
         }
 

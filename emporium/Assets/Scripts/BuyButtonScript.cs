@@ -36,11 +36,15 @@ public class BuyButtonScript : MonoBehaviour
     public void TheClick()
     {
 
-        if(Camera.main.transform.position.y > 3) //buy mode is enabled. Cancel buy mode.
+        if(Globals.cameraUp && DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
         {
 
             DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().DisableBuyMode();
-            DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().enabled = false;
+            
+        }else if (Globals.cameraUp && DisabledObjectsGameScene.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled) //enabled sell mode, disabling.
+        {
+            DisabledObjectsGameScene.tileSellScript.GetComponent<TileSellScript>().EnableDisableSellMode();
+
         }
 
         StartCoroutine(BuyMenuPanelFader());
@@ -48,7 +52,7 @@ public class BuyButtonScript : MonoBehaviour
 
 
 
-    IEnumerator BuyMenuPanelFader()
+    public IEnumerator BuyMenuPanelFader()
     {
         DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
 
@@ -99,9 +103,4 @@ public class BuyButtonScript : MonoBehaviour
 
     }
 
-    public void activateOpGrid(bool bb)
-    {
-
-       opgrid.SetActive(bb);
-    }
 }

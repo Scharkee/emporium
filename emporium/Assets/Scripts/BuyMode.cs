@@ -8,9 +8,10 @@ public class BuyMode : MonoBehaviour {
     string buildingName;
     string TileName;
     bool darken;
+    bool disableQueued;
     int camspeed = 10;
 
-    Material light_skybox;
+   
     BuyButtonScript buybuttonscript;
 
     // Use this for initialization
@@ -18,7 +19,12 @@ public class BuyMode : MonoBehaviour {
         buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
 
         buybuttonscript.panelEnabled = false;
+        disableQueued = false;
 
+    }
+    void OnEnable()
+    {
+        disableQueued = false;
     }
 
     void Awake()
@@ -53,7 +59,7 @@ public class BuyMode : MonoBehaviour {
                     StartCoroutine(liftcamera());
                     buybuttonscript.panelEnabled = false;
 
-                    RenderSettings.skybox = light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
+                    RenderSettings.skybox = DisabledObjectsGameScene.light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
 
                     DisabledObjectsGameScene.BuyMenuPanel.SetActive(false);
 
@@ -89,8 +95,6 @@ public class BuyMode : MonoBehaviour {
         StartCoroutine(liftcamera());
         GameObject.Find("_GameScripts").GetComponent<PlotSelector>().plotselectors.SetActive(true);
 
-        light_skybox = RenderSettings.skybox;
-        RenderSettings.skybox = Resources.Load("Materials/Skybox_mat_darkened") as Material; // MAKEME fade here
 
     }
 
@@ -103,8 +107,9 @@ public class BuyMode : MonoBehaviour {
         float step = camspeed * Time.deltaTime;
 
 
-        if (Camera.main.transform.position.y<3)  //raise cam
+        if (!Globals.cameraUp)  //raise cam
         {
+            Globals.cameraUp = true;
             while (Camera.main.transform.position.y < 3.2f)
             {
                 yield return new WaitForSeconds(0.001f);
@@ -113,13 +118,15 @@ public class BuyMode : MonoBehaviour {
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f), step);
 
             }
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f);
 
             yield break;
 
 
         }
-        else if (Camera.main.transform.position.y > 3)  //lower cam
+        else if (Globals.cameraUp)  //lower cam
         {
+            Globals.cameraUp = false;
             while (Camera.main.transform.position.y > 1.7f)
             {
                 yield return new WaitForSeconds(0.0001f);
@@ -128,23 +135,38 @@ public class BuyMode : MonoBehaviour {
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f), step);
             }
 
+            Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f);
+
             yield break;
+        }
+
+        if (disableQueued)
+        {
+
+            gameObject.SetActive(false);
         }
         
 }
 
     public void DisableBuyMode()
     {
-        GameObject.Find("PlotSelectors").SetActive(false);
+        if (DisabledObjectsGameScene.PlotSelectors.activeSelf) //compatibility with sell mode & protection against crashing out
+        {
+            DisabledObjectsGameScene.PlotSelectors.SetActive(false);
+
+        }
+  
 
         StartCoroutine(liftcamera());
-        buybuttonscript.panelEnabled = false;
-
-        RenderSettings.skybox = light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
-
+        // buybuttonscript.panelEnabled = false;
+        Debug.Log("changing back skybox");
+        RenderSettings.skybox = DisabledObjectsGameScene.light_skybox; //MAKEME make fade    
+        Debug.Log("changing back skybox");
         DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
 
-        buybuttonscript.activateOpGrid(false);
+        disableQueued = true;
+       
+
 
     }
 

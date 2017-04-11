@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\DisabledObjectsMain.cs" />
     <Compile Include="Assets\Scripts\GameAlerts.cs" />
     <Compile Include="Assets\Scripts\GlobalControl.cs" />
+    <Compile Include="Assets\Scripts\Globals.cs" />
     <Compile Include="Assets\Scripts\HelperScripts.cs" />
     <Compile Include="Assets\Scripts\IDHelper.cs" />
     <Compile Include="Assets\Scripts\IdentifierScript.cs" />

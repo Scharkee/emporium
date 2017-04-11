@@ -104,23 +104,7 @@ public class SocketManager : MonoBehaviour {
 
     }
 
-    public void UpdateUI(SocketIOEvent evt)
-    {
-
-        Text moneytext = GameObject.Find("MoneyEdit").GetComponent<Text>();
-        Text usertext = GameObject.Find("PlayingAsEdit").GetComponent<Text>();
-
-        
-        int dollars = int.Parse(evt.data.GetField("dollars").ToString());
-        
-
-        moneytext.text = Database.UserDollars.ToString();
-        Debug.Log("setting dollar UI text to " + dollars);
-        usertext.text = GlobalControl.Uname;
-        Debug.Log("setting username UI text to " + GlobalControl.Uname);
-
-
-    }
+  
 
     public void UpdatePlotSize(SocketIOEvent evt)
     {
@@ -146,10 +130,7 @@ public class SocketManager : MonoBehaviour {
 
     void ReceiveUnix(SocketIOEvent evt)
     {
-
-     
         
-      
         unix = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", "")); //FIXME this is dumb
 
   
@@ -157,6 +138,7 @@ public class SocketManager : MonoBehaviour {
 
     void NoFundsAlert(SocketIOEvent evt)
     {
+        GameAlerts.AlertWithMessage("Not enough money!"); //TODO: finsih and test this. 
 
 
     }
