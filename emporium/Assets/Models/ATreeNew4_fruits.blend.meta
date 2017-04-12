@@ -237,7 +237,7 @@ ModelImporter:
     4300062: Icosphere_030
     4300064: Icosphere_031
     4300066: Icosphere_032
-    7400000: obuoliai_Growth
+    7400000: slyvos_Growth
     9500000: //RootNode
     13700000: Cylinder
     13700002: Icosphere
@@ -297,7 +297,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: obuoliai_Growth
+      name: slyvos_Growth
       takeName: Default Take
       firstFrame: 0
       lastFrame: 19
