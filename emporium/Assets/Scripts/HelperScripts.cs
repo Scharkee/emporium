@@ -17,9 +17,9 @@ public class HelperScripts : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameAlerts.AlertWithMessage("heyyyHO");
-      
-    
+            GameObject alert = Instantiate(Resources.Load("produceAmountAlert"), new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0), Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;
+            
+
         }
 
 

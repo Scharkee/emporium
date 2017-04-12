@@ -121,8 +121,7 @@ public class AssignTiles : MonoBehaviour {
             i++;
         }
 
-        GameObject loadpanel = GameObject.Find("LoadingPanel");
-        Destroy(loadpanel);
+
 
        
 
@@ -136,7 +135,7 @@ public class AssignTiles : MonoBehaviour {
         float Z = float.Parse(evt.data.GetField("TileZ").ToString());
         string tilename = evt.data.GetField("TileName").ToString();
 
-        int i = 0;
+
         int count = 1;
 
 

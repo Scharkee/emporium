@@ -76,9 +76,6 @@ public class BuyMode : MonoBehaviour {
             }
 
        
-
-          
-
         }
 
     }
@@ -90,7 +87,7 @@ public class BuyMode : MonoBehaviour {
      
         buybuttonscript.panelEnabled = false;
 
-
+        DisabledObjectsGameScene.cameraBlur.enabled = false;
         //effects and pltoselectors
         StartCoroutine(liftcamera());
         RenderSettings.skybox = DisabledObjectsGameScene.dark_skybox;
@@ -164,6 +161,7 @@ public class BuyMode : MonoBehaviour {
         RenderSettings.skybox = DisabledObjectsGameScene.light_skybox; //MAKEME make fade    
         Debug.Log("changing back skybox");
         DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
+
 
         disableQueued = true;
        

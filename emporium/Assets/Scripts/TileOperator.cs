@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class TileOperator : MonoBehaviour {
 
     SocketManager socman;
+    private bool firstLoadCompleted = false;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +27,8 @@ public class TileOperator : MonoBehaviour {
 
     IEnumerator CheckForGrowthCompletionRepeat()
     {
+        CheckForGrowthCompletion(); //pirmas expedited checkas uzkrovimui
+
         while (true)
         {
             yield return new WaitForSeconds(1f);
@@ -91,6 +95,18 @@ public class TileOperator : MonoBehaviour {
                     }
                 }
             }
+        }
+
+
+
+        if (!firstLoadCompleted)
+        {
+            firstLoadCompleted = true;
+            GameObject loadpanel = GameObject.Find("LoadingPanel");
+            Destroy(loadpanel);
+            DisabledObjectsGameScene.cameraBlur.blurSize = 0;
+            DisabledObjectsGameScene.cameraBlur.enabled = false;
+
         }
 
     }

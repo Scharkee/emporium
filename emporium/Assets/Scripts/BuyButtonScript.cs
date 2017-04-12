@@ -68,10 +68,12 @@ public class BuyButtonScript : MonoBehaviour
                 yield return new WaitForSeconds(0.001f);
                 //didinam alpha kas cikla
                 DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha += 0.1f;
+                
+                DisabledObjectsGameScene.cameraBlur.blurSize += 0.3f;
                
                
             }
-
+            DisabledObjectsGameScene.cameraBlur.enabled = true;
             DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 1f;
 
 
@@ -89,10 +91,12 @@ public class BuyButtonScript : MonoBehaviour
                 //mazinam alpha kas cikla
                 DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha -= 0.1f;
                 
-              
+                DisabledObjectsGameScene.cameraBlur.blurSize -= 0.3f;
+
 
 
             }
+            DisabledObjectsGameScene.cameraBlur.enabled = false;
             DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
 
 
