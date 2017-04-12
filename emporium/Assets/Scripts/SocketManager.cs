@@ -109,27 +109,15 @@ public class SocketManager : MonoBehaviour {
 
     public void UpdatePlotSize(SocketIOEvent evt)
     {
-        Debug.Log("1");
-        Database.UserPlotSize++;
-        Debug.Log("21");
-
-        GameObject.Find("PlotSelectors").SetActive(true); //kliuna cia
-
+        
+        
         Debug.Log("2221");
-        foreach (Transform child in GameObject.Find("PlotSelectors").transform)
-        {
-            Debug.Log("destroying");
-            Destroy(child);
-        }
 
+        GameAlerts.AlertWithMessage("You have upgraded your plot size! Please log in again.");
 
-        GameObject.Find("Ground").transform.localScale = new Vector3(Database.UserPlotSize, 1f, Database.UserPlotSize);
+        logOffWithDelay(2f);
 
-        Debug.Log("222");
-        GameObject.Find("_GameScripts").GetComponent<PlotSelector>().SpawnPlotSelectors();
-
-        RotationScript rotscript = GameObject.Find("Main Camera").GetComponent<RotationScript>();
-        rotscript.SetCurrentRotCenter(helperscript.LyginisPlotsize());//also sets ground transform
+    
 
         
     }
@@ -140,6 +128,10 @@ public class SocketManager : MonoBehaviour {
 
     void DiscrepancyAction(SocketIOEvent evt)
     {
+
+        GameAlerts.AlertWithMessage("Desynchronization detected. Logging off...");
+        logOffWithDelay(2f);
+
         //TODO: show diecrepency alert, mb shut down game even.
 
 
@@ -176,6 +168,13 @@ public class SocketManager : MonoBehaviour {
         data["Uname"] = GlobalControl.Uname;
         socket.Emit("VERIFY_EXPAND_PLOTSIZE", new JSONObject(data));
 
+    }
+
+    public IEnumerator logOffWithDelay(float delay)
+    {
+
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(0);
     }
 
 

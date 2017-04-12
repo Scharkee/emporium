@@ -117,7 +117,7 @@ public class Building
     public int PROG_AMOUNT;
     public string TILEPRODUCENAME;
     public int BUILDING_TYPE;
-
+    public int SINGLE_USE;
 
 }
 

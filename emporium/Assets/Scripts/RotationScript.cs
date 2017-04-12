@@ -7,7 +7,7 @@ public class RotationScript : MonoBehaviour {
     PlayerInfoLoaderBank playerinfobank;
     Vector3 nelygusPlotCenter;
     Vector3 lygusPlotCenter;
-    Vector3 currentCenter;
+    public Vector3 currentCenter;
     private float rot;
     private float rotOld; //stores the rotation of the mouse wheel
     public float speed;      //multiplier for the mouse wheel input
@@ -38,7 +38,7 @@ public class RotationScript : MonoBehaviour {
 	void Update ()
     {
 
-        transform.LookAt(axispoint);
+        transform.LookAt(currentCenter);
 
         rotOld = rot;
 

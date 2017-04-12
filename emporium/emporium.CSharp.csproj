@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\AssignTiles.cs" />
     <Compile Include="Assets\Scripts\BuildingScript.cs" />
     <Compile Include="Assets\Scripts\BuyButtonScript.cs" />
+    <Compile Include="Assets\Scripts\BuyMenuInfoLoader.cs" />
     <Compile Include="Assets\Scripts\BuyMode.cs" />
     <Compile Include="Assets\Scripts\BuyScript.cs" />
     <Compile Include="Assets\Scripts\BuyTile.cs" />

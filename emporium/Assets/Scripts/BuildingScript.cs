@@ -121,6 +121,11 @@ public class BuildingScript : MonoBehaviour {
                 ContextManager.StartPressContext(WorkAssigned);
 
             }
+        }else if (thistileInfo.BUILDING_TYPE == 2) //pardavimu dalykelis darbo net nera galima sakyt(nebent upgrades)
+        {
+            ContextManager.StartProduceSellingContext();
+
+
         }
 
 
@@ -169,13 +174,24 @@ public class BuildingScript : MonoBehaviour {
 
         if (thistileInfo.BUILDING_TYPE == 0)//plant
         {
+            
             socket.Emit("VERIFY_COLLECT_TILE", new JSONObject(data));
+
+            
 
         }else if (thistileInfo.BUILDING_TYPE == 1)//presas
         {
             socket.Emit("VERIFY_COLLECT_PRESS_WORK", new JSONObject(data));
 
 
+        }
+
+        if (thistileInfo.SINGLE_USE == 1) //vienkartinius destroyinam, taip pat istrinti ir database.
+        {
+
+            Database.ActiveTiles.Remove(gameObject);
+            Destroy(gameObject);
+           
         }
 
 

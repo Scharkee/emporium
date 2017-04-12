@@ -10,9 +10,6 @@ public class ShopTabSwitcher : MonoBehaviour {
 	void Start () {
 
 
-
-
-        DisabledObjectsGameScene.gridBuildings.SetActive(false);
     }
 
 

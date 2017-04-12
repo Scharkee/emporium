@@ -38,6 +38,16 @@ public class ContextManager : MonoBehaviour {
 
     }
 
+
+    public static void StartProduceSellingContext()
+    {
+
+  
+            DisabledObjectsGameScene.PressContextPanel.SetActive(true);
+
+
+    }
+
     public static void CloseAndResetPressContext()
     {
 

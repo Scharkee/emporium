@@ -22,7 +22,7 @@ public class BuyButtonScript : MonoBehaviour
 
      
 
-       DisabledObjectsGameScene.BuyMenuPanel.SetActive(false);
+     
         panelEnabled = false;
 
     }

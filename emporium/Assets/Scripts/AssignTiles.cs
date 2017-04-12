@@ -68,7 +68,9 @@ public class AssignTiles : MonoBehaviour {
 
         Database.buildinginfo = JsonHelper.FromJson<Building>(evtStringItems);//converting & assignment
 
- 
+        BuyMenuInfoLoader.LoadBuyMenuInfo();
+
+
 
     }
 
