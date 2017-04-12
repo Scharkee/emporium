@@ -222,6 +222,8 @@ public class BuildingScript : MonoBehaviour {
 
             thistile = Database.tile[idInTileDatabase];
 
+            notifyOfProduceAmount(float.Parse(evt.data.GetField("harvestAmount").ToString()));
+
 
 
         }
@@ -394,6 +396,16 @@ public class BuildingScript : MonoBehaviour {
 
 
 
+    }
+
+    private void notifyOfProduceAmount(float produceAmount)
+    {
+
+        Debug.Log("ASDASDASDAD");
+
+
+        GameObject alert = Instantiate(Resources.Load("produceAmountAlert"),new Vector3(Input.mousePosition.x,Input.mousePosition.y,0),Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;
+        alert.GetComponent<Text>().text = produceAmount.ToString();
     }
 
 

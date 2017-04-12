@@ -17,7 +17,7 @@ public class HelperScripts : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log(Database.inventory[0].kriauses);
+            GameAlerts.AlertWithMessage("heyyyHO");
       
     
         }

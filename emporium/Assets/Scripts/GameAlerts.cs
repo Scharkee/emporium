@@ -13,6 +13,9 @@ public class GameAlerts : MonoBehaviour {
 
     int popUpSpeed;
 
+    public AudioClip alert;
+    public AudioClip error;
+
     void Start()
     {
         alertQueue = new List<string>();
@@ -20,6 +23,7 @@ public class GameAlerts : MonoBehaviour {
         alertDefaultPos = DisabledObjectsGameScene.alertPanel.transform.position;
         alertCenterPos = new Vector2(Screen.width/2,Screen.height/2);
         popUpSpeed = 1;
+        DisabledObjectsGameScene.alertPanel.GetComponent<AudioSource>().clip = alert; //implement more later mb.
     }
 
     void Update()
@@ -32,9 +36,6 @@ public class GameAlerts : MonoBehaviour {
             //TODO: veikia tik 2 alertai max. tyngiu taisyt mb later.
 
 
-
-
-            Debug.Log(alertQueue.Count);
             
 
         
@@ -52,22 +53,20 @@ public class GameAlerts : MonoBehaviour {
     }
 
 
-    public static void AlertWithMessage(string str)
+    public static void AlertWithMessage(string content)
     {
-        Debug.Log("alerting string "+str);
-        alertQueue.Add(str);
+        Debug.Log("alerting string "+ content);
+        alertQueue.Add(content);
 
         //TODO
-
-
+        
     }
+
 
     private IEnumerator startAlert(string str)
     {
 
-        Debug.Log("through to IENUM");
-
-
+    
         while (alertUp)
         {
             yield return new WaitForSeconds(0.5f);
@@ -91,8 +90,10 @@ public class GameAlerts : MonoBehaviour {
 
         }
 
+        DisabledObjectsGameScene.alertPanel.GetComponent<AudioSource>().Play();
 
-        alertUp = true;
+
+       alertUp = true;
         Debug.Log("alertups is" + alertUp);
 
     }
