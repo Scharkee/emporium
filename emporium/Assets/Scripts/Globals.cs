@@ -5,18 +5,19 @@ using UnityStandardAssets.ImageEffects;
 
 public class Globals : MonoBehaviour {
 
+    public static Globals Instance;
 
-    public static bool cameraUp;
-    public static GameObject canvas;
+    public bool cameraUp;
+    public GameObject canvas;
 
 
     //skybox materials
-    public static Material light_skybox;
-    public static Material dark_skybox;
+    public Material light_skybox;
+    public Material dark_skybox;
 
     //camera effect references
-    public static BlurOptimized cameraBlur;
-    public static Bloom cameraBloom;
+    public BlurOptimized cameraBlur;
+    public Bloom cameraBloom;
 
     // Use this for initialization
     void Start () {
@@ -28,6 +29,7 @@ public class Globals : MonoBehaviour {
 
     void Awake()
     {
+        Instance = this;
         cameraBlur = Camera.main.GetComponent<BlurOptimized>();
         cameraBloom = Camera.main.GetComponent<Bloom>();
         canvas = GameObject.Find("Canvas");

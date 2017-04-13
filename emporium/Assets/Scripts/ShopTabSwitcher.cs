@@ -16,15 +16,15 @@ public class ShopTabSwitcher : MonoBehaviour {
     public void ReceivePlantTabButtonClick()
     {
 
-        if (DisabledObjectsGameScene.gridPlants.activeSelf)
+        if (DisabledObjectsGameScene.Instance.gridPlants.activeSelf)
         {
 
 
         }else
         {
 
-            DisabledObjectsGameScene.gridBuildings.SetActive(false);
-            DisabledObjectsGameScene.gridPlants.SetActive(true);
+            DisabledObjectsGameScene.Instance.gridBuildings.SetActive(false);
+            DisabledObjectsGameScene.Instance.gridPlants.SetActive(true);
 
         }
 
@@ -35,15 +35,15 @@ public class ShopTabSwitcher : MonoBehaviour {
     {
 
 
-        if (DisabledObjectsGameScene.gridBuildings.activeSelf)
+        if (DisabledObjectsGameScene.Instance.gridBuildings.activeSelf)
         {
 
 
         }
         else
         {
-            DisabledObjectsGameScene.gridPlants.SetActive(false);
-            DisabledObjectsGameScene.gridBuildings.SetActive(true);
+            DisabledObjectsGameScene.Instance.gridPlants.SetActive(false);
+            DisabledObjectsGameScene.Instance.gridBuildings.SetActive(true);
            
 
         }

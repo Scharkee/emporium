@@ -19,7 +19,7 @@ public class TileOperator : MonoBehaviour {
     {
 
 
-        socman = DisabledObjectsGameScene.managerialScripts.GetComponent<SocketManager>();
+        socman = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SocketManager>();
     }
 
     public void StartGrowthCompletrionCheckRepeat()
@@ -48,7 +48,7 @@ public class TileOperator : MonoBehaviour {
     void CheckForGrowthCompletion()
     {
 
-        foreach (GameObject tile in Database.ActiveTiles)
+        foreach (GameObject tile in Database.Instance.ActiveTiles)
         {
             BuildingScript tileScript = (tile.GetComponent<BuildingScript>());
 
@@ -111,8 +111,8 @@ public class TileOperator : MonoBehaviour {
             firstLoadCompleted = true;
             GameObject loadpanel = GameObject.Find("LoadingPanel");
             Destroy(loadpanel);
-            Globals.cameraBlur.blurSize = 0;
-            Globals.cameraBlur.enabled = false;
+            Globals.Instance.cameraBlur.blurSize = 0;
+            Globals.Instance.cameraBlur.enabled = false;
 
         }
 

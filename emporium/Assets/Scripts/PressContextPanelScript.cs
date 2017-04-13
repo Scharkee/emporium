@@ -38,13 +38,13 @@ public class PressContextPanelScript : MonoBehaviour {
             {
         
                 int workAmount = int.Parse(amounttext.text);       
-                string workName = IDHelper.PressContextPanelIDtoName(GameObject.Find("Press_AssignJob_ProdTypeDropdown").GetComponent<Dropdown>().value);
+                string workName = IDHelper.Instance.PressContextPanelIDtoName(GameObject.Find("Press_AssignJob_ProdTypeDropdown").GetComponent<Dropdown>().value);
 
                 PressWorkPKG pkg;    //sukuriaamas struct nes tik 1 parameter i broadcasta leidziama det
                 pkg.workAmount = workAmount;
                 pkg.workName = workName;
 
-                DisabledObjectsGameScene.Tiles.BroadcastMessage("ReceiveWork", pkg);
+                DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("ReceiveWork", pkg);
               
             }
 

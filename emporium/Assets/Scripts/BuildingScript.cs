@@ -44,11 +44,11 @@ public class BuildingScript : MonoBehaviour {
         justSpawned = true;
 
      
-        socman = DisabledObjectsGameScene.managerialScripts.GetComponent<SocketManager>();
-        uiManager = DisabledObjectsGameScene.managerialScripts.GetComponent<UIManager>();
+        socman = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SocketManager>();
+        uiManager = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<UIManager>();
 
  
-        socket = DisabledObjectsGameScene.socket;
+        socket = DisabledObjectsGameScene.Instance.socket;
 
         audiosource = GetComponent<AudioSource>();
 
@@ -110,7 +110,7 @@ public class BuildingScript : MonoBehaviour {
                 //ismetamaas meniu, todel sitas true iki value returno arba menu close*
                 ContextOpen = true;
 
-                ContextManager.StartPressContext(WorkAssigned);
+                ContextManager.Instance.StartPressContext(WorkAssigned);
 
             }
             else if (!WorkDone)
@@ -118,12 +118,12 @@ public class BuildingScript : MonoBehaviour {
                 // spaudziama ant nebaigusio spausti preso, ismesti context menu su stats
                 Debug.Log("Checking stats on press progress");
 
-                ContextManager.StartPressContext(WorkAssigned);
+                ContextManager.Instance.StartPressContext(WorkAssigned);
 
             }
         }else if (thistileInfo.BUILDING_TYPE == 2) //pardavimu dalykelis darbo net nera galima sakyt(nebent upgrades)
         {
-            ContextManager.StartProduceSellingContext();
+            ContextManager.Instance.StartProduceSellingContext();
 
 
         }
@@ -146,15 +146,15 @@ public class BuildingScript : MonoBehaviour {
         while (thistileInfo.NAME != thistile.NAME)
         {
             i++;
-            thistileInfo.NAME = Database.buildinginfo[i].NAME;
+            thistileInfo.NAME = Database.Instance.buildinginfo[i].NAME;
 
-
+            Debug.Log(Database.Instance.buildinginfo[i].NAME);
 
         }
 
-        
+        Debug.Log(thistileInfo.NAME);
 
-        thistileInfo = Database.buildinginfo[i];
+        thistileInfo = Database.Instance.buildinginfo[i];
         idInTileInfoDatabase = i;
 
         justSpawned = false;
@@ -169,7 +169,7 @@ public class BuildingScript : MonoBehaviour {
         Dictionary<string, string> data;
         data = new Dictionary<string, string>();
    
-        data["Uname"] = Database.UserUsername;
+        data["Uname"] = Database.Instance.UserUsername;
         data["TileID"] = thistile.ID.ToString();
 
         if (thistileInfo.BUILDING_TYPE == 0)//plant
@@ -186,10 +186,10 @@ public class BuildingScript : MonoBehaviour {
 
         }
 
-        if (thistileInfo.SINGLE_USE == 1) //vienkartinius destroyinam, taip pat istrinti ir database.
+        if (thistileInfo.SINGLE_USE == 1) //vienkartinius destroyinam, taip pat istrinti ir Database.Instance.
         {
 
-            Database.ActiveTiles.Remove(gameObject);
+            Database.Instance.ActiveTiles.Remove(gameObject);
             Destroy(gameObject);
            
         }
@@ -208,19 +208,19 @@ public class BuildingScript : MonoBehaviour {
         if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
         {
                
-           Database.Inventory[thistileInfo.TILEPRODUCENAME]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory
+           Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory
 
           
                 Destroy(transform.FindChild(thistile.NAME + "_vaisiai(Clone)").gameObject);
 
 
 
-            Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+            Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
 
             TileGrown = false;
 
 
-            thistile = Database.tile[idInTileDatabase];
+            thistile = Database.Instance.tile[idInTileDatabase];
 
             notifyOfProduceAmount(float.Parse(evt.data.GetField("harvestAmount").ToString()));
 
@@ -243,7 +243,7 @@ public class BuildingScript : MonoBehaviour {
 
 
     
-                Database.Inventory[thistileInfo.TILEPRODUCENAME+"_sultys"]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
+                Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME+"_sultys"]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
              
                 
 
@@ -255,14 +255,14 @@ public class BuildingScript : MonoBehaviour {
                 Debug.Log("destroying done status: " + thistile.NAME + "_done(Clone)");
 
 
-                Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+                Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
                 
 
-                Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = 0;
+                Database.Instance.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = 0;
 
-                Database.tile[idInTileDatabase].WORK_NAME = "";
+                Database.Instance.tile[idInTileDatabase].WORK_NAME = "";
               
-                thistile = Database.tile[idInTileDatabase];
+                thistile = Database.Instance.tile[idInTileDatabase];
 
                 WorkAssigned = false;
                 WorkDone = false;
@@ -298,18 +298,18 @@ public class BuildingScript : MonoBehaviour {
 
          
 
-            Database.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
-            Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = int.Parse(Regex.Replace(evt.data.GetField("currentWorkAmount").ToString(), "[^0-9]", ""));
-            Database.tile[idInTileDatabase].WORK_NAME = Regex.Replace(evt.data.GetField("currentWorkName").ToString(), "[^a-z]", "");
+            Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+            Database.Instance.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = int.Parse(Regex.Replace(evt.data.GetField("currentWorkAmount").ToString(), "[^0-9]", ""));
+            Database.Instance.tile[idInTileDatabase].WORK_NAME = Regex.Replace(evt.data.GetField("currentWorkName").ToString(), "[^a-z]", "");
 
-            thistile = Database.tile[idInTileDatabase];
+            thistile = Database.Instance.tile[idInTileDatabase];
 
-            Debug.Log("curent work amount = " + Database.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT);
-            Debug.Log("workname is " + Database.tile[idInTileDatabase].WORK_NAME+" and "+thistile.WORK_NAME);
+            Debug.Log("curent work amount = " + Database.Instance.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT);
+            Debug.Log("workname is " + Database.Instance.tile[idInTileDatabase].WORK_NAME+" and "+thistile.WORK_NAME);
             WorkAssigned = true;
             WorkDone = false;
 
-            thistile = Database.tile[idInTileDatabase];
+            thistile = Database.Instance.tile[idInTileDatabase];
 
             //start some sort of work effects.
 
@@ -359,7 +359,7 @@ public class BuildingScript : MonoBehaviour {
             ContextOpen = false;
             AskForWork(pkg.workName, pkg.workAmount);
 
-            ContextManager.CloseAndResetPressContext();
+            ContextManager.Instance.CloseAndResetPressContext();
 
 
 
@@ -375,7 +375,7 @@ public class BuildingScript : MonoBehaviour {
         Dictionary<string, string> data;
         data = new Dictionary<string, string>();
 
-        data["Uname"] = Database.UserUsername;
+        data["Uname"] = Database.Instance.UserUsername;
         data["TileID"] = thistile.ID.ToString();
         data["WorkName"] = workName;
         data["WorkAmount"] = workAmount.ToString();

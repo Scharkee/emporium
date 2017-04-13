@@ -33,7 +33,7 @@ public class LoginCheck : MonoBehaviour {
     public IEnumerator CheckDBForDupeUN(string username)
     {  
         yield return new WaitForSeconds(0.1f);
-        StartCoroutine(CheckLoginDetails(GlobalControl.Uname, GlobalControl.Pass));
+        StartCoroutine(CheckLoginDetails(GlobalControl.Instance.Uname, GlobalControl.Instance.Pass));
     }
     
 
@@ -100,9 +100,9 @@ public class LoginCheck : MonoBehaviour {
     void Reaskforlogininfo() {
 
         Debug.Log("REASKING FOR LOGIN INFO");
-        GlobalControl.Pass = null;
-        GlobalControl.Uname = null;
-        GlobalControl.Logincount = 1;
+        GlobalControl.Instance.Pass = null;
+        GlobalControl.Instance.Uname = null;
+        GlobalControl.Instance.Logincount = 1;
 
         StartCoroutine(TextFader(GameObject.Find("UnamePassText")));
         StartCoroutine(TextFader(GameObject.Find("WrongPassText")));
@@ -120,11 +120,11 @@ public class LoginCheck : MonoBehaviour {
     IEnumerator LVLLoadCamEffect()
     {
       
-        while (Globals.cameraBloom.bloomThreshold > 0.01)
+        while (Globals.Instance.cameraBloom.bloomThreshold > 0.01)
         {
             //fadeoutas
             yield return new WaitForSeconds(0.001f);
-            Globals.cameraBloom.bloomThreshold -= 0.01f;
+            Globals.Instance.cameraBloom.bloomThreshold -= 0.01f;
         }
     }
     IEnumerator TextFader(GameObject txtobject)

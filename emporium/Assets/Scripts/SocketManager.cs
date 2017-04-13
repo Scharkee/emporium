@@ -23,12 +23,12 @@ public class SocketManager : MonoBehaviour {
     void Start () {
 
         db = gameObject.GetComponent<Database>();
-
+        socket = DisabledObjectsGameScene.Instance.socket;
         GameObject go = GameObject.Find("SocketIO");
 
-        socket = DisabledObjectsGameScene.socket.GetComponent<SocketIOComponent>();
+        socket = DisabledObjectsGameScene.Instance.socket.GetComponent<SocketIOComponent>();
 
-
+        StartCoroutine(UnixUpdater());
 
 
         socket.On("LASTONLINE_PING", SendAutosaveVerify);
@@ -36,7 +36,7 @@ public class SocketManager : MonoBehaviour {
         socket.On("DISCREPANCY", DiscrepancyAction);
         socket.On("RECEIVE_UNIX", ReceiveUnix);
 
-        socket.On("BUILD_TILE", DisabledObjectsGameScene.managerialScripts.GetComponent<AssignTiles>().BuildTile);
+        socket.On("BUILD_TILE", DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<AssignTiles>().BuildTile);
 
         socket.On("NO_FUNDS", NoFundsAlert);
 
@@ -46,14 +46,6 @@ public class SocketManager : MonoBehaviour {
 
     }
 
-    void Awake()
-    {
-        socket = DisabledObjectsGameScene.socket;
-        
-        StartCoroutine(UnixUpdater());
-
-
-    }
 	
 	
 
@@ -83,7 +75,7 @@ public class SocketManager : MonoBehaviour {
     void SendAutosaveVerify(SocketIOEvent evt)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
-        data["Uname"] = GlobalControl.Uname;
+        data["Uname"] = GlobalControl.Instance.Uname;
         Debug.Log("Received lastlogged ping from server");
         socket.Emit("AUTOSAVE_PUSH_LASTLOGGED", new JSONObject(data));
 
@@ -122,9 +114,9 @@ public class SocketManager : MonoBehaviour {
 
 
         
-        ContextManager.CancelContext();
+        ContextManager.Instance.CancelContext();
 
-        GameAlerts.AlertWithMessage("You have upgraded your plot size! Please log in again.");
+        GameAlerts.Instance.AlertWithMessage("You have upgraded your plot size! Please log in again.");
 
         StartCoroutine(logOffWithDelay(2f));
 
@@ -140,10 +132,10 @@ public class SocketManager : MonoBehaviour {
     void DiscrepancyAction(SocketIOEvent evt)
     {
 
-        GameAlerts.AlertWithMessage("Desynchronization detected. Logging off...");
+        GameAlerts.Instance.AlertWithMessage("Desynchronization detected. Logging off...");
         StartCoroutine(logOffWithDelay(2f));
 
-        ContextManager.CancelContext();
+        ContextManager.Instance.CancelContext();
 
         //TODO: show diecrepency alert, mb shut down game even.
 
@@ -162,14 +154,15 @@ public class SocketManager : MonoBehaviour {
 
     void NoFundsAlert(SocketIOEvent evt)
     {
-        GameAlerts.AlertWithMessage("Not enough money!"); //TODO: finsih and test this. 
+        GameAlerts.Instance.AlertWithMessage("Not enough money!"); //TODO: finsih and test this. 
 
 
     }
     void AddFunds(SocketIOEvent evt)
     {
         int additive = int.Parse(evt.data.GetField("addFunds").ToString());
-        Database.UserDollars += additive;
+
+      Database.Instance.UserDollars += additive;
 
 
 
@@ -178,7 +171,7 @@ public class SocketManager : MonoBehaviour {
     public void ExpandPlotsize()
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
-        data["Uname"] = GlobalControl.Uname;
+        data["Uname"] = GlobalControl.Instance.Uname;
         socket.Emit("VERIFY_EXPAND_PLOTSIZE", new JSONObject(data));
 
     }
@@ -187,7 +180,7 @@ public class SocketManager : MonoBehaviour {
     {
 
         yield return new WaitForSeconds(delay);
-        GlobalControl.reset();
+        GlobalControl.Instance.reset();
         SceneManager.LoadScene(0);
     }
 

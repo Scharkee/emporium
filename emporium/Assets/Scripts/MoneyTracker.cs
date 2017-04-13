@@ -11,9 +11,9 @@ public class MoneyTracker : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Database.UserDollars != lastDollars)
+        if (Database.Instance.UserDollars != lastDollars)
         {
-            lastDollars = Database.UserDollars;
+            lastDollars = Database.Instance.UserDollars;
 
             if (moneyChanging)
             {
@@ -39,25 +39,25 @@ public class MoneyTracker : MonoBehaviour {
      
 
 
-        if (newMoney == float.Parse(DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text)) { Debug.Log("error, shouldnt happen."); }
-        else if(newMoney> float.Parse(DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text))
+        if (newMoney == float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text)) { Debug.Log("error, shouldnt happen."); }
+        else if(newMoney> float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text))
         {
-            while (float.Parse(DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text) < newMoney)
+            while (float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text) < newMoney)
             {
                 yield return new WaitForSeconds(0.01f);
-                DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text = Mathf.Lerp(float.Parse(DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text), newMoney, 0.1f).ToString();
+                DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text = Mathf.Lerp(float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text), newMoney, 0.1f).ToString();
 
             }
 
 
         }
-        else if(newMoney < float.Parse(DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text))
+        else if(newMoney < float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text))
         {
 
-            while (float.Parse(DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text) > newMoney)
+            while (float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text) > newMoney)
             {
                 yield return new WaitForSeconds(0.01f);
-                DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text = Mathf.Lerp(float.Parse(DisabledObjectsGameScene.moneyEdit.GetComponent<Text>().text), newMoney, 0.1f).ToString();
+                DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text = Mathf.Lerp(float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text), newMoney, 0.1f).ToString();
 
             }
 

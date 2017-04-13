@@ -5,6 +5,7 @@ using SocketIO;
 
 public class HelperScripts : MonoBehaviour {
 
+    public static HelperScripts Instance;
     SocketIOComponent socket;
 
     void Start()
@@ -13,10 +14,19 @@ public class HelperScripts : MonoBehaviour {
         socket = socketgo.GetComponent<SocketIOComponent>();
     }
 
+    void Awake()
+    {
+        Instance = this;
+
+
+    }
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            Debug.Log("-----------------------------");
             GameObject alert = Instantiate(Resources.Load("produceAmountAlert"), new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0), Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;
             
 
@@ -31,18 +41,18 @@ public class HelperScripts : MonoBehaviour {
     {
         bool lygnelyg = true;
 
-        if (Database.UserPlotSize % 2 == 0) //lyginis plot dimensions
+        if (Database.Instance.UserPlotSize % 2 == 0) //lyginis plot dimensions
         {
             lygnelyg = true;
         }
-        else if (Database.UserPlotSize % 2 == 1)//NElyginis plot dimensions
+        else if (Database.Instance.UserPlotSize % 2 == 1)//NElyginis plot dimensions
         {
             lygnelyg = false;
         }
         return lygnelyg;
     }
 
-    public static Dictionary<string,float> ReassignInventory(Inventory inv)
+    public Dictionary<string,float> ReassignInventory(Inventory inv)
     {
         Dictionary<string, float> dic = new Dictionary<string, float>();
 

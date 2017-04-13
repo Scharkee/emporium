@@ -22,7 +22,7 @@ public class PlotSelector : MonoBehaviour {
     public void SpawnPlotSelectors()
     {
       
-        int plotsz = Database.UserPlotSize;
+        int plotsz = Database.Instance.UserPlotSize;
         float currentX = -0.5f;
         float currentZ = 0.5f;
 

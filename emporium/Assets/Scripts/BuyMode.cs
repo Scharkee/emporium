@@ -59,9 +59,9 @@ public class BuyMode : MonoBehaviour {
                     StartCoroutine(liftcamera());
                     buybuttonscript.panelEnabled = false;
 
-                    RenderSettings.skybox = Globals.light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
+                    RenderSettings.skybox = Globals.Instance.light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
 
-                    DisabledObjectsGameScene.BuyMenuPanel.SetActive(false);
+                    DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
 
                   
 
@@ -87,10 +87,11 @@ public class BuyMode : MonoBehaviour {
      
         buybuttonscript.panelEnabled = false;
 
-        Globals.cameraBlur.enabled = false;
+
+      Globals.Instance.cameraBlur.enabled = false;
         //effects and pltoselectors
         StartCoroutine(liftcamera());
-        RenderSettings.skybox = Globals.dark_skybox;
+        RenderSettings.skybox = Globals.Instance.dark_skybox;
         GameObject.Find("_GameScripts").GetComponent<PlotSelector>().plotselectors.SetActive(true);
 
 
@@ -105,9 +106,9 @@ public class BuyMode : MonoBehaviour {
         float step = camspeed * Time.deltaTime;
 
 
-        if (!Globals.cameraUp)  //raise cam
+        if (!Globals.Instance.cameraUp)  //raise cam
         {
-            Globals.cameraUp = true;
+            Globals.Instance.cameraUp = true;
             while (Camera.main.transform.position.y < 3.2f)
             {
                 yield return new WaitForSeconds(0.001f);
@@ -122,9 +123,9 @@ public class BuyMode : MonoBehaviour {
 
 
         }
-        else if (Globals.cameraUp)  //lower cam
+        else if (Globals.Instance.cameraUp)  //lower cam
         {
-            Globals.cameraUp = false;
+            Globals.Instance.cameraUp = false;
             while (Camera.main.transform.position.y > 1.7f)
             {
                 yield return new WaitForSeconds(0.0001f);
@@ -148,9 +149,9 @@ public class BuyMode : MonoBehaviour {
 
     public void DisableBuyMode()
     {
-        if (DisabledObjectsGameScene.PlotSelectors.activeSelf) //compatibility with sell mode & protection against crashing out
+        if (DisabledObjectsGameScene.Instance.PlotSelectors.activeSelf) //compatibility with sell mode & protection against crashing out
         {
-            DisabledObjectsGameScene.PlotSelectors.SetActive(false);
+            DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(false);
 
         }
   
@@ -158,9 +159,9 @@ public class BuyMode : MonoBehaviour {
         StartCoroutine(liftcamera());
         // buybuttonscript.panelEnabled = false;
         Debug.Log("changing back skybox");
-        RenderSettings.skybox = Globals.light_skybox; //MAKEME make fade    
+        RenderSettings.skybox = Globals.Instance.light_skybox; //MAKEME make fade    
         Debug.Log("changing back skybox");
-        DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
+        DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(true);
 
 
         disableQueued = true;

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DisabledObjectsMain : MonoBehaviour {
 
-    public static GameObject SubmitButton;
-    public static GameObject UnamePassInputField;
-    public static GameObject UnamePassText;
+    public
+        
+        
+        GameObject SubmitButton;
+    public GameObject UnamePassInputField;
+    public GameObject UnamePassText;
 
     // Use this for initialization
     void Start () {

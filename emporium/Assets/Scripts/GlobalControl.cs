@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class GlobalControl : MonoBehaviour
 {
-    public static string Uname;
-    public static string Pass;
-    public static int Logincount;
-    public static int Userlanguage;
-    public static Dictionary<string,string> currentLangDict;
+    public string Uname;
+    public string Pass;
+    public int Logincount;
+    public int Userlanguage;
+    public Dictionary<string,string> currentLangDict;
     public static GlobalControl Instance;
     public bool ConnectedOnceNoDupeStatRequests = false;
-    private static bool firstLaunch=true;
+    private bool firstLaunch=true;
+
 
     void Start()
     {
@@ -43,7 +44,7 @@ public class GlobalControl : MonoBehaviour
 
     }
 
-    public static void reset()
+    public void reset()
     {
         currentLangDict = null;
         Uname = null;

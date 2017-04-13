@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class IDHelper : MonoBehaviour {
-
-	
-
+    public static IDHelper Instance;
 
 
 
-    public static string PressContextPanelIDtoName(int ID)
+
+    void Awake()
+    {
+        Instance = this;
+
+
+    }
+
+    public string PressContextPanelIDtoName(int ID)
     {
         string name = "";
 
@@ -49,9 +55,9 @@ public class IDHelper : MonoBehaviour {
         return name;
     }
 
-    public static string NameToRealName(string name)
+    public string NameToRealName(string name)
     {
         
-        return GlobalControl.currentLangDict[name];
+        return GlobalControl.Instance.currentLangDict[name];
     }
 }

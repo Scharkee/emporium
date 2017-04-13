@@ -6,18 +6,26 @@ using System;
 
 public class BuyMenuInfoLoader : MonoBehaviour {
 
- 
+    public static BuyMenuInfoLoader Instance;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
      
 	}
-	
 
-    public static void LoadBuyMenuInfo()
+    void Awake()
+    {
+        Instance = this;
+
+
+    }
+
+
+
+    public void LoadBuyMenuInfo()
     {
        
-        foreach (Building building in Database.buildinginfo)
+        foreach (Building building in Database.Instance.buildinginfo)
         {
 
             if (building.BUILDING_TYPE == 0)
@@ -41,7 +49,7 @@ public class BuyMenuInfoLoader : MonoBehaviour {
             }
  
         }
-        DisabledObjectsGameScene.gridBuildings.SetActive(false);
-        DisabledObjectsGameScene.BuyMenuPanel.SetActive(false);
+        DisabledObjectsGameScene.Instance.gridBuildings.SetActive(false);
+        DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
     }
 }

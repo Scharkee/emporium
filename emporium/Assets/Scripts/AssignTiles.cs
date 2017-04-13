@@ -19,8 +19,8 @@ public class AssignTiles : MonoBehaviour {
         GameObject managerial = GameObject.Find("_ManagerialScripts");
        
         uiManager = managerial.GetComponent<UIManager>();
-       
 
+        socman= managerial.GetComponent<SocketManager>();
 
 
     }
@@ -42,7 +42,7 @@ public class AssignTiles : MonoBehaviour {
         string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
       
 
-        Database.tile = JsonHelper.FromJson<Tile>(evtStringItems);//converting & assignment
+        Database.Instance.tile = JsonHelper.FromJson<Tile>(evtStringItems);//converting & assignment
 
 
 
@@ -66,9 +66,9 @@ public class AssignTiles : MonoBehaviour {
         string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
 
 
-        Database.buildinginfo = JsonHelper.FromJson<Building>(evtStringItems);//converting & assignment
+        Database.Instance.buildinginfo = JsonHelper.FromJson<Building>(evtStringItems);//converting & assignment
 
-        BuyMenuInfoLoader.LoadBuyMenuInfo();
+        BuyMenuInfoLoader.Instance.LoadBuyMenuInfo();
 
 
 
@@ -86,10 +86,10 @@ public class AssignTiles : MonoBehaviour {
         string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
 
 
-        Database.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);// assignment
+        Database.Instance.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);// assignment
 
 
-        Database.Inventory = HelperScripts.ReassignInventory(Database.inventory[0]);
+        Database.Instance.Inventory = HelperScripts.Instance.ReassignInventory(Database.Instance.inventory[0]);
 
 
 
@@ -102,19 +102,19 @@ public class AssignTiles : MonoBehaviour {
 
 
 
-        while (i < Database.tile.Length)
+        while (i < Database.Instance.tile.Length)
         {
            
-            GameObject currentTilePrefab = Resources.Load("Plants/"+Database.tile[i].NAME) as GameObject;
+            GameObject currentTilePrefab = Resources.Load("Plants/"+Database.Instance.tile[i].NAME) as GameObject;
             float xRot=0;
        
 
-            GameObject currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.tile[i].X, 0f, Database.tile[i].Z),Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)) ,GameObject.Find("Tiles").transform) as GameObject).gameObject;
-            currentTile.GetComponent<BuildingScript>().thistile = Database.tile[i];
+            GameObject currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z),Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)) ,GameObject.Find("Tiles").transform) as GameObject).gameObject;
+            currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
             currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
            
-            Database.ActiveTiles.Add(currentTile);
+            Database.Instance.ActiveTiles.Add(currentTile);
 
 
 
@@ -138,7 +138,7 @@ public class AssignTiles : MonoBehaviour {
         float X = float.Parse(evt.data.GetField("TileX").ToString());
         float Z = float.Parse(evt.data.GetField("TileZ").ToString());
         string tilename = evt.data.GetField("TileName").ToString();
-
+     
 
         int count = 1;
 
@@ -172,6 +172,7 @@ public class AssignTiles : MonoBehaviour {
     public void SpawnATile(string tilename, float X, float Z)
     {
         tilename = tilename.Replace("\"", ""); //formatting to get rid of quotation marks
+    
         float xRot = 0;
 
    
@@ -181,10 +182,16 @@ public class AssignTiles : MonoBehaviour {
         GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(X, 0f, Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject;
         // currentTile.transform.localScale = new Vector3(Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f));  FIXME: ask unity teacher y not workin
 
-        Database.ActiveTiles.Add(currentTile);
+
+        Database.Instance.ActiveTiles.Add(currentTile);
+
+
+
 
         currentTile.GetComponent<BuildingScript>().thistile.START_OF_GROWTH = socman.unix;
+
         currentTile.GetComponent<BuildingScript>().thistile.NAME = tilename;
+        
 
 
 

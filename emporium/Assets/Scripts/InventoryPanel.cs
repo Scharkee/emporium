@@ -19,19 +19,19 @@ public class InventoryPanel : MonoBehaviour {
 
         //ADD NEW FRUITS AND JUICES
 
-        UIManager.ChangeUIText("kriauses_Editable", Database.Inventory["kriauses"].ToString());
-        UIManager.ChangeUIText("apelsinai_Editable", Database.Inventory["apelsinai"].ToString());
-        UIManager.ChangeUIText("persikai_Editable", Database.Inventory["persikai"].ToString());
-        UIManager.ChangeUIText("nektarinai_Editable", Database.Inventory["nektarinai"].ToString());
-        UIManager.ChangeUIText("kiviai_Editable", Database.Inventory["kiviai"].ToString());
-        UIManager.ChangeUIText("slyvos_Editable", Database.Inventory["slyvos"].ToString());
+        UIManager.Instance.ChangeUIText("kriauses_Editable", Database.Instance.Inventory["kriauses"].ToString());
+        UIManager.Instance.ChangeUIText("apelsinai_Editable", Database.Instance.Inventory["apelsinai"].ToString());
+        UIManager.Instance.ChangeUIText("persikai_Editable", Database.Instance.Inventory["persikai"].ToString());
+        UIManager.Instance.ChangeUIText("nektarinai_Editable", Database.Instance.Inventory["nektarinai"].ToString());
+        UIManager.Instance.ChangeUIText("kiviai_Editable", Database.Instance.Inventory["kiviai"].ToString());
+        UIManager.Instance.ChangeUIText("slyvos_Editable", Database.Instance.Inventory["slyvos"].ToString());
 
 
       
-        UIManager.ChangeUIText("kriauses_Sultys_Editable", Database.Inventory["kriauses_sultys"].ToString());
-        UIManager.ChangeUIText("apelsinai_Sultys_Editable", Database.Inventory["apelsinai_sultys"].ToString());
-        UIManager.ChangeUIText("persikai_Sultys_Editable", Database.Inventory["persikai_sultys"].ToString());
-        UIManager.ChangeUIText("slyvos_Sultys_Editable", Database.Inventory["slyvos_sultys"].ToString());
+        UIManager.Instance.ChangeUIText("kriauses_Sultys_Editable", Database.Instance.Inventory["kriauses_sultys"].ToString());
+        UIManager.Instance.ChangeUIText("apelsinai_Sultys_Editable", Database.Instance.Inventory["apelsinai_sultys"].ToString());
+        UIManager.Instance.ChangeUIText("persikai_Sultys_Editable", Database.Instance.Inventory["persikai_sultys"].ToString());
+        UIManager.Instance.ChangeUIText("slyvos_Sultys_Editable", Database.Instance.Inventory["slyvos_sultys"].ToString());
 
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
-
+    public static UIManager Instance;
 
     Text dollarText;
     Text usernameText;
@@ -31,12 +31,13 @@ public class UIManager : MonoBehaviour {
 
     void Awake()
     {
+        Instance = this;
         //grab all panels 
         PressContextPanel = GameObject.Find("PressContextPanel");
 
     }
 
-    public static void ChangeUIText(string TextObjName, string newtext)
+    public void ChangeUIText(string TextObjName, string newtext)
     {
         Text text = GameObject.Find(TextObjName).GetComponent<Text>();
 

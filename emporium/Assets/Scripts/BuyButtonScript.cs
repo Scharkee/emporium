@@ -36,14 +36,14 @@ public class BuyButtonScript : MonoBehaviour
     public void TheClick()
     {
 
-        if(Globals.cameraUp && DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
+        if(Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
         {
 
-            DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().DisableBuyMode();
+            DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().DisableBuyMode();
             
-        }else if (Globals.cameraUp && DisabledObjectsGameScene.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled) //enabled sell mode, disabling.
+        }else if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled) //enabled sell mode, disabling.
         {
-            DisabledObjectsGameScene.tileSellScript.GetComponent<TileSellScript>().EnableDisableSellMode();
+            DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().EnableDisableSellMode();
 
         }
 
@@ -54,53 +54,53 @@ public class BuyButtonScript : MonoBehaviour
 
     public IEnumerator BuyMenuPanelFader()
     {
-        DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
+        DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(true);
 
-        if (DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha<1f)
+        if (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha<1f)
         {
           
             panelEnabled = true; // used to stop rotation when viewing panel
 
-            while (DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha < 1f)
+            while (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha < 1f)
             {
                 //fadeoutas
                
                 yield return new WaitForSeconds(0.001f);
                 //didinam alpha kas cikla
-                DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha += 0.1f;
+                DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha += 0.1f;
                 
-                Globals.cameraBlur.blurSize += 0.22f;
+                Globals.Instance.cameraBlur.blurSize += 0.22f;
                
                
             }
-            Globals.cameraBlur.enabled = true;
-            DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 1f;
+            Globals.Instance.cameraBlur.enabled = true;
+            DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 1f;
 
 
 
         }
-        else if (DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha > 0f)
+        else if (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha > 0f)
         {
             panelEnabled = false;
 
-            while (DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha > 0f)
+            while (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha > 0f)
             {
                 //fadeoutas
 
                 yield return new WaitForSeconds(0.001f);
                 //mazinam alpha kas cikla
-                DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha -= 0.1f;
+                DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha -= 0.1f;
 
-                Globals.cameraBlur.blurSize -= 0.22f;
+                Globals.Instance.cameraBlur.blurSize -= 0.22f;
 
 
 
             }
-            Globals.cameraBlur.enabled = false;
-            DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
+            Globals.Instance.cameraBlur.enabled = false;
+            DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
 
 
-            DisabledObjectsGameScene.BuyMenuPanel.SetActive(false);
+            DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
 
 
         }

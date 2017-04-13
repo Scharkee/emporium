@@ -6,21 +6,23 @@ using SocketIO;
 public class DisabledObjectsGameScene : MonoBehaviour {
 
     //issaugomi ivairus objektai kuriu reikia kitoms klasems. Islieka references net kai disablinami patys objektai
-    public static GameObject PressContextPanel;
-    public static GameObject LoadingPanel;
-    public static GameObject Inventory_Fruit_panel;
-    public static GameObject Tiles;
-    public static GameObject BuyMenuPanel;
-    public static GameObject Selector;
-    public static GameObject alertPanel;
-    public static GameObject StatsContextPanel;
-    public static GameObject gridPlants;
-    public static GameObject gridBuildings;
-    public static GameObject managerialScripts;
-    public static SocketIOComponent socket;
-    public static GameObject moneyEdit;
-    public static GameObject tileSellScript;
-    public static GameObject PlotSelectors;
+    public GameObject PressContextPanel;
+    public GameObject LoadingPanel;
+    public GameObject Inventory_Fruit_panel;
+    public GameObject Tiles;
+    public GameObject BuyMenuPanel;
+    public GameObject Selector;
+    public GameObject alertPanel;
+    public GameObject StatsContextPanel;
+    public GameObject gridPlants;
+    public GameObject gridBuildings;
+    public GameObject managerialScripts;
+    public SocketIOComponent socket;
+    public GameObject moneyEdit;
+    public GameObject tileSellScript;
+    public GameObject PlotSelectors;
+
+    public static DisabledObjectsGameScene Instance;
 
 
 
@@ -38,6 +40,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     }
     void Awake()
     {
+        Instance = this;
         socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
         PressContextPanel = GameObject.Find("PressContextPanel");
         LoadingPanel = GameObject.Find("LoadingPanel");
@@ -63,7 +66,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     IEnumerator delayedDisable() //should test if works against bad 
     {
 
-        while (DisabledObjectsGameScene.LoadingPanel)
+        while (DisabledObjectsGameScene.Instance.LoadingPanel)
         {
             yield return new WaitForSeconds(0.1f);
            

@@ -55,22 +55,22 @@ public class IdentifierScript : MonoBehaviour {
 
 
 
-        if (GlobalControl.Logincount == 1)
+        if (GlobalControl.Instance.Logincount == 1)
         {
-            GlobalControl.Uname = val;
-            GlobalControl.Logincount++;
+            GlobalControl.Instance.Uname = val;
+            GlobalControl.Instance.Logincount++;
             GameObject.Find("UnamePassText").GetComponent<Text>().text = "Enter your password";
 
         }
-        else if (GlobalControl.Logincount == 2)
+        else if (GlobalControl.Instance.Logincount == 2)
         {
-            GlobalControl.Pass = val;
-            GlobalControl.Logincount++;
-            Debug.Log(GlobalControl.Logincount);
+            GlobalControl.Instance.Pass = val;
+            GlobalControl.Instance.Logincount++;
+            Debug.Log(GlobalControl.Instance.Logincount);
 
             GameObject.Find("UnamePassInputField").GetComponent<InputField>().text = string.Empty;
             
-            logcheck.LogInCh(GlobalControl.Uname, GlobalControl.Pass);
+            logcheck.LogInCh(GlobalControl.Instance.Uname, GlobalControl.Instance.Pass);
 
            // connectingText.color = Color.black; TODO: implement this with BlinkConnecting() and wrong passwords n shit
 

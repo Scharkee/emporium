@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class GameAlerts : MonoBehaviour {
 
-    private static bool alertUp;
-    private static List<string> alertQueue;
-    private static List<string> tempQueue;
-    static Vector2 alertDefaultPos;
-    static Vector2 alertCenterPos;
+    private bool alertUp;
+    private List<string> alertQueue;
+    private List<string> tempQueue;
+    Vector2 alertDefaultPos;
+    Vector2 alertCenterPos;
+
+    public static GameAlerts Instance;
 
     int popUpSpeed;
 
@@ -20,10 +22,17 @@ public class GameAlerts : MonoBehaviour {
     {
         alertQueue = new List<string>();
         alertUp = false;  //nerodomas joks alertas. 
-        alertDefaultPos = DisabledObjectsGameScene.alertPanel.transform.position;
+        alertDefaultPos = DisabledObjectsGameScene.Instance.alertPanel.transform.position;
         alertCenterPos = new Vector2(Screen.width/2,Screen.height/2);
         popUpSpeed = 1;
-        DisabledObjectsGameScene.alertPanel.GetComponent<AudioSource>().clip = alert; //implement more later mb.
+        DisabledObjectsGameScene.Instance.alertPanel.GetComponent<AudioSource>().clip = alert; //implement more later mb.
+    }
+
+    void Awake()
+    {
+        Instance = this;
+
+
     }
 
     void Update()
@@ -41,7 +50,7 @@ public class GameAlerts : MonoBehaviour {
         
             for (int i = 0; i < alertQueue.Count; i++) // Loop through List with for
             {
-                Debug.Log("aaa");
+    
 
                 StartCoroutine(startAlert(alertQueue[i]));
 
@@ -53,9 +62,9 @@ public class GameAlerts : MonoBehaviour {
     }
 
 
-    public static void AlertWithMessage(string content)
+    public void AlertWithMessage(string content)
     {
-        Debug.Log("alerting string "+ content);
+
         alertQueue.Add(content);
 
         //TODO
@@ -75,22 +84,22 @@ public class GameAlerts : MonoBehaviour {
 
        
 
-        DisabledObjectsGameScene.alertPanel.SetActive(true);
-        DisabledObjectsGameScene.alertPanel.transform.FindChild("Alert_Text").GetComponent<Text>().text=str;
+        DisabledObjectsGameScene.Instance.alertPanel.SetActive(true);
+        DisabledObjectsGameScene.Instance.alertPanel.transform.FindChild("Alert_Text").GetComponent<Text>().text=str;
 
         
         
-        while (DisabledObjectsGameScene.alertPanel.GetComponent<CanvasGroup>().alpha < 1)
+        while (DisabledObjectsGameScene.Instance.alertPanel.GetComponent<CanvasGroup>().alpha < 1)
         {
             
-            DisabledObjectsGameScene.alertPanel.transform.position = Vector2.Lerp(DisabledObjectsGameScene.alertPanel.transform.position, alertCenterPos,Time.deltaTime*10);
-            DisabledObjectsGameScene.alertPanel.GetComponent<CanvasGroup>().alpha += 0.1f;
+            DisabledObjectsGameScene.Instance.alertPanel.transform.position = Vector2.Lerp(DisabledObjectsGameScene.Instance.alertPanel.transform.position, alertCenterPos,Time.deltaTime*10);
+            DisabledObjectsGameScene.Instance.alertPanel.GetComponent<CanvasGroup>().alpha += 0.1f;
             yield return new WaitForSeconds(0.01f);
             
 
         }
 
-        DisabledObjectsGameScene.alertPanel.GetComponent<AudioSource>().Play();
+        DisabledObjectsGameScene.Instance.alertPanel.GetComponent<AudioSource>().Play();
 
 
        alertUp = true;
@@ -98,12 +107,12 @@ public class GameAlerts : MonoBehaviour {
 
     }
 
-    public static void closeAlert()
+    public void closeAlert()
     {
         
-        DisabledObjectsGameScene.alertPanel.GetComponent<CanvasGroup>().alpha = 0f;
-        DisabledObjectsGameScene.alertPanel.transform.position = alertDefaultPos;
-        DisabledObjectsGameScene.alertPanel.SetActive(false);
+        DisabledObjectsGameScene.Instance.alertPanel.GetComponent<CanvasGroup>().alpha = 0f;
+        DisabledObjectsGameScene.Instance.alertPanel.transform.position = alertDefaultPos;
+        DisabledObjectsGameScene.Instance.alertPanel.SetActive(false);
         alertUp = false;
     }
 }

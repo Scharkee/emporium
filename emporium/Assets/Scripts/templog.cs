@@ -15,8 +15,8 @@ public class templog : MonoBehaviour {
 
 
     public void loginAsMat() {
-        GlobalControl.Uname = "mat";
-        GlobalControl.Pass = "rho";
+        GlobalControl.Instance.Uname = "mat";
+        GlobalControl.Instance.Pass = "rho";
         GameObject.Find("IdentifierPanel").GetComponent<LoginCheck>().LogInCh("mat", "rho");
 
 

@@ -17,7 +17,7 @@ public class TileSellScript : MonoBehaviour {
       
      
 
-        socket = DisabledObjectsGameScene.socket;
+        socket = DisabledObjectsGameScene.Instance.socket;
 
     }
 
@@ -26,15 +26,15 @@ public class TileSellScript : MonoBehaviour {
     {
 
 
-        if (DisabledObjectsGameScene.BuyMenuPanel.activeSelf) //buymenu panel is currently open
+        if (DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf) //buymenu panel is currently open
         {
             StartCoroutine(GameObject.Find("BuyButton").GetComponent<BuyButtonScript>().BuyMenuPanelFader());
 
         }
-        if (Globals.cameraUp && DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
+        if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
         {
 
-            DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().DisableBuyMode();
+            DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().DisableBuyMode();
            
         }
 
@@ -66,13 +66,13 @@ public class TileSellScript : MonoBehaviour {
 
         if (sell)
         {
-            RenderSettings.skybox = Globals.dark_skybox;
+            RenderSettings.skybox = Globals.Instance.dark_skybox;
             StartCoroutine(moveCamera());
 
         }else
         {
             StartCoroutine(moveCamera());
-            RenderSettings.skybox = Globals.light_skybox;
+            RenderSettings.skybox = Globals.Instance.light_skybox;
 
         }
 
@@ -96,7 +96,9 @@ public class TileSellScript : MonoBehaviour {
                 {
                         SellTile(hit.transform.gameObject.GetComponent<BuildingScript>().thistile.ID, hit.transform.gameObject.GetComponent<BuildingScript>().thistile.NAME);
                         Destroy(hit.transform.gameObject);
-                        Database.ActiveTiles.Remove(hit.transform.gameObject);
+
+
+                    Database.Instance.ActiveTiles.Remove(hit.transform.gameObject);
                     }
 
             }
@@ -114,7 +116,7 @@ public class TileSellScript : MonoBehaviour {
 
        
         Dictionary<string, string> data = new Dictionary<string, string>();
-        data["Uname"] = GlobalControl.Uname;
+        data["Uname"] = GlobalControl.Instance.Uname;
         data["SellTileID"] = ID.ToString();
         data["TileName"] = name;
 
@@ -126,9 +128,9 @@ public class TileSellScript : MonoBehaviour {
     {
         float step = 10 * Time.deltaTime;
 
-        if (!Globals.cameraUp)  //raise cam
+        if (!Globals.Instance.cameraUp)  //raise cam
         {
-            Globals.cameraUp = true;
+            Globals.Instance.cameraUp = true;
             while (Camera.main.transform.position.y < 3.2f)
             {
                 yield return new WaitForSeconds(0.001f);
@@ -138,9 +140,9 @@ public class TileSellScript : MonoBehaviour {
 
             yield break;
         }
-        else if (Globals.cameraUp)  //lower cam
+        else if (Globals.Instance.cameraUp)  //lower cam
         {
-            Globals.cameraUp = false;
+            Globals.Instance.cameraUp = false;
             while (Camera.main.transform.position.y > 1.7f)
             {
                 yield return new WaitForSeconds(0.0001f);

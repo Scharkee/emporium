@@ -9,7 +9,7 @@ public class alertPanelScript : MonoBehaviour {
 	public void closeAlert()
     {
         Debug.Log("aaSDASDasdasd");
-        GameAlerts.closeAlert();
+        GameAlerts.Instance.closeAlert();
     }
 
     public void CancelContext() //parejo broadcastas, 

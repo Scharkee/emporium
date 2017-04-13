@@ -7,7 +7,9 @@ public class InvExpander : MonoBehaviour {
 
     void Start()
     {
-        DisabledObjectsGameScene.Inventory_Fruit_panel.SetActive(false);
+
+
+    DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(false);
 
     }
 
@@ -17,13 +19,13 @@ public class InvExpander : MonoBehaviour {
     public void expandContract() //TODO: make normal disables and not alpha shit
     {
 
-        if (DisabledObjectsGameScene.Inventory_Fruit_panel.activeSelf)
+        if (DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.activeSelf)
         {
 
-            DisabledObjectsGameScene.Inventory_Fruit_panel.SetActive(false);
+            DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(false);
         }else
         {
-            DisabledObjectsGameScene.Inventory_Fruit_panel.SetActive(true);
+            DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(true);
         }
     }
 

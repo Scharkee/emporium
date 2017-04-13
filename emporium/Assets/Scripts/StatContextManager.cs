@@ -22,9 +22,9 @@ public class StatContextManager : MonoBehaviour {
             if (hit.collider.tag == "Ground")
             {
 
-                if (DisabledObjectsGameScene.StatsContextPanel.activeSelf)
+                if (DisabledObjectsGameScene.Instance.StatsContextPanel.activeSelf)
                 {
-                    ContextManager.CloseStatPanel();
+                    ContextManager.Instance.CloseStatPanel();
 
                 }
 
@@ -32,7 +32,7 @@ public class StatContextManager : MonoBehaviour {
 
                 if (hit.transform.tag=="Building")
             {
-                ContextManager.ShowStats(hit.transform.gameObject);
+                ContextManager.Instance.ShowStats(hit.transform.gameObject);
 
             }
 
@@ -42,9 +42,9 @@ public class StatContextManager : MonoBehaviour {
         {
 
            
-                if (DisabledObjectsGameScene.StatsContextPanel.activeSelf)
+                if (DisabledObjectsGameScene.Instance.StatsContextPanel.activeSelf)
                 {
-                    ContextManager.CloseStatPanel();
+                    ContextManager.Instance.CloseStatPanel();
 
                 }
 
@@ -58,10 +58,10 @@ public class StatContextManager : MonoBehaviour {
     void LateUpdate()
     {
 
-        if (DisabledObjectsGameScene.StatsContextPanel.activeSelf)
+        if (DisabledObjectsGameScene.Instance.StatsContextPanel.activeSelf)
         {
            
-            DisabledObjectsGameScene.StatsContextPanel.transform.position = new Vector3(Input.mousePosition.x+100, Input.mousePosition.y-40, Input.mousePosition.z);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.position = new Vector3(Input.mousePosition.x+100, Input.mousePosition.y-40, Input.mousePosition.z);
 
 
         }

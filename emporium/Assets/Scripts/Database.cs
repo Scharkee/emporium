@@ -7,76 +7,83 @@ using System.Text.RegularExpressions;
 
 public class Database : MonoBehaviour
 {
-    public static string UserUsername;
-    public static float UserDollars;
-    public static int UserLastOnline;
-    public static int UserPlotSize;
+    public string UserUsername;
+    public float UserDollars;
+    public int UserLastOnline;
+    public int UserPlotSize;
+
+    public static Database Instance;
 
 
 
 
 
     //MAIN DATBASES
-    public static Tile[] tile;
-    public static Building[] buildinginfo;
-    public static Inventory[] inventory; //one temp invo for JSON conversion
-    public static Dictionary<string, float> Inventory;  // main inventory
+    public Tile[] tile;
+    public Building[] buildinginfo;
+    public Inventory[] inventory; //one temp invo for JSON conversion
+    public Dictionary<string, float> Inventory;  // main inventory
 
 
-    public static List<GameObject> ActiveTiles = new List<GameObject>(); //tiles su kuriom daromos operacijos main update cikle.
+    public List<GameObject> ActiveTiles = new List<GameObject>(); //tiles su kuriom daromos operacijos main update cikle.
 
 
+    void Awake()
+    {
+        Instance = this;
 
+
+    }
 
 
     //BUILDING-UPGRADE-FRUIT INFORMATION
     //augalai
-    
-/*
-    public static Building apelsinas_1 = new Building();
-    public static Building obelis_1 = new Building();
-    public static Building krause_1 = new Building();
-    public static Building slyva_1 = new Building();
-    public static Building vysnia_1 = new Building();
-    public static Building aloe_1 = new Building();
-    public static Building kokosas_1 = new Building();
-    public static Building vynuoge_1 = new Building();
-    public static Building granatas_1 = new Building();
-    public static Building citrina_1 = new Building();
-    public static Building melionas_1 = new Building();
-    public static Building papajus_1 = new Building();
-    public static Building ananasas_1 = new Building();
-    public static Building avietes_1 = new Building();
-    public static Building braskes_1 = new Building();
-    public static Building morka_1 = new Building();
 
-*/
+    /*
+        public Building apelsinas_1 = new Building();
+        public Building obelis_1 = new Building();
+        public Building krause_1 = new Building();
+        public Building slyva_1 = new Building();
+        public Building vysnia_1 = new Building();
+        public Building aloe_1 = new Building();
+        public Building kokosas_1 = new Building();
+        public Building vynuoge_1 = new Building();
+        public Building granatas_1 = new Building();
+        public Building citrina_1 = new Building();
+        public Building melionas_1 = new Building();
+        public Building papajus_1 = new Building();
+        public Building ananasas_1 = new Building();
+        public Building avietes_1 = new Building();
+        public Building braskes_1 = new Building();
+        public Building morka_1 = new Building();
+
+    */
 
     //irenginiai
 
-    public static Building press_1 = new Building();
-    public static Building press_2 = new Building();
-    public static Building press_3 = new Building();
-    public static Building tank_1 = new Building();
-    public static Building tank_2 = new Building();
-    public static Building tank_3 = new Building();
-    public static Building sterilizuotojas_1 = new Building();
-    public static Building sterilizuotojas_2 = new Building();
-    public static Building buteliavimas_1 = new Building();
-    public static Building buteliavimas_2 = new Building();
+    public Building press_1 = new Building();
+    public Building press_2 = new Building();
+    public Building press_3 = new Building();
+    public Building tank_1 = new Building();
+    public Building tank_2 = new Building();
+    public Building tank_3 = new Building();
+    public Building sterilizuotojas_1 = new Building();
+    public Building sterilizuotojas_2 = new Building();
+    public Building buteliavimas_1 = new Building();
+    public Building buteliavimas_2 = new Building();
 
 
     //pastatai
 
-    public static Building kioskas = new Building();
-    public static Building dviratis = new Building();
-    public static Building mopedas = new Building();
-    public static Building motociklas = new Building();
-    public static Building masina_1 = new Building();
-    public static Building masina_2 = new Building();
-    public static Building pickup_truck = new Building();
-    public static Building sukvezimis = new Building();
-    public static Building sunkvezimis_2 = new Building();
+    public Building kioskas = new Building();
+    public Building dviratis = new Building();
+    public Building mopedas = new Building();
+    public Building motociklas = new Building();
+    public Building masina_1 = new Building();
+    public Building masina_2 = new Building();
+    public Building pickup_truck = new Building();
+    public Building sukvezimis = new Building();
+    public Building sunkvezimis_2 = new Building();
 
 
 

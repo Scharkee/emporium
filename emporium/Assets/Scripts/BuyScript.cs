@@ -6,7 +6,7 @@ using SocketIO;
 
 public class BuyScript : MonoBehaviour {
 
-    public static string tilename;
+    public string tilename;
     RaycastHit hit;
     SocketIOComponent socket;
 
@@ -29,16 +29,16 @@ public class BuyScript : MonoBehaviour {
 
 
 
-        DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
+        DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
 
 
 
       
-        DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().enabled = true;
+        DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().enabled = true;
 
-        DisabledObjectsGameScene.Selector.GetComponent<BuyMode>().receiveName(tilename);
+        DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().receiveName(tilename);
 
-        DisabledObjectsGameScene.BuyMenuPanel.SetActive(false);
+        DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
     }
 
     public void ChoosePlot(string buildingname, float X, float Z)
@@ -49,7 +49,7 @@ public class BuyScript : MonoBehaviour {
         
 
         Dictionary<string, string> data = new Dictionary<string, string>();
-        data["Uname"] = GlobalControl.Uname;
+        data["Uname"] = GlobalControl.Instance.Uname;
 
         data["BuildingName"] = buildingname;
         data["X"] = X.ToString();
