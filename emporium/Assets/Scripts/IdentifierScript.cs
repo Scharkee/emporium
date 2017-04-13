@@ -13,9 +13,7 @@ public class IdentifierScript : MonoBehaviour {
     LoginCheck logincheck;
     GameObject Networkman;
     GameObject GlobalObj;
-    GlobalControl globcontr;
     GameObject globalobje;
-    GlobalControl globalcontrol;
     LoginCheck logcheck;
 
 
@@ -23,6 +21,8 @@ public class IdentifierScript : MonoBehaviour {
     public TextMesh textmesh;
     public Color def;
     float fadd = 1f;
+
+    private Text connectingText;
 
 
     public bool create = false;
@@ -38,15 +38,12 @@ public class IdentifierScript : MonoBehaviour {
     void Start () {
       //TODO:  inputf = GameObject.Find("logintextfield").GetComponent<InputField>();
         globalobje = GameObject.Find("GlobalObject");
-        globalcontrol = globalobje.GetComponent<GlobalControl>();
+       
         logcheck = gameObject.GetComponent<LoginCheck>();
+        connectingText = GameObject.Find("ConnectingText").GetComponent<Text>();
 
     }
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
    
 
@@ -56,12 +53,13 @@ public class IdentifierScript : MonoBehaviour {
         InputField inpf = GameObject.Find("UnamePassInputField").GetComponent<InputField>();
 
 
-        Debug.Log(val);
+
 
         if (GlobalControl.Logincount == 1)
         {
             GlobalControl.Uname = val;
             GlobalControl.Logincount++;
+            GameObject.Find("UnamePassText").GetComponent<Text>().text = "Enter your password";
 
         }
         else if (GlobalControl.Logincount == 2)
@@ -74,6 +72,9 @@ public class IdentifierScript : MonoBehaviour {
             
             logcheck.LogInCh(GlobalControl.Uname, GlobalControl.Pass);
 
+           // connectingText.color = Color.black; TODO: implement this with BlinkConnecting() and wrong passwords n shit
+
+ 
 
             //TODO: keep flashing connecting until the scene changes?
 
@@ -84,6 +85,24 @@ public class IdentifierScript : MonoBehaviour {
   
         inpf.ActivateInputField();
         inpf.Select();
+
+    }
+
+
+    private IEnumerator BlinkConnecting()
+    {
+
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            connectingText.color= Color.Lerp(Color.grey, Color.black, Mathf.PingPong(Time.time * 2, 1));
+
+
+
+
+        }
+
 
     }
 }

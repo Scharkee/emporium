@@ -13,6 +13,7 @@ public class GlobalControl : MonoBehaviour
     public static Dictionary<string,string> currentLangDict;
     public static GlobalControl Instance;
     public bool ConnectedOnceNoDupeStatRequests = false;
+    private static bool firstLaunch=true;
 
     void Start()
     {
@@ -40,6 +41,16 @@ public class GlobalControl : MonoBehaviour
 
 
 
+    }
+
+    public static void reset()
+    {
+        currentLangDict = null;
+        Uname = null;
+        Pass = null;
+        Logincount =1;
+        Userlanguage = 0;
+        firstLaunch = false;
     }
 
     public void setLanguage(int lang)

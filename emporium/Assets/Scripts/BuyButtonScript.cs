@@ -69,11 +69,11 @@ public class BuyButtonScript : MonoBehaviour
                 //didinam alpha kas cikla
                 DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha += 0.1f;
                 
-                DisabledObjectsGameScene.cameraBlur.blurSize += 0.3f;
+                Globals.cameraBlur.blurSize += 0.22f;
                
                
             }
-            DisabledObjectsGameScene.cameraBlur.enabled = true;
+            Globals.cameraBlur.enabled = true;
             DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 1f;
 
 
@@ -90,13 +90,13 @@ public class BuyButtonScript : MonoBehaviour
                 yield return new WaitForSeconds(0.001f);
                 //mazinam alpha kas cikla
                 DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha -= 0.1f;
-                
-                DisabledObjectsGameScene.cameraBlur.blurSize -= 0.3f;
+
+                Globals.cameraBlur.blurSize -= 0.22f;
 
 
 
             }
-            DisabledObjectsGameScene.cameraBlur.enabled = false;
+            Globals.cameraBlur.enabled = false;
             DisabledObjectsGameScene.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
 
 
@@ -104,6 +104,15 @@ public class BuyButtonScript : MonoBehaviour
 
 
         }
+
+    }
+
+
+    public void CancelContext() //parejo broadcastas, isjungti VISUS context panels
+    {
+        StartCoroutine(BuyMenuPanelFader());
+
+
 
     }
 

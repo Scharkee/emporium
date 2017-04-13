@@ -11,7 +11,7 @@ public class TileOperator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        StartCoroutine(CheckForGrowthCompletionRepeat());
+        
 		
 	}
 
@@ -19,7 +19,13 @@ public class TileOperator : MonoBehaviour {
     {
 
 
-        socman = GameObject.Find("_ManagerialScripts").GetComponent<SocketManager>();
+        socman = DisabledObjectsGameScene.managerialScripts.GetComponent<SocketManager>();
+    }
+
+    public void StartGrowthCompletrionCheckRepeat()
+    {
+
+        StartCoroutine(CheckForGrowthCompletionRepeat());
     }
 	
 	
@@ -101,11 +107,12 @@ public class TileOperator : MonoBehaviour {
 
         if (!firstLoadCompleted)
         {
+
             firstLoadCompleted = true;
             GameObject loadpanel = GameObject.Find("LoadingPanel");
             Destroy(loadpanel);
-            DisabledObjectsGameScene.cameraBlur.blurSize = 0;
-            DisabledObjectsGameScene.cameraBlur.enabled = false;
+            Globals.cameraBlur.blurSize = 0;
+            Globals.cameraBlur.enabled = false;
 
         }
 

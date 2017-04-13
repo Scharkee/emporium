@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SocketIO;
-using UnityStandardAssets.ImageEffects;
+
 public class DisabledObjectsGameScene : MonoBehaviour {
 
     //issaugomi ivairus objektai kuriu reikia kitoms klasems. Islieka references net kai disablinami patys objektai
@@ -22,13 +22,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public static GameObject tileSellScript;
     public static GameObject PlotSelectors;
 
-    //skybox materials
-    public static Material light_skybox;
-    public static Material dark_skybox;
-    
-    //camera effect references
-    public static BlurOptimized cameraBlur;
-    public static Bloom cameraBloom;
+
 
     // Use this for initialization
     void Start () {
@@ -37,16 +31,14 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         StatsContextPanel.SetActive(false);
         //  StartCoroutine(delayedDisable());
 
-        dark_skybox = Resources.Load("Materials/Skybox_mat_darkened") as Material;
-        light_skybox = RenderSettings.skybox;
+
 
 
 
     }
     void Awake()
     {
-        cameraBlur = Camera.main.GetComponent<BlurOptimized>();
-        cameraBloom = Camera.main.GetComponent<Bloom>();
+        socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
         PressContextPanel = GameObject.Find("PressContextPanel");
         LoadingPanel = GameObject.Find("LoadingPanel");
         Inventory_Fruit_panel = GameObject.Find("Inventory_Fruit_panel");
@@ -59,7 +51,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
 
         gridPlants = GameObject.Find("OptionGrid");
         gridBuildings = GameObject.Find("OptionGridBuildings");
-        socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
+       
 
         moneyEdit = GameObject.Find("MoneyEdit");
         tileSellScript = GameObject.Find("SellScript");

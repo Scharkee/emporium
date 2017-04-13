@@ -43,12 +43,12 @@ public class BuildingScript : MonoBehaviour {
     void Start () {
         justSpawned = true;
 
-        GameObject managerial = GameObject.Find("_ManagerialScripts");
-        socman = managerial.GetComponent<SocketManager>();
-        uiManager = managerial.GetComponent<UIManager>();
+     
+        socman = DisabledObjectsGameScene.managerialScripts.GetComponent<SocketManager>();
+        uiManager = DisabledObjectsGameScene.managerialScripts.GetComponent<UIManager>();
 
-        GameObject go = GameObject.Find("SocketIO");
-        socket = go.GetComponent<SocketIOComponent>();
+ 
+        socket = DisabledObjectsGameScene.socket;
 
         audiosource = GetComponent<AudioSource>();
 
@@ -401,7 +401,7 @@ public class BuildingScript : MonoBehaviour {
     private void notifyOfProduceAmount(float produceAmount)
     {
 
-        Debug.Log("ASDASDASDAD");
+
 
 
         GameObject alert = Instantiate(Resources.Load("produceAmountAlert"),new Vector3(Input.mousePosition.x,Input.mousePosition.y,0),Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;

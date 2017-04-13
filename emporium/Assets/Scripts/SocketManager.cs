@@ -10,7 +10,7 @@ using UnityStandardAssets.ImageEffects;
 
 public class SocketManager : MonoBehaviour {
 
-    GlobalControl globalcontr;
+  
     Database db;
     bool ver = false;
     public int unix;
@@ -25,22 +25,32 @@ public class SocketManager : MonoBehaviour {
         db = gameObject.GetComponent<Database>();
 
         GameObject go = GameObject.Find("SocketIO");
-        socket = go.GetComponent<SocketIOComponent>();
-        globalcontr = GameObject.Find("GlobalObject").GetComponent<GlobalControl>();
 
-        StartCoroutine(UnixUpdater());
+        socket = DisabledObjectsGameScene.socket.GetComponent<SocketIOComponent>();
+
+
+
 
         socket.On("LASTONLINE_PING", SendAutosaveVerify);
         socket.On("VERIFY", Verification);
         socket.On("DISCREPANCY", DiscrepancyAction);
         socket.On("RECEIVE_UNIX", ReceiveUnix);
 
-        socket.On("BUILD_TILE", GameObject.Find("_ManagerialScripts").GetComponent<AssignTiles>().BuildTile);
+        socket.On("BUILD_TILE", DisabledObjectsGameScene.managerialScripts.GetComponent<AssignTiles>().BuildTile);
 
         socket.On("NO_FUNDS", NoFundsAlert);
 
         socket.On("ADD_FUNDS", AddFunds);
         socket.On("UPDATE_PLOT_SIZE", UpdatePlotSize);
+
+
+    }
+
+    void Awake()
+    {
+        socket = DisabledObjectsGameScene.socket;
+        
+        StartCoroutine(UnixUpdater());
 
 
     }
@@ -109,13 +119,14 @@ public class SocketManager : MonoBehaviour {
 
     public void UpdatePlotSize(SocketIOEvent evt)
     {
+
+
         
-        
-        Debug.Log("2221");
+        ContextManager.CancelContext();
 
         GameAlerts.AlertWithMessage("You have upgraded your plot size! Please log in again.");
 
-        logOffWithDelay(2f);
+        StartCoroutine(logOffWithDelay(2f));
 
     
 
@@ -130,7 +141,9 @@ public class SocketManager : MonoBehaviour {
     {
 
         GameAlerts.AlertWithMessage("Desynchronization detected. Logging off...");
-        logOffWithDelay(2f);
+        StartCoroutine(logOffWithDelay(2f));
+
+        ContextManager.CancelContext();
 
         //TODO: show diecrepency alert, mb shut down game even.
 
@@ -174,6 +187,7 @@ public class SocketManager : MonoBehaviour {
     {
 
         yield return new WaitForSeconds(delay);
+        GlobalControl.reset();
         SceneManager.LoadScene(0);
     }
 

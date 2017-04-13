@@ -11,4 +11,12 @@ public class alertPanelScript : MonoBehaviour {
         Debug.Log("aaSDASDasdasd");
         GameAlerts.closeAlert();
     }
+
+    public void CancelContext() //parejo broadcastas, 
+    {
+        Destroy(gameObject);
+
+
+
+    }
 }

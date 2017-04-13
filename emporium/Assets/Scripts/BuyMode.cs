@@ -59,7 +59,7 @@ public class BuyMode : MonoBehaviour {
                     StartCoroutine(liftcamera());
                     buybuttonscript.panelEnabled = false;
 
-                    RenderSettings.skybox = DisabledObjectsGameScene.light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
+                    RenderSettings.skybox = Globals.light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
 
                     DisabledObjectsGameScene.BuyMenuPanel.SetActive(false);
 
@@ -87,10 +87,10 @@ public class BuyMode : MonoBehaviour {
      
         buybuttonscript.panelEnabled = false;
 
-        DisabledObjectsGameScene.cameraBlur.enabled = false;
+        Globals.cameraBlur.enabled = false;
         //effects and pltoselectors
         StartCoroutine(liftcamera());
-        RenderSettings.skybox = DisabledObjectsGameScene.dark_skybox;
+        RenderSettings.skybox = Globals.dark_skybox;
         GameObject.Find("_GameScripts").GetComponent<PlotSelector>().plotselectors.SetActive(true);
 
 
@@ -158,7 +158,7 @@ public class BuyMode : MonoBehaviour {
         StartCoroutine(liftcamera());
         // buybuttonscript.panelEnabled = false;
         Debug.Log("changing back skybox");
-        RenderSettings.skybox = DisabledObjectsGameScene.light_skybox; //MAKEME make fade    
+        RenderSettings.skybox = Globals.light_skybox; //MAKEME make fade    
         Debug.Log("changing back skybox");
         DisabledObjectsGameScene.BuyMenuPanel.SetActive(true);
 

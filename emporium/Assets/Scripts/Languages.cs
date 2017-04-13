@@ -86,7 +86,7 @@ public class Languages : MonoBehaviour {
         english.Add("obuolys_1", "Apple tree");
         english.Add("persikas_1", "Peach tree");
         english.Add("slyva_1", "Plum tree");
-
+        english.Add("vysnia_1", "Cherry tree");
         english.Add("presas_1", "Small juicer");
 
     }

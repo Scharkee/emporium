@@ -14,7 +14,6 @@ public class LoginCheck : MonoBehaviour {
     public string inputpassword;
     Dictionary<string, string> data;
 
-    public GlobalControl globalcontr;
 
     public SocketIOComponent socket;
 
@@ -24,7 +23,6 @@ public class LoginCheck : MonoBehaviour {
 		socket = go.GetComponent<SocketIOComponent>();
 		socket.On("PASS_CHECK_CALLBACK", OnLoginCheckCallback);
    
-        globalcontr = GameObject.Find("GlobalObject").GetComponent<GlobalControl>();
 
 
     }
@@ -52,7 +50,7 @@ public class LoginCheck : MonoBehaviour {
     private void OnLoginCheckCallback(SocketIOEvent evt)
     {
 		
-		Debug.Log("server returned : " + evt.data.GetField("passStatus").ToString());
+	
 
 		LoginorCreate (int.Parse(evt.data.GetField ("passStatus").ToString()) );
     }
@@ -121,12 +119,12 @@ public class LoginCheck : MonoBehaviour {
     }
     IEnumerator LVLLoadCamEffect()
     {
-        Bloom bloom = Camera.main.GetComponent<Bloom>();
-        while (bloom.bloomThreshold > 0.01)
+      
+        while (Globals.cameraBloom.bloomThreshold > 0.01)
         {
             //fadeoutas
             yield return new WaitForSeconds(0.001f);
-            bloom.bloomThreshold = bloom.bloomThreshold - 0.01f;
+            Globals.cameraBloom.bloomThreshold -= 0.01f;
         }
     }
     IEnumerator TextFader(GameObject txtobject)

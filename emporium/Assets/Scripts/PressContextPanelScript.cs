@@ -67,6 +67,15 @@ public class PressContextPanelScript : MonoBehaviour {
     }
 
 
+    public void CancelContext() //parejo broadcastas, isjungti VISUS context panels
+    {
+        Destroy(gameObject);
+
+
+
+    }
+
+
 }
 
 

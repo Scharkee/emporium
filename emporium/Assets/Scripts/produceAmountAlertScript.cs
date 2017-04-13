@@ -10,7 +10,7 @@ public class produceAmountAlertScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.GetComponent<Animation>().Play();
+
     }
 	
 	// Update is called once per frame

@@ -19,7 +19,7 @@ public class AssignTiles : MonoBehaviour {
         GameObject managerial = GameObject.Find("_ManagerialScripts");
        
         uiManager = managerial.GetComponent<UIManager>();
-        socman = managerial.GetComponent<SocketManager>();
+       
 
 
 
@@ -35,7 +35,7 @@ public class AssignTiles : MonoBehaviour {
   
 
         string evtStringRows = evt.data.ToString();
-        Debug.Log(evtStringRows);
+
 
         StringBuilder builder = new StringBuilder(evtStringRows);///////////////////////////////////////////////////////
         builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
@@ -59,7 +59,7 @@ public class AssignTiles : MonoBehaviour {
 
 
         string evtStringRows = evt.data.ToString();
-        Debug.Log(evtStringRows);
+
 
         StringBuilder builder = new StringBuilder(evtStringRows);///////////////////////////////////////////////////////
         builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
@@ -79,7 +79,7 @@ public class AssignTiles : MonoBehaviour {
 
 
         string evtStringRows = evt.data.ToString();
-        Debug.Log(evtStringRows);
+
 
         StringBuilder builder = new StringBuilder(evtStringRows);///////////////////////////////////////////////////////
         builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
@@ -122,8 +122,12 @@ public class AssignTiles : MonoBehaviour {
         }
 
 
+        GameObject.Find("_ManagerialScripts").GetComponent<TileOperator>().StartGrowthCompletrionCheckRepeat();
 
-       
+
+
+
+
 
     }
 

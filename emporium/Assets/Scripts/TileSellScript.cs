@@ -66,13 +66,13 @@ public class TileSellScript : MonoBehaviour {
 
         if (sell)
         {
-            RenderSettings.skybox = DisabledObjectsGameScene.dark_skybox;
+            RenderSettings.skybox = Globals.dark_skybox;
             StartCoroutine(moveCamera());
 
         }else
         {
             StartCoroutine(moveCamera());
-            RenderSettings.skybox = DisabledObjectsGameScene.light_skybox;
+            RenderSettings.skybox = Globals.light_skybox;
 
         }
 
