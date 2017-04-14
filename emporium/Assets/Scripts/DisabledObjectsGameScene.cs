@@ -23,6 +23,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public GameObject PlotSelectors;
     public GameObject SellButton;
     public GameObject BuyButton;
+    public GameObject BuyMode;
 
     public static DisabledObjectsGameScene Instance;
 
@@ -58,7 +59,8 @@ public class DisabledObjectsGameScene : MonoBehaviour {
 
         gridPlants = GameObject.Find("OptionGrid");
         gridBuildings = GameObject.Find("OptionGridBuildings");
-       
+        BuyMode = GameObject.Find("BuyMode_Selector"); 
+
 
         moneyEdit = GameObject.Find("MoneyEdit");
         tileSellScript = GameObject.Find("SellScript");

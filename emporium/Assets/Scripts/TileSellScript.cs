@@ -22,10 +22,7 @@ public class TileSellScript : MonoBehaviour {
     {
       
         sellModeEnabled = false;
-
-      
-     
-
+        
         socket = DisabledObjectsGameScene.Instance.socket;
 
     }
@@ -40,10 +37,10 @@ public class TileSellScript : MonoBehaviour {
             StartCoroutine(GameObject.Find("BuyButton").GetComponent<BuyButtonScript>().BuyMenuPanelFader());
 
         }
-        if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
+        if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
         {
 
-            DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().DisableBuyMode();
+            DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().DisableBuyMode();
            
         }
 

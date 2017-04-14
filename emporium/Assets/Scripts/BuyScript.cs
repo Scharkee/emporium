@@ -34,9 +34,9 @@ public class BuyScript : MonoBehaviour {
 
 
       
-        DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().enabled = true;
+        DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled = true;
 
-        DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().receiveName(tilename);
+        DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().receiveName(tilename);
 
         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
     }

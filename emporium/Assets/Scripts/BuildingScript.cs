@@ -71,6 +71,22 @@ public class BuildingScript : MonoBehaviour {
         
 
     }
+
+    public bool Harvestable()
+    {
+
+
+        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled ||DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled||DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
+        {
+            return false;
+
+        }else //nothing stopping user from interacting with the tile
+        {
+            return true;
+        }
+
+        
+    }
 	
 
 
@@ -79,54 +95,63 @@ public class BuildingScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-
-        if (thistileInfo.BUILDING_TYPE == 0) { 
-        if (TileGrown)
+        if (Harvestable())
         {
-                audiosource.clip = yeh;
-                audiosource.Play();
-
-            Debug.Log("harvesting plant");
-
-            VerifyHarvest();
-            }else
+            if (thistileInfo.BUILDING_TYPE == 0)
             {
-                audiosource.clip = noh;
-                audiosource.Play();
+                if (TileGrown)
+                {
+                    audiosource.clip = yeh;
+                    audiosource.Play();
+
+                    Debug.Log("harvesting plant");
+
+                    VerifyHarvest();
+                }
+                else
+                {
+                    audiosource.clip = noh;
+                    audiosource.Play();
+
+                }
 
             }
-
-        }else if(thistileInfo.BUILDING_TYPE == 1)
-        {
-
-            if (WorkDone && WorkAssigned)
+            else if (thistileInfo.BUILDING_TYPE == 1)
             {
-                Debug.Log("harvesting building");
 
-                VerifyHarvest();
-            }else if (!WorkAssigned)
-            {  // spaudziama ant neturincio darbo preso, ismesti job assign menu
-                Debug.Log("Assign job right now");
-                //ismetamaas meniu, todel sitas true iki value returno arba menu close*
-                ContextOpen = true;
+                if (WorkDone && WorkAssigned)
+                {
+                    Debug.Log("harvesting building");
 
-                ContextManager.Instance.StartPressContext(WorkAssigned);
+                    VerifyHarvest();
+                }
+                else if (!WorkAssigned)
+                {  // spaudziama ant neturincio darbo preso, ismesti job assign menu
+                    Debug.Log("Assign job right now");
+                    //ismetamaas meniu, todel sitas true iki value returno arba menu close*
+                    ContextOpen = true;
+
+                    ContextManager.Instance.StartPressContext(WorkAssigned);
+
+                }
+                else if (!WorkDone)
+                {
+                    // spaudziama ant nebaigusio spausti preso, ismesti context menu su stats
+                    Debug.Log("Checking stats on press progress");
+
+                    ContextManager.Instance.StartPressContext(WorkAssigned);
+
+                }
+            }
+            else if (thistileInfo.BUILDING_TYPE == 2) //pardavimu dalykelis darbo net nera galima sakyt(nebent upgrades)
+            {
+                ContextManager.Instance.StartProduceSellingContext();
+
 
             }
-            else if (!WorkDone)
-            {  
-                // spaudziama ant nebaigusio spausti preso, ismesti context menu su stats
-                Debug.Log("Checking stats on press progress");
-
-                ContextManager.Instance.StartPressContext(WorkAssigned);
-
-            }
-        }else if (thistileInfo.BUILDING_TYPE == 2) //pardavimu dalykelis darbo net nera galima sakyt(nebent upgrades)
-        {
-            ContextManager.Instance.StartProduceSellingContext();
-
 
         }
+        
 
 
 

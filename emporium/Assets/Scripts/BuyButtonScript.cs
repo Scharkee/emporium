@@ -36,10 +36,10 @@ public class BuyButtonScript : MonoBehaviour
     public void TheClick()
     {
 
-        if(Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
+        if(Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
         {
 
-            DisabledObjectsGameScene.Instance.Selector.GetComponent<BuyMode>().DisableBuyMode();
+            DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().DisableBuyMode();
             
         }else if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled) //enabled sell mode, disabling.
         {

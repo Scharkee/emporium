@@ -120,7 +120,7 @@ public class LoginCheck : MonoBehaviour {
     IEnumerator LVLLoadCamEffect()
     {
       
-        while (Globals.Instance.cameraBloom.bloomThreshold > 0.01)
+        while (Camera.main.GetComponent<Bloom>().bloomThreshold > 0.01)
         {
             //fadeoutas
             yield return new WaitForSeconds(0.001f);

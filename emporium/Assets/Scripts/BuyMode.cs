@@ -145,7 +145,7 @@ public class BuyMode : MonoBehaviour {
         if (disableQueued)
         {
 
-            gameObject.SetActive(false);
+            gameObject.GetComponent<BuyMode>().enabled=false;
         }
         
 }
@@ -157,7 +157,6 @@ public class BuyMode : MonoBehaviour {
             DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(false);
 
         }
-  
 
         StartCoroutine(liftcamera());
         // buybuttonscript.panelEnabled = false;
@@ -168,9 +167,7 @@ public class BuyMode : MonoBehaviour {
 
 
         disableQueued = true;
-       
-
-
+      
     }
 
     
