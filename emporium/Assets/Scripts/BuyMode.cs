@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuyMode : MonoBehaviour {
 
@@ -66,6 +67,8 @@ public class BuyMode : MonoBehaviour {
                   
 
                     GameObject.Find("BuyScript").GetComponent<BuyScript>().ChoosePlot(buildingName, X, Z);
+                    DisabledObjectsGameScene.Instance.BuyButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
+                    Globals.Instance.cameraBlur.blurSize = 0;
 
                 }
 
@@ -88,7 +91,7 @@ public class BuyMode : MonoBehaviour {
         buybuttonscript.panelEnabled = false;
 
 
-      Globals.Instance.cameraBlur.enabled = false;
+        Globals.Instance.cameraBlur.enabled = false;
         //effects and pltoselectors
         StartCoroutine(liftcamera());
         RenderSettings.skybox = Globals.Instance.dark_skybox;

@@ -46,12 +46,13 @@ public class GlobalControl : MonoBehaviour
 
     public void reset()
     {
-        currentLangDict = null;
+        
         Uname = null;
         Pass = null;
         Logincount =1;
         Userlanguage = 0;
         firstLaunch = false;
+        ConnectedOnceNoDupeStatRequests = false;
     }
 
     public void setLanguage(int lang)

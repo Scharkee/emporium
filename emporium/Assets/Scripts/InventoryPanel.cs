@@ -5,11 +5,13 @@ using UnityEngine;
 public class InventoryPanel : MonoBehaviour {
 
     UIManager uimanager;
+    private bool firstStart=true;
 
     void Start()
     {
 
         uimanager = GameObject.Find("_ManagerialScripts").GetComponent<UIManager>();
+        
     }
 
 	void OnEnable()
@@ -33,7 +35,11 @@ public class InventoryPanel : MonoBehaviour {
         UIManager.Instance.ChangeUIText("persikai_Sultys_Editable", Database.Instance.Inventory["persikai_sultys"].ToString());
         UIManager.Instance.ChangeUIText("slyvos_Sultys_Editable", Database.Instance.Inventory["slyvos_sultys"].ToString());
 
-
+        if (firstStart)
+        {
+            firstStart = false;
+            gameObject.SetActive(false);
+        }
 
 
     }

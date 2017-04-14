@@ -76,7 +76,7 @@ public class SocketManager : MonoBehaviour {
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
-        Debug.Log("Received lastlogged ping from server");
+       
         socket.Emit("AUTOSAVE_PUSH_LASTLOGGED", new JSONObject(data));
 
     }
@@ -111,21 +111,21 @@ public class SocketManager : MonoBehaviour {
 
     public void UpdatePlotSize(SocketIOEvent evt)
     {
-
-
-        
         ContextManager.Instance.CancelContext();
 
         GameAlerts.Instance.AlertWithMessage("You have upgraded your plot size! Please log in again.");
-
         StartCoroutine(logOffWithDelay(2f));
-
-    
-
-        
+   
     }
 
-   
+    public void LogOffWithDelay(float delay)
+    {
+        ContextManager.Instance.CancelContext();
+        StartCoroutine(logOffWithDelay(delay));
+
+    }
+
+
 
 
 
@@ -154,6 +154,8 @@ public class SocketManager : MonoBehaviour {
 
     void NoFundsAlert(SocketIOEvent evt)
     {
+        ContextManager.Instance.CancelContext();
+
         GameAlerts.Instance.AlertWithMessage("Not enough money!"); //TODO: finsih and test this. 
 
 
@@ -180,8 +182,10 @@ public class SocketManager : MonoBehaviour {
     {
 
         yield return new WaitForSeconds(delay);
+        socket.Emit("DISCONNECT");
         GlobalControl.Instance.reset();
         SceneManager.LoadScene(0);
+        
     }
 
 

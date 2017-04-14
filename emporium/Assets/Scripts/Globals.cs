@@ -19,6 +19,10 @@ public class Globals : MonoBehaviour {
     public BlurOptimized cameraBlur;
     public Bloom cameraBloom;
 
+    //colors
+    public Color buttonActiveColor1;
+    public Color buttonColor1;
+
     // Use this for initialization
     void Start () {
 
@@ -29,11 +33,14 @@ public class Globals : MonoBehaviour {
 
     void Awake()
     {
+
         Instance = this;
         cameraBlur = Camera.main.GetComponent<BlurOptimized>();
         cameraBloom = Camera.main.GetComponent<Bloom>();
         canvas = GameObject.Find("Canvas");
 
+        buttonColor1 = new Color(26f/255, 89f/255, 112f/255);
+        buttonActiveColor1 = new Color(17f/255, 158f/255, 210f/255);
     }
 	
 	

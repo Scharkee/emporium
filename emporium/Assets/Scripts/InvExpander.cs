@@ -9,23 +9,24 @@ public class InvExpander : MonoBehaviour {
     {
 
 
-    DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(false);
+
 
     }
 
- 
 
 
-    public void expandContract() //TODO: make normal disables and not alpha shit
+    public void expandContract() 
     {
 
         if (DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.activeSelf)
         {
-
+            Debug.Log("disabling");
             DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(false);
         }else
         {
+            Debug.Log("enabling");
             DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(true);
+            Debug.Log("enabling");
         }
     }
 

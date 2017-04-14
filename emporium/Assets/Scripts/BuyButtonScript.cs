@@ -58,7 +58,8 @@ public class BuyButtonScript : MonoBehaviour
 
         if (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha<1f)
         {
-          
+            DisabledObjectsGameScene.Instance.BuyButton.GetComponent<Image>().color = Globals.Instance.buttonActiveColor1;
+
             panelEnabled = true; // used to stop rotation when viewing panel
 
             while (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha < 1f)
@@ -82,6 +83,8 @@ public class BuyButtonScript : MonoBehaviour
         else if (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha > 0f)
         {
             panelEnabled = false;
+            DisabledObjectsGameScene.Instance.BuyButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
+
 
             while (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha > 0f)
             {

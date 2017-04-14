@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using SocketIO;
 
 public class TileSellScript : MonoBehaviour {
 
+    public AudioClip coin1;
+    public AudioClip coin2;
+    public AudioClip coin3;
+    public AudioClip coin4;
+
     public bool sellModeEnabled;
+
+    
+
    
     SocketIOComponent socket;
 
     void Start()
     {
-
+      
         sellModeEnabled = false;
 
       
@@ -66,11 +75,13 @@ public class TileSellScript : MonoBehaviour {
 
         if (sell)
         {
+            DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonActiveColor1;
             RenderSettings.skybox = Globals.Instance.dark_skybox;
             StartCoroutine(moveCamera());
 
         }else
         {
+            DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
             StartCoroutine(moveCamera());
             RenderSettings.skybox = Globals.Instance.light_skybox;
 
@@ -97,8 +108,11 @@ public class TileSellScript : MonoBehaviour {
                         SellTile(hit.transform.gameObject.GetComponent<BuildingScript>().thistile.ID, hit.transform.gameObject.GetComponent<BuildingScript>().thistile.NAME);
                         Destroy(hit.transform.gameObject);
 
+                        GetComponent<AudioSource>().clip = coinSound();
+                        GetComponent<AudioSource>().Play();
 
-                    Database.Instance.ActiveTiles.Remove(hit.transform.gameObject);
+                        Database.Instance.ActiveTiles.Remove(hit.transform.gameObject);
+
                     }
 
             }
@@ -121,6 +135,41 @@ public class TileSellScript : MonoBehaviour {
         data["TileName"] = name;
 
         socket.Emit("SELL_TILE", new JSONObject(data));
+
+    }
+
+
+    public AudioClip coinSound()
+    {
+        AudioClip randomized;
+
+
+        int rand = Random.Range(1, 4);
+
+        switch (rand)
+        {
+
+            case 1:
+                randomized = coin1;
+                break;
+            case 2:
+                randomized = coin2;
+                break;
+            case 3:
+                randomized = coin3;
+                break;
+            case 4:
+                randomized = coin4;
+                break;
+            default:
+                randomized = coin1;
+                break;
+
+        }
+
+
+        return randomized;
+
 
     }
 

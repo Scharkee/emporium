@@ -148,13 +148,13 @@ public class BuildingScript : MonoBehaviour {
             i++;
             thistileInfo.NAME = Database.Instance.buildinginfo[i].NAME;
 
-            Debug.Log(Database.Instance.buildinginfo[i].NAME);
+
 
         }
 
-        Debug.Log(thistileInfo.NAME);
 
-        thistileInfo = Database.Instance.buildinginfo[i];
+
+      
         idInTileInfoDatabase = i;
 
         justSpawned = false;
@@ -339,7 +339,7 @@ public class BuildingScript : MonoBehaviour {
 
             }else
             {
-                Debug.Log("woop");
+
                 WorkAssigned = true;
             }
 

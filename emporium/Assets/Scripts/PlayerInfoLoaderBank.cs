@@ -104,8 +104,11 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
             Debug.Log("asking for stats");
             globalcontr.ConnectedOnceNoDupeStatRequests = bool.Parse(evt.data.GetField("ConnectedOnceNoDupeStatRequests").ToString());
         }
-        
-        
+
+
+        socket.Emit("CLIENT_DATA", new JSONObject(data));
+
+
     }
     void ReceiveStats(SocketIOEvent evt)
     {

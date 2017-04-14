@@ -21,6 +21,8 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public GameObject moneyEdit;
     public GameObject tileSellScript;
     public GameObject PlotSelectors;
+    public GameObject SellButton;
+    public GameObject BuyButton;
 
     public static DisabledObjectsGameScene Instance;
 
@@ -41,10 +43,12 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     void Awake()
     {
         Instance = this;
+        Inventory_Fruit_panel = GameObject.Find("Inventory_Fruit_panel");
+        Inventory_Fruit_panel.SetActive(false);
         socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
         PressContextPanel = GameObject.Find("PressContextPanel");
         LoadingPanel = GameObject.Find("LoadingPanel");
-        Inventory_Fruit_panel = GameObject.Find("Inventory_Fruit_panel");
+        
         Tiles= GameObject.Find("Tiles");
         BuyMenuPanel = GameObject.Find("BuyMenuPanel");
         Selector = GameObject.Find("Selector");
@@ -60,22 +64,10 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         tileSellScript = GameObject.Find("SellScript");
         PlotSelectors = GameObject.Find("PlotSelectors");
 
-
+        BuyButton = GameObject.Find("BuyButton");
+        SellButton = GameObject.Find("SellTileButton");
     }
 
-    IEnumerator delayedDisable() //should test if works against bad 
-    {
-
-        while (DisabledObjectsGameScene.Instance.LoadingPanel)
-        {
-            yield return new WaitForSeconds(0.1f);
-           
-
-        }
-
-        GameObject.Find("InventoryDropDown").GetComponent<CanvasGroup>().alpha = 1f;
-        Inventory_Fruit_panel.SetActive(false);
-    }
 
 
 
