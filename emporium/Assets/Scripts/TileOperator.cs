@@ -29,8 +29,6 @@ public class TileOperator : MonoBehaviour {
     }
 	
 	
-
-
     IEnumerator CheckForGrowthCompletionRepeat()
     {
         CheckForGrowthCompletion(); //pirmas expedited checkas uzkrovimui
@@ -50,14 +48,15 @@ public class TileOperator : MonoBehaviour {
 
         foreach (GameObject tile in Database.Instance.ActiveTiles)
         {
-            BuildingScript tileScript = (tile.GetComponent<BuildingScript>());
+            BuildingScript tileScript = tile.GetComponent<BuildingScript>();
  
             if (tileScript.thistileInfo.BUILDING_TYPE == 0)
             { // augalas
-                int prog = tileScript.thistile.START_OF_GROWTH + tileScript.thistileInfo.PROG_AMOUNT;
+                int prog = tile.GetComponent<BuildingScript>().thistile.START_OF_GROWTH + tile.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT;
 
                 if (socman.unix >= prog && !tileScript.justSpawned)
                 {
+
                
                     tileScript.TileGrown = true;
 

@@ -152,9 +152,10 @@ public class BuildingScript : MonoBehaviour {
 
         }
 
+        thistileInfo = Database.Instance.buildinginfo[i];
 
 
-      
+
         idInTileInfoDatabase = i;
 
         justSpawned = false;

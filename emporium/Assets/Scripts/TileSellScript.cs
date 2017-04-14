@@ -126,7 +126,7 @@ public class TileSellScript : MonoBehaviour {
     public void SellTile(int ID, string name)
     {
 
-        Debug.Log("trying to sell tile ID " + ID);
+
 
        
         Dictionary<string, string> data = new Dictionary<string, string>();

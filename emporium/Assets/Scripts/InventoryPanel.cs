@@ -16,7 +16,24 @@ public class InventoryPanel : MonoBehaviour {
 
 	void OnEnable()
     {
-        
+
+        if (!firstStart)
+        {
+
+            adjustValues();
+        }
+        else
+        {
+
+            firstStart = false;
+
+        }
+
+    }
+
+
+    private void adjustValues()
+    {
         Debug.Log("adjusting values");
 
         //ADD NEW FRUITS AND JUICES
@@ -29,18 +46,11 @@ public class InventoryPanel : MonoBehaviour {
         UIManager.Instance.ChangeUIText("slyvos_Editable", Database.Instance.Inventory["slyvos"].ToString());
 
 
-      
+
         UIManager.Instance.ChangeUIText("kriauses_Sultys_Editable", Database.Instance.Inventory["kriauses_sultys"].ToString());
         UIManager.Instance.ChangeUIText("apelsinai_Sultys_Editable", Database.Instance.Inventory["apelsinai_sultys"].ToString());
         UIManager.Instance.ChangeUIText("persikai_Sultys_Editable", Database.Instance.Inventory["persikai_sultys"].ToString());
         UIManager.Instance.ChangeUIText("slyvos_Sultys_Editable", Database.Instance.Inventory["slyvos_sultys"].ToString());
-
-        if (firstStart)
-        {
-            firstStart = false;
-            gameObject.SetActive(false);
-        }
-
 
     }
 }

@@ -39,7 +39,7 @@ public class MoneyTracker : MonoBehaviour {
      
 
 
-        if (newMoney == float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text)) { Debug.Log("error, shouldnt happen."); }
+        if (newMoney == float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text)) { Debug.Log("error, shouldnt happen, only on first load technically"); }
         else if(newMoney> float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text))
         {
             while (float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text) < newMoney)

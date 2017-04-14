@@ -24,7 +24,7 @@ public class RotationScript : MonoBehaviour {
         lygusPlotCenter = Vector3.zero;
 
         axispoint = new Vector3(0,0,0);
-        Debug.Log(currentCenter);
+
         StartCoroutine(SpawnInCamEffect());
         speed = 10000.0f;
         storePos = gameObject.transform.eulerAngles;  //keeps storePos up to date 

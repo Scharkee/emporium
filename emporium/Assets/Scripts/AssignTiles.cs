@@ -72,6 +72,8 @@ public class AssignTiles : MonoBehaviour {
 
 
 
+
+
     }
 
     public void AssignInventory(SocketIOEvent evt)
@@ -91,7 +93,7 @@ public class AssignTiles : MonoBehaviour {
 
         Database.Instance.Inventory = HelperScripts.Instance.ReassignInventory(Database.Instance.inventory[0]);
 
-        DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(true);//leidziu invntory panelui pasigriebt viska pirma kart, is iskart issijungia
+     
 
 
 

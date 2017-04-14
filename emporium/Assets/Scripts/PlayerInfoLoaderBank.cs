@@ -112,7 +112,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
     }
     void ReceiveStats(SocketIOEvent evt)
     {
-        Debug.Log("got stats!");
+
        
 
         Database.Instance.UserUsername = GlobalControl.Instance.Uname;
