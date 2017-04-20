@@ -27,12 +27,26 @@ public class HelperScripts : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log("-----------------------------");
-            GameObject alert = Instantiate(Resources.Load("produceAmountAlert"), new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0), Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;
+            testThing();
+         
             
 
         }
 
 
+
+    }
+
+    private void testThing()
+    {
+        Dictionary<string, string> dic = new Dictionary<string, string>();
+        dic[0+"amount"]=10.ToString();
+        dic[0 +"name"] = "kriauses";
+        dic["salesNum"] = 1.ToString();
+        dic["Uname"] = Database.Instance.UserUsername.ToString();
+
+        DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AskForSaleVerification(dic);
+     
 
     }
 

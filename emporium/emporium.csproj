@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\PlotSelector.cs" />
     <Compile Include="Assets\Scripts\PlotSelectorScript.cs" />
     <Compile Include="Assets\Scripts\PressContextPanelScript.cs" />
+    <Compile Include="Assets\Scripts\ProduceSelling.cs" />
     <Compile Include="Assets\Scripts\RotationScript.cs" />
     <Compile Include="Assets\Scripts\ShopTabSwitcher.cs" />
     <Compile Include="Assets\Scripts\SocketManager.cs" />
