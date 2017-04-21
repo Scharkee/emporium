@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class UniversalBank : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public int one;
+    public int two;
+
 }

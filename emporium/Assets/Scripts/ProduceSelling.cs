@@ -34,107 +34,135 @@ public class ProduceSelling : MonoBehaviour {
 
 
         //TODO: checkas ar yra pakamkamai in inventory
+        //if(!saleInvAmountConfirmed()) - kazkaip perejo per max amount checkus. no clue how
+
+
+
+        resetSellingPanel();
+
+
+        AskForSaleVerification(formSalePackage());
+    }
+
+    public void SellAllClick()
+    {
+        DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("maxOutValues");
+
+
+    }
+
+    public void ResetClick()
+    {
+        DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("resetValues");
+
+
+    }
+
+
+    private Dictionary<string,string> formSalePackage()
+    {
+
         Dictionary<string, string> sale = new Dictionary<string, string>();
         int salesNum = 0;
 
-        if (GameObject.Find("SellListItem_juice_InputField_apples").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_juice_InputField_apples").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "obuoliai";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_apples").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_produce_InputField_apples").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_produce_InputField_apples").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "obuoliai_sultys";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_apples").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_produce_InputField_pears").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_produce_InputField_pears").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "kriauses";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_pears").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_juice_InputField_pears").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_juice_InputField_pears").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "kriauses_sultys";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_pears").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_produce_InputField_oranges").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_produce_InputField_oranges").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "apelsinai";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_oranges").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_juice_InputField_oranges").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_juice_InputField_oranges").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "apelsinai_sultys";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_oranges").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_produce_InputField_plums").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_produce_InputField_plums").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "slyvos";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_plums").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_juice_InputField_plums").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_juice_InputField_plums").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "slyvos_sultys";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_plums").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_produce_InputField_peaches").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_produce_InputField_peaches").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "persikai";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_peaches").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_juice_InputField_peaches").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_juice_InputField_peaches").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "persikai_sultys";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_peaches").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_produce_InputField_nectarines").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_produce_InputField_nectarines").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "nektarinai";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_nectarines").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_juice_InputField_nectarines").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_juice_InputField_nectarines").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "nektarinai_sultys";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_nectarines").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_produce_InputField_kiwis").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_produce_InputField_kiwis").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "kiviai";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_kiwis").GetComponent<InputField>().text;
             salesNum++;
         }
-        if (GameObject.Find("SellListItem_juice_InputField_kiwis").GetComponent<InputField>().text!="")
+        if (GameObject.Find("SellListItem_juice_InputField_kiwis").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "kiviai_sultys";
             sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_kiwis").GetComponent<InputField>().text;
             salesNum++;
         }
 
-
-
-        //TODO: resetSellingPanel(); (grazint viska i 0 ir isjungt.)
-        GameObject.Find("SellingButton").GetComponent<SellingButtonScript>().expandContract();
-
-
-
-        //final things
-
         sale["Uname"] = Database.Instance.UserUsername.ToString();
         sale["salesNum"] = salesNum.ToString();
 
-        AskForSaleVerification(sale);
+        return sale;
+    }
+
+
+    private void resetSellingPanel()
+    {
+        //savarankiskai issitrina visi values pries uzdaryma    
+        DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("resetValues");
+
+        GameObject.Find("SellingButton").GetComponent<SellingButtonScript>().expandContract();
     }
 	
 	

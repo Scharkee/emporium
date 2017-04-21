@@ -111,7 +111,10 @@
     <Compile Include="Assets\Scripts\PlotSelector.cs" />
     <Compile Include="Assets\Scripts\PlotSelectorScript.cs" />
     <Compile Include="Assets\Scripts\PressContextPanelScript.cs" />
+    <Compile Include="Assets\Scripts\ProduceSelling.cs" />
     <Compile Include="Assets\Scripts\RotationScript.cs" />
+    <Compile Include="Assets\Scripts\SellListItem_maxButtonScript.cs" />
+    <Compile Include="Assets\Scripts\SellingButtonScript.cs" />
     <Compile Include="Assets\Scripts\ShopTabSwitcher.cs" />
     <Compile Include="Assets\Scripts\SocketManager.cs" />
     <Compile Include="Assets\Scripts\StatContextManager.cs" />
@@ -120,6 +123,7 @@
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\UnamePassInputScript.cs" />
+    <Compile Include="Assets\Scripts\UniversalBank.cs" />
     <Compile Include="Assets\Scripts\alertPanelScript.cs" />
     <Compile Include="Assets\Scripts\produceAmountAlertScript.cs" />
     <Compile Include="Assets\Scripts\templog.cs" />

@@ -9,10 +9,6 @@ public class SellListItem_maxButtonScript : MonoBehaviour {
     public InputField inp;
     public string name;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
 
 
     public void TheClick()
@@ -21,6 +17,19 @@ public class SellListItem_maxButtonScript : MonoBehaviour {
 
 
 
+    }
+
+    public void resetValues()
+    {
+
+
+
+        inp.text = "";
+    }
+
+    public void maxOutValues()
+    {
+        inp.text = Database.Instance.Inventory[name].ToString();
     }
 	
 	
