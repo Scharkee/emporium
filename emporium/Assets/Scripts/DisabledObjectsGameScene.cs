@@ -24,6 +24,9 @@ public class DisabledObjectsGameScene : MonoBehaviour {
     public GameObject SellButton;
     public GameObject BuyButton;
     public GameObject BuyMode;
+    public GameObject SellingPanel;
+
+
 
     public static DisabledObjectsGameScene Instance;
 
@@ -34,6 +37,7 @@ public class DisabledObjectsGameScene : MonoBehaviour {
 
         alertPanel.SetActive(false);
         StatsContextPanel.SetActive(false);
+        SellingPanel.SetActive(false);
         //  StartCoroutine(delayedDisable());
 
 
@@ -49,8 +53,8 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
         PressContextPanel = GameObject.Find("PressContextPanel");
         LoadingPanel = GameObject.Find("LoadingPanel");
-        
-        Tiles= GameObject.Find("Tiles");
+        SellingPanel = GameObject.Find("SellingContextPanel");
+        Tiles = GameObject.Find("Tiles");
         BuyMenuPanel = GameObject.Find("BuyMenuPanel");
         Selector = GameObject.Find("Selector");
         alertPanel = GameObject.Find("alertPanel");

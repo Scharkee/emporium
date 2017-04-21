@@ -112,24 +112,23 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
     }
     void ReceiveStats(SocketIOEvent evt)
     {
+  
 
-       
 
         Database.Instance.UserUsername = GlobalControl.Instance.Uname;
-        Database.Instance.UserDollars = int.Parse(evt.data.GetField("dollars").ToString());
+        Database.Instance.UserDollars = float.Parse(evt.data.GetField("dollars").ToString());
         Database.Instance.UserPlotSize = int.Parse(evt.data.GetField("plotsize").ToString());
 
         string lastOnline = Regex.Replace(evt.data.GetField("lastonline").ToString(), "[^0-9]", "");
         Database.Instance.UserLastOnline=int.Parse(lastOnline);
 
+        
         if (bool.Parse((evt.data.GetField("firstPlay").ToString()))){
 
 
             DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TutorialManager>().StartTutorial();
 
         }
-
-    
 
 
         LoadEverythingAndSetUI();

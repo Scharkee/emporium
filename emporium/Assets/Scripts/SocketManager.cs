@@ -162,7 +162,7 @@ public class SocketManager : MonoBehaviour {
     }
     void AddFunds(SocketIOEvent evt)
     {
-        int additive = int.Parse(evt.data.GetField("addFunds").ToString());
+        float additive = float.Parse(evt.data.GetField("addFunds").ToString());
 
       Database.Instance.UserDollars += additive;
 
