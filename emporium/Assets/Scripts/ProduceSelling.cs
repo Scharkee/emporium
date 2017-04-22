@@ -40,6 +40,12 @@ public class ProduceSelling : MonoBehaviour {
         
     }
 
+    public void CancelContext()
+    {
+        resetSellingPanel();
+
+    }
+
     public void SellAllClick()
     {
         DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("maxOutValues");

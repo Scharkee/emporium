@@ -55,9 +55,65 @@ public class BuyScript : MonoBehaviour {
         data["X"] = X.ToString();
         data["Z"] = Z.ToString();    //gali buti kad node reikia verst atgal i INTEGER mb idk
 
+        int tileExists = tileExistsAt(X, Z);
 
+        if (tileExists!=-9898)//placeholder
+        {
+            //tile exists
+
+            if (Database.Instance.tile[tileExists].COUNT >= 5)
+            {
+                Debug.Log("Cant purchase any more.");
+            }
+            else if (Database.Instance.tile[tileExists].COUNT != 0)
+            {
+                data["TileCount"] = (Database.Instance.tile[tileExists].COUNT + 1).ToString();
+
+            }
+
+
+        }
+        else //tile does not exist.
+        {
+            data["TileCount"] = 1.ToString();
+        }
+
+       
 
         socket.Emit("BUY_TILE", new JSONObject(data));
+
+    }
+
+    private int tileExistsAt(float X, float Z)
+    {
+        int currentDBpos=-1;
+        float x;
+
+        do
+        {
+            currentDBpos++;
+            try
+            {
+                x = Database.Instance.tile[currentDBpos].X;
+
+            }
+            catch
+            {
+                currentDBpos = -9898;
+
+                break;
+            }
+
+
+
+        } while (Database.Instance.tile[currentDBpos].X != X && Database.Instance.tile[currentDBpos].Z != Z);
+
+
+
+        Debug.Log("return code "+ currentDBpos);
+        
+        return currentDBpos;
+
 
     }
 

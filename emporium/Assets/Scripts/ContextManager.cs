@@ -70,11 +70,12 @@ public class ContextManager : MonoBehaviour {
 
 
     }
+   
 
     public void CancelContext()
     {
-
-        Globals.Instance.canvas.BroadcastMessage("CancelContext");
+      
+       // Globals.Instance.canvas.BroadcastMessage("CancelContext");
 
         if (DisabledObjectsGameScene.Instance.PressContextPanel.GetComponent<PressContextPanelScript>().aliveForHalfSec)
         {
