@@ -25,23 +25,19 @@ public class ProduceSelling : MonoBehaviour {
     {
 
         Database.Instance.UserDollars = float.Parse(evt.data.GetField("dollars").ToString());
-
+        DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.GetComponent<InventoryPanel>().adjustValues();
 
     }
 
     public void SaleClick()
     {
 
-
-        //TODO: checkas ar yra pakamkamai in inventory
-        //if(!saleInvAmountConfirmed()) - kazkaip perejo per max amount checkus. no clue how
-
-
+        AskForSaleVerification(formSalePackage());
 
         resetSellingPanel();
 
 
-        AskForSaleVerification(formSalePackage());
+        
     }
 
     public void SellAllClick()

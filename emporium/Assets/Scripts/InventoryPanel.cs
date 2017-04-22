@@ -31,8 +31,10 @@ public class InventoryPanel : MonoBehaviour {
 
     }
 
+    
 
-    private void adjustValues()
+
+    public void adjustValues()
     {
         Debug.Log("adjusting values");
 
