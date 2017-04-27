@@ -49,6 +49,7 @@ public class TileOperator : MonoBehaviour {
         foreach (GameObject tile in Database.Instance.ActiveTiles)
         {
             BuildingScript tileScript = tile.GetComponent<BuildingScript>();
+
  
             if (tileScript.thistileInfo.BUILDING_TYPE == 0)
             { // augalas

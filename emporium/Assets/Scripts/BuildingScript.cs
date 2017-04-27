@@ -88,11 +88,6 @@ public class BuildingScript : MonoBehaviour {
         
     }
 	
-
-
-
-
-
     void OnMouseDown()
     {
         if (Harvestable())
@@ -160,11 +155,6 @@ public class BuildingScript : MonoBehaviour {
 
 
 
-   
-
-
-
-
     void RetrieveTileInfo()
     {
         int i = -1;
@@ -178,14 +168,9 @@ public class BuildingScript : MonoBehaviour {
         }
 
         thistileInfo = Database.Instance.buildinginfo[i];
-
-
-
         idInTileInfoDatabase = i;
 
         justSpawned = false;
-
-     
     }
 
 
@@ -212,7 +197,7 @@ public class BuildingScript : MonoBehaviour {
 
         }
 
-        if (thistileInfo.SINGLE_USE == 1) //vienkartinius destroyinam, taip pat istrinti ir Database.Instance.
+        if (thistileInfo.SINGLE_USE == 1) //vienkartinius destroyinam, taip pat istrinam ir Database.Instance.
         {
 
             Database.Instance.ActiveTiles.Remove(gameObject);
@@ -236,11 +221,18 @@ public class BuildingScript : MonoBehaviour {
                
            Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory
 
-          
-                Destroy(transform.FindChild(thistile.NAME + "_vaisiai(Clone)").gameObject);
+                //tik augalai gali tureti multiple buildings per tile. Cia sunaikinami VISI vaisiai.
 
+                foreach (Transform fruits in transform)
+                {
+                    if(fruits.name== thistile.NAME + "_vaisiai(Clone)") //sita child yra vaisius. Trinam
+                    {
+                        Destroy(fruits.gameObject);
 
+                    }
 
+                }
+         
             Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
 
             TileGrown = false;
@@ -294,10 +286,6 @@ public class BuildingScript : MonoBehaviour {
                 WorkDone = false;
 
                 transform.FindChild("PressCube").GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
-
-
-
-
 
 
 
@@ -390,9 +378,6 @@ public class BuildingScript : MonoBehaviour {
 
 
         }
-
-
-
     }
 
     private void AskForWork(string workName, int workAmount)
@@ -411,13 +396,12 @@ public class BuildingScript : MonoBehaviour {
         {
             socket.Emit("TILE_ASSIGN_WORK", new JSONObject(data));
 
-            Debug.Log("sending stuff out");
+    
         }
         else
         {
-
-
             Debug.Log("--------------ELUL AUGALAS PRASO DARBO ------------");
+            socman.DiscrepancyAction(); //cast discrepancy
         }
 
 
@@ -426,9 +410,6 @@ public class BuildingScript : MonoBehaviour {
 
     private void notifyOfProduceAmount(float produceAmount)
     {
-
-
-
 
         GameObject alert = Instantiate(Resources.Load("produceAmountAlert"),new Vector3(Input.mousePosition.x,Input.mousePosition.y,0),Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;
         alert.GetComponent<Text>().text = produceAmount.ToString();

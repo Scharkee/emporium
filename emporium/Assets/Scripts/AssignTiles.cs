@@ -103,15 +103,20 @@ public class AssignTiles : MonoBehaviour {
 
     public void SpawnTiles()
     {
+        //sita funkcija atsakinga uz visu tile spawninima zaidimo pradzioje.
         int i = 0;
-
+        //TODO: randomized scales, switch (galbut), atskirts spawninima i atskira funkc.
 
 
         while (i < Database.Instance.tile.Length)
         {
             GameObject currentTile = new GameObject();
+            //uzkraunami prefabs
+            GameObject currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
             GameObject currentTilePrefab = Resources.Load("Plants/" + Database.Instance.tile[i].NAME) as GameObject;
             float xRot = 0;
+
+            //gal but pakeist i switcha, randomizint vosvos scale visu (kad nebutu absolutely identical.                                                                                                                    )
 
             if (Database.Instance.tile[i].COUNT == 1)
             {
@@ -126,7 +131,7 @@ public class AssignTiles : MonoBehaviour {
                 currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
                 currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
-                GameObject currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
+                currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
                 GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 3f, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
 
 
@@ -139,7 +144,7 @@ public class AssignTiles : MonoBehaviour {
                 currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
                 currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
-                GameObject currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
+                currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
                 GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X -0.25f, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
                 GameObject currentAdditional1 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 0.3f, 0f, Database.Instance.tile[i].Z + 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
 
@@ -154,7 +159,7 @@ public class AssignTiles : MonoBehaviour {
                 currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
                 currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
-                GameObject currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
+               
                 GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X+0.3f, 0f, Database.Instance.tile[i].Z + 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
                 GameObject currentAdditional1 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X - 0.3f, 0f, Database.Instance.tile[i].Z + 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
                 GameObject currentAdditional2 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X - 0.3f, 0f, Database.Instance.tile[i].Z - 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
@@ -169,19 +174,18 @@ public class AssignTiles : MonoBehaviour {
                 currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
                 currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
-                GameObject currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
-                GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X +, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
+                
+                GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 0.3f, 0f, Database.Instance.tile[i].Z + 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
+                GameObject currentAdditional1 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X - 0.3f, 0f, Database.Instance.tile[i].Z + 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
+                GameObject currentAdditional2 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X - 0.3f, 0f, Database.Instance.tile[i].Z - 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
 
 
 
 
             }
 
-
-
-
-
-
+            Debug.Log(currentTile.GetComponent<BuildingScript>().thistile.NAME);
+           
 
             Database.Instance.ActiveTiles.Add(currentTile);
 
@@ -193,10 +197,7 @@ public class AssignTiles : MonoBehaviour {
 
         GameObject.Find("_ManagerialScripts").GetComponent<TileOperator>().StartGrowthCompletrionCheckRepeat();
 
-
-
-
-
+        
 
     }
 
@@ -228,11 +229,6 @@ public class AssignTiles : MonoBehaviour {
 
 
         }
-
-
-
-       
-
 
 
 

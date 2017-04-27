@@ -91,7 +91,6 @@
     <Compile Include="Assets\Scripts\BuyMode.cs" />
     <Compile Include="Assets\Scripts\BuyScript.cs" />
     <Compile Include="Assets\Scripts\BuyTile.cs" />
-    <Compile Include="Assets\Scripts\CancelContext.cs" />
     <Compile Include="Assets\Scripts\ContextManager.cs" />
     <Compile Include="Assets\Scripts\Database.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsGameScene.cs" />

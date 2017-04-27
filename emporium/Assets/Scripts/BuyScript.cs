@@ -89,6 +89,7 @@ public class BuyScript : MonoBehaviour {
         int currentDBpos=-1;
         float x;
 
+        Debug.Log("checking for tiles at "+X+" "+Z);
         do
         {
             currentDBpos++;
@@ -99,6 +100,7 @@ public class BuyScript : MonoBehaviour {
             }
             catch
             {
+                Debug.Log("caught a thing");
                 currentDBpos = -9898;
 
                 break;

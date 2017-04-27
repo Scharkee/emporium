@@ -129,7 +129,7 @@ public class SocketManager : MonoBehaviour {
 
 
 
-    void DiscrepancyAction(SocketIOEvent evt)
+    public void DiscrepancyAction(SocketIOEvent evt = default(SocketIOEvent)) //check ar veikia
     {
 
         GameAlerts.Instance.AlertWithMessage("Desynchronization detected. Logging off...");
@@ -137,7 +137,6 @@ public class SocketManager : MonoBehaviour {
 
         ContextManager.Instance.CancelContext();
 
-        //TODO: show diecrepency alert, mb shut down game even.
 
 
     }
