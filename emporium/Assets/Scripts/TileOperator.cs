@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 
-public class TileOperator : MonoBehaviour {
+public class TileOperator : MonoBehaviour
+{
 
     SocketManager socman;
     private bool firstLoadCompleted = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
-        
-		
-	}
+
+
+    }
 
     void Awake()
     {
 
-       
+
         socman = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SocketManager>();
     }
 
@@ -27,8 +29,8 @@ public class TileOperator : MonoBehaviour {
 
         StartCoroutine(CheckForGrowthCompletionRepeat());
     }
-	
-	
+
+
     IEnumerator CheckForGrowthCompletionRepeat()
     {
         CheckForGrowthCompletion(); //pirmas expedited checkas uzkrovimui
@@ -50,7 +52,7 @@ public class TileOperator : MonoBehaviour {
         {
             BuildingScript tileScript = tile.GetComponent<BuildingScript>();
 
- 
+
             if (tileScript.thistileInfo.BUILDING_TYPE == 0)
             { // augalas
                 int prog = tile.GetComponent<BuildingScript>().thistile.START_OF_GROWTH + tile.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT;
@@ -58,23 +60,43 @@ public class TileOperator : MonoBehaviour {
                 if (socman.unix >= prog && !tileScript.justSpawned)
                 {
 
-               
+
                     tileScript.TileGrown = true;
 
 
-                    if (tile.transform.FindChild(tileScript.thistile.NAME + "_vaisiai(Clone)"))
+                    if (!tile.transform.FindChild(tileScript.thistile.NAME + "_vaisiai(Clone)"))
                     {
-
-                    }
-                    else
-                    {
-                   
+                        Vector3 mainTreeScale = new Vector3();
 
                         GameObject vaisiaiPrefab = Resources.Load("Plants/done/" + tileScript.thistile.NAME + "_vaisiai") as GameObject;
 
-                        GameObject vaisiai = Instantiate(vaisiaiPrefab, new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z), tile.transform.rotation, tile.transform) as GameObject;
+                        foreach (Transform child in tile.transform)
+                        {
+                            //yra papildomu medziu ant tile
+                            if (child.name == tileScript.thistile.NAME + "(Clone)")
+                            {
 
-                    }       
+                                GameObject vaisiai = Instantiate(vaisiaiPrefab, new Vector3(child.transform.position.x, child.transform.position.y, child.transform.position.z), child.transform.rotation, child.transform) as GameObject;
+                                //   vaisiai.transform.localScale = child.transform.localScale;
+
+                            }
+                            else if (child.name != tileScript.thistile.NAME + "(Clone)" && child.name != tileScript.thistile.NAME + "_vaisiai(Clone)")
+                            {
+                                Debug.Log("aptiktas medzio modelis");
+                                mainTreeScale = child.transform.localScale;
+
+                            }
+
+
+                        }
+
+                        //one final instantiate for main tree's fruits
+                        GameObject mainVaisiai = Instantiate(vaisiaiPrefab, new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z), tile.transform.rotation, tile.transform) as GameObject;
+                        //paskutinis scale pagrindinio medzio vaisiams
+                        mainVaisiai.transform.localScale = mainTreeScale;
+
+                    }
+
                 }
             }
             else if (tileScript.thistileInfo.BUILDING_TYPE == 1) // presas
@@ -96,14 +118,14 @@ public class TileOperator : MonoBehaviour {
                     else
                     {
 
-                        GameObject DonePrefab = Resources.Load("Plants/done/" + tileScript.thistile.NAME + "_done") as GameObject;                 
+                        GameObject DonePrefab = Resources.Load("Plants/done/" + tileScript.thistile.NAME + "_done") as GameObject;
                         GameObject done = Instantiate(DonePrefab, new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z), tile.transform.rotation, tile.transform) as GameObject;
                     }
                 }
             }
         }
 
-        
+
 
         if (!firstLoadCompleted)
         {
@@ -117,7 +139,7 @@ public class TileOperator : MonoBehaviour {
         }
 
 
-     
+
 
 
 

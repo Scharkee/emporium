@@ -6,7 +6,8 @@ using SocketIO;
 using System.Text.RegularExpressions;
 using System;
 
-public class BuildingScript : MonoBehaviour {
+public class BuildingScript : MonoBehaviour
+{
 
 
 
@@ -40,14 +41,15 @@ public class BuildingScript : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         justSpawned = true;
 
-     
+
         socman = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SocketManager>();
         uiManager = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<UIManager>();
 
- 
+
         socket = DisabledObjectsGameScene.Instance.socket;
 
         audiosource = GetComponent<AudioSource>();
@@ -56,19 +58,19 @@ public class BuildingScript : MonoBehaviour {
 
 
         RetrieveTileInfo();
-  
+
         AssignBuildingSpecificValues();
         TileGrown = false;
         WorkDone = false;
-        
+
         ContextOpen = false;
-       
+
 
         socket.On("RESET_TILE_GROWTH", ResetGrowth);
         socket.On("ASSIGN_TILE_WORK", AssignTileWork);
 
 
-        
+
 
     }
 
@@ -76,18 +78,19 @@ public class BuildingScript : MonoBehaviour {
     {
 
 
-        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled ||DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled||DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
+        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled || DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
         {
             return false;
 
-        }else //nothing stopping user from interacting with the tile
+        }
+        else //nothing stopping user from interacting with the tile
         {
             return true;
         }
 
-        
+
     }
-	
+
     void OnMouseDown()
     {
         if (Harvestable())
@@ -146,7 +149,7 @@ public class BuildingScript : MonoBehaviour {
             }
 
         }
-        
+
 
 
 
@@ -176,21 +179,22 @@ public class BuildingScript : MonoBehaviour {
 
     private void VerifyHarvest()
     {
-        
+
         Dictionary<string, string> data;
         data = new Dictionary<string, string>();
-   
+
         data["Uname"] = Database.Instance.UserUsername;
         data["TileID"] = thistile.ID.ToString();
 
         if (thistileInfo.BUILDING_TYPE == 0)//plant
         {
-            
+
             socket.Emit("VERIFY_COLLECT_TILE", new JSONObject(data));
 
-            
 
-        }else if (thistileInfo.BUILDING_TYPE == 1)//presas
+
+        }
+        else if (thistileInfo.BUILDING_TYPE == 1)//presas
         {
             socket.Emit("VERIFY_COLLECT_PRESS_WORK", new JSONObject(data));
 
@@ -199,10 +203,10 @@ public class BuildingScript : MonoBehaviour {
 
         if (thistileInfo.SINGLE_USE == 1) //vienkartinius destroyinam, taip pat istrinam ir Database.Instance.
         {
-
+            //make call to node
             Database.Instance.ActiveTiles.Remove(gameObject);
             Destroy(gameObject);
-           
+
         }
 
 
@@ -212,43 +216,58 @@ public class BuildingScript : MonoBehaviour {
     private void ResetGrowth(SocketIOEvent evt)
     {
 
-        if(thistileInfo.BUILDING_TYPE == 0)//augalas
+        if (thistileInfo.BUILDING_TYPE == 0)//augalas
         {
 
 
-        if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
-        {
-               
-           Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory
+            if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
+            {
+
+                Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory
 
                 //tik augalai gali tureti multiple buildings per tile. Cia sunaikinami VISI vaisiai.
 
-                foreach (Transform fruits in transform)
+                foreach (Transform child in transform)
                 {
-                    if(fruits.name== thistile.NAME + "_vaisiai(Clone)") //sita child yra vaisius. Trinam
+                    if (child.name == thistile.NAME + "_vaisiai(Clone)") //sita child yra vaisius. Trinam
                     {
-                        Destroy(fruits.gameObject);
+                        Destroy(child.gameObject);
+
+                    }
+                    else if (child.name == thistile.NAME + "(Clone)")
+                    {//cia multi-tile shell modelis
+
+                        try
+                        {
+                            Destroy(child.FindChild(thistile.NAME + "_vaisiai(Clone)").gameObject);
+
+                        }
+                        catch
+                        {
+                            Debug.Log("couldnt destroy shell tree's fruits");
+                        }
 
                     }
 
                 }
-         
-            Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
 
-            TileGrown = false;
+                Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
+
+                TileGrown = false;
 
 
-            thistile = Database.Instance.tile[idInTileDatabase];
+                thistile = Database.Instance.tile[idInTileDatabase];
 
-            notifyOfProduceAmount(float.Parse(evt.data.GetField("harvestAmount").ToString()));
+                notifyOfProduceAmount(float.Parse(evt.data.GetField("harvestAmount").ToString()));
+
+
+
+            }
 
 
 
         }
-      
-
-
-        }else if(thistileInfo.BUILDING_TYPE == 1)//presas
+        else if (thistileInfo.BUILDING_TYPE == 1)//presas
         {
             //kaip presas reaguos, kai atsius resetint progresa
             //TODO
@@ -260,10 +279,10 @@ public class BuildingScript : MonoBehaviour {
                 Debug.Log("this just in");
 
 
-    
-                Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME+"_sultys"]=float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
-             
-                
+
+                Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME + "_sultys"] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
+
+
 
                 Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
 
@@ -274,12 +293,12 @@ public class BuildingScript : MonoBehaviour {
 
 
                 Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
-                
+
 
                 Database.Instance.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = 0;
 
                 Database.Instance.tile[idInTileDatabase].WORK_NAME = "";
-              
+
                 thistile = Database.Instance.tile[idInTileDatabase];
 
                 WorkAssigned = false;
@@ -310,7 +329,7 @@ public class BuildingScript : MonoBehaviour {
 
             Debug.Log("GOT THE CALLBACK ");
 
-         
+
 
             Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
             Database.Instance.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT = int.Parse(Regex.Replace(evt.data.GetField("currentWorkAmount").ToString(), "[^0-9]", ""));
@@ -319,7 +338,7 @@ public class BuildingScript : MonoBehaviour {
             thistile = Database.Instance.tile[idInTileDatabase];
 
             Debug.Log("curent work amount = " + Database.Instance.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT);
-            Debug.Log("workname is " + Database.Instance.tile[idInTileDatabase].WORK_NAME+" and "+thistile.WORK_NAME);
+            Debug.Log("workname is " + Database.Instance.tile[idInTileDatabase].WORK_NAME + " and " + thistile.WORK_NAME);
             WorkAssigned = true;
             WorkDone = false;
 
@@ -328,7 +347,7 @@ public class BuildingScript : MonoBehaviour {
             //start some sort of work effects.
 
 
-            transform.FindChild("PressCube").GetComponent<Renderer>().material.color = new Color(1f,0.1f,0.2f);
+            transform.FindChild("PressCube").GetComponent<Renderer>().material.color = new Color(1f, 0.1f, 0.2f);
 
 
 
@@ -343,15 +362,16 @@ public class BuildingScript : MonoBehaviour {
     void AssignBuildingSpecificValues()
     {
 
-        if (thistileInfo.BUILDING_TYPE==1) // cia pastatas, reikia priskirtii pastatui specifisku parametrus
+        if (thistileInfo.BUILDING_TYPE == 1) // cia pastatas, reikia priskirtii pastatui specifisku parametrus
         {
 
 
-            if (thistile.WORK_NAME == "nieko"|| thistile.WORK_NAME == "")
+            if (thistile.WORK_NAME == "nieko" || thistile.WORK_NAME == "")
             {
                 WorkAssigned = false;
 
-            }else
+            }
+            else
             {
 
                 WorkAssigned = true;
@@ -391,12 +411,12 @@ public class BuildingScript : MonoBehaviour {
         data["WorkName"] = workName;
         data["WorkAmount"] = workAmount.ToString();
 
-     
+
         if (thistileInfo.BUILDING_TYPE == 1)//last verification
         {
             socket.Emit("TILE_ASSIGN_WORK", new JSONObject(data));
 
-    
+
         }
         else
         {
@@ -411,7 +431,7 @@ public class BuildingScript : MonoBehaviour {
     private void notifyOfProduceAmount(float produceAmount)
     {
 
-        GameObject alert = Instantiate(Resources.Load("produceAmountAlert"),new Vector3(Input.mousePosition.x,Input.mousePosition.y,0),Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;
+        GameObject alert = Instantiate(Resources.Load("produceAmountAlert"), new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0), Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;
         alert.GetComponent<Text>().text = produceAmount.ToString();
     }
 

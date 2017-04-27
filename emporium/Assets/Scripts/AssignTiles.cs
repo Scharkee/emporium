@@ -127,12 +127,13 @@ public class AssignTiles : MonoBehaviour {
             }else if(Database.Instance.tile[i].COUNT == 2)
             {
 
-                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X-0.3f, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject).gameObject;
+                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X-0.25f, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject).gameObject;
                 currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
                 currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
                 currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
-                GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 3f, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
+                GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 0.25f, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
+
 
 
 
@@ -183,6 +184,8 @@ public class AssignTiles : MonoBehaviour {
 
 
             }
+
+            randomizeTileScales(currentTile);
 
             Debug.Log(currentTile.GetComponent<BuildingScript>().thistile.NAME);
            
@@ -260,6 +263,20 @@ public class AssignTiles : MonoBehaviour {
         
 
 
+
+    }
+
+    private void randomizeTileScales(GameObject tile)
+    {
+    
+
+
+        foreach(Transform model in tile.transform)
+        {
+            model.gameObject.transform.localScale = new Vector3(Random.Range(0.85f,1.2f), Random.Range(0.85f, 1.2f), Random.Range(0.85f, 1.2f));
+
+
+        }
 
     }
 

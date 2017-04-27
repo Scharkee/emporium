@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-public class IdentifierScript : MonoBehaviour {
+public class IdentifierScript : MonoBehaviour
+{
 
     //apsibreziami pag. objektai
 
@@ -35,17 +36,18 @@ public class IdentifierScript : MonoBehaviour {
     Text Unamepasstext;
 
     // Use this for initialization
-    void Start () {
-      //TODO:  inputf = GameObject.Find("logintextfield").GetComponent<InputField>();
+    void Start()
+    {
+        //TODO:  inputf = GameObject.Find("logintextfield").GetComponent<InputField>();
         globalobje = GameObject.Find("GlobalObject");
-       
+
         logcheck = gameObject.GetComponent<LoginCheck>();
         connectingText = GameObject.Find("ConnectingText").GetComponent<Text>();
 
     }
-	
 
-   
+
+
 
     public void setPlayerInfo(string val)
     {
@@ -69,12 +71,12 @@ public class IdentifierScript : MonoBehaviour {
             Debug.Log(GlobalControl.Instance.Logincount);
 
             GameObject.Find("UnamePassInputField").GetComponent<InputField>().text = string.Empty;
-            
+
             logcheck.LogInCh(GlobalControl.Instance.Uname, GlobalControl.Instance.Pass);
 
-           // connectingText.color = Color.black; TODO: implement this with BlinkConnecting() and wrong passwords n shit
+            // connectingText.color = Color.black; TODO: implement this with BlinkConnecting() and wrong passwords n shit
 
- 
+
 
             //TODO: keep flashing connecting until the scene changes?
 
@@ -82,7 +84,7 @@ public class IdentifierScript : MonoBehaviour {
 
 
         inpf.text = string.Empty;
-  
+
         inpf.ActivateInputField();
         inpf.Select();
 
@@ -96,7 +98,7 @@ public class IdentifierScript : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
-            connectingText.color= Color.Lerp(Color.grey, Color.black, Mathf.PingPong(Time.time * 2, 1));
+            connectingText.color = Color.Lerp(Color.grey, Color.black, Mathf.PingPong(Time.time * 2, 1));
 
 
 
