@@ -8,7 +8,8 @@ using System.Text.RegularExpressions;
 using SocketIO;
 using UnityStandardAssets.ImageEffects;
 
-public class PlayerInfoLoaderBank : MonoBehaviour {
+public class PlayerInfoLoaderBank : MonoBehaviour
+{
 
     public string UserUsername;
     public int UserDollars;
@@ -21,9 +22,10 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
 
     public static PlayerInfoLoaderBank Instance;
     SocketIOComponent socket;
-    
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         db = gameObject.GetComponent<Database>();
 
@@ -34,13 +36,13 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
 
         globalcontr = GameObject.Find("GlobalObject").GetComponent<GlobalControl>();
 
-   
+
         socket.On("connectedToNode", GetStats);
         socket.On("RETRIEVE_STATS", ReceiveStats);
         socket.On("RECEIVE_TILES", ReceiveTileData);
         socket.On("RECEIVE_TILE_INFORMATION", ReceiveTileInformation);
         socket.On("RECEIVE_INVENTORY", ReceiveInventory);
-        
+
 
 
     }
@@ -62,24 +64,24 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
 
         moneytext.text = Database.Instance.UserDollars.ToString();
         usertext.text = GlobalControl.Instance.Uname;
-     
+
 
         RotationScript rotscript = GameObject.Find("Main Camera").GetComponent<RotationScript>();
         rotscript.SetCurrentRotCenter(lygusnelygusPlot());//also sets ground transform
 
-        GameObject.Find("Ground").transform.localScale = new Vector3(Database.Instance.UserPlotSize, 1f, Database.Instance.UserPlotSize) ;
+        GameObject.Find("Ground").transform.localScale = new Vector3(Database.Instance.UserPlotSize, 1f, Database.Instance.UserPlotSize);
 
 
     }
     bool lygusnelygusPlot()
     {
-        bool lygnelyg=true;
+        bool lygnelyg = true;
 
-        if(Database.Instance.UserPlotSize % 2==0) //lyginis plot dimensions
+        if (Database.Instance.UserPlotSize % 2 == 0) //lyginis plot dimensions
         {
             lygnelyg = true;
         }
-        else if(Database.Instance.UserPlotSize % 2 == 1)//NElyginis plot dimensions
+        else if (Database.Instance.UserPlotSize % 2 == 1)//NElyginis plot dimensions
         {
             lygnelyg = false;
         }
@@ -89,17 +91,18 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
     void GetStats(SocketIOEvent evt)
     {
 
-        Dictionary<string, string>  data = new Dictionary<string, string>();
+        Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
-        
-       
+
+
 
         if (globalcontr.ConnectedOnceNoDupeStatRequests)
         {
 
-         
+
         }
-        else {
+        else
+        {
             socket.Emit("GET_STATS", new JSONObject(data));  //get stats
             Debug.Log("asking for stats");
             globalcontr.ConnectedOnceNoDupeStatRequests = bool.Parse(evt.data.GetField("ConnectedOnceNoDupeStatRequests").ToString());
@@ -112,7 +115,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
     }
     void ReceiveStats(SocketIOEvent evt)
     {
-  
+
 
 
         Database.Instance.UserUsername = GlobalControl.Instance.Uname;
@@ -120,10 +123,11 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
         Database.Instance.UserPlotSize = int.Parse(evt.data.GetField("plotsize").ToString());
 
         string lastOnline = Regex.Replace(evt.data.GetField("lastonline").ToString(), "[^0-9]", "");
-        Database.Instance.UserLastOnline=int.Parse(lastOnline);
+        Database.Instance.UserLastOnline = int.Parse(lastOnline);
 
-        
-        if (bool.Parse((evt.data.GetField("firstPlay").ToString()))){
+
+        if (bool.Parse((evt.data.GetField("firstPlay").ToString())))
+        {
 
 
             DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TutorialManager>().StartTutorial();
@@ -147,8 +151,8 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
 
     void ReceiveTileData(SocketIOEvent evt)
     {
-      
-        
+
+
         assigner.AssignReceivedTiles(evt);
 
     }
@@ -156,7 +160,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour {
     void ReceiveTileInformation(SocketIOEvent evt)
     {
 
-        
+
         assigner.AssignTileInformation(evt);
 
     }

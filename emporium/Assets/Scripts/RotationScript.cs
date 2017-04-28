@@ -3,7 +3,8 @@ using System.Collections;
 using UnityStandardAssets.ImageEffects;
 
 
-public class RotationScript : MonoBehaviour {
+public class RotationScript : MonoBehaviour
+{
     PlayerInfoLoaderBank playerinfobank;
     Vector3 nelygusPlotCenter;
     Vector3 lygusPlotCenter;
@@ -18,24 +19,25 @@ public class RotationScript : MonoBehaviour {
 
     private Vector3 axispoint;
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         playerinfobank = GameObject.Find("_ManagerialScripts").GetComponent<PlayerInfoLoaderBank>();
-        nelygusPlotCenter = new Vector3(-0.5f,0,0.5f);
+        nelygusPlotCenter = new Vector3(-0.5f, 0, 0.5f);
         lygusPlotCenter = Vector3.zero;
 
-        axispoint = new Vector3(0,0,0);
+        axispoint = new Vector3(0, 0, 0);
 
         StartCoroutine(SpawnInCamEffect());
         speed = 10000.0f;
         storePos = gameObject.transform.eulerAngles;  //keeps storePos up to date 
 
-        buybuttonscript= GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
+        buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
 
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
 
         transform.LookAt(currentCenter);
@@ -65,12 +67,13 @@ public class RotationScript : MonoBehaviour {
     {
         if (lygnelyg)
         {
-            gameObject.transform.position=(new Vector3(0f, 1.63f, -3.8f));//cam pos
+            gameObject.transform.position = (new Vector3(0f, 1.63f, -3.8f));//cam pos
             GameObject.Find("Ground").transform.position = new Vector3(0f, -0.059f, 0f);//ground pos
             currentCenter = lygusPlotCenter;
         }
-        else {
-            gameObject.transform.position=(new Vector3(-0.5f, 1.63f, -3.8f));//cam pos
+        else
+        {
+            gameObject.transform.position = (new Vector3(-0.5f, 1.63f, -3.8f));//cam pos
             GameObject.Find("Ground").transform.position = new Vector3(-0.5f, -0.059f, 0.5f);//ground pos
             currentCenter = nelygusPlotCenter;
         }

@@ -4,12 +4,14 @@ using UnityEngine;
 using SocketIO;
 using UnityEngine.UI;
 
-public class ProduceSelling : MonoBehaviour {
+public class ProduceSelling : MonoBehaviour
+{
 
 
     SocketIOComponent socket;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         socket = DisabledObjectsGameScene.Instance.socket;
         socket.On("SALE_VERIFICATION", ReceiveSaleVerification);
@@ -37,7 +39,7 @@ public class ProduceSelling : MonoBehaviour {
         resetSellingPanel();
 
 
-        
+
     }
 
     public void CancelContext()
@@ -61,7 +63,7 @@ public class ProduceSelling : MonoBehaviour {
     }
 
 
-    private Dictionary<string,string> formSalePackage()
+    private Dictionary<string, string> formSalePackage()
     {
 
         Dictionary<string, string> sale = new Dictionary<string, string>();
@@ -166,6 +168,6 @@ public class ProduceSelling : MonoBehaviour {
 
         GameObject.Find("SellingButton").GetComponent<SellingButtonScript>().expandContract();
     }
-	
-	
+
+
 }

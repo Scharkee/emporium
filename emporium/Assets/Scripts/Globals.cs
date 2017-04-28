@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 
-public class Globals : MonoBehaviour {
+public class Globals : MonoBehaviour
+{
 
     public static Globals Instance;
 
@@ -24,7 +25,8 @@ public class Globals : MonoBehaviour {
     public Color buttonColor1;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         dark_skybox = Resources.Load("Materials/Skybox_mat_darkened") as Material;
         light_skybox = RenderSettings.skybox;
@@ -39,9 +41,9 @@ public class Globals : MonoBehaviour {
         cameraBloom = Camera.main.GetComponent<Bloom>();
         canvas = GameObject.Find("Canvas");
 
-        buttonColor1 = new Color(26f/255, 89f/255, 112f/255);
-        buttonActiveColor1 = new Color(17f/255, 158f/255, 210f/255);
+        buttonColor1 = new Color(26f / 255, 89f / 255, 112f / 255);
+        buttonActiveColor1 = new Color(17f / 255, 158f / 255, 210f / 255);
     }
-	
-	
+
+
 }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using SocketIO;
 
-public class DisabledObjectsGameScene : MonoBehaviour {
+public class DisabledObjectsGameScene : MonoBehaviour
+{
 
     //issaugomi ivairus objektai kuriu reikia kitoms klasems. Islieka references net kai disablinami patys objektai
     public GameObject PressContextPanel;
@@ -33,7 +34,8 @@ public class DisabledObjectsGameScene : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         alertPanel.SetActive(false);
         StatsContextPanel.SetActive(false);
@@ -58,12 +60,12 @@ public class DisabledObjectsGameScene : MonoBehaviour {
         BuyMenuPanel = GameObject.Find("BuyMenuPanel");
         Selector = GameObject.Find("Selector");
         alertPanel = GameObject.Find("alertPanel");
-        managerialScripts= GameObject.Find("_ManagerialScripts");
+        managerialScripts = GameObject.Find("_ManagerialScripts");
         StatsContextPanel = GameObject.Find("StatsContextPanel");
 
         gridPlants = GameObject.Find("OptionGrid");
         gridBuildings = GameObject.Find("OptionGridBuildings");
-        BuyMode = GameObject.Find("BuyMode_Selector"); 
+        BuyMode = GameObject.Find("BuyMode_Selector");
 
 
         moneyEdit = GameObject.Find("MoneyEdit");

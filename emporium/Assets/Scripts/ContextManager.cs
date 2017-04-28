@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using System;
 
 
-public class ContextManager : MonoBehaviour {
+public class ContextManager : MonoBehaviour
+{
 
     public static ContextManager Instance;
 
@@ -14,12 +15,13 @@ public class ContextManager : MonoBehaviour {
     Color normal;
     Color invisText;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         socman = GameObject.Find("_ManagerialScripts").GetComponent<SocketManager>();
-		
-	}
+
+    }
 
     void Awake()
     {
@@ -33,14 +35,15 @@ public class ContextManager : MonoBehaviour {
 
         if (working)  // uzsiundyta darbo, bet nepabaigta. Open stats panel + expected time until finsihed
         {
-            
 
 
-        }else if (!working) //nera darbo. Job assigment panel.
+
+        }
+        else if (!working) //nera darbo. Job assigment panel.
         {
 
             DisabledObjectsGameScene.Instance.PressContextPanel.SetActive(true);
-           
+
 
         }
 
@@ -51,8 +54,8 @@ public class ContextManager : MonoBehaviour {
     public void StartProduceSellingContext()
     {
 
-  
-            DisabledObjectsGameScene.Instance.PressContextPanel.SetActive(true);
+
+        DisabledObjectsGameScene.Instance.PressContextPanel.SetActive(true);
 
 
     }
@@ -60,22 +63,22 @@ public class ContextManager : MonoBehaviour {
     public void CloseAndResetPressContext()
     {
 
-        DisabledObjectsGameScene.Instance.PressContextPanel.transform.FindChild("Press_AssignJob_InputField").GetComponent<InputField>().text="";
+        DisabledObjectsGameScene.Instance.PressContextPanel.transform.FindChild("Press_AssignJob_InputField").GetComponent<InputField>().text = "";
         DisabledObjectsGameScene.Instance.PressContextPanel.transform.FindChild("Press_AssignJob_ProdTypeDropdown").GetComponent<Dropdown>().value = 0;
 
         DisabledObjectsGameScene.Instance.PressContextPanel.SetActive(false);
 
 
-        
+
 
 
     }
-   
+
 
     public void CancelContext()
     {
-      
-       // Globals.Instance.canvas.BroadcastMessage("CancelContext");
+
+        // Globals.Instance.canvas.BroadcastMessage("CancelContext");
 
         if (DisabledObjectsGameScene.Instance.PressContextPanel.GetComponent<PressContextPanelScript>().aliveForHalfSec)
         {
@@ -83,7 +86,7 @@ public class ContextManager : MonoBehaviour {
 
         }
 
-       
+
         //stats konteksta uzdarom ir t.t
 
 
@@ -104,10 +107,10 @@ public class ContextManager : MonoBehaviour {
         {
             DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
         }
-            
 
-            if (buildingscript.thistileInfo.BUILDING_TYPE == 0) //augalas
-            {
+
+        if (buildingscript.thistileInfo.BUILDING_TYPE == 0) //augalas
+        {
             string finishedString;
 
             int time = (buildingscript.thistile.START_OF_GROWTH + buildingscript.thistileInfo.PROG_AMOUNT) - socman.unix;
@@ -116,26 +119,27 @@ public class ContextManager : MonoBehaviour {
             if (time <= 0)
             {
                 finishedString = GlobalControl.Instance.currentLangDict["done_plant_growth"];
-            }else
+            }
+            else
             {
                 finishedString = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
             }
-               
 
 
-                DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
-                DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-                DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
-                DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = "";
+
+            DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = "";
 
         }
-        else if(buildingscript.thistileInfo.BUILDING_TYPE == 1) //pastatas
+        else if (buildingscript.thistileInfo.BUILDING_TYPE == 1) //pastatas
         {
 
             string finishedString;
 
             int time = (buildingscript.thistile.START_OF_GROWTH + buildingscript.thistile.BUILDING_CURRENT_WORK_AMOUNT * (buildingscript.thistileInfo.PROG_AMOUNT / 100)) - socman.unix;
-            
+
             TimeSpan ts = TimeSpan.FromSeconds(time);
 
 
@@ -151,7 +155,7 @@ public class ContextManager : MonoBehaviour {
 
 
             DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName( buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME;
 

@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatContextManager : MonoBehaviour {
+public class StatContextManager : MonoBehaviour
+{
 
     Ray ray;
     RaycastHit hit;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
@@ -30,7 +33,7 @@ public class StatContextManager : MonoBehaviour {
 
             }
 
-                if (hit.transform.tag=="Building")
+            if (hit.transform.tag == "Building")
             {
                 ContextManager.Instance.ShowStats(hit.transform.gameObject);
 
@@ -38,17 +41,18 @@ public class StatContextManager : MonoBehaviour {
 
 
 
-        }else
+        }
+        else
         {
 
-           
-                if (DisabledObjectsGameScene.Instance.StatsContextPanel.activeSelf)
-                {
-                    ContextManager.Instance.CloseStatPanel();
 
-                }
+            if (DisabledObjectsGameScene.Instance.StatsContextPanel.activeSelf)
+            {
+                ContextManager.Instance.CloseStatPanel();
 
-            
+            }
+
+
 
 
         }
@@ -60,12 +64,12 @@ public class StatContextManager : MonoBehaviour {
 
         if (DisabledObjectsGameScene.Instance.StatsContextPanel.activeSelf)
         {
-           
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.position = new Vector3(Input.mousePosition.x+100, Input.mousePosition.y-40, Input.mousePosition.z);
+
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.position = new Vector3(Input.mousePosition.x + 100, Input.mousePosition.y - 40, Input.mousePosition.z);
 
 
         }
     }
 
-    
+
 }

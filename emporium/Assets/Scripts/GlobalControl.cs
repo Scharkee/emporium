@@ -10,10 +10,10 @@ public class GlobalControl : MonoBehaviour
     public string Pass;
     public int Logincount;
     public int Userlanguage;
-    public Dictionary<string,string> currentLangDict;
+    public Dictionary<string, string> currentLangDict;
     public static GlobalControl Instance;
     public bool ConnectedOnceNoDupeStatRequests = false;
-    private bool firstLaunch=true;
+    private bool firstLaunch = true;
 
 
     void Start()
@@ -46,10 +46,10 @@ public class GlobalControl : MonoBehaviour
 
     public void reset()
     {
-        
+
         Uname = null;
         Pass = null;
-        Logincount =1;
+        Logincount = 1;
         Userlanguage = 0;
         firstLaunch = false;
         ConnectedOnceNoDupeStatRequests = false;
@@ -84,10 +84,10 @@ public class GlobalControl : MonoBehaviour
                 GameObject.Find("tempLoginButtonText").GetComponent<Text>().text = currentLangDict["templog"];
 
             }
-       
+
 
         }
-       
+
 
 
     }

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialManager : MonoBehaviour {
+public class TutorialManager : MonoBehaviour
+{
 
-	public void StartTutorial()
+    public void StartTutorial()
     {
         //TODO:
 

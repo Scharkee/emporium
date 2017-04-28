@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoneyTracker : MonoBehaviour {
+public class MoneyTracker : MonoBehaviour
+{
 
     float lastDollars;
     bool moneyChanging;
@@ -20,7 +21,8 @@ public class MoneyTracker : MonoBehaviour {
                 StopAllCoroutines();
                 StartCoroutine(changeMoney_Effect(lastDollars));
 
-            }else
+            }
+            else
             {
 
                 StartCoroutine(changeMoney_Effect(lastDollars));
@@ -36,11 +38,11 @@ public class MoneyTracker : MonoBehaviour {
 
     IEnumerator changeMoney_Effect(float newMoney)
     {
-     
+
 
 
         if (newMoney == float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text)) { Debug.Log("error, shouldnt happen, only on first load technically"); }
-        else if(newMoney> float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text))
+        else if (newMoney > float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text))
         {
             while (float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text) < newMoney)
             {
@@ -51,7 +53,7 @@ public class MoneyTracker : MonoBehaviour {
 
 
         }
-        else if(newMoney < float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text))
+        else if (newMoney < float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text))
         {
 
             while (float.Parse(DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>().text) > newMoney)
@@ -64,8 +66,8 @@ public class MoneyTracker : MonoBehaviour {
 
         }
 
-       
-    
+
+
 
 
     }

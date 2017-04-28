@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvExpander : MonoBehaviour {
-    
+public class InvExpander : MonoBehaviour
+{
+
 
     void Start()
     {
@@ -15,14 +16,15 @@ public class InvExpander : MonoBehaviour {
 
 
 
-    public void expandContract() 
+    public void expandContract()
     {
 
         if (DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.activeSelf)
         {
             Debug.Log("disabling");
             DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(false);
-        }else
+        }
+        else
         {
             Debug.Log("enabling");
             DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(true);

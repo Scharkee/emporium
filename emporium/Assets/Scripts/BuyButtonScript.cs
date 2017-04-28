@@ -11,18 +11,18 @@ public class BuyButtonScript : MonoBehaviour
 
     public bool panelEnabled;
 
-  
-     GameObject opgrid;
 
-   
+    GameObject opgrid;
+
+
 
 
     void Start()
     {
 
-     
 
-     
+
+
         panelEnabled = false;
 
     }
@@ -30,18 +30,19 @@ public class BuyButtonScript : MonoBehaviour
     void Awake()
     {
 
-      
+
     }
 
     public void TheClick()
     {
 
-        if(Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
+        if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
         {
 
             DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().DisableBuyMode();
-            
-        }else if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled) //enabled sell mode, disabling.
+
+        }
+        else if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled) //enabled sell mode, disabling.
         {
             DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().EnableDisableSellMode();
 
@@ -56,7 +57,7 @@ public class BuyButtonScript : MonoBehaviour
     {
         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(true);
 
-        if (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha<1f)
+        if (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha < 1f)
         {
             DisabledObjectsGameScene.Instance.BuyButton.GetComponent<Image>().color = Globals.Instance.buttonActiveColor1;
 
@@ -65,14 +66,14 @@ public class BuyButtonScript : MonoBehaviour
             while (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha < 1f)
             {
                 //fadeoutas
-               
+
                 yield return new WaitForSeconds(0.001f);
                 //didinam alpha kas cikla
                 DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha += 0.1f;
-                
+
                 Globals.Instance.cameraBlur.blurSize += 0.22f;
-               
-               
+
+
             }
             Globals.Instance.cameraBlur.enabled = true;
             DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 1f;
@@ -145,9 +146,9 @@ public class BuyButtonScript : MonoBehaviour
 
 
         }
-       
-      
-      
+
+
+
 
     }
 

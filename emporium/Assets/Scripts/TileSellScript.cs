@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using SocketIO;
 
-public class TileSellScript : MonoBehaviour {
+public class TileSellScript : MonoBehaviour
+{
 
     public AudioClip coin1;
     public AudioClip coin2;
@@ -13,16 +14,16 @@ public class TileSellScript : MonoBehaviour {
 
     public bool sellModeEnabled;
 
-    
 
-   
+
+
     SocketIOComponent socket;
 
     void Start()
     {
-      
+
         sellModeEnabled = false;
-        
+
         socket = DisabledObjectsGameScene.Instance.socket;
 
     }
@@ -41,7 +42,7 @@ public class TileSellScript : MonoBehaviour {
         {
 
             DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().DisableBuyMode();
-           
+
         }
 
         EnableDisableSellMode();
@@ -58,7 +59,8 @@ public class TileSellScript : MonoBehaviour {
         {
             sellModeEnabled = false;
             ApplyModeTransition(false);
-        }else
+        }
+        else
         {
             sellModeEnabled = true;
             ApplyModeTransition(true);
@@ -76,7 +78,8 @@ public class TileSellScript : MonoBehaviour {
             RenderSettings.skybox = Globals.Instance.dark_skybox;
             StartCoroutine(moveCamera());
 
-        }else
+        }
+        else
         {
             DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
             StartCoroutine(moveCamera());
@@ -90,18 +93,19 @@ public class TileSellScript : MonoBehaviour {
     void Update()
     {
 
-        if (sellModeEnabled) { 
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
+        if (sellModeEnabled)
         {
-            if (hit.transform.tag == "Building")
-            {
 
-                if (Input.GetMouseButtonDown(0))
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.tag == "Building")
                 {
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
                         SellTile(hit.transform.gameObject.GetComponent<BuildingScript>().thistile.ID, hit.transform.gameObject.GetComponent<BuildingScript>().thistile.NAME);
                         Destroy(hit.transform.gameObject);
 
@@ -112,10 +116,10 @@ public class TileSellScript : MonoBehaviour {
 
                     }
 
-            }
-            
+                }
 
-        }
+
+            }
 
         }
     }
@@ -125,7 +129,7 @@ public class TileSellScript : MonoBehaviour {
 
 
 
-       
+
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
         data["SellTileID"] = ID.ToString();
@@ -182,7 +186,7 @@ public class TileSellScript : MonoBehaviour {
                 yield return new WaitForSeconds(0.001f);
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f), step);
             }
-        
+
 
             yield break;
         }
@@ -194,7 +198,7 @@ public class TileSellScript : MonoBehaviour {
                 yield return new WaitForSeconds(0.0001f);
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f), step);
             }
-        
+
 
             yield break;
         }

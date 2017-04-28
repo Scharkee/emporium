@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlotSelector : MonoBehaviour {
+public class PlotSelector : MonoBehaviour
+{
 
     public GameObject PlotSelectorPrefab;
 
     public GameObject plotselectors;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         plotselectors = GameObject.Find("PlotSelectors");
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void SpawnPlotSelectors()
     {
-      
+
         int plotsz = Database.Instance.UserPlotSize;
         float currentX = -0.5f;
         float currentZ = 0.5f;
@@ -52,11 +55,11 @@ public class PlotSelector : MonoBehaviour {
 
         while (Zcount <= plotsz)
         {
-            
+
             while (Xcount <= plotsz)
             {
 
-                GameObject currentplot = Instantiate(PlotSelectorPrefab, new Vector3(currentX, 0.1f, currentZ), Quaternion.identity , GameObject.Find("PlotSelectors").transform) as GameObject;
+                GameObject currentplot = Instantiate(PlotSelectorPrefab, new Vector3(currentX, 0.1f, currentZ), Quaternion.identity, GameObject.Find("PlotSelectors").transform) as GameObject;
                 currentplot.transform.localScale = new Vector3(0.65f, 0.0234f, 0.65f);
 
                 currentX++;
@@ -80,5 +83,5 @@ public class PlotSelector : MonoBehaviour {
     }
 
 
-    }
+}
 

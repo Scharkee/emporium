@@ -8,19 +8,21 @@ using System.Text.RegularExpressions;
 using SocketIO;
 using UnityStandardAssets.ImageEffects;
 
-public class SocketManager : MonoBehaviour {
+public class SocketManager : MonoBehaviour
+{
 
-  
+
     Database db;
     bool ver = false;
     public int unix;
     HelperScripts helperscript;
-    
+
 
     SocketIOComponent socket;
-    
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         db = gameObject.GetComponent<Database>();
         socket = DisabledObjectsGameScene.Instance.socket;
@@ -46,8 +48,8 @@ public class SocketManager : MonoBehaviour {
 
     }
 
-	
-	
+
+
 
     IEnumerator UnixUpdater()
     {
@@ -64,19 +66,19 @@ public class SocketManager : MonoBehaviour {
 
     void GetUnix()
     {
-      
+
         socket.Emit("GET_UNIX");
 
     }
 
 
- 
-    
+
+
     void SendAutosaveVerify(SocketIOEvent evt)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
-       
+
         socket.Emit("AUTOSAVE_PUSH_LASTLOGGED", new JSONObject(data));
 
     }
@@ -85,7 +87,7 @@ public class SocketManager : MonoBehaviour {
     {
 
         yield return new WaitForSeconds(5);
-        if( ver == false)
+        if (ver == false)
         {
             Debug.Log("bad verification!");
 
@@ -96,18 +98,20 @@ public class SocketManager : MonoBehaviour {
     {
         Debug.Log(evt);
         Debug.Log("Server verified client.");
-        if (bool.Parse(evt.data.GetField("ver").ToString())) { 
+        if (bool.Parse(evt.data.GetField("ver").ToString()))
+        {
             Debug.Log("verification sent back false");
             ver = false;
-        }else
+        }
+        else
         {//verification came back true;
             ver = true;
         }
-        
+
 
     }
 
-  
+
 
     public void UpdatePlotSize(SocketIOEvent evt)
     {
@@ -115,7 +119,7 @@ public class SocketManager : MonoBehaviour {
 
         GameAlerts.Instance.AlertWithMessage("You have upgraded your plot size! Please log in again.");
         StartCoroutine(logOffWithDelay(2f));
-   
+
     }
 
     public void LogOffWithDelay(float delay)
@@ -141,14 +145,14 @@ public class SocketManager : MonoBehaviour {
 
     }
 
-   
+
 
     void ReceiveUnix(SocketIOEvent evt)
     {
-        
+
         unix = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", "")); //FIXME this is dumb
 
-  
+
     }
 
     void NoFundsAlert(SocketIOEvent evt)
@@ -163,7 +167,7 @@ public class SocketManager : MonoBehaviour {
     {
         float additive = float.Parse(evt.data.GetField("addFunds").ToString());
 
-      Database.Instance.UserDollars += additive;
+        Database.Instance.UserDollars += additive;
 
 
 
@@ -184,7 +188,7 @@ public class SocketManager : MonoBehaviour {
         socket.Emit("DISCONNECT");
         GlobalControl.Instance.reset();
         SceneManager.LoadScene(0);
-        
+
     }
 
 

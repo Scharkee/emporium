@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryPanel : MonoBehaviour {
+public class InventoryPanel : MonoBehaviour
+{
 
     UIManager uimanager;
-    private bool firstStart=true;
+    private bool firstStart = true;
 
     void Start()
     {
 
         uimanager = GameObject.Find("_ManagerialScripts").GetComponent<UIManager>();
-        
+
     }
 
-	void OnEnable()
+    void OnEnable()
     {
 
         if (!firstStart)
@@ -31,7 +32,7 @@ public class InventoryPanel : MonoBehaviour {
 
     }
 
-    
+
 
 
     public void adjustValues()

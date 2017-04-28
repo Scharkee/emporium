@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForgotPassScript : MonoBehaviour {
+public class ForgotPassScript : MonoBehaviour
+{
 
-	public void Click()
+    public void Click()
     {
 
 

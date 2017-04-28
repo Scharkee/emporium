@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisabledObjectsMain : MonoBehaviour {
+public class DisabledObjectsMain : MonoBehaviour
+{
 
     public static DisabledObjectsMain Instance;
 
@@ -10,11 +11,12 @@ public class DisabledObjectsMain : MonoBehaviour {
     public GameObject UnamePassInputField;
     public GameObject UnamePassText;
     public GameObject MainCanvas;
-         
+
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         SubmitButton.SetActive(false);
         UnamePassInputField.SetActive(false);

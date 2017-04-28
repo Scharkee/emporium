@@ -4,7 +4,8 @@ using System.Text;
 using UnityEngine;
 using SocketIO;
 
-public class BuyScript : MonoBehaviour {
+public class BuyScript : MonoBehaviour
+{
 
     public string tilename;
     RaycastHit hit;
@@ -12,20 +13,23 @@ public class BuyScript : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         GameObject go = GameObject.Find("SocketIO");
         socket = go.GetComponent<SocketIOComponent>();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
 
     }
 
-    public void EnableSelector(string tilename) {
+    public void EnableSelector(string tilename)
+    {
 
 
 
@@ -33,7 +37,7 @@ public class BuyScript : MonoBehaviour {
 
 
 
-      
+
         DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled = true;
 
         DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().receiveName(tilename);
@@ -44,9 +48,9 @@ public class BuyScript : MonoBehaviour {
     public void ChoosePlot(string buildingname, float X, float Z)
     {
 
-        Debug.Log("trying to build "+buildingname+" at "+X+" "+Z);
+        Debug.Log("trying to build " + buildingname + " at " + X + " " + Z);
 
-        
+
 
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
@@ -57,7 +61,7 @@ public class BuyScript : MonoBehaviour {
 
         int tileExists = tileExistsAt(X, Z);
 
-        if (tileExists!=-9898)//placeholder
+        if (tileExists != -9898)//placeholder
         {
             //tile exists
 
@@ -76,7 +80,7 @@ public class BuyScript : MonoBehaviour {
             data["TileCount"] = 1.ToString();
         }
 
-       
+
 
         socket.Emit("BUY_TILE", new JSONObject(data));
 
@@ -84,10 +88,10 @@ public class BuyScript : MonoBehaviour {
 
     private int tileExistsAt(float X, float Z)
     {
-        int currentDBpos=-1;
+        int currentDBpos = -1;
         float x;
 
-        Debug.Log("checking for tiles at "+X+" "+Z);
+        Debug.Log("checking for tiles at " + X + " " + Z);
         do
         {
             currentDBpos++;
@@ -106,8 +110,8 @@ public class BuyScript : MonoBehaviour {
 
         } while (Database.Instance.tile[currentDBpos].X != X && Database.Instance.tile[currentDBpos].Z != Z);
 
-        Debug.Log("return code "+ currentDBpos);
-        
+        Debug.Log("return code " + currentDBpos);
+
         return currentDBpos;
 
     }

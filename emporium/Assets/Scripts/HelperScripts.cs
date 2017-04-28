@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using SocketIO;
 
-public class HelperScripts : MonoBehaviour {
+public class HelperScripts : MonoBehaviour
+{
 
     public static HelperScripts Instance;
     SocketIOComponent socket;
@@ -28,8 +29,8 @@ public class HelperScripts : MonoBehaviour {
         {
             Debug.Log("-----------------------------");
             testThing();
-         
-            
+
+
 
         }
 
@@ -40,13 +41,13 @@ public class HelperScripts : MonoBehaviour {
     private void testThing()
     {
         Dictionary<string, string> dic = new Dictionary<string, string>();
-        dic[0+"amount"]=10.ToString();
-        dic[0 +"name"] = "kriauses";
+        dic[0 + "amount"] = 10.ToString();
+        dic[0 + "name"] = "kriauses";
         dic["salesNum"] = 1.ToString();
         dic["Uname"] = Database.Instance.UserUsername.ToString();
 
         DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AskForSaleVerification(dic);
-     
+
 
     }
 
@@ -66,13 +67,13 @@ public class HelperScripts : MonoBehaviour {
         return lygnelyg;
     }
 
-    public Dictionary<string,float> ReassignInventory(Inventory inv)
+    public Dictionary<string, float> ReassignInventory(Inventory inv)
     {
         Dictionary<string, float> dic = new Dictionary<string, float>();
 
         //ADD NEW JUICES AND FRUITS
 
-        dic.Add("kriauses",inv.kriauses);
+        dic.Add("kriauses", inv.kriauses);
         dic.Add("kriauses_sultys", inv.kriauses_sultys);
         dic.Add("apelsinai", inv.apelsinai);
         dic.Add("apelsinai_sultys", inv.apelsinai_sultys);

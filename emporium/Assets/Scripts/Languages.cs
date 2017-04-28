@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Languages : MonoBehaviour {
+public class Languages : MonoBehaviour
+{
 
     public static Dictionary<string, string> lithuanian = new Dictionary<string, string>();
     public static Dictionary<string, string> english = new Dictionary<string, string>();
-    public static bool initiated=false;
-    
+    public static bool initiated = false;
+
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start()
+    {
 
-  
+    }
+
+
 
 
 
@@ -100,6 +102,6 @@ public class Languages : MonoBehaviour {
 
     }
 
-    
+
 }
 

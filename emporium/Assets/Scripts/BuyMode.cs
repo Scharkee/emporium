@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuyMode : MonoBehaviour {
+public class BuyMode : MonoBehaviour
+{
 
-    
+
     string buildingName;
     string TileName;
     bool darken;
     bool disableQueued;
     int camspeed = 10;
 
-   
+
     BuyButtonScript buybuttonscript;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
 
         buybuttonscript.panelEnabled = false;
@@ -31,12 +33,13 @@ public class BuyMode : MonoBehaviour {
     void Awake()
     {
 
-    
+
         buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
 
 
@@ -56,7 +59,7 @@ public class BuyMode : MonoBehaviour {
                     float Z = hit.transform.localPosition.z;
 
                     GameObject.Find("PlotSelectors").SetActive(false);
-                 
+
                     StartCoroutine(liftcamera());
                     buybuttonscript.panelEnabled = false;
 
@@ -64,7 +67,7 @@ public class BuyMode : MonoBehaviour {
 
                     DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
 
-                  
+
 
                     GameObject.Find("BuyScript").GetComponent<BuyScript>().ChoosePlot(buildingName, X, Z);
                     DisabledObjectsGameScene.Instance.BuyButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
@@ -75,19 +78,19 @@ public class BuyMode : MonoBehaviour {
             }
             else
             {
-                
+
             }
 
-       
+
         }
 
     }
 
     public void receiveName(string name)
     {
-        
+
         buildingName = name;
-     
+
         buybuttonscript.panelEnabled = false;
 
 
@@ -100,7 +103,7 @@ public class BuyMode : MonoBehaviour {
 
     }
 
-   
+
 
     IEnumerator liftcamera()
     {
@@ -116,11 +119,11 @@ public class BuyMode : MonoBehaviour {
             {
                 yield return new WaitForSeconds(0.001f);
 
-              
+
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f), step);
 
             }
-          
+
 
             yield break;
 
@@ -133,11 +136,11 @@ public class BuyMode : MonoBehaviour {
             {
                 yield return new WaitForSeconds(0.0001f);
 
-              
+
                 Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f), step);
             }
 
-           
+
 
             yield break;
         }
@@ -145,10 +148,10 @@ public class BuyMode : MonoBehaviour {
         if (disableQueued)
         {
 
-            gameObject.GetComponent<BuyMode>().enabled=false;
+            gameObject.GetComponent<BuyMode>().enabled = false;
         }
-        
-}
+
+    }
 
     public void DisableBuyMode()
     {
@@ -167,8 +170,8 @@ public class BuyMode : MonoBehaviour {
 
 
         disableQueued = true;
-      
+
     }
 
-    
+
 }

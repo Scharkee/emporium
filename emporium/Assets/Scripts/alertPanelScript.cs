@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class alertPanelScript : MonoBehaviour {
+public class alertPanelScript : MonoBehaviour
+{
 
 
 
-	public void closeAlert()
+    public void closeAlert()
     {
         Debug.Log("aaSDASDasdasd");
         GameAlerts.Instance.closeAlert();

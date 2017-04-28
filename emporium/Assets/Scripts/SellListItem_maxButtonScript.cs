@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SellListItem_maxButtonScript : MonoBehaviour {
+public class SellListItem_maxButtonScript : MonoBehaviour
+{
 
 
     public InputField inp;
-    public string name;
+
 
 
 
@@ -19,7 +20,7 @@ public class SellListItem_maxButtonScript : MonoBehaviour {
 
     public void resetValues()
     {
-        
+
         inp.text = "";
     }
 
@@ -36,11 +37,11 @@ public class SellListItem_maxButtonScript : MonoBehaviour {
         {
             inp.text = Database.Instance.Inventory[name].ToString();
 
-        } 
+        }
 
 
 
     }
-	
-	
+
+
 }

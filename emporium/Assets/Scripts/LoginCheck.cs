@@ -9,7 +9,8 @@ using SocketIO;
 using UnityStandardAssets.ImageEffects;
 
 
-public class LoginCheck : MonoBehaviour {
+public class LoginCheck : MonoBehaviour
+{
     public string inputusername;
     public string inputpassword;
     Dictionary<string, string> data;
@@ -18,29 +19,30 @@ public class LoginCheck : MonoBehaviour {
     public SocketIOComponent socket;
 
     // Use this for initialization
-    void Start () {
-		GameObject go = GameObject.Find ("SocketIO");
-		socket = go.GetComponent<SocketIOComponent>();
-		socket.On("PASS_CHECK_CALLBACK", OnLoginCheckCallback);
-   
+    void Start()
+    {
+        GameObject go = GameObject.Find("SocketIO");
+        socket = go.GetComponent<SocketIOComponent>();
+        socket.On("PASS_CHECK_CALLBACK", OnLoginCheckCallback);
+
 
 
     }
 
 
- //TODO: check for dupe username
+    //TODO: check for dupe username
 
     public IEnumerator CheckDBForDupeUN(string username)
-    {  
+    {
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(CheckLoginDetails(GlobalControl.Instance.Uname, GlobalControl.Instance.Pass));
     }
-    
+
 
     IEnumerator CheckLoginDetails(string username, string password)
     {
         data = new Dictionary<string, string>();
-        Debug.Log("sending "+ username+ password);
+        Debug.Log("sending " + username + password);
         data["Uname"] = username;
         data["Upass"] = password;
         yield return new WaitForSeconds(0.1f);
@@ -49,55 +51,65 @@ public class LoginCheck : MonoBehaviour {
 
     private void OnLoginCheckCallback(SocketIOEvent evt)
     {
-		
-	
 
-		LoginorCreate (int.Parse(evt.data.GetField ("passStatus").ToString()) );
+
+
+        LoginorCreate(int.Parse(evt.data.GetField("passStatus").ToString()));
     }
 
 
 
     public void LogInCh(string un, string pass)
     {
-        StartCoroutine(CheckLoginDetails(un,pass));
-        
-   
+        StartCoroutine(CheckLoginDetails(un, pass));
+
+
     }
-    
 
-	string  JsonToString( string target, string s){
 
-		string[] newString = Regex.Split(target,s);
+    string JsonToString(string target, string s)
+    {
 
-		return newString[1];
+        string[] newString = Regex.Split(target, s);
 
-	}
+        return newString[1];
 
-	void LoginorCreate(int stat){
-		if (stat == 0) {  //pass incorrect
+    }
+
+    void LoginorCreate(int stat)
+    {
+        if (stat == 0)
+        {  //pass incorrect
             Reaskforlogininfo();
-        } else if (stat == 1) { //pass correct
+        }
+        else if (stat == 1)
+        { //pass correct
             proceedToGameScene();
 
-        } else if (stat == 2) { //user not in DB
+        }
+        else if (stat == 2)
+        { //user not in DB
 
             Debug.Log("user not found in DB, inititing creation");
             socket.Emit("CREATE_USER", new JSONObject(data)); // mb doesnt work iunno
             proceedToGameScene();
-        }else if(stat == 3)
+        }
+        else if (stat == 3)
         {
             //user already logged in from another PC.
             //TODO: Flash "logged in already" here, and reask for password
-     
+
         }
 
 
-	}
-	void proceedToGameScene(){
+    }
+    void proceedToGameScene()
+    {
         StartCoroutine(LVLLoadCamEffect());
         SceneManager.LoadScene("GameScene");
     }
-    void Reaskforlogininfo() {
+    void Reaskforlogininfo()
+    {
 
         Debug.Log("REASKING FOR LOGIN INFO");
         GlobalControl.Instance.Pass = null;
@@ -119,7 +131,7 @@ public class LoginCheck : MonoBehaviour {
     }
     IEnumerator LVLLoadCamEffect()
     {
-      
+
         while (Camera.main.GetComponent<Bloom>().bloomThreshold > 0.01)
         {
             //fadeoutas

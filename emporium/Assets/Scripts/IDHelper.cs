@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IDHelper : MonoBehaviour {
+public class IDHelper : MonoBehaviour
+{
     public static IDHelper Instance;
 
 
@@ -57,7 +58,7 @@ public class IDHelper : MonoBehaviour {
 
     public string NameToRealName(string name)
     {
-        
+
         return GlobalControl.Instance.currentLangDict[name];
     }
 }

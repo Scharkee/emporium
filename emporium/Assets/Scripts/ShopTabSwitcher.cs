@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopTabSwitcher : MonoBehaviour {
+public class ShopTabSwitcher : MonoBehaviour
+{
 
 
-  
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start()
+    {
 
 
     }
@@ -20,7 +22,8 @@ public class ShopTabSwitcher : MonoBehaviour {
         {
 
 
-        }else
+        }
+        else
         {
 
             DisabledObjectsGameScene.Instance.gridBuildings.SetActive(false);
@@ -44,7 +47,7 @@ public class ShopTabSwitcher : MonoBehaviour {
         {
             DisabledObjectsGameScene.Instance.gridPlants.SetActive(false);
             DisabledObjectsGameScene.Instance.gridBuildings.SetActive(true);
-           
+
 
         }
 
