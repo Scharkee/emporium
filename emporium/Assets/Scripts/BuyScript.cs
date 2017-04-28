@@ -70,8 +70,6 @@ public class BuyScript : MonoBehaviour {
                 data["TileCount"] = (Database.Instance.tile[tileExists].COUNT + 1).ToString();
 
             }
-
-
         }
         else //tile does not exist.
         {
@@ -106,18 +104,11 @@ public class BuyScript : MonoBehaviour {
                 break;
             }
 
-
-
         } while (Database.Instance.tile[currentDBpos].X != X && Database.Instance.tile[currentDBpos].Z != Z);
-
-
 
         Debug.Log("return code "+ currentDBpos);
         
         return currentDBpos;
 
-
     }
-
-
 }

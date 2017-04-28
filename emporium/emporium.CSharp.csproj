@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\Database.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsGameScene.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsMain.cs" />
+    <Compile Include="Assets\Scripts\ForgotPassScript.cs" />
     <Compile Include="Assets\Scripts\GameAlerts.cs" />
     <Compile Include="Assets\Scripts\GlobalControl.cs" />
     <Compile Include="Assets\Scripts\Globals.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Assets\Scripts\PlotSelectorScript.cs" />
     <Compile Include="Assets\Scripts\PressContextPanelScript.cs" />
     <Compile Include="Assets\Scripts\ProduceSelling.cs" />
+    <Compile Include="Assets\Scripts\RegisterScript.cs" />
     <Compile Include="Assets\Scripts\RotationScript.cs" />
     <Compile Include="Assets\Scripts\SellListItem_maxButtonScript.cs" />
     <Compile Include="Assets\Scripts\SellingButtonScript.cs" />
