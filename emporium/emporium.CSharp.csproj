@@ -121,6 +121,7 @@
     <Compile Include="Assets\Scripts\StatContextManager.cs" />
     <Compile Include="Assets\Scripts\TileOperator.cs" />
     <Compile Include="Assets\Scripts\TileSellScript.cs" />
+    <Compile Include="Assets\Scripts\TitleText.cs" />
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\UnamePassInputScript.cs" />

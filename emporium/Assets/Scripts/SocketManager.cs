@@ -44,7 +44,7 @@ public class SocketManager : MonoBehaviour
 
         socket.On("ADD_FUNDS", AddFunds);
         socket.On("UPDATE_PLOT_SIZE", UpdatePlotSize);
-
+        socket.On("UPGRADE_TILE",UpgradeTile);
 
     }
 
@@ -141,6 +141,13 @@ public class SocketManager : MonoBehaviour
 
         ContextManager.Instance.CancelContext();
 
+
+
+    }
+
+    private void UpgradeTile(SocketIOEvent evt)
+    {
+        DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<AssignTiles>().UpgradeTile(int.Parse(evt.data.GetField("tileID").ToString()));
 
 
     }
