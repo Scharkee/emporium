@@ -147,8 +147,11 @@ public class SocketManager : MonoBehaviour
 
     private void UpgradeTile(SocketIOEvent evt)
     {
-        DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<AssignTiles>().UpgradeTile(int.Parse(evt.data.GetField("tileID").ToString()));
+ 
+        int tileID = int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", ""));
 
+        DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<AssignTiles>().UpgradeTile(tileID);
+        Debug.Log("socketman past ID");
 
     }
 

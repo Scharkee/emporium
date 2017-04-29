@@ -22,7 +22,7 @@ public class StatContextManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
 
-            if (hit.collider.tag == "Ground")
+            if (hit.collider.tag == "Ground" || DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)
             {
 
                 if (DisabledObjectsGameScene.Instance.StatsContextPanel.activeSelf)
@@ -31,13 +31,13 @@ public class StatContextManager : MonoBehaviour
 
                 }
 
-            }
-
-            if (hit.transform.tag == "Building")
+            }else if (hit.transform.tag == "Building")
             {
-                ContextManager.Instance.ShowStats(hit.transform.gameObject);
 
+                ContextManager.Instance.ShowStats(hit.transform.gameObject);
             }
+
+          
 
 
 

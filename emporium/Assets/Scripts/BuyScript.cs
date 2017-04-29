@@ -48,7 +48,7 @@ public class BuyScript : MonoBehaviour
     public void ChoosePlot(string buildingname, float X, float Z)
     {
 
-        Debug.Log("trying to build " + buildingname + " at " + X + " " + Z);
+        Debug.Log("requesting " + buildingname + " at " + X + " " + Z);
 
 
 
@@ -64,57 +64,70 @@ public class BuyScript : MonoBehaviour
         if (tileExists != -9898)//placeholder
         {
             //tile exists
+            Debug.Log("551");
+            Debug.Log(Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.ID);
 
-            if (Database.Instance.tile[tileExists].COUNT >= 5)
+            if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT >= 5)
             {
                 Debug.Log("Cant purchase any more.");
                 GameAlerts.Instance.AlertWithMessage("Tile cannot host any more trees.");
+               
             }
-            else if (Database.Instance.tile[tileExists].COUNT != 0)
+            else if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT != 0)
             {
-                data["TileCount"] = Database.Instance.tile[tileExists].COUNT.ToString();
-                data["tileID"] = (Database.Instance.tile[tileExists].ID).ToString();
+                Debug.Log("551");
+                data["TileCount"] = Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT.ToString();
+                data["tileID"] = (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.ID).ToString();
                 socket.Emit("BUY_TILE", new JSONObject(data));
-                Debug.Log(Database.Instance.tile[tileExists].ID);
+                Debug.Log("2");
+                Debug.Log("551");
+
             }
         }
         else //tile does not exist.
         {
+            Debug.Log("3");
             data["TileCount"] = 1.ToString();
             socket.Emit("BUY_TILE", new JSONObject(data));
         }
 
 
 
-        
+
 
     }
 
     private int tileExistsAt(float X, float Z)
     {
-        int currentDBpos = -1;
-        float x;
+        int currentDBpos = -9898;
 
-        Debug.Log("checking for tiles at " + X + " " + Z);
-        do
+
+
+
+
+        foreach (GameObject tile in Database.Instance.ActiveTiles)
         {
-            currentDBpos++;
+
             try
             {
-                x = Database.Instance.tile[currentDBpos].X;
+                
+                if (tile.transform.position.x == X && tile.transform.position.z == Z)
+                {
+
+                    currentDBpos = Database.Instance.ActiveTiles.IndexOf(tile);
+
+                }
 
             }
             catch
             {
-                Debug.Log("caught a thing");
-                currentDBpos = -9898;
 
-                break;
             }
 
-        } while (Database.Instance.tile[currentDBpos].X != X && Database.Instance.tile[currentDBpos].Z != Z);
 
-        Debug.Log("return code " + currentDBpos);
+        }
+
+        Debug.Log("tile at Activetiles index " + currentDBpos);
 
         return currentDBpos;
 

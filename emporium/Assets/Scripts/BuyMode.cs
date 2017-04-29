@@ -53,7 +53,7 @@ public class BuyMode : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log("hit selector at pos: " + hit.transform);
+
 
                     float X = hit.transform.localPosition.x;
                     float Z = hit.transform.localPosition.z;
@@ -172,7 +172,7 @@ public class BuyMode : MonoBehaviour
         RenderSettings.skybox = Globals.Instance.light_skybox; //MAKEME make fade    
         Debug.Log("changing back skybox");
         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(true);
-
+        GameObject.Find("Tiles").BroadcastMessage("activateColliders", true);
 
         disableQueued = true;
 

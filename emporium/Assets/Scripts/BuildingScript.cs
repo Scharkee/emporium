@@ -39,7 +39,7 @@ public class BuildingScript : MonoBehaviour
     public int idInTileDatabase; //norint pasiekti savo tile bendrame tile array
     private int idInTileInfoDatabase;  // norint pasiekti savo tile informacija bendrame BuildingInfo array
 
-
+    public int idInActiveTiles;
 
     // Use this for initialization
     void Start()
@@ -79,8 +79,10 @@ public class BuildingScript : MonoBehaviour
     {
 
 
-        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled || DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
+        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled|| DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
         {
+
+
             return false;
 
         }
@@ -94,6 +96,7 @@ public class BuildingScript : MonoBehaviour
 
     void OnMouseDown()
     {
+
         if (Harvestable())
         {
             if (thistileInfo.BUILDING_TYPE == 0)
@@ -162,19 +165,24 @@ public class BuildingScript : MonoBehaviour
     public void RetrieveTileInfo()
     {
         int i = -1;
+
         while (thistileInfo.NAME != thistile.NAME)
         {
+     
             i++;
             thistileInfo.NAME = Database.Instance.buildinginfo[i].NAME;
 
 
 
         }
-
+    
         thistileInfo = Database.Instance.buildinginfo[i];
         idInTileInfoDatabase = i;
 
         justSpawned = false;
+        
+
+        idInActiveTiles = Database.Instance.ActiveTiles.IndexOf(gameObject);
     }
 
 
@@ -241,15 +249,17 @@ public class BuildingScript : MonoBehaviour
                     if (child.name == thistile.NAME + "(Clone)"|| child.name == thistile.NAME)
                     {//cia multi-tile shell modelis
 
-                        try
+                        foreach(Transform vais in child)
                         {
-                            Destroy(child.FindChild(thistile.NAME + "_vaisiai(Clone)").gameObject);
+                            if(vais.name== thistile.NAME + "_vaisiai(Clone)")//vaisiai, destroy.
+                            {
+                                Destroy(vais.gameObject);
+
+                            }
 
                         }
-                        catch
-                        {
-                            Debug.Log("couldnt destroy shell tree's fruits");
-                        }
+             
+
 
                     }
 
