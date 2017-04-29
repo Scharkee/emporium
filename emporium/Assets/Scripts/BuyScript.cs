@@ -68,21 +68,25 @@ public class BuyScript : MonoBehaviour
             if (Database.Instance.tile[tileExists].COUNT >= 5)
             {
                 Debug.Log("Cant purchase any more.");
+                GameAlerts.Instance.AlertWithMessage("Tile cannot host any more trees.");
             }
             else if (Database.Instance.tile[tileExists].COUNT != 0)
             {
-                data["TileCount"] = (Database.Instance.tile[tileExists].COUNT + 1).ToString();
-
+                data["TileCount"] = Database.Instance.tile[tileExists].COUNT.ToString();
+                data["tileID"] = (Database.Instance.tile[tileExists].ID).ToString();
+                socket.Emit("BUY_TILE", new JSONObject(data));
+                Debug.Log(Database.Instance.tile[tileExists].ID);
             }
         }
         else //tile does not exist.
         {
             data["TileCount"] = 1.ToString();
+            socket.Emit("BUY_TILE", new JSONObject(data));
         }
 
 
 
-        socket.Emit("BUY_TILE", new JSONObject(data));
+        
 
     }
 

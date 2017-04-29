@@ -121,6 +121,7 @@
     <Compile Include="Assets\Scripts\StatContextManager.cs" />
     <Compile Include="Assets\Scripts\TileOperator.cs" />
     <Compile Include="Assets\Scripts\TileSellScript.cs" />
+    <Compile Include="Assets\Scripts\TitleText.cs" />
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\UnamePassInputScript.cs" />
@@ -128,7 +129,6 @@
     <Compile Include="Assets\Scripts\alertPanelScript.cs" />
     <Compile Include="Assets\Scripts\produceAmountAlertScript.cs" />
     <Compile Include="Assets\Scripts\templog.cs" />
-    <Compile Include="Assets\TitleText.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Misc\Fonts\Roboto\NOTICE.txt" />
