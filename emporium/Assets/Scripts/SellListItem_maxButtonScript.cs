@@ -8,13 +8,13 @@ public class SellListItem_maxButtonScript : MonoBehaviour
 
 
     public InputField inp;
-
+    public string prodName;
 
 
 
     public void TheClick()
     {
-        inp.text = Database.Instance.Inventory[name].ToString();
+        inp.text = Database.Instance.Inventory[prodName].ToString();
 
     }
 
@@ -26,16 +26,16 @@ public class SellListItem_maxButtonScript : MonoBehaviour
 
     public void maxOutValues()
     {
-        inp.text = Database.Instance.Inventory[name].ToString();
+        inp.text = Database.Instance.Inventory[prodName].ToString();
     }
 
     public void KeepAtMaxValues(string str)
     {
         Debug.Log("WOO");
         //kad negaletu parduot daugiau negu turi.
-        if (float.Parse(inp.text) > Database.Instance.Inventory[name])
+        if (float.Parse(inp.text) > Database.Instance.Inventory[prodName])
         {
-            inp.text = Database.Instance.Inventory[name].ToString();
+            inp.text = Database.Instance.Inventory[prodName].ToString();
 
         }
 

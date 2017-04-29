@@ -13,6 +13,7 @@ public class BuildingScript : MonoBehaviour
 
     //plant
     public bool TileGrown;
+    
 
     //building
     public bool WorkDone;
@@ -33,8 +34,8 @@ public class BuildingScript : MonoBehaviour
     public Tile thistile;
     public Building thistileInfo;
     SocketManager socman;
-    public bool justSpawned;
-
+    public bool justSpawned=true;
+    public bool colliderSet=false;
     public int idInTileDatabase; //norint pasiekti savo tile bendrame tile array
     private int idInTileInfoDatabase;  // norint pasiekti savo tile informacija bendrame BuildingInfo array
 
@@ -43,7 +44,7 @@ public class BuildingScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        justSpawned = true;
+       
 
 
         socman = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SocketManager>();
@@ -57,7 +58,7 @@ public class BuildingScript : MonoBehaviour
 
 
 
-        RetrieveTileInfo();
+        
 
         AssignBuildingSpecificValues();
         TileGrown = false;
@@ -158,7 +159,7 @@ public class BuildingScript : MonoBehaviour
 
 
 
-    void RetrieveTileInfo()
+    public void RetrieveTileInfo()
     {
         int i = -1;
         while (thistileInfo.NAME != thistile.NAME)
@@ -212,6 +213,13 @@ public class BuildingScript : MonoBehaviour
 
 
     }
+    void activateColliders(bool active)
+    {
+        GetComponent<BoxCollider>().enabled = active;
+
+
+    }
+
 
     private void ResetGrowth(SocketIOEvent evt)
     {
@@ -229,12 +237,8 @@ public class BuildingScript : MonoBehaviour
 
                 foreach (Transform child in transform)
                 {
-                    if (child.name == thistile.NAME + "_vaisiai(Clone)") //sita child yra vaisius. Trinam
-                    {
-                        Destroy(child.gameObject);
-
-                    }
-                    else if (child.name == thistile.NAME + "(Clone)")
+                  
+                    if (child.name == thistile.NAME + "(Clone)"|| child.name == thistile.NAME)
                     {//cia multi-tile shell modelis
 
                         try

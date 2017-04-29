@@ -118,21 +118,26 @@ public class AssignTiles : MonoBehaviour
             GameObject currentTilePrefab = Resources.Load("Plants/" + Database.Instance.tile[i].NAME) as GameObject;
             float xRot = 0;
 
-            //gal but pakeist i switcha, randomizint vosvos scale visu (kad nebutu absolutely identical.                                                                                                                    )
+            //gal but pakeist i switcha, randomizint vosvos scale visu (kad nebutu absolutely identical.                                                                                                                    
 
             if (Database.Instance.tile[i].COUNT == 1)
             {
-                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject).gameObject;
-                currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
-                currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
+                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z),Quaternion.identity, GameObject.Find("Tiles").transform) as GameObject).gameObject;
+               
+                currentTile.transform.FindChild(Database.Instance.tile[i].NAME).rotation = Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0));
+  
 
             }
             else if (Database.Instance.tile[i].COUNT == 2)
             {
 
-                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X - 0.25f, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject).gameObject;
-                currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
-                currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
+
+                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z), Quaternion.identity, GameObject.Find("Tiles").transform) as GameObject).gameObject;
+                GameObject n1 = currentTile.transform.FindChild(Database.Instance.tile[i].NAME).gameObject;
+                n1.transform.localPosition = new Vector3(n1.transform.localPosition.x-0.25f,0f, n1.transform.localPosition.z);
+                n1.transform.rotation= Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0));
+
+
 
                 currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
                 GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 0.25f, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
@@ -144,7 +149,11 @@ public class AssignTiles : MonoBehaviour
             else if (Database.Instance.tile[i].COUNT == 3)
             {
 
-                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X + 0.3f, 0f, Database.Instance.tile[i].Z + 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject).gameObject;
+                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z), Quaternion.identity, GameObject.Find("Tiles").transform) as GameObject).gameObject;
+                GameObject n1 = currentTile.transform.FindChild(Database.Instance.tile[i].NAME).gameObject;
+                n1.transform.localPosition = new Vector3(n1.transform.localPosition.x +0.3f, 0f, n1.transform.localPosition.z+0.3f);
+                n1.transform.rotation = Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0));
+
                 currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
                 currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
@@ -159,7 +168,11 @@ public class AssignTiles : MonoBehaviour
             else if (Database.Instance.tile[i].COUNT == 4)
             {
 
-                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X + 0.3f, 0f, Database.Instance.tile[i].Z - 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject).gameObject;
+                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z), Quaternion.identity, GameObject.Find("Tiles").transform) as GameObject).gameObject; 
+                GameObject n1 = currentTile.transform.FindChild(Database.Instance.tile[i].NAME).gameObject;
+                n1.transform.localPosition = new Vector3(n1.transform.localPosition.x +0.3f, 0f, n1.transform.localPosition.z-0.3f);
+                n1.transform.rotation = Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0));
+
                 currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
                 currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
@@ -174,7 +187,11 @@ public class AssignTiles : MonoBehaviour
             else if (Database.Instance.tile[i].COUNT == 5) //TODO: pabaigt su situ
             {
 
-                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject).gameObject;
+           
+                currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z), Quaternion.identity, GameObject.Find("Tiles").transform) as GameObject).gameObject; 
+                GameObject n1 = currentTile.transform.FindChild(Database.Instance.tile[i].NAME).gameObject;
+                n1.transform.rotation = Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0));
+
                 currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
                 currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
@@ -189,6 +206,16 @@ public class AssignTiles : MonoBehaviour
             }
 
             randomizeTileScales(currentTile);
+
+            currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
+
+            Debug.Log("setting it to be " + currentTile.GetComponent<BuildingScript>().idInTileDatabase);
+
+            currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
+
+            currentTile.GetComponent<BuildingScript>().RetrieveTileInfo();
+
+           
 
             Debug.Log(currentTile.GetComponent<BuildingScript>().thistile.NAME);
 
@@ -215,29 +242,10 @@ public class AssignTiles : MonoBehaviour
         float Z = float.Parse(evt.data.GetField("TileZ").ToString());
         string tilename = evt.data.GetField("TileName").ToString();
 
+       
+        SpawnATile(tilename, X, Z);
 
-        int count = int.Parse(evt.data.GetField("TileCount").ToString());
-
-
-
-        if (count == 1) //single plant
-        {
-            SpawnATile(tilename, X, Z);
-
-        }
-        else if (count == 2) //two plants one tile
-        {
-            //move tile to the side
-            SpawnATile(tilename, X + 0.25f, Z + 0.25f);
-            SpawnATile(tilename, X - 0.25f, Z - 0.25f);
-        }
-        else if (count == 3) //three plants 1 tile
-        {
-
-
-        }
-
-
+     
 
     }
 

@@ -63,6 +63,9 @@ public class BuyMode : MonoBehaviour
                     StartCoroutine(liftcamera());
                     buybuttonscript.panelEnabled = false;
 
+                    //if multi-buy TODO
+
+                    GameObject.Find("Tiles").BroadcastMessage("activateColliders",true);
                     RenderSettings.skybox = Globals.Instance.light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
 
                     DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
@@ -96,6 +99,8 @@ public class BuyMode : MonoBehaviour
 
         Globals.Instance.cameraBlur.enabled = false;
         //effects and pltoselectors
+
+        GameObject.Find("Tiles").BroadcastMessage("activateColliders", false);
         StartCoroutine(liftcamera());
         RenderSettings.skybox = Globals.Instance.dark_skybox;
         GameObject.Find("_GameScripts").GetComponent<PlotSelector>().plotselectors.SetActive(true);

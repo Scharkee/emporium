@@ -57,23 +57,36 @@ public class TileOperator : MonoBehaviour
             { // augalas
                 int prog = tile.GetComponent<BuildingScript>().thistile.START_OF_GROWTH + tile.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT;
 
+                if (!tileScript.colliderSet)
+                {
+               
+
+                    tile.GetComponent<BoxCollider>().center =  new Vector3(0 , transform.lossyScale.y / 2, 0);
+
+
+                    tile.GetComponent<BoxCollider>().size =new Vector3(1,transform.lossyScale.y,1);
+                    tileScript.colliderSet = true;
+                }
+
+
+
                 if (socman.unix >= prog && !tileScript.justSpawned)
                 {
 
-
+                    GameObject vaisiaiPrefab = Resources.Load("Plants/done/" + tileScript.thistile.NAME + "_vaisiai") as GameObject;
                     tileScript.TileGrown = true;
 
 
                     if (!tile.transform.FindChild(tileScript.thistile.NAME + "_vaisiai(Clone)"))
                     {
-                        Vector3 mainTreeScale = new Vector3();
+              
 
-                        GameObject vaisiaiPrefab = Resources.Load("Plants/done/" + tileScript.thistile.NAME + "_vaisiai") as GameObject;
+                        
 
                         foreach (Transform child in tile.transform)
                         {
                             //yra papildomu medziu ant tile
-                            if (child.name == tileScript.thistile.NAME + "(Clone)")
+                            if (child.name == tileScript.thistile.NAME + "(Clone)"|| child.name == tileScript.thistile.NAME)
                             {
 
                                 GameObject vaisiai = Instantiate(vaisiaiPrefab, new Vector3(child.transform.position.x, child.transform.position.y, child.transform.position.z), child.transform.rotation, child.transform) as GameObject;
@@ -82,18 +95,14 @@ public class TileOperator : MonoBehaviour
                             }
                             else if (child.name != tileScript.thistile.NAME + "(Clone)" && child.name != tileScript.thistile.NAME + "_vaisiai(Clone)")
                             {
-                                Debug.Log("aptiktas medzio modelis");
-                                mainTreeScale = child.transform.localScale;
+                                Debug.Log("aptiktas pasalinis objektas");
+                              
 
                             }
 
 
                         }
 
-                        //one final instantiate for main tree's fruits
-                        GameObject mainVaisiai = Instantiate(vaisiaiPrefab, new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z), tile.transform.rotation, tile.transform) as GameObject;
-                        //paskutinis scale pagrindinio medzio vaisiams
-                        mainVaisiai.transform.localScale = mainTreeScale;
 
                     }
 
