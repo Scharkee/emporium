@@ -20,7 +20,11 @@ public class Globals : MonoBehaviour
     public BlurOptimized cameraBlur;
     public Bloom cameraBloom;
 
+    //plotselector mat refs
 
+    public Material plotselector_standard;
+    public Material plotselector_upgradeable;
+    public Material plotselector_unavailable;
 
     //colors
     public Color buttonActiveColor1;

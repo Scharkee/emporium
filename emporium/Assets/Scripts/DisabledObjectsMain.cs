@@ -33,11 +33,6 @@ public class DisabledObjectsMain : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        SubmitButton = GameObject.Find("SubmitButton");
-        UnamePassInputField = GameObject.Find("UnamePassInputField");
-        UnamePassText = GameObject.Find("UnamePassText");
-        titleText= GameObject.Find("TitleText");
-        MainCanvas = GameObject.Find("Canvas");
-        LoginButton= GameObject.Find("LoginButton");
+
     }
 }

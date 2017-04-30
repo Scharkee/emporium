@@ -50,30 +50,12 @@ public class DisabledObjectsGameScene : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        Inventory_Fruit_panel = GameObject.Find("Inventory_Fruit_panel");
         Inventory_Fruit_panel.SetActive(false);
         socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
-        PressContextPanel = GameObject.Find("PressContextPanel");
-        LoadingPanel = GameObject.Find("LoadingPanel");
-        SellingPanel = GameObject.Find("SellingContextPanel");
-        Tiles = GameObject.Find("Tiles");
-        BuyMenuPanel = GameObject.Find("BuyMenuPanel");
+
         Selector = GameObject.Find("Selector");
-        alertPanel = GameObject.Find("alertPanel");
-        managerialScripts = GameObject.Find("_ManagerialScripts");
-        StatsContextPanel = GameObject.Find("StatsContextPanel");
-
-        gridPlants = GameObject.Find("OptionGrid");
-        gridBuildings = GameObject.Find("OptionGridBuildings");
-        BuyMode = GameObject.Find("BuyMode_Selector");
 
 
-        moneyEdit = GameObject.Find("MoneyEdit");
-        tileSellScript = GameObject.Find("SellScript");
-        PlotSelectors = GameObject.Find("PlotSelectors");
-
-        BuyButton = GameObject.Find("BuyButton");
-        SellButton = GameObject.Find("SellTileButton");
     }
 
 

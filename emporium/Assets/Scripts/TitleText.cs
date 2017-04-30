@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitleText : MonoBehaviour {
+public class TitleText : MonoBehaviour
+{
 
     private float startTimer = 1.5f;
     private Color currentColor;
@@ -11,11 +12,14 @@ public class TitleText : MonoBehaviour {
     private Text text;
     private bool nextColorGenerated = false;
     private float transitionTimer = 3f;
-    private float pulseTimer = 4f; 
+    private float pulseTimer = 4f;
     private bool resetPulse = false;
     GameObject ghost;
-    private bool ghost_done = false;
 
+    private bool ghost_done = false;
+    private bool ghostBack = false;
+
+    public float colorChangeAdditive = 0;
 
 
     private void Start()
@@ -26,39 +30,46 @@ public class TitleText : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
 
 
         if (startTimer > 0)
         {
             startTimer -= Time.deltaTime;
-        }else
+        }
+        else
         {
-            
+
 
             if (!nextColorGenerated)
             {
 
-                nextColor = Random.ColorHSV(0f,1f,0.7f,1f,1f,1f,1f,1f);
+                nextColor = Random.ColorHSV(0f, 1f, 0.7f, 1f, 1f, 1f, 1f, 1f);
 
                 nextColorGenerated = true;
             }
 
-            if(transitionTimer>0)
+            if (transitionTimer > 0)
             {
                 //do transit
 
 
                 transitionTimer -= Time.deltaTime;
 
-                gameObject.GetComponent<Text>().color= Color.Lerp(gameObject.GetComponent<Text>().color, nextColor,0.01f);
+                Debug.Log(colorChangeAdditive);
+                gameObject.GetComponent<Text>().color = Color.Lerp(gameObject.GetComponent<Text>().color, nextColor, colorChangeAdditive);
+                ghost.GetComponent<Text>().color = Color.Lerp(new Color(gameObject.GetComponent<Text>().color.r,gameObject.GetComponent<Text>().color.g, gameObject.GetComponent<Text>().color.b,0.05f), nextColor, colorChangeAdditive);
 
+            
+                ghost.transform.localScale = Vector3.Lerp(ghost.transform.localScale, gameObject.transform.localScale * (1 + colorChangeAdditive/2),0.5f);
+              
             }
             else
             {
                 transitionTimer = 3f;
-  
+
                 nextColorGenerated = false;
 
 
@@ -68,78 +79,18 @@ public class TitleText : MonoBehaviour {
 
         }
 
-/*
-        if (!resetPulse)
-        {
-            if(pulseTimer > 0 )
-            {
-                pulseTimer -= Time.deltaTime;
-                transform.localScale = Vector3.Lerp(transform.localScale,new Vector3(1.2f,1.2f,1.2f),Time.deltaTime*5);
 
-                if (!ghost_done)
-                {
-                    ghostOut();
-                    ghost_done = true;
-                }
-            }
-            else
-            {
-                pulseTimer = 2f;
-                resetPulse = true;
-
-            }
-           
-
-            
-        }else
-        {
-            if (pulseTimer > 0)
-            {
-                pulseTimer -= Time.deltaTime;
-                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1f, 1f,1f), Time.deltaTime * 10);
-            }
-            else
-            {
-                pulseTimer = 2f;
-                resetPulse = false;
-
-            }
-            
-
-        }
-
-    */
-
-	}
-
-
-    private void ghostOut()
-    {
-        ghost = GameObject.Find("TitleTextGhost");
-        Color temp = text.color;
-        temp.a = 0.1f;
-        ghost.GetComponent<Text>().color = temp;
-
-        StartCoroutine(ghoster());
-
-
+   
 
     }
 
-    private IEnumerator ghoster()
+
+ 
+  
+
+    private void returnGhost(GameObject ghost)
     {
-        Vector3 maxScale=new Vector3(50f,50f,50f);
-
-        while (ghost.transform.localScale.x < 9.9f)
-        {
-            yield return new WaitForSeconds(0.01f);
-            ghost.GetComponent<Text>().color = Color.Lerp(ghost.GetComponent<Text>().color,new Color(1f,1f,1f,0f),0.1f);
-            ghost.transform.localScale = Vector3.Lerp(ghost.transform.localScale, maxScale,Time.deltaTime);
-
-        }
-
-        Destroy(ghost);
-        
-
+        ghostBack = true;
+        ghost.transform.localScale = gameObject.transform.localScale * 2;
     }
 }

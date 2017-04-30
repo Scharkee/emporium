@@ -65,7 +65,7 @@ public class TileOperator : MonoBehaviour
                     }
 
 
-
+                    Debug.Log(socman.unix + " is more than " + prog);
                     if (socman.unix >= prog && !tileScript.justSpawned)
                     {
 

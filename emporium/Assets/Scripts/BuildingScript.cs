@@ -221,7 +221,7 @@ public class BuildingScript : MonoBehaviour
 
 
     }
-    void activateColliders(bool active)
+    public void activateColliders(bool active)
     {
         GetComponent<BoxCollider>().enabled = active;
 
@@ -264,13 +264,14 @@ public class BuildingScript : MonoBehaviour
                     }
 
                 }
+              
+                thistile.START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
 
-                Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
-
+               
                 TileGrown = false;
 
 
-                thistile = Database.Instance.tile[idInTileDatabase];
+               
 
                 notifyOfProduceAmount(float.Parse(evt.data.GetField("harvestAmount").ToString()));
 
