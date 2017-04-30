@@ -20,6 +20,8 @@ public class Globals : MonoBehaviour
     public BlurOptimized cameraBlur;
     public Bloom cameraBloom;
 
+
+
     //colors
     public Color buttonActiveColor1;
     public Color buttonColor1;

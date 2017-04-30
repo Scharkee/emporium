@@ -68,7 +68,7 @@ public class TitleText : MonoBehaviour {
 
         }
 
-
+/*
         if (!resetPulse)
         {
             if(pulseTimer > 0 )
@@ -108,7 +108,7 @@ public class TitleText : MonoBehaviour {
 
         }
 
-
+    */
 
 	}
 

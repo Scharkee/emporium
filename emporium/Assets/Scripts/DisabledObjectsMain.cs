@@ -11,9 +11,11 @@ public class DisabledObjectsMain : MonoBehaviour
     public GameObject UnamePassInputField;
     public GameObject UnamePassText;
     public GameObject MainCanvas;
+    public GameObject titleText;
+    public GameObject LoginButton;
 
-
-
+    public Color blueish;
+    public Color defaultcolor;
     // Use this for initialization
     void Start()
     {
@@ -34,8 +36,8 @@ public class DisabledObjectsMain : MonoBehaviour
         SubmitButton = GameObject.Find("SubmitButton");
         UnamePassInputField = GameObject.Find("UnamePassInputField");
         UnamePassText = GameObject.Find("UnamePassText");
-
+        titleText= GameObject.Find("TitleText");
         MainCanvas = GameObject.Find("Canvas");
-
+        LoginButton= GameObject.Find("LoginButton");
     }
 }
