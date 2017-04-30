@@ -72,13 +72,13 @@ public class ProduceSelling : MonoBehaviour
         if (GameObject.Find("SellListItem_produce_InputField_apples").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "obuoliai";
-            sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_apples").GetComponent<InputField>().text;
+            sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_apples").GetComponent<InputField>().text;
             salesNum++;
         }
         if (GameObject.Find("SellListItem_juice_InputField_apples").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "obuoliai_sultys";
-            sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_apples").GetComponent<InputField>().text;
+            sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_apples").GetComponent<InputField>().text;
             salesNum++;
         }
         if (GameObject.Find("SellListItem_produce_InputField_pears").GetComponent<InputField>().text != "")

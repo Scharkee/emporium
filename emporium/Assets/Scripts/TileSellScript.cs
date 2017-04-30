@@ -126,10 +126,8 @@ public class TileSellScript : MonoBehaviour
 
     public void SellTile(int ID, string name)
     {
-
-
-
-
+        Debug.Log("selling "+name);
+        
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
         data["SellTileID"] = ID.ToString();

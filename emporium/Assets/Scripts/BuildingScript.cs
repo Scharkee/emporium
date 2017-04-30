@@ -293,10 +293,10 @@ public class BuildingScript : MonoBehaviour
                 Debug.Log("this just in");
 
 
+                Debug.Log("reaching for "+ thistile.WORK_NAME + "_sultys");
+                Database.Instance.Inventory[thistile.WORK_NAME + "_sultys"] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
 
-                Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME + "_sultys"] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
-
-
+                Debug.Log("this just asdasdn");
 
                 Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
 
