@@ -52,7 +52,7 @@ public class IdentifierScript : MonoBehaviour
     public void setPlayerInfo(string val)
     {
 
-        InputField inpf = GameObject.Find("UnamePassInputField").GetComponent<InputField>();
+        InputField inpf = DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>();
 
 
 
@@ -61,7 +61,7 @@ public class IdentifierScript : MonoBehaviour
         {
             GlobalControl.Instance.Uname = val;
             GlobalControl.Instance.Logincount++;
-            GameObject.Find("UnamePassText").GetComponent<Text>().text = "Enter your password";
+            DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = "Enter your password";
 
         }
         else if (GlobalControl.Instance.Logincount == 2)
@@ -70,7 +70,7 @@ public class IdentifierScript : MonoBehaviour
             GlobalControl.Instance.Logincount++;
             Debug.Log(GlobalControl.Instance.Logincount);
 
-            GameObject.Find("UnamePassInputField").GetComponent<InputField>().text = string.Empty;
+            inpf.text = string.Empty;
 
             logcheck.LogInCh(GlobalControl.Instance.Uname, GlobalControl.Instance.Pass);
 

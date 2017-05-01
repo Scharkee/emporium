@@ -52,11 +52,11 @@ public class BuyMode : MonoBehaviour
             {
                 if (hit.transform.tag == "Selector")
                 {
-
+                    
                     if (Input.GetMouseButtonDown(0))
                     {
 
-
+                        EnableGroundCol(true);
                         float X = hit.transform.localPosition.x;
                         float Z = hit.transform.localPosition.z;
 
@@ -77,6 +77,7 @@ public class BuyMode : MonoBehaviour
                         GameObject.Find("BuyScript").GetComponent<BuyScript>().ChoosePlot(buildingName, X, Z);
                         DisabledObjectsGameScene.Instance.BuyButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
                         Globals.Instance.cameraBlur.blurSize = 0;
+                        
 
                     }
 
@@ -108,8 +109,15 @@ public class BuyMode : MonoBehaviour
         RenderSettings.skybox = Globals.Instance.dark_skybox;
         DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(true);
 
+        EnableGroundCol(false);
+
         adaptPlotSelectors(name);
 
+    }
+
+    public void EnableGroundCol(bool enabled)
+    {
+        DisabledObjectsGameScene.Instance.RealGround.GetComponent<BoxCollider>().enabled = enabled;
     }
 
 
@@ -182,6 +190,7 @@ public class BuyMode : MonoBehaviour
         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(MenupanelActive);
 
         DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", true);
+        EnableGroundCol(true);
 
         disableQueued = true;
 

@@ -30,9 +30,8 @@ public class PlayerInfoLoaderBank : MonoBehaviour
         db = gameObject.GetComponent<Database>();
 
         assigner = gameObject.GetComponent<AssignTiles>();
-
-        GameObject go = GameObject.Find("SocketIO");
-        socket = go.GetComponent<SocketIOComponent>();
+        
+        socket = DisabledObjectsGameScene.Instance.socket;
 
         globalcontr = GameObject.Find("GlobalObject").GetComponent<GlobalControl>();
 
@@ -59,14 +58,14 @@ public class PlayerInfoLoaderBank : MonoBehaviour
 
     void LoadEverythingAndSetUI()
     {
-        Text moneytext = GameObject.Find("MoneyEdit").GetComponent<Text>();
+        Text moneytext = DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>();
         Text usertext = GameObject.Find("PlayingAsEdit").GetComponent<Text>();
 
         moneytext.text = Database.Instance.UserDollars.ToString();
         usertext.text = GlobalControl.Instance.Uname;
 
 
-        RotationScript rotscript = GameObject.Find("Main Camera").GetComponent<RotationScript>();
+        RotationScript rotscript = Camera.main.GetComponent<RotationScript>();
         rotscript.SetCurrentRotCenter(lygusnelygusPlot());//also sets ground transform
 
         GameObject.Find("Ground").transform.localScale = new Vector3(Database.Instance.UserPlotSize, 1f, Database.Instance.UserPlotSize);
@@ -139,7 +138,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour
 
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
-        Debug.Log("asking for tile data");
+
 
         socket.Emit("GET_TILE_INFORMATION", new JSONObject(data));
         socket.Emit("GET_TILE_DATA", new JSONObject(data));

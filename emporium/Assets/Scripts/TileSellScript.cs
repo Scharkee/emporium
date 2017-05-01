@@ -35,7 +35,7 @@ public class TileSellScript : MonoBehaviour
 
         if (DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf) //buymenu panel is currently open
         {
-            StartCoroutine(GameObject.Find("BuyButton").GetComponent<BuyButtonScript>().BuyMenuPanelFader());
+            StartCoroutine(DisabledObjectsGameScene.Instance.BuyButton.GetComponent<BuyButtonScript>().BuyMenuPanelFader());
 
         }
         if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
@@ -126,8 +126,8 @@ public class TileSellScript : MonoBehaviour
 
     public void SellTile(int ID, string name)
     {
-        Debug.Log("selling "+name);
-        
+        Debug.Log("selling " + name);
+
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
         data["SellTileID"] = ID.ToString();

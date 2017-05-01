@@ -58,7 +58,7 @@ public class TitleText : MonoBehaviour
 
                 transitionTimer -= Time.deltaTime;
 
-                Debug.Log(colorChangeAdditive);
+
                 gameObject.GetComponent<Text>().color = Color.Lerp(gameObject.GetComponent<Text>().color, nextColor, colorChangeAdditive);
                 ghost.GetComponent<Text>().color = Color.Lerp(new Color(gameObject.GetComponent<Text>().color.r,gameObject.GetComponent<Text>().color.g, gameObject.GetComponent<Text>().color.b,0.05f), nextColor, colorChangeAdditive);
 

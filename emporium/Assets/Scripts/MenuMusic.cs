@@ -34,12 +34,13 @@ public class MenuMusic : MonoBehaviour
 
         spectrumScale = 1f + ((spectrum[specStat1] + spectrum[specStat2]) * curveEnhancer);
 
-        DisabledObjectsMain.Instance.titleText.transform.localScale = Vector3.Lerp(DisabledObjectsMain.Instance.titleText.transform.localScale, new Vector3(spectrumScale, spectrumScale, spectrumScale), 0.1f);
+        DisabledObjectsMain.Instance.titleText.transform.localScale = Vector3.Lerp(DisabledObjectsMain.Instance.titleText.transform.localScale, new Vector3(Mathf.Clamp(spectrumScale, 1,1.3f) , Mathf.Clamp(spectrumScale, 1, 1.3f), Mathf.Clamp(spectrumScale, 1, 1.3f) ), 0.01f);
         Camera.main.GetComponent<Fisheye>().strengthX = Mathf.Lerp(Camera.main.GetComponent<Fisheye>().strengthX, (spectrumScale - 1) / 2, 0.2f);
         Camera.main.GetComponent<Fisheye>().strengthY = Mathf.Lerp(Camera.main.GetComponent<Fisheye>().strengthY, (spectrumScale - 1) / 2, 0.2f);
 
+      
         DisabledObjectsMain.Instance.titleText.GetComponent<TitleText>().colorChangeAdditive = (spectrumScale - 1) * 2;
-
+        
     }
 
 
