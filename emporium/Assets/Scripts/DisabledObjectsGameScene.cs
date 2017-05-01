@@ -26,7 +26,8 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public GameObject BuyButton;
     public GameObject BuyMode;
     public GameObject SellingPanel;
-
+    public GameObject RealGround;
+    public GameObject PlaceholderGround;
 
 
     public static DisabledObjectsGameScene Instance;

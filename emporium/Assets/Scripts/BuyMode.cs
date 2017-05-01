@@ -20,7 +20,7 @@ public class BuyMode : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
+        buybuttonscript = DisabledObjectsGameScene.Instance.BuyButton.GetComponent<BuyButtonScript>();
 
         buybuttonscript.panelEnabled = false;
         disableQueued = false;
@@ -35,7 +35,7 @@ public class BuyMode : MonoBehaviour
     {
 
 
-        buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
+        
     }
 
     // Update is called once per frame
@@ -60,14 +60,14 @@ public class BuyMode : MonoBehaviour
                         float X = hit.transform.localPosition.x;
                         float Z = hit.transform.localPosition.z;
 
-                        GameObject.Find("PlotSelectors").SetActive(false);
+                        DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(false);
 
                         StartCoroutine(liftcamera());
                         buybuttonscript.panelEnabled = false;
 
                         //if multi-buy TODO
 
-                        GameObject.Find("Tiles").BroadcastMessage("activateColliders", true);
+                        DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", true);
                         RenderSettings.skybox = Globals.Instance.light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
 
                         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
@@ -103,10 +103,10 @@ public class BuyMode : MonoBehaviour
         Globals.Instance.cameraBlur.enabled = false;
         //effects and pltoselectors
 
-        GameObject.Find("Tiles").BroadcastMessage("activateColliders", false);
+        DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", false);
         StartCoroutine(liftcamera());
         RenderSettings.skybox = Globals.Instance.dark_skybox;
-        GameObject.Find("_GameScripts").GetComponent<PlotSelector>().plotselectors.SetActive(true);
+        DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(true);
 
         adaptPlotSelectors(name);
 
@@ -181,14 +181,14 @@ public class BuyMode : MonoBehaviour
 
         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(MenupanelActive);
 
-        GameObject.Find("Tiles").BroadcastMessage("activateColliders", true);
+        DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", true);
 
         disableQueued = true;
 
     }
 
     private void adaptPlotSelectors(string name)
-    {
+    { //highlighter for upgradeable tiles + grey out for unavailable ones
 
         foreach (Transform selector in DisabledObjectsGameScene.Instance.PlotSelectors.transform)
         {
@@ -202,7 +202,13 @@ public class BuyMode : MonoBehaviour
 
                 if (tile.transform.position.x == selector.position.x && tile.transform.position.z == selector.position.z)//selector is overlaping a tile
                 {
-                    if (tile.GetComponent<BuildingScript>().thistile.NAME == name)//same tile, mark for upgrading
+                    if (tile.GetComponent<BuildingScript>().thistile.NAME == name && tile.GetComponent<BuildingScript>().thistile.COUNT>=5)//max upgraded SAME tile. Mark unavailable.
+                    {
+                        selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_unavailable;
+                        selector.GetComponent<BoxCollider>().enabled = false;
+
+                    }
+                    else if (tile.GetComponent<BuildingScript>().thistile.NAME == name)//same tile, mark for upgrading
                     {
                         selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable;
 

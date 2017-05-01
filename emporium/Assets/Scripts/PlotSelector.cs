@@ -7,12 +7,11 @@ public class PlotSelector : MonoBehaviour
 
     public GameObject PlotSelectorPrefab;
 
-    public GameObject plotselectors;
 
     // Use this for initialization
     void Start()
     {
-        plotselectors = GameObject.Find("PlotSelectors");
+    
 
     }
 
@@ -59,7 +58,7 @@ public class PlotSelector : MonoBehaviour
             while (Xcount <= plotsz)
             {
 
-                GameObject currentplot = Instantiate(PlotSelectorPrefab, new Vector3(currentX, 0.1f, currentZ), Quaternion.identity, GameObject.Find("PlotSelectors").transform) as GameObject;
+                GameObject currentplot = Instantiate(PlotSelectorPrefab, new Vector3(currentX, 0.1f, currentZ), Quaternion.identity, DisabledObjectsGameScene.Instance.PlotSelectors.transform) as GameObject;
                 currentplot.transform.localScale = new Vector3(0.65f, 0.0234f, 0.65f);
 
                 currentX++;
@@ -77,9 +76,9 @@ public class PlotSelector : MonoBehaviour
 
         }
 
-        GameObject.Find("PlotSelectors").SetActive(false);
-
-
+        DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(false);
+        DisabledObjectsGameScene.Instance.RealGround.SetActive(true);
+        DisabledObjectsGameScene.Instance.PlaceholderGround.SetActive(false);
     }
 
 

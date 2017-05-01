@@ -31,7 +31,7 @@ public class StatContextManager : MonoBehaviour
 
                 }
 
-            }else if (hit.transform.tag == "Building")
+            }else if (hit.transform.tag == "Building" && !DisabledObjectsGameScene.Instance.alertPanel.activeSelf && !DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf)
             {
 
                 ContextManager.Instance.ShowStats(hit.transform.gameObject);

@@ -79,7 +79,7 @@ public class BuildingScript : MonoBehaviour
     {
 
 
-        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled|| DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
+        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled|| DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf|| DisabledObjectsGameScene.Instance.alertPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
         {
 
 

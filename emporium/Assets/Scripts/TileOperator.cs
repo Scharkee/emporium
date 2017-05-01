@@ -65,7 +65,7 @@ public class TileOperator : MonoBehaviour
                     }
 
 
-                    Debug.Log(socman.unix + " is more than " + prog);
+
                     if (socman.unix >= prog && !tileScript.justSpawned)
                     {
 
@@ -142,8 +142,7 @@ public class TileOperator : MonoBehaviour
         {
 
             firstLoadCompleted = true;
-            GameObject loadpanel = GameObject.Find("LoadingPanel");
-            Destroy(loadpanel);
+            Destroy(DisabledObjectsGameScene.Instance.LoadingPanel);
             Globals.Instance.cameraBlur.blurSize = 0;
             Globals.Instance.cameraBlur.enabled = false;
 
