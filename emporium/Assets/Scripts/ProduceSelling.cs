@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class ProduceSelling : MonoBehaviour
 {
 
+    private bool firstPricesTaken = false;
+    private Prices newPrices;
+    private Prices oldprices;
 
     SocketIOComponent socket;
     // Use this for initialization
@@ -17,6 +20,31 @@ public class ProduceSelling : MonoBehaviour
         socket.On("SALE_VERIFICATION", ReceiveSaleVerification);
 
     }
+    private void Update()
+    {
+        if (DisabledObjectsGameScene.Instance.pricemanager.priceUpdateTimer <= 0)
+        {
+
+
+            newPrices = DisabledObjectsGameScene.Instance.pricemanager.SalePanelAdaptingPrices();
+            oldprices = Database.Instance.oldPrices[0];
+
+            AdaptPrices(newPrices);
+
+        }
+    }
+
+    private void AdaptPrices(Prices prices)
+    {
+
+
+
+
+
+
+    }
+
+
 
     public void AskForSaleVerification(Dictionary<string, string> sale)
     {

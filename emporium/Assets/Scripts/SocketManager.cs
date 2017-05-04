@@ -45,7 +45,9 @@ public class SocketManager : MonoBehaviour
         socket.On("ADD_FUNDS", AddFunds);
         socket.On("UPDATE_PLOT_SIZE", UpdatePlotSize);
         socket.On("UPGRADE_TILE",UpgradeTile);
+        socket.On("RECEIVE_PRICES", ReceivePrices);
 
+        RetrievePrices();
     }
 
 
@@ -189,6 +191,19 @@ public class SocketManager : MonoBehaviour
         data["Uname"] = GlobalControl.Instance.Uname;
         socket.Emit("VERIFY_EXPAND_PLOTSIZE", new JSONObject(data));
 
+    }
+
+    public void RetrievePrices()
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data["Uname"] = GlobalControl.Instance.Uname;
+        socket.Emit("GET_PRICES", new JSONObject(data));
+
+    }
+
+    public void ReceivePrices(SocketIOEvent evt)
+    {
+        DisabledObjectsGameScene.Instance.pricemanager.ResolvePrices(evt);
     }
 
     public IEnumerator logOffWithDelay(float delay)

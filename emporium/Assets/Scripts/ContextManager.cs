@@ -143,11 +143,17 @@ public class ContextManager : MonoBehaviour
             TimeSpan ts = TimeSpan.FromSeconds(time);
 
 
-            if (time <= 0)
+            if (time <= 0 && buildingscript.thistile.BUILDING_CURRENT_WORK_AMOUNT!=0) //pilnas
             {
                 finishedString = GlobalControl.Instance.currentLangDict["done_collect"];
+            }else if (time <= 0) //tuscias
+            {
+
+                finishedString = GlobalControl.Instance.currentLangDict["job_unassigned"];
+
+
             }
-            else
+            else //veikiantis 
             {
                 finishedString = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
             }

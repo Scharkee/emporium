@@ -31,11 +31,21 @@ public class StatContextManager : MonoBehaviour
                     ContextManager.Instance.CloseStatPanel();
 
                 }
-                if (lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.activeSelf)
+                try
                 {
-                    lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(false);
+
+                    if (lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.activeSelf)
+                    {
+                        lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(false);
+
+                    }
 
                 }
+                catch
+                {
+
+                }
+
 
             }
             else if (hit.transform.tag == "Building" && !DisabledObjectsGameScene.Instance.alertPanel.activeSelf && !DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf)
@@ -63,6 +73,21 @@ public class StatContextManager : MonoBehaviour
                 ContextManager.Instance.CloseStatPanel();
 
             }
+            try
+            {
+                if (lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.activeSelf)
+                {
+                    lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(false);
+
+                }
+
+            }
+            catch
+            {
+
+            }
+
+
 
 
 

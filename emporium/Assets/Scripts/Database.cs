@@ -22,7 +22,10 @@ public class Database : MonoBehaviour
     public Tile[] tile;
     public Building[] buildinginfo;
     public Inventory[] inventory; //one temp invo for JSON conversion
+    public Prices[] prices;
+    public Prices[] oldPrices;
     public Dictionary<string, float> Inventory;  // main inventory
+    public Dictionary<string, float> Prices;  // main inventory
 
 
     public List<GameObject> ActiveTiles = new List<GameObject>(); //tiles su kuriom daromos operacijos main update cikle.
@@ -90,13 +93,6 @@ public class Database : MonoBehaviour
 
 
 
-    // Use this for initialization
-    void Start()
-    {
-
-
-
-    }
 
 
 
@@ -137,7 +133,35 @@ public class BuyButtons
 
 [System.Serializable]
 public class Inventory
-{
+{//EXPNEWTREES
+
+
+    public float apelsinai;
+    public float apelsinai_sultys;
+    public float obuoliai;
+    public float obuoliai_sultys;
+    public float vysnios;
+    public float vysnios_sultys;
+    public float slyvos;
+    public float slyvos_sultys;
+    public float bananai;
+    public float bananai_sultys;
+    public float arbuzai;
+    public float arbuzai_sultys;
+    public float kriauses;
+    public float kriauses_sultys;
+    public float nektarinai_sultys;
+    public float nektarinai;
+    public float kiviai;
+    public float kiviai_sultys;
+    public float persikai;
+    public float persikai_sultys;
+
+
+}
+
+public class Prices
+{//EXPNEWTREES
 
 
     public float apelsinai;

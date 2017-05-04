@@ -73,6 +73,7 @@ public class Languages : MonoBehaviour
             english.Add("templog", "temporary");
             english.Add("loading", "Loading...");
             english.Add("done_plant_growth", "Ready to Harvest.");
+            english.Add("job_unassigned", "Idle.");
             english.Add("done_collect", "Ready to Collect.");
 
 

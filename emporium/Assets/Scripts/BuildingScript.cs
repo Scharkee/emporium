@@ -81,7 +81,7 @@ public class BuildingScript : MonoBehaviour
     {
 
 
-        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled|| DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf|| DisabledObjectsGameScene.Instance.alertPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
+        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled|| DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf|| DisabledObjectsGameScene.Instance.alertPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf || DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
         {
 
 
@@ -299,7 +299,7 @@ public class BuildingScript : MonoBehaviour
                 Debug.Log("reaching for "+ thistile.WORK_NAME + "_sultys");
                 Database.Instance.Inventory[thistile.WORK_NAME + "_sultys"] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
 
-                Debug.Log("this just asdasdn");
+                Debug.Log("new amount: " + float.Parse(evt.data.GetField("currentProduceAmount").ToString()));
 
                 Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
 

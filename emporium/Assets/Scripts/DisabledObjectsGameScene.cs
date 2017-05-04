@@ -28,6 +28,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public GameObject SellingPanel;
     public GameObject RealGround;
     public GameObject PlaceholderGround;
+    public PriceManager pricemanager;
 
 
     public static DisabledObjectsGameScene Instance;
@@ -53,7 +54,6 @@ public class DisabledObjectsGameScene : MonoBehaviour
         Instance = this;
         Inventory_Fruit_panel.SetActive(false);
         socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
-
         Selector = GameObject.Find("Selector");
 
 
