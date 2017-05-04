@@ -465,14 +465,23 @@ public class AssignTiles : MonoBehaviour
 
 
         GameObject currentTilePrefab = Resources.Load("Plants/" + tilename) as GameObject;
-        GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(X, 0f, Z), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), GameObject.Find("Tiles").transform) as GameObject;
-        // currentTile.transform.localScale = new Vector3(Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f), Random.Range(0.05f, 0.09f));  FIXME: ask unity teacher y not workin
+        GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(X, 0f, Z), Quaternion.Euler(new Vector3(xRot,0, 0)), GameObject.Find("Tiles").transform) as GameObject;
+
+        foreach (Transform child in currentTile.transform)
+        {
+
+            if (child.name == "SelectionGlow")
+            {
 
 
+            }
+            else
+            {
+                child.localRotation = Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0));
 
 
-
-
+            }
+        }
 
 
         currentTile.GetComponent<BuildingScript>().thistile.START_OF_GROWTH = socman.unix;
