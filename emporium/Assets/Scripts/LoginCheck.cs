@@ -96,6 +96,7 @@ public class LoginCheck : MonoBehaviour
         }
         else if (stat == 3)
         {
+            Debug.Log("user already logged in.");
             //user already logged in from another PC.
             //TODO: Flash "logged in already" here, and reask for password
 

@@ -25,6 +25,8 @@ public class BuildingScript : MonoBehaviour
     public AudioClip yeh;
     public AudioClip noh;
 
+    public GameObject SelectionGlowObject;
+
 
 
     //both

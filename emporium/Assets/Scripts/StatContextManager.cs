@@ -17,6 +17,7 @@ public class StatContextManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit lasthit = hit;
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
@@ -30,11 +31,22 @@ public class StatContextManager : MonoBehaviour
                     ContextManager.Instance.CloseStatPanel();
 
                 }
+                if (lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.activeSelf)
+                {
+                    lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(false);
 
-            }else if (hit.transform.tag == "Building" && !DisabledObjectsGameScene.Instance.alertPanel.activeSelf && !DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf)
+                }
+
+            }
+            else if (hit.transform.tag == "Building" && !DisabledObjectsGameScene.Instance.alertPanel.activeSelf && !DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf)
             {
 
                 ContextManager.Instance.ShowStats(hit.transform.gameObject);
+                if (!hit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.activeSelf)
+                {
+                    hit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(true);
+
+                }
             }
 
           
