@@ -29,7 +29,8 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public GameObject RealGround;
     public GameObject PlaceholderGround;
     public PriceManager pricemanager;
-
+    public GameObject EconomyButton;
+    public GameObject EconomyPanel;
 
     public static DisabledObjectsGameScene Instance;
 
@@ -42,6 +43,8 @@ public class DisabledObjectsGameScene : MonoBehaviour
         alertPanel.SetActive(false);
         StatsContextPanel.SetActive(false);
         SellingPanel.SetActive(false);
+        EconomyPanel.SetActive(false);
+
         //  StartCoroutine(delayedDisable());
 
 

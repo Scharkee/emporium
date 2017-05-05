@@ -84,7 +84,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ListItemPrice.cs" />
+    <Compile Include="Assets\EconomyPanelListItem.cs" />
+    <Compile Include="Assets\EconomyPanelScript.cs" />
     <Compile Include="Assets\Scripts\AssignTiles.cs" />
     <Compile Include="Assets\Scripts\BuildingScript.cs" />
     <Compile Include="Assets\Scripts\BuyButtonScript.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\Scripts\Database.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsGameScene.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsMain.cs" />
+    <Compile Include="Assets\Scripts\EconomyButtonScript.cs" />
     <Compile Include="Assets\Scripts\ForgotPassScript.cs" />
     <Compile Include="Assets\Scripts\GameAlerts.cs" />
     <Compile Include="Assets\Scripts\GlobalControl.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Assets\Scripts\InvExpander.cs" />
     <Compile Include="Assets\Scripts\InventoryPanel.cs" />
     <Compile Include="Assets\Scripts\Languages.cs" />
+    <Compile Include="Assets\Scripts\ListItemPrice.cs" />
     <Compile Include="Assets\Scripts\LoginCheck.cs" />
     <Compile Include="Assets\Scripts\MenuMusic.cs" />
     <Compile Include="Assets\Scripts\MoneyTracker.cs" />

@@ -22,19 +22,7 @@ public class ProduceSelling : MonoBehaviour
     }
     private void Update()
     {
-        /*
-        if (DisabledObjectsGameScene.Instance.pricemanager.priceUpdateTimer <= 0)
-        {
-            Debug.Log("timer is done");
 
-
-            newPrices = DisabledObjectsGameScene.Instance.pricemanager.SalePanelAdaptingPrices();
-            oldprices = Database.Instance.oldPrices[0];
-
-            AdaptPrices(newPrices);
-
-        }
-        */
     }
 
 

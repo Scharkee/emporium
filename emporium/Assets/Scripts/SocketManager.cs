@@ -210,7 +210,7 @@ public class SocketManager : MonoBehaviour
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
         socket.Emit("GET_PRICES", new JSONObject(data));
-        Debug.Log("asking for prices");
+
 
     }
 

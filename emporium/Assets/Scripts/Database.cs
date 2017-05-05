@@ -26,7 +26,7 @@ public class Database : MonoBehaviour
     public Prices[] oldPrices;
     public Dictionary<string, float> Inventory;  // main inventory
     public Dictionary<string, float> Prices;  // main inventory
-
+    public Dictionary<string, float> Oldprices;  // main inventory
 
     public List<GameObject> ActiveTiles = new List<GameObject>(); //tiles su kuriom daromos operacijos main update cikle.
 
@@ -168,7 +168,7 @@ public class Prices
     public int ID;
     public string NAME;
     public float PRICE;
-    
+
 }
 
 
