@@ -95,33 +95,20 @@ public class HelperScripts : MonoBehaviour
         return dic;
     }
 
-    public Dictionary<string, float> ReassignPrices(Prices pric)
+    public Dictionary<string, float> ReassignPrices(Prices[] pric)
     {
         Dictionary<string, float> dic = new Dictionary<string, float>();
 
-
-        dic.Add("kriauses", pric.kriauses);
-        dic.Add("kriauses_sultys", pric.kriauses_sultys);
-        dic.Add("apelsinai", pric.apelsinai);
-        dic.Add("apelsinai_sultys", pric.apelsinai_sultys);
-        dic.Add("arbuzai", pric.arbuzai);
-        dic.Add("arbuzai_sultys", pric.arbuzai_sultys);
-        dic.Add("bananai", pric.bananai);
-        dic.Add("bananai_sultys", pric.bananai_sultys);
-        dic.Add("obuoliai", pric.obuoliai);
-        dic.Add("obuoliai_sultys", pric.obuoliai_sultys);
-        dic.Add("slyvos", pric.slyvos);
-        dic.Add("slyvos_sultys", pric.slyvos_sultys);
-        dic.Add("vysnios", pric.vysnios);
-        dic.Add("vysnios_sultys", pric.vysnios_sultys);
-        dic.Add("persikai", pric.persikai);
-        dic.Add("persikai_sultys", pric.persikai_sultys);
-        dic.Add("kiviai", pric.kiviai);
-        dic.Add("kiviai_sultys", pric.kiviai_sultys);
-        dic.Add("nektarinai", pric.nektarinai);
-        dic.Add("nektarinai_sultys", pric.nektarinai_sultys);
+        foreach (Prices price in pric)
+        {
+            dic.Add(price.NAME, price.PRICE);
 
 
+
+        }
+
+        
+       
 
         return dic;
     }

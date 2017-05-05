@@ -90,9 +90,11 @@ public class AssignTiles : MonoBehaviour
         builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
         string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
 
+        Debug.Log(evtStringItems);
 
         Database.Instance.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);// assignment
 
+ 
 
         Database.Instance.Inventory = HelperScripts.Instance.ReassignInventory(Database.Instance.inventory[0]);
 

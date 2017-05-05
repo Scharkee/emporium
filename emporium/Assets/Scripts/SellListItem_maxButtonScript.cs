@@ -9,20 +9,37 @@ public class SellListItem_maxButtonScript : MonoBehaviour
 
     public InputField inp;
     public string prodName;
-    public Text price;
+    public Text pricetext;
     public Text SalePanelTotalstext;
-    private float lastValue = 0;
+    public ListItemPrice totalWeightCache;
 
+    public ListItemPrice priceLog;
+    public string Typename;
 
 
     public void TheClick()
     {
         inp.text = Database.Instance.Inventory[prodName].ToString();
 
+        float newamount = Database.Instance.Inventory[prodName];
+
+        //list item price(desinej)
+        priceLog.PriceCache[Typename] = newamount * Database.Instance.Prices[prodName];
+        priceLog.UpdatePrice(pricetext);
+
+
+
+        //total weight in the bottom of the panel
+
+        totalWeightCache.WeightCache[prodName] = newamount;
+
+        totalWeightCache.UpdateTotalWeight(SalePanelTotalstext);
+
     }
 
     private void Start()
     {
+       
         SalePanelTotalstext = DisabledObjectsGameScene.Instance.SellingPanel.transform.FindChild("Selling_totals_panel").transform.FindChild("Selling_totalsPanel_total_edit").gameObject.GetComponent<Text>();
 
     }
@@ -31,16 +48,43 @@ public class SellListItem_maxButtonScript : MonoBehaviour
     {
 
         inp.text = "";
+
+        float newamount =0;
+
+        //list item price(desinej)
+        priceLog.PriceCache[Typename] = newamount * Database.Instance.Prices[prodName];
+        priceLog.UpdatePrice(pricetext);
+
+
+
+        //total weight in the bottom of the panel
+
+        totalWeightCache.WeightCache[prodName] = newamount;
+
+        totalWeightCache.UpdateTotalWeight(SalePanelTotalstext);
     }
 
     public void maxOutValues()
     {
         inp.text = Database.Instance.Inventory[prodName].ToString();
+        float newamount = Database.Instance.Inventory[prodName];
+
+        //list item price(desinej)
+        priceLog.PriceCache[Typename] = newamount * Database.Instance.Prices[prodName];
+        priceLog.UpdatePrice(pricetext);
+
+
+
+        //total weight in the bottom of the panel
+        totalWeightCache.WeightCache[prodName] = newamount;
+
+        totalWeightCache.UpdateTotalWeight(SalePanelTotalstext);
+
     }
 
     public void KeepAtMaxValues(string str)
     {
-       
+
         //kad negaletu parduot daugiau negu turi.
         if (float.Parse(inp.text) > Database.Instance.Inventory[prodName])
         {
@@ -50,13 +94,22 @@ public class SellListItem_maxButtonScript : MonoBehaviour
 
 
         //pritaikau price price taip pat apacioj
-        float newprice = float.Parse(inp.text);
-        float old = lastValue;
-        //check if works
-        price.text =""+(float.Parse(price.text)- old) +(newprice*Database.Instance.Prices[prodName]);
-        SalePanelTotalstext.text = "" + (float.Parse(SalePanelTotalstext.text) - old) + (newprice * Database.Instance.Prices[prodName]);
+        float newamount = float.Parse(inp.text);
 
-        lastValue = newprice * Database.Instance.Prices[prodName];
+
+
+
+        //list item price(desinej)
+        priceLog.PriceCache[Typename] = newamount*Database.Instance.Prices[prodName];
+        priceLog.UpdatePrice(pricetext);
+
+
+
+        //total weight in the bottom of the panel
+       totalWeightCache.WeightCache[prodName] = newamount;
+
+        totalWeightCache.UpdateTotalWeight(SalePanelTotalstext);
+
 
 
     }

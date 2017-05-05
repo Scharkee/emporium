@@ -31,7 +31,7 @@ public class SocketManager : MonoBehaviour
         socket = DisabledObjectsGameScene.Instance.socket.GetComponent<SocketIOComponent>();
 
         StartCoroutine(UnixUpdater());
-
+        StartCoroutine(delayedPrices());
 
         socket.On("LASTONLINE_PING", SendAutosaveVerify);
         socket.On("VERIFY", Verification);
@@ -47,7 +47,19 @@ public class SocketManager : MonoBehaviour
         socket.On("UPGRADE_TILE",UpgradeTile);
         socket.On("RECEIVE_PRICES", ReceivePrices);
 
+        
+    }
+
+    IEnumerator delayedPrices()
+    {
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+        }
         RetrievePrices();
+
     }
 
 
@@ -198,11 +210,13 @@ public class SocketManager : MonoBehaviour
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
         socket.Emit("GET_PRICES", new JSONObject(data));
+        Debug.Log("asking for prices");
 
     }
 
     public void ReceivePrices(SocketIOEvent evt)
     {
+
         DisabledObjectsGameScene.Instance.pricemanager.ResolvePrices(evt);
     }
 
