@@ -9,7 +9,7 @@ public class RegisterScript : MonoBehaviour
 
     public void Click()
     {
-
+        Debug.Log("launching register panel/ launching site");
 
     }
 }

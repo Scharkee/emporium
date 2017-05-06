@@ -147,9 +147,9 @@ public class BuildingScript : MonoBehaviour
 
                 }
             }
-            else if (thistileInfo.BUILDING_TYPE == 2) //pardavimu dalykelis darbo net nera galima sakyt(nebent upgrades)
+            else if (thistileInfo.BUILDING_TYPE == 2) //transporto dalykelis darbo net nera galima sakyt(nebent upgrades)
             {
-                ContextManager.Instance.StartProduceSellingContext();
+              //  ContextManager.Instance.StartProduceSellingContext();
 
 
             }
@@ -196,7 +196,7 @@ public class BuildingScript : MonoBehaviour
             Database.Instance.CurrentVehichle.IDinActiveTiles = idInActiveTiles;
 
 
-            DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = Database.Instance.CurrentVehichle.Name;
+            DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = IDHelper.Instance.NameToRealName(Database.Instance.CurrentVehichle.Name);
 
             Debug.Log(Database.Instance.CurrentVehichle.Name);
 

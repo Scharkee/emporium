@@ -95,8 +95,13 @@ public class Languages : MonoBehaviour
             english.Add("persikas_1", "Peach tree");
             english.Add("slyva_1", "Plum tree");
             english.Add("vysnia_1", "Cherry tree");
+
             english.Add("presas_1", "Small juicer");
 
+            english.Add("mopedas_1", "Moped");
+            english.Add("masina_1", "Car");
+            english.Add("pikapas_1", "Pickup Truck");
+            english.Add("sunkvezimis_1", "Truck");
 
         }
 

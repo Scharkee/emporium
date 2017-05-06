@@ -21,8 +21,8 @@ public class LoginCheck : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        GameObject go = GameObject.Find("SocketIO");
-        socket = go.GetComponent<SocketIOComponent>();
+
+        socket = DisabledObjectsMain.Instance.socket;
         socket.On("PASS_CHECK_CALLBACK", OnLoginCheckCallback);
 
 
@@ -42,10 +42,9 @@ public class LoginCheck : MonoBehaviour
     IEnumerator CheckLoginDetails(string username, string password)
     {
         data = new Dictionary<string, string>();
-        Debug.Log("sending " + username + password);
         data["Uname"] = username;
         data["Upass"] = password;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         socket.Emit("CHECK_LOGIN", new JSONObject(data));
     }
 
