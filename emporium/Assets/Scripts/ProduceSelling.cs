@@ -10,6 +10,8 @@ public class ProduceSelling : MonoBehaviour
     private bool firstPricesTaken = false;
     private Prices newPrices;
     private Prices oldprices;
+    public ListItemPrice totalWeightCache;
+    public Text SalePanelTotalstext;
 
     SocketIOComponent socket;
     // Use this for initialization
@@ -20,10 +22,13 @@ public class ProduceSelling : MonoBehaviour
         socket.On("SALE_VERIFICATION", ReceiveSaleVerification);
 
     }
-    private void Update()
+
+    public void AdaptPrices()
     {
 
+        DisabledObjectsGameScene.Instance.SellingPanel.transform.BroadcastMessage("AdaptListingPrices");
     }
+
 
 
 

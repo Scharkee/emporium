@@ -35,7 +35,7 @@ public class TileSellScript : MonoBehaviour
 
         if (DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf) //buymenu panel is currently open
         {
-            StartCoroutine(DisabledObjectsGameScene.Instance.BuyButton.GetComponent<BuyButtonScript>().BuyMenuPanelFader());
+            StartCoroutine(DisabledObjectsGameScene.Instance.BuyButton.GetComponent<BuyButtonScript>().BuyMenuPanelCloser());
 
         }
         if (Globals.Instance.cameraUp && DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled) //buy mode is enabled. Cancel buy mode.
@@ -43,6 +43,18 @@ public class TileSellScript : MonoBehaviour
 
             DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().DisableBuyMode(false);
 
+        }
+        if (DisabledObjectsGameScene.Instance.EconomyPanel.activeSelf)
+        {
+            DisabledObjectsGameScene.Instance.EconomyPanel.SetActive(false);
+
+
+        }
+       
+        if (DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)
+        {
+
+            DisabledObjectsGameScene.Instance.SellingPanel.SetActive(false);
         }
 
         EnableDisableSellMode();
@@ -69,7 +81,7 @@ public class TileSellScript : MonoBehaviour
 
     }
 
-    private void ApplyModeTransition(bool sell)
+    public void ApplyModeTransition(bool sell)
     {
 
         if (sell)

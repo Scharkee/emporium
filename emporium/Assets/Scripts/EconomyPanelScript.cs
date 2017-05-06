@@ -12,37 +12,19 @@ public class EconomyPanelScript : MonoBehaviour
     public Sprite falling;
     public Sprite stable;
 
-    public int priceUpdateInterval = 30;
 
-    private long nextUpdate = 9999999999999;
 
     // Update is called once per frame
     void Update()
     {
-
-
-
-        if(DisabledObjectsGameScene.Instance.SocketManager.unix>= nextUpdate)
-        {
-            Debug.Log("resetting");
-            nextUpdate = DisabledObjectsGameScene.Instance.SocketManager.unix + priceUpdateInterval;
-            DisabledObjectsGameScene.Instance.pricemanager.retrievePrices();
-            Debug.Log("reset done");
-        }
-
-
-        EconomyPanel_refreshTimer_edit.GetComponent<Text>().text = (nextUpdate-DisabledObjectsGameScene.Instance.SocketManager.unix).ToString("F1");
+        
+        EconomyPanel_refreshTimer_edit.GetComponent<Text>().text = (DisabledObjectsGameScene.Instance.pricemanager.nextUpdate - DisabledObjectsGameScene.Instance.SocketManager.unix).ToString("F1");
 
 
 
     }
 
-    public void StartPriceUpdates()
-    {
-        DisabledObjectsGameScene.Instance.pricemanager.retrievePrices();
-        nextUpdate = DisabledObjectsGameScene.Instance.SocketManager.unix + priceUpdateInterval;
 
-    }
 
     public void Adapt()
     {
@@ -96,6 +78,14 @@ public class EconomyPanelScript : MonoBehaviour
 
 
         }
+
+
+    }
+
+    public void CancelContext() //parejo broadcastas, isjungti VISUS context panels
+    {
+        gameObject.SetActive(false);
+
 
 
     }

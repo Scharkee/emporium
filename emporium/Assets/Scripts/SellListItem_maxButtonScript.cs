@@ -114,5 +114,14 @@ public class SellListItem_maxButtonScript : MonoBehaviour
 
     }
 
+    public void AdaptListingPrices()
+    {
+ 
+        float newamount = float.Parse(inp.text);
+        priceLog.PriceCache[Typename] = newamount * Database.Instance.Prices[prodName];
+        priceLog.UpdatePrice(pricetext);
+
+    }
+
 
 }

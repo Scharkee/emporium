@@ -11,6 +11,7 @@ public class ListItemPrice : MonoBehaviour
 
     public Dictionary<string, float> WeightCache = new Dictionary<string, float>();  // laikomos visu listitem bendras svoris;
 
+
     private void Start()
     {
 

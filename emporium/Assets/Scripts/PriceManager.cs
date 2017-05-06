@@ -11,9 +11,50 @@ public class PriceManager : MonoBehaviour
 
     private bool firstPricesTaken = false;
 
+    public int priceUpdateInterval = 10; //CHANGE ON RELEASE
+
+    public long nextUpdate = 9999999999999;
+
 
 
     // Update is called once per frame
+
+    private void Update()
+    {
+
+        if (DisabledObjectsGameScene.Instance.SocketManager.unix >= nextUpdate)
+        {
+
+            nextUpdate = DisabledObjectsGameScene.Instance.SocketManager.unix + priceUpdateInterval;
+            retrievePrices();
+
+            if (DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)
+            {
+                DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AdaptPrices();
+
+
+            }
+
+            if (DisabledObjectsGameScene.Instance.EconomyPanel.activeSelf) 
+            {
+                DisabledObjectsGameScene.Instance.EconomyPanel.GetComponent<EconomyPanelScript>().Adapt();
+
+
+            }
+
+
+
+        }
+
+
+    }
+
+    public void StartPriceUpdates()
+    {
+        DisabledObjectsGameScene.Instance.pricemanager.retrievePrices();
+        nextUpdate = DisabledObjectsGameScene.Instance.SocketManager.unix + priceUpdateInterval;
+
+    }
 
 
     public void retrievePrices()
@@ -42,7 +83,7 @@ public class PriceManager : MonoBehaviour
 
             Database.Instance.Prices = HelperScripts.Instance.ReassignPrices(Database.Instance.prices);
             Database.Instance.Oldprices = Database.Instance.Prices;
-            DisabledObjectsGameScene.Instance.EconomyPanel.GetComponent<EconomyPanelScript>().StartPriceUpdates();
+            StartPriceUpdates();
 
         }
         else

@@ -15,8 +15,7 @@ public class alertPanelScript : MonoBehaviour
 
     public void CancelContext() //parejo broadcastas, 
     {
-        Destroy(gameObject);
-
+        GameAlerts.Instance.closeAlert();
 
 
     }
