@@ -19,19 +19,11 @@ public class BuyButtonScript : MonoBehaviour
 
     void Start()
     {
-
-
-
-
+        
         panelEnabled = false;
 
     }
 
-    void Awake()
-    {
-
-
-    }
 
     public void TheClick()
     {

@@ -196,6 +196,13 @@ public class BuyMode : MonoBehaviour
 
     }
 
+    public void CancelContext()
+    {
+
+        DisableBuyMode(false);
+
+    }
+
     private void adaptPlotSelectors(string name)
     { //highlighter for upgradeable tiles + grey out for unavailable ones
 

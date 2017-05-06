@@ -11,44 +11,54 @@ public class EconomyPanelScript : MonoBehaviour
     public Sprite rising;
     public Sprite falling;
     public Sprite stable;
-    public float priceUpdateTimer = 999f;
-    public float priceUpdateInterval = 30f;
+
+    public int priceUpdateInterval = 30;
+
+    private long nextUpdate = 9999999999999;
 
     // Update is called once per frame
     void Update()
     {
 
 
-        if (priceUpdateTimer > 0)
+
+        if(DisabledObjectsGameScene.Instance.SocketManager.unix>= nextUpdate)
         {
-            priceUpdateTimer -= Time.deltaTime;
-        }
-        else
-        {
-            priceUpdateTimer = priceUpdateInterval;
+            Debug.Log("resetting");
+            nextUpdate = DisabledObjectsGameScene.Instance.SocketManager.unix + priceUpdateInterval;
             DisabledObjectsGameScene.Instance.pricemanager.retrievePrices();
+            Debug.Log("reset done");
         }
 
 
-        EconomyPanel_refreshTimer_edit.GetComponent<Text>().text = priceUpdateTimer.ToString("F1");
+        EconomyPanel_refreshTimer_edit.GetComponent<Text>().text = (nextUpdate-DisabledObjectsGameScene.Instance.SocketManager.unix).ToString("F1");
 
 
+
+    }
+
+    public void StartPriceUpdates()
+    {
+        DisabledObjectsGameScene.Instance.pricemanager.retrievePrices();
+        nextUpdate = DisabledObjectsGameScene.Instance.SocketManager.unix + priceUpdateInterval;
 
     }
 
     public void Adapt()
     {
 
-
-        foreach (Transform listitem in gameObject.transform)
+       
+        foreach (Transform listitem in transform.Find("EconomyPanel_panel"))
         {
             //check if even works
-
+     
+        
             listitem.GetComponent<EconomyPanelListItem>().SellListItem_juice_price.text = Database.Instance.Prices[listitem.GetComponent<EconomyPanelListItem>().bankJuice.produceName].ToString();
             listitem.GetComponent<EconomyPanelListItem>().SellListItem_produce_price.text = Database.Instance.Prices[listitem.GetComponent<EconomyPanelListItem>().bankProduce.produceName].ToString();
 
             listitem.GetComponent<EconomyPanelListItem>().SellListItem_juice_price_prev.text = Database.Instance.Oldprices[listitem.GetComponent<EconomyPanelListItem>().bankJuice.produceName].ToString();
             listitem.GetComponent<EconomyPanelListItem>().SellListItem_produce_price_prev.text = Database.Instance.Oldprices[listitem.GetComponent<EconomyPanelListItem>().bankProduce.produceName].ToString();
+
 
             if (Database.Instance.Prices[listitem.GetComponent<EconomyPanelListItem>().bankJuice.produceName] < Database.Instance.Oldprices[listitem.GetComponent<EconomyPanelListItem>().bankJuice.produceName])
             {//atpigo
@@ -69,17 +79,17 @@ public class EconomyPanelScript : MonoBehaviour
 
             if (Database.Instance.Prices[listitem.GetComponent<EconomyPanelListItem>().bankProduce.produceName] < Database.Instance.Oldprices[listitem.GetComponent<EconomyPanelListItem>().bankProduce.produceName])
             {//atpigo
-                listitem.GetComponent<EconomyPanelListItem>().SellListItem_juice_symbol_image.sprite = falling;
+                listitem.GetComponent<EconomyPanelListItem>().SellListItem_produce_symbol_image.sprite = falling;
 
             }
             else if (Database.Instance.Prices[listitem.GetComponent<EconomyPanelListItem>().bankProduce.produceName] == Database.Instance.Oldprices[listitem.GetComponent<EconomyPanelListItem>().bankProduce.produceName])
             {//stable
-                listitem.GetComponent<EconomyPanelListItem>().SellListItem_juice_symbol_image.sprite = stable;
+                listitem.GetComponent<EconomyPanelListItem>().SellListItem_produce_symbol_image.sprite = stable;
 
             }
             else //pabrango
             {
-                listitem.GetComponent<EconomyPanelListItem>().SellListItem_juice_symbol_image.sprite = rising;
+                listitem.GetComponent<EconomyPanelListItem>().SellListItem_produce_symbol_image.sprite = rising;
 
 
             }

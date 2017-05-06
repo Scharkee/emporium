@@ -31,6 +31,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public PriceManager pricemanager;
     public GameObject EconomyButton;
     public GameObject EconomyPanel;
+    public SocketManager SocketManager;
 
     public static DisabledObjectsGameScene Instance;
 

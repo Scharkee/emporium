@@ -78,7 +78,7 @@ public class ContextManager : MonoBehaviour
     public void CancelContext()
     {
 
-        // Globals.Instance.canvas.BroadcastMessage("CancelContext");
+        Globals.Instance.canvas.BroadcastMessage("CancelContext");
 
         if (DisabledObjectsGameScene.Instance.PressContextPanel.GetComponent<PressContextPanelScript>().aliveForHalfSec)
         {
@@ -143,10 +143,11 @@ public class ContextManager : MonoBehaviour
             TimeSpan ts = TimeSpan.FromSeconds(time);
 
 
-            if (time <= 0 && buildingscript.thistile.BUILDING_CURRENT_WORK_AMOUNT!=0) //pilnas
+            if (time <= 0 && buildingscript.thistile.BUILDING_CURRENT_WORK_AMOUNT != 0) //pilnas
             {
                 finishedString = GlobalControl.Instance.currentLangDict["done_collect"];
-            }else if (time <= 0) //tuscias
+            }
+            else if (time <= 0) //tuscias
             {
 
                 finishedString = GlobalControl.Instance.currentLangDict["job_unassigned"];

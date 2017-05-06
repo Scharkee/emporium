@@ -14,11 +14,7 @@ public class PriceManager : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
 
-
-    }
 
     public void retrievePrices()
     {
@@ -46,7 +42,7 @@ public class PriceManager : MonoBehaviour
 
             Database.Instance.Prices = HelperScripts.Instance.ReassignPrices(Database.Instance.prices);
             Database.Instance.Oldprices = Database.Instance.Prices;
-            DisabledObjectsGameScene.Instance.EconomyPanel.GetComponent<EconomyPanelScript>().priceUpdateTimer = 0f;
+            DisabledObjectsGameScene.Instance.EconomyPanel.GetComponent<EconomyPanelScript>().StartPriceUpdates();
 
         }
         else
