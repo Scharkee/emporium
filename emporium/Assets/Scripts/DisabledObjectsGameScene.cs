@@ -58,7 +58,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
     {
         Instance = this;
         Inventory_Fruit_panel.SetActive(false);
-        socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
+        socket = GlobalControl.Instance.gameObject.GetComponent<SocketIOComponent>();
         Selector = GameObject.Find("Selector");
 
 

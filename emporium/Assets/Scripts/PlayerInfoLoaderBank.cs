@@ -36,7 +36,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour
         globalcontr = GameObject.Find("GlobalObject").GetComponent<GlobalControl>();
 
 
-        socket.On("connectedToNode", GetStats);
+        RetrieveStats();
         socket.On("RETRIEVE_STATS", ReceiveStats);
         socket.On("RECEIVE_TILES", ReceiveTileData);
         socket.On("RECEIVE_TILE_INFORMATION", ReceiveTileInformation);
@@ -111,6 +111,30 @@ public class PlayerInfoLoaderBank : MonoBehaviour
         socket.Emit("CLIENT_DATA", new JSONObject(data));
 
 
+    }
+
+    void RetrieveStats()
+    {
+
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data["Uname"] = GlobalControl.Instance.Uname;
+
+
+
+        if (globalcontr.ConnectedOnceNoDupeStatRequests)
+        {
+
+
+        }
+        else
+        {
+            socket.Emit("GET_STATS", new JSONObject(data));  //get stats
+            Debug.Log("asking for stats");
+            globalcontr.ConnectedOnceNoDupeStatRequests =true;
+        }
+
+
+        socket.Emit("CLIENT_DATA", new JSONObject(data));
     }
     void ReceiveStats(SocketIOEvent evt)
     {

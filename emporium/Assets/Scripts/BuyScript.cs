@@ -15,10 +15,8 @@ public class BuyScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        GameObject go = GameObject.Find("SocketIO");
-        socket = go.GetComponent<SocketIOComponent>();
-
+        socket = DisabledObjectsGameScene.Instance.socket;
+  
     }
 
     // Update is called once per frame

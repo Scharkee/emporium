@@ -26,14 +26,12 @@ public class SocketManager : MonoBehaviour
 
         db = gameObject.GetComponent<Database>();
         socket = DisabledObjectsGameScene.Instance.socket;
-        GameObject go = GameObject.Find("SocketIO");
 
-        socket = DisabledObjectsGameScene.Instance.socket.GetComponent<SocketIOComponent>();
 
         StartCoroutine(UnixUpdater());
         StartCoroutine(delayedPrices());
 
-        socket.On("LASTONLINE_PING", SendAutosaveVerify);
+       
         socket.On("VERIFY", Verification);
         socket.On("DISCREPANCY", DiscrepancyAction);
         socket.On("RECEIVE_UNIX", ReceiveUnix);
@@ -87,15 +85,6 @@ public class SocketManager : MonoBehaviour
 
 
 
-
-    void SendAutosaveVerify(SocketIOEvent evt)
-    {
-        Dictionary<string, string> data = new Dictionary<string, string>();
-        data["Uname"] = GlobalControl.Instance.Uname;
-
-        socket.Emit("AUTOSAVE_PUSH_LASTLOGGED", new JSONObject(data));
-
-    }
 
     IEnumerator WaitForVerify(int s)
     {

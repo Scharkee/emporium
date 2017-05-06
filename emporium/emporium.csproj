@@ -114,6 +114,7 @@
     <Compile Include="Assets\Scripts\ListItemPrice.cs" />
     <Compile Include="Assets\Scripts\LoadingPanelSafetyNetTimer.cs" />
     <Compile Include="Assets\Scripts\LoginCheck.cs" />
+    <Compile Include="Assets\Scripts\MainMenuMute.cs" />
     <Compile Include="Assets\Scripts\MenuMusic.cs" />
     <Compile Include="Assets\Scripts\MoneyTracker.cs" />
     <Compile Include="Assets\Scripts\PlayerInfoLoaderBank.cs" />

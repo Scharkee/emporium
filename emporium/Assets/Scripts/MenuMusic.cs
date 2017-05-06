@@ -17,7 +17,6 @@ public class MenuMusic : MonoBehaviour
 
     public bool HaltBeats = false;
 
-
     private AudioSource audiosrc;
 
     // Use this for initialization

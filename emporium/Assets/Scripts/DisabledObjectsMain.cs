@@ -20,6 +20,7 @@ public class DisabledObjectsMain : MonoBehaviour
     public GameObject ReportInputField;
     public MenuMusic Menumusic;
 
+
     public SocketIOComponent socket;
 
 

@@ -7,7 +7,7 @@ public class HelperScripts : MonoBehaviour
 {
 
     public static HelperScripts Instance;
-    SocketIOComponent socket;
+
 
     void Start()
     {
@@ -18,8 +18,7 @@ public class HelperScripts : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        GameObject socketgo = GameObject.Find("SocketIO");
-        socket = socketgo.GetComponent<SocketIOComponent>();
+
 
 
     }
