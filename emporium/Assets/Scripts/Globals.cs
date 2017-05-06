@@ -24,8 +24,9 @@ public class Globals : MonoBehaviour
 
     public Material plotselector_standard;
     public Material plotselector_upgradeable;
+    public Material plotselector_upgradeable_mouseover;
     public Material plotselector_unavailable;
-
+    public Material plotselector_standard_mouseover;
     //colors
     public Color buttonActiveColor1;
     public Color buttonColor1;

@@ -128,6 +128,13 @@ public class TileOperator : MonoBehaviour
                         }
                     }
                 }
+                else if (tileScript.thistileInfo.BUILDING_TYPE == 2) // transportas
+                {
+
+                    //kolkas nieko, transportas tik stovi vietoj
+
+
+                }
             }
             catch
             {

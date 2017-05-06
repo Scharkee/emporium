@@ -18,6 +18,13 @@ public class Database : MonoBehaviour
 
 
 
+    //TRANSPORT
+    private Transport currentVehichle;
+    public Transport CurrentVehichle;
+
+
+
+
     //MAIN DATBASES
     public Tile[] tile;
     public Building[] buildinginfo;
@@ -39,28 +46,6 @@ public class Database : MonoBehaviour
     }
 
 
-    //BUILDING-UPGRADE-FRUIT INFORMATION
-    //augalai
-
-    /*
-        public Building apelsinas_1 = new Building();
-        public Building obelis_1 = new Building();
-        public Building krause_1 = new Building();
-        public Building slyva_1 = new Building();
-        public Building vysnia_1 = new Building();
-        public Building aloe_1 = new Building();
-        public Building kokosas_1 = new Building();
-        public Building vynuoge_1 = new Building();
-        public Building granatas_1 = new Building();
-        public Building citrina_1 = new Building();
-        public Building melionas_1 = new Building();
-        public Building papajus_1 = new Building();
-        public Building ananasas_1 = new Building();
-        public Building avietes_1 = new Building();
-        public Building braskes_1 = new Building();
-        public Building morka_1 = new Building();
-
-    */
 
     //irenginiai
 
@@ -169,6 +154,16 @@ public class Prices
     public string NAME;
     public float PRICE;
 
+}
+
+[System.Serializable]
+public class Transport
+{//EXPNEWTREES
+    public string Name;
+    public int IDinDB;
+    public int IDinActiveTiles;
+    public float amount;
+    public float time;
 }
 
 

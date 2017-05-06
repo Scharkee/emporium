@@ -84,15 +84,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\LoadingPanelSafetyNet.cs" />
     <Compile Include="Assets\Scripts\AssignTiles.cs" />
     <Compile Include="Assets\Scripts\BuildingScript.cs" />
     <Compile Include="Assets\Scripts\BuyButtonScript.cs" />
     <Compile Include="Assets\Scripts\BuyMenuInfoLoader.cs" />
+    <Compile Include="Assets\Scripts\BuyMenuPanelListing.cs" />
     <Compile Include="Assets\Scripts\BuyMode.cs" />
     <Compile Include="Assets\Scripts\BuyScript.cs" />
     <Compile Include="Assets\Scripts\BuyTile.cs" />
     <Compile Include="Assets\Scripts\ContextManager.cs" />
+    <Compile Include="Assets\Scripts\CurrentVehicle.cs" />
     <Compile Include="Assets\Scripts\Database.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsGameScene.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsMain.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Assets\Scripts\InventoryPanel.cs" />
     <Compile Include="Assets\Scripts\Languages.cs" />
     <Compile Include="Assets\Scripts\ListItemPrice.cs" />
+    <Compile Include="Assets\Scripts\LoadingPanelSafetyNetTimer.cs" />
     <Compile Include="Assets\Scripts\LoginCheck.cs" />
     <Compile Include="Assets\Scripts\MenuMusic.cs" />
     <Compile Include="Assets\Scripts\MoneyTracker.cs" />

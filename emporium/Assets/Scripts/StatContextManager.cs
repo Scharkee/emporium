@@ -7,6 +7,7 @@ public class StatContextManager : MonoBehaviour
 
     Ray ray;
     RaycastHit hit;
+    bool useHit=false;
 
     // Use this for initialization
     void Start()
@@ -18,10 +19,22 @@ public class StatContextManager : MonoBehaviour
     void Update()
     {
         RaycastHit lasthit = hit;
+        useHit = true;
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
         {
+
+            try
+            {
+                if (hit.transform.gameObject == lasthit.transform.gameObject) //same thing
+                {
+                    useHit = false;
+
+                }
+
+            }catch { }
+
 
             if (hit.collider.tag == "Ground" || DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf)
             {
@@ -57,6 +70,31 @@ public class StatContextManager : MonoBehaviour
                     hit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(true);
 
                 }
+
+                try
+                {
+
+                    if(useHit)
+                    {
+
+                        if (lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.activeSelf)
+                        {
+                            lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(false);
+
+                        }
+
+
+                    }
+ 
+
+
+                }
+                catch
+                {
+
+
+                }
+
             }
 
           

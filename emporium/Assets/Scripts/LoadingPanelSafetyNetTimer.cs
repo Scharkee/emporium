@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadingPanelSafetyNet : MonoBehaviour {
+public class LoadingPanelSafetyNetTimer : MonoBehaviour {
 
     private float connectionFailureTimer = 4f;
 	

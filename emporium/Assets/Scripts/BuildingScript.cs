@@ -185,6 +185,24 @@ public class BuildingScript : MonoBehaviour
         
 
         idInActiveTiles = Database.Instance.ActiveTiles.IndexOf(gameObject);
+        Debug.Log("heeey");
+
+        if (thistileInfo.BUILDING_TYPE==2) //uzsiregistruojama kaip transportas.
+        {
+            Database.Instance.CurrentVehichle.time = thistileInfo.PROG_AMOUNT;
+            Database.Instance.CurrentVehichle.amount = float.Parse(thistileInfo.TILEPRODUCENAME);
+            Database.Instance.CurrentVehichle.Name = thistile.NAME;
+            Database.Instance.CurrentVehichle.IDinDB = idInTileDatabase;
+            Database.Instance.CurrentVehichle.IDinActiveTiles = idInActiveTiles;
+
+
+            DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = Database.Instance.CurrentVehichle.Name;
+
+            Debug.Log(Database.Instance.CurrentVehichle.Name);
+
+        }
+
+        Debug.Log("heeey");
     }
 
 
@@ -395,7 +413,13 @@ public class BuildingScript : MonoBehaviour
             }
 
 
-        }
+        }else if(thistileInfo.BUILDING_TYPE == 2)
+        {
+
+            WorkAssigned = false;
+            WorkDone = false;
+
+}
 
     }
 

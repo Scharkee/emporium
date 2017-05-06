@@ -270,6 +270,8 @@ public class AssignTiles : MonoBehaviour
 
 
         }
+
+
         currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.ActiveTiles[i].GetComponent<BuildingScript>().thistile;
 
 

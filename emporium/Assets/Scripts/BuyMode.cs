@@ -12,7 +12,7 @@ public class BuyMode : MonoBehaviour
     bool darken;
     bool disableQueued;
     int camspeed = 10;
-
+    RaycastHit hit;
 
 
     BuyButtonScript buybuttonscript;
@@ -42,17 +42,60 @@ public class BuyMode : MonoBehaviour
     void Update()
     {
 
+        
+
+
+
+
         if (DisabledObjectsGameScene.Instance.PlotSelectors.activeSelf)
         {
+            RaycastHit oldHit = hit;
+
+
+            try
+            {
+                
+                if (hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat == 2)
+                {
+                   
+                    oldHit.transform.gameObject.GetComponent<Renderer>().material = Globals.Instance.plotselector_standard;
+                    hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat = 1;
+                }
+                else if (hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat == 4)
+                {
+                    oldHit.transform.gameObject.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable;
+                    hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat = 3;
+                }
+
+
+            }
+            catch
+            {
+
+            }
+
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+  
 
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag == "Selector")
                 {
-                    
+
+                    if (hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat == 1)
+                    {
+                        hit.transform.gameObject.GetComponent<Renderer>().material = Globals.Instance.plotselector_standard_mouseover;
+                        hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat = 2;
+
+                    }
+                    else if (hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat == 3)
+                    {
+                        hit.transform.gameObject.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable_mouseover;
+                        hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat = 4;
+                    }
+
+
                     if (Input.GetMouseButtonDown(0))
                     {
 
@@ -227,6 +270,8 @@ public class BuyMode : MonoBehaviour
                     else if (tile.GetComponent<BuildingScript>().thistile.NAME == name)//same tile, mark for upgrading
                     {
                         selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable;
+
+                        selector.GetComponent<PlotSelectorScript>().currentMat = 3; //upgrade mat code
 
                     }
                     else //not the same type of tile, grey out and disable collider
