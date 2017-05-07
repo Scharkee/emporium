@@ -23,11 +23,13 @@ public class BugReporter : MonoBehaviour
         if (!BugReporterOpen)
         {
             BugReporterOpen = true;
+            DisabledObjectsMain.Instance.UnamePassInputField.SetActive(false);
             StartCoroutine(ManageBugReporter(true));
         }
         else
         {
             BugReporterOpen = false;
+            DisabledObjectsMain.Instance.UnamePassInputField.SetActive(true);
             StartCoroutine(ManageBugReporter(false));
         }
 

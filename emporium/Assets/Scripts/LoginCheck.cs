@@ -136,7 +136,7 @@ public class LoginCheck : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
 
-        txtobject.GetComponent<Text>().text = Oldtext;
+        txtobject.GetComponent<Text>().text = "Enter your username:";
         txtobject.GetComponent<Text>().color = NormalTextColor;
     }
 

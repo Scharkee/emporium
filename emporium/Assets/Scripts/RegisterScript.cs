@@ -20,11 +20,13 @@ public class RegisterScript : MonoBehaviour
         if (!RegisterPanelOpen)
         {
             RegisterPanelOpen = true;
+            DisabledObjectsMain.Instance.UnamePassInputField.SetActive(false);
             StartCoroutine(ManageRegisterPanel(true));
         }
         else
         {
             RegisterPanelOpen = false;
+            DisabledObjectsMain.Instance.UnamePassInputField.SetActive(true);
             StartCoroutine(ManageRegisterPanel(false));
         }
 
