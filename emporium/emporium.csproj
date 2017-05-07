@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\MainMenuMute.cs" />
     <Compile Include="Assets\Scripts\MenuMusic.cs" />
     <Compile Include="Assets\Scripts\MoneyTracker.cs" />
+    <Compile Include="Assets\Scripts\PasswordStrength.cs" />
     <Compile Include="Assets\Scripts\PlayerInfoLoaderBank.cs" />
     <Compile Include="Assets\Scripts\PlotSelector.cs" />
     <Compile Include="Assets\Scripts\PlotSelectorScript.cs" />

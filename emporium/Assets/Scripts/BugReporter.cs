@@ -4,7 +4,8 @@ using UnityEngine.UI;
 using UnityEngine;
 using SocketIO;
 
-public class BugReporter : MonoBehaviour {
+public class BugReporter : MonoBehaviour
+{
 
     public bool BugReporterOpen = false;
 
@@ -42,7 +43,7 @@ public class BugReporter : MonoBehaviour {
             DisabledObjectsMain.Instance.BugReportPanel.SetActive(open);
             DisabledObjectsMain.Instance.Menumusic.HaltBeats = true;
         }
-        
+
 
 
         if (open)
@@ -55,7 +56,8 @@ public class BugReporter : MonoBehaviour {
 
 
 
-        }else
+        }
+        else
         {
             while (DisabledObjectsMain.Instance.BugReportPanel.GetComponent<CanvasGroup>().alpha > 0f)
             {
@@ -87,10 +89,10 @@ public class BugReporter : MonoBehaviour {
     {
 
         Dictionary<string, string> data = new Dictionary<string, string>();
-       
+
         data["report"] = report;
-     
-  
+
+
         DisabledObjectsMain.Instance.socket.Emit("SUBMIT_BUGREPORT", new JSONObject(data));
     }
 

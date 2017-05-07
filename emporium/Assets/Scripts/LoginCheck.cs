@@ -13,8 +13,9 @@ public class LoginCheck : MonoBehaviour
 {
     public string inputusername;
     public string inputpassword;
-    Dictionary<string, string> data;
 
+
+    public Color NormalTextColor, RedTextColor, BlueTextColor;
 
     public SocketIOComponent socket;
 
@@ -25,26 +26,16 @@ public class LoginCheck : MonoBehaviour
         socket = DisabledObjectsMain.Instance.socket;
         socket.On("PASS_CHECK_CALLBACK", OnLoginCheckCallback);
 
-
-
     }
 
 
-    //TODO: check for dupe username
 
-    public IEnumerator CheckDBForDupeUN(string username)
+
+    void CheckLoginDetails(string username, string password)
     {
-        yield return new WaitForSeconds(0.1f);
-        StartCoroutine(CheckLoginDetails(GlobalControl.Instance.Uname, GlobalControl.Instance.Pass));
-    }
-
-
-    IEnumerator CheckLoginDetails(string username, string password)
-    {
-        data = new Dictionary<string, string>();
+        Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = username;
         data["Upass"] = password;
-        yield return new WaitForSeconds(0.01f);
         socket.Emit("CHECK_LOGIN", new JSONObject(data));
     }
 
@@ -60,7 +51,7 @@ public class LoginCheck : MonoBehaviour
 
     public void LogInCh(string un, string pass)
     {
-        StartCoroutine(CheckLoginDetails(un, pass));
+        CheckLoginDetails(un, pass);
 
 
     }
@@ -83,17 +74,15 @@ public class LoginCheck : MonoBehaviour
         }
         else if (stat == 1)
         { //pass correct
+
             proceedToGameScene();
 
         }
         else if (stat == 2)
         { //user not in DB
-
-            Debug.Log("user not found in DB, inititing creation");
-            socket.Emit("CREATE_USER", new JSONObject(data)); // mb doesnt work iunno
-            proceedToGameScene();
+            NoUser();
         }
-        else if (stat == 3)
+        else if (stat == 3) //reimplement kad net neparodytu main screen jei pareina connection is kito PC;
         {
             Debug.Log("user already logged in.");
             //user already logged in from another PC.
@@ -115,20 +104,43 @@ public class LoginCheck : MonoBehaviour
         GlobalControl.Instance.Pass = null;
         GlobalControl.Instance.Uname = null;
         GlobalControl.Instance.Logincount = 1;
+        DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
+        DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = "Enter your username:";
 
-        StartCoroutine(TextFader(GameObject.Find("UnamePassText")));
-        StartCoroutine(TextFader(GameObject.Find("WrongPassText")));
-        StartCoroutine(waitforabitandfadeagain());
+        StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "Wrong Password.", RedTextColor));
     }
 
-    IEnumerator waitforabitandfadeagain()
+    void NoUser()
     {
-        yield return new WaitForSeconds(0.5f);
 
-        GameObject.Find("UnamePassText").GetComponent<Text>().text = "Enter your username:";
-        StartCoroutine(TextFader(GameObject.Find("UnamePassText")));
-        StartCoroutine(TextFader(GameObject.Find("WrongPassText")));
+        Debug.Log("asking to create a user");
+        GlobalControl.Instance.Pass = null;
+        GlobalControl.Instance.Uname = null;
+        GlobalControl.Instance.Logincount = 1;
+        DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
+
+        StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "No user found.", BlueTextColor));
+
     }
+
+    IEnumerator NotifyText(GameObject txtobject, string notification, Color notificationColor)
+    {
+        string Oldtext = txtobject.GetComponent<Text>().text;
+
+
+
+        txtobject.GetComponent<Text>().text = notification;
+        txtobject.GetComponent<Text>().color = notificationColor;
+
+
+        yield return new WaitForSeconds(1.5f);
+
+
+        txtobject.GetComponent<Text>().text = Oldtext;
+        txtobject.GetComponent<Text>().color = NormalTextColor;
+    }
+
+
     IEnumerator LVLLoadCamEffect()
     {
 
@@ -139,33 +151,7 @@ public class LoginCheck : MonoBehaviour
             Globals.Instance.cameraBloom.bloomThreshold -= 0.01f;
         }
     }
-    IEnumerator TextFader(GameObject txtobject)
-    {
-        Color def;
-        def = txtobject.GetComponent<Text>().color;
-        Debug.Log("doin the fade");
 
-        if (def.a < 1f)
-        {
-            while (def.a < 1f)
-            {
-                //fadeoutas
-                yield return new WaitForSeconds(0.001f);
-                def.a = def.a + 0.02f;
-                txtobject.GetComponent<Text>().color = def;
-            }
-        }
-        else if (def.a > 0.1f)
-        {
-            while (def.a > 0)
-            {
-                //fadeoutas 
-                yield return new WaitForSeconds(0.001f);
-                def.a = def.a - 0.02f;
-                txtobject.GetComponent<Text>().color = def;
-            }
-        }
-    }
 
 
 }

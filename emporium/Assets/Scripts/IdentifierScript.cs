@@ -101,8 +101,6 @@ public class IdentifierScript : MonoBehaviour
             connectingText.color = Color.Lerp(Color.grey, Color.black, Mathf.PingPong(Time.time * 2, 1));
 
 
-
-
         }
 
 
