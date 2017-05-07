@@ -14,8 +14,7 @@ public class LoginCheck : MonoBehaviour
     public string inputusername;
     public string inputpassword;
 
-
-    public Color NormalTextColor, RedTextColor, BlueTextColor;
+   
 
     public SocketIOComponent socket;
 
@@ -107,9 +106,9 @@ public class LoginCheck : MonoBehaviour
         DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
         DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = "Enter your username:";
 
-        StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "Wrong Password.", RedTextColor));
+        StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "Wrong Password.", DisabledObjectsMain.Instance.RedTextColor));
     }
-
+    
     void NoUser()
     {
 
@@ -119,7 +118,7 @@ public class LoginCheck : MonoBehaviour
         GlobalControl.Instance.Logincount = 1;
         DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
 
-        StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "No user found.", BlueTextColor));
+        StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "No user found.", DisabledObjectsMain.Instance.BlueTextColor));
 
     }
 
@@ -137,7 +136,7 @@ public class LoginCheck : MonoBehaviour
 
 
         txtobject.GetComponent<Text>().text = "Enter your username:";
-        txtobject.GetComponent<Text>().color = NormalTextColor;
+        txtobject.GetComponent<Text>().color = DisabledObjectsMain.Instance.NormalTextColor;
     }
 
 

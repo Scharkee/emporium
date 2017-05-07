@@ -12,12 +12,10 @@ public class TitleText : MonoBehaviour
     private Text text;
     private bool nextColorGenerated = false;
     private float transitionTimer = 3f;
-    private float pulseTimer = 4f;
-    private bool resetPulse = false;
+
     GameObject ghost;
 
-    private bool ghost_done = false;
-    private bool ghostBack = false;
+
 
     public float colorChangeAdditive = 0;
 
@@ -60,11 +58,11 @@ public class TitleText : MonoBehaviour
 
 
                 gameObject.GetComponent<Text>().color = Color.Lerp(gameObject.GetComponent<Text>().color, nextColor, colorChangeAdditive);
-                ghost.GetComponent<Text>().color = Color.Lerp(new Color(gameObject.GetComponent<Text>().color.r,gameObject.GetComponent<Text>().color.g, gameObject.GetComponent<Text>().color.b,0.05f), nextColor, colorChangeAdditive);
+                ghost.GetComponent<Text>().color = Color.Lerp(new Color(gameObject.GetComponent<Text>().color.r, gameObject.GetComponent<Text>().color.g, gameObject.GetComponent<Text>().color.b, 0.05f), nextColor, colorChangeAdditive);
 
-            
-                ghost.transform.localScale = Vector3.Lerp(ghost.transform.localScale, gameObject.transform.localScale * (1 + colorChangeAdditive/2),0.5f);
-              
+
+                ghost.transform.localScale = Vector3.Lerp(ghost.transform.localScale, gameObject.transform.localScale * (1 + colorChangeAdditive / 2), 0.5f);
+
             }
             else
             {
@@ -72,25 +70,12 @@ public class TitleText : MonoBehaviour
 
                 nextColorGenerated = false;
 
-
             }
-
-
 
         }
 
 
-   
-
     }
 
 
- 
-  
-
-    private void returnGhost(GameObject ghost)
-    {
-        ghostBack = true;
-        ghost.transform.localScale = gameObject.transform.localScale * 2;
-    }
 }

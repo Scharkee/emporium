@@ -21,7 +21,7 @@ public class IdentifierScript : MonoBehaviour
     //for fading text
     public TextMesh textmesh;
     public Color def;
-    float fadd = 1f;
+
 
     private Text connectingText;
 
@@ -59,34 +59,44 @@ public class IdentifierScript : MonoBehaviour
 
         if (GlobalControl.Instance.Logincount == 1)
         {
-            GlobalControl.Instance.Uname = val;
-            GlobalControl.Instance.Logincount++;
-            DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = "Enter your password";
+            if (val!="")
+            {
+                GlobalControl.Instance.Uname = val;
+                GlobalControl.Instance.Logincount++;
+                DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = "Enter your password";
+
+            }
+            inpf.ActivateInputField();
+            inpf.Select();
 
         }
         else if (GlobalControl.Instance.Logincount == 2)
         {
-            GlobalControl.Instance.Pass = val;
+            if (val != "")
+            {
+                GlobalControl.Instance.Pass = val;
             GlobalControl.Instance.Logincount++;
             Debug.Log(GlobalControl.Instance.Logincount);
 
-            inpf.text = string.Empty;
+            inpf.text = "";
+
 
             logcheck.LogInCh(GlobalControl.Instance.Uname, GlobalControl.Instance.Pass);
 
-            // connectingText.color = Color.black; TODO: implement this with BlinkConnecting() and wrong passwords n shit
+
+            }
 
 
+            inpf.ActivateInputField();
+            inpf.Select();
 
-            //TODO: keep flashing connecting until the scene changes?
 
         }
 
 
-        inpf.text = string.Empty;
+        inpf.text ="";
 
-        inpf.ActivateInputField();
-        inpf.Select();
+
 
     }
 

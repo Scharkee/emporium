@@ -23,13 +23,12 @@ public class BugReporter : MonoBehaviour
         if (!BugReporterOpen)
         {
             BugReporterOpen = true;
-            DisabledObjectsMain.Instance.UnamePassInputField.SetActive(false);
+            DisabledObjectsMain.Instance.ResetLoginButton();
             StartCoroutine(ManageBugReporter(true));
         }
         else
         {
             BugReporterOpen = false;
-            DisabledObjectsMain.Instance.UnamePassInputField.SetActive(true);
             StartCoroutine(ManageBugReporter(false));
         }
 
@@ -105,8 +104,8 @@ public class BugReporter : MonoBehaviour
         Debug.Log(str);
         DisabledObjectsMain.Instance.ReportInputField.GetComponent<InputField>().text = "";
 
-        //TODO: "thank you for your feedback!"
-        TheClick();
+        StartCoroutine(DisabledObjectsMain.Instance.ShowMessage("Thank You! Your bug report has been submitted.", DisabledObjectsMain.Instance.NormalTextColor, 2f));
+        CancelReporting();
 
     }
 

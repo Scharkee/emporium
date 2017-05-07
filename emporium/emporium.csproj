@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -101,7 +103,7 @@
     <Compile Include="Assets\Scripts\EconomyButtonScript.cs" />
     <Compile Include="Assets\Scripts\EconomyPanelListItem.cs" />
     <Compile Include="Assets\Scripts\EconomyPanelScript.cs" />
-    <Compile Include="Assets\Scripts\ForgotPassScript.cs" />
+    <Compile Include="Assets\Scripts\ForgotPassword.cs" />
     <Compile Include="Assets\Scripts\GameAlerts.cs" />
     <Compile Include="Assets\Scripts\GlobalControl.cs" />
     <Compile Include="Assets\Scripts\Globals.cs" />

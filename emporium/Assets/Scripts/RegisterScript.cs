@@ -20,13 +20,12 @@ public class RegisterScript : MonoBehaviour
         if (!RegisterPanelOpen)
         {
             RegisterPanelOpen = true;
-            DisabledObjectsMain.Instance.UnamePassInputField.SetActive(false);
+            DisabledObjectsMain.Instance.ResetLoginButton();
             StartCoroutine(ManageRegisterPanel(true));
         }
         else
         {
             RegisterPanelOpen = false;
-            DisabledObjectsMain.Instance.UnamePassInputField.SetActive(true);
             StartCoroutine(ManageRegisterPanel(false));
         }
 
@@ -94,8 +93,8 @@ public class RegisterScript : MonoBehaviour
         //reset registry fields
 
         usernameInput.text = "";
-        usernameInput.text = "";
-        usernameInput.text = "";
+        passwordInput.text = "";
+        emailInput.text = "";
         TheClick();
     }
 
@@ -148,14 +147,10 @@ public class RegisterScript : MonoBehaviour
 
             SendRegisterForm(un, psw, email);
 
-            usernameInput.text = "";
-            usernameInput.text = "";
-            usernameInput.text = "";
+ 
 
-
-            //TODO: "please confirm your account in your email"
-            TheClick();
-
+            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage("Success! Check your email to confirm your account.", DisabledObjectsMain.Instance.NormalTextColor, 3f));
+            CancelRegistering();
 
         }
 
