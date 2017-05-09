@@ -3,7 +3,7 @@ using System.Collections;
 using UnityStandardAssets.ImageEffects;
 
 
-public class RotationScript : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     PlayerInfoLoaderBank playerinfobank;
     Vector3 nelygusPlotCenter;
@@ -13,6 +13,9 @@ public class RotationScript : MonoBehaviour
     private float rotOld; //stores the rotation of the mouse wheel
     public float speed;      //multiplier for the mouse wheel input
     private Vector3 storePos; //stores the rotation of the attached gameObject
+
+    bool inHeightTransition = false;
+    bool cameraUp = false;
 
     BuyButtonScript buybuttonscript;
 
@@ -63,6 +66,69 @@ public class RotationScript : MonoBehaviour
 
     }
 
+    private IEnumerator raiseCamera()
+    {
+
+
+
+        if (inHeightTransition)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+        }
+        else
+        {
+            inHeightTransition = true; //uzsilockinam, kad nieks neciupinetu cameros
+
+            if (!Globals.Instance.cameraUp) //keliam
+            {
+                RenderSettings.skybox = Globals.Instance.dark_skybox;
+                while (Camera.main.transform.position.y < Database.Instance.UserPlotSize * 1.4f)
+                {
+                    yield return new WaitForSeconds(0.001f);
+
+                    // 3 plotsize tinka 3.28f elevation, todel 6 plotsize tinka 6.56, 1 = 1.0933.
+
+                    Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, Database.Instance.UserPlotSize * 1.5f, Camera.main.transform.position.z), Time.deltaTime * 10);
+
+                }
+
+
+
+                Globals.Instance.cameraUp = true;
+            }
+            else
+            {
+                RenderSettings.skybox = Globals.Instance.light_skybox;
+                while (Camera.main.transform.position.y > Database.Instance.UserPlotSize *0.8f)
+                {
+                    yield return new WaitForSeconds(0.0001f);
+
+                    //3=1.63, 1=0.5433f
+                    Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, Database.Instance.UserPlotSize  *0.7f, Camera.main.transform.position.z), Time.deltaTime * 10);
+                }
+
+
+                Globals.Instance.cameraUp = false;
+            }
+
+
+
+            inHeightTransition = false;
+
+
+        }
+
+
+    }
+
+
+    public void PerformCamElevetion()
+    {
+
+        StartCoroutine(raiseCamera());
+    }
+
     public void SetCurrentRotCenter(bool lygnelyg)
     {
         if (lygnelyg)
@@ -92,4 +158,7 @@ public class RotationScript : MonoBehaviour
             bloom.bloomThreshold = bloom.bloomThreshold + 0.01f;
         }
     }
+
+
+
 }

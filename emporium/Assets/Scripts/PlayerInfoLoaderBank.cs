@@ -65,8 +65,10 @@ public class PlayerInfoLoaderBank : MonoBehaviour
         usertext.text = GlobalControl.Instance.Uname;
 
 
-        RotationScript rotscript = Camera.main.GetComponent<RotationScript>();
+        CameraController rotscript = Camera.main.GetComponent<CameraController>();
         rotscript.SetCurrentRotCenter(lygusnelygusPlot());//also sets ground transform
+
+        Camera.main.transform.position = new Vector3(0,Database.Instance.UserPlotSize * 0.7f, Database.Instance.UserPlotSize*1.2f );
 
         GameObject.Find("Ground").transform.localScale = new Vector3(Database.Instance.UserPlotSize, 1f, Database.Instance.UserPlotSize);
 

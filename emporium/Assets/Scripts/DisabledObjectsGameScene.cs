@@ -33,6 +33,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public GameObject EconomyPanel;
     public SocketManager SocketManager;
     public CurrentVehicle CurrentVehicle;
+    public CameraController Camcontroller;
 
     public static DisabledObjectsGameScene Instance;
 

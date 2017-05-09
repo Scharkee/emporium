@@ -8,7 +8,7 @@ public class Globals : MonoBehaviour
 
     public static Globals Instance;
 
-    public bool cameraUp;
+    public bool cameraUp=false;
     public GameObject canvas;
 
 

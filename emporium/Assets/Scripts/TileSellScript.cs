@@ -87,15 +87,15 @@ public class TileSellScript : MonoBehaviour
         if (sell)
         {
             DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonActiveColor1;
-            RenderSettings.skybox = Globals.Instance.dark_skybox;
-            StartCoroutine(moveCamera());
+            
+            DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
 
         }
         else
         {
             DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
-            StartCoroutine(moveCamera());
-            RenderSettings.skybox = Globals.Instance.light_skybox;
+            DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
+            
 
         }
 
@@ -184,36 +184,7 @@ public class TileSellScript : MonoBehaviour
 
     }
 
-    IEnumerator moveCamera()
-    {
-        float step = 10 * Time.deltaTime;
 
-        if (!Globals.Instance.cameraUp)  //raise cam
-        {
-            Globals.Instance.cameraUp = true;
-            while (Camera.main.transform.position.y < 3.2f)
-            {
-                yield return new WaitForSeconds(0.001f);
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f), step);
-            }
-
-
-            yield break;
-        }
-        else if (Globals.Instance.cameraUp)  //lower cam
-        {
-            Globals.Instance.cameraUp = false;
-            while (Camera.main.transform.position.y > 1.7f)
-            {
-                yield return new WaitForSeconds(0.0001f);
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f), step);
-            }
-
-
-            yield break;
-        }
-
-    }
 
 
 }

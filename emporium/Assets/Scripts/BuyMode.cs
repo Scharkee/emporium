@@ -105,13 +105,13 @@ public class BuyMode : MonoBehaviour
 
                         DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(false);
 
-                        StartCoroutine(liftcamera());
+                        DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
                         buybuttonscript.panelEnabled = false;
 
                         //if multi-buy TODO
 
                         DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", true);
-                        RenderSettings.skybox = Globals.Instance.light_skybox; //MAKEME make fade     //FIXME fix material of normal skybox
+            
 
                         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
 
@@ -148,8 +148,8 @@ public class BuyMode : MonoBehaviour
         //effects and pltoselectors
 
         DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", false);
-        StartCoroutine(liftcamera());
-        RenderSettings.skybox = Globals.Instance.dark_skybox;
+        DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
+
         DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(true);
 
         EnableGroundCol(false);
@@ -165,53 +165,7 @@ public class BuyMode : MonoBehaviour
 
 
 
-    IEnumerator liftcamera()
-    {
-
-
-        float step = camspeed * Time.deltaTime;
-
-
-        if (!Globals.Instance.cameraUp)  //raise cam
-        {
-            Globals.Instance.cameraUp = true;
-            while (Camera.main.transform.position.y < 3.2f)
-            {
-                yield return new WaitForSeconds(0.001f);
-
-
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 3.28f, -1.94f), step);
-
-            }
-
-
-            yield break;
-
-
-        }
-        else if (Globals.Instance.cameraUp)  //lower cam
-        {
-            Globals.Instance.cameraUp = false;
-            while (Camera.main.transform.position.y > 1.7f)
-            {
-                yield return new WaitForSeconds(0.0001f);
-
-
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Camera.main.transform.position.x, 1.63f, -3.8f), step);
-            }
-
-
-
-            yield break;
-        }
-
-        if (disableQueued)
-        {
-
-            gameObject.GetComponent<BuyMode>().enabled = false;
-        }
-
-    }
+   
 
     public void DisableBuyMode(bool MenupanelActive)
     {
@@ -223,16 +177,24 @@ public class BuyMode : MonoBehaviour
 
         if (Globals.Instance.cameraUp)
         {
-            StartCoroutine(liftcamera());
+            DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
         }
 
         // buybuttonscript.panelEnabled = false;
 
-        RenderSettings.skybox = Globals.Instance.light_skybox; //MAKEME make fade    
+    
 
         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(MenupanelActive);
 
-        DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", true);
+        try
+        {
+            DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", true);
+
+        }
+        catch
+        {
+
+        }
         EnableGroundCol(true);
 
         disableQueued = true;

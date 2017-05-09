@@ -510,8 +510,17 @@ public class AssignTiles : MonoBehaviour
 
         foreach (Transform model in tile.transform)
         {
-            model.gameObject.transform.localScale = new Vector3(Random.Range(0.85f, 1.2f), Random.Range(0.85f, 1.2f), Random.Range(0.85f, 1.2f));
+           
 
+
+            if(model.name== "SelectionGlow") //isskirtiniai atvejai
+            {
+
+
+            }else
+            {
+                model.gameObject.transform.localScale = new Vector3(Random.Range(0.85f, 1.2f), Random.Range(0.85f, 1.2f), Random.Range(0.85f, 1.2f));
+            }
 
         }
 
