@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using SocketIO;
 using System.Text.RegularExpressions;
-using System;
+using System.Threading;
 
 public class BuildingScript : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class BuildingScript : MonoBehaviour
 
     //plant
     public bool TileGrown;
-    
+
 
     //building
     public bool WorkDone;
@@ -36,8 +36,8 @@ public class BuildingScript : MonoBehaviour
     public Tile thistile;
     public Building thistileInfo;
     SocketManager socman;
-    public bool justSpawned=true;
-    public bool colliderSet=false;
+    public bool justSpawned = true;
+    public bool colliderSet = false;
     public int idInTileDatabase; //norint pasiekti savo tile bendrame tile array
     private int idInTileInfoDatabase;  // norint pasiekti savo tile informacija bendrame BuildingInfo array
 
@@ -46,7 +46,7 @@ public class BuildingScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-       
+
 
 
         socman = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SocketManager>();
@@ -60,7 +60,7 @@ public class BuildingScript : MonoBehaviour
 
 
 
-        
+
 
         AssignBuildingSpecificValues();
         TileGrown = false;
@@ -81,7 +81,7 @@ public class BuildingScript : MonoBehaviour
     {
 
 
-        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled|| DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf|| DisabledObjectsGameScene.Instance.alertPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf || DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
+        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled || DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf || DisabledObjectsGameScene.Instance.alertPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf || DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
         {
 
 
@@ -149,7 +149,7 @@ public class BuildingScript : MonoBehaviour
             }
             else if (thistileInfo.BUILDING_TYPE == 2) //transporto dalykelis darbo net nera galima sakyt(nebent upgrades)
             {
-              //  ContextManager.Instance.StartProduceSellingContext();
+                //  ContextManager.Instance.StartProduceSellingContext();
 
 
             }
@@ -170,24 +170,24 @@ public class BuildingScript : MonoBehaviour
 
         while (thistileInfo.NAME != thistile.NAME)
         {
-     
+
             i++;
             thistileInfo.NAME = Database.Instance.buildinginfo[i].NAME;
 
 
 
         }
-    
+
         thistileInfo = Database.Instance.buildinginfo[i];
         idInTileInfoDatabase = i;
 
         justSpawned = false;
-        
+
 
         idInActiveTiles = Database.Instance.ActiveTiles.IndexOf(gameObject);
         Debug.Log("heeey");
 
-        if (thistileInfo.BUILDING_TYPE==2) //uzsiregistruojama kaip transportas.
+        if (thistileInfo.BUILDING_TYPE == 2) //uzsiregistruojama kaip transportas.
         {
             Database.Instance.CurrentVehichle.time = thistileInfo.PROG_AMOUNT;
             Database.Instance.CurrentVehichle.amount = float.Parse(thistileInfo.TILEPRODUCENAME);
@@ -201,8 +201,41 @@ public class BuildingScript : MonoBehaviour
             Debug.Log(Database.Instance.CurrentVehichle.Name);
 
         }
+        else if (thistileInfo.BUILDING_TYPE == 3) //uzsiregistruojama kaip PRODUCE storage
+        {
 
-        Debug.Log("heeey");
+            
+
+            lock (Database.Instance.ActiveProduceStorage)
+            {
+
+                    Interlocked.Exchange(ref Database.Instance.Storage.TotalProduceStorage, Database.Instance.Storage.TotalProduceStorage + thistileInfo.PROG_AMOUNT);
+                    Database.Instance.ActiveProduceStorage.Add(this);
+
+            }
+            
+
+
+
+
+        }
+        else if (thistileInfo.BUILDING_TYPE == 4) //uzsiregistruojama kaip JUICE storage
+        {
+            lock (Database.Instance.ActiveJuiceStorage)
+            {
+
+                    Interlocked.Exchange(ref Database.Instance.Storage.TotalJuiceStorage, Database.Instance.Storage.TotalJuiceStorage + thistileInfo.PROG_AMOUNT);
+                    Database.Instance.ActiveJuiceStorage.Add(this);
+
+            }
+
+
+        }
+
+
+        //uzregistruojama, kad tile suvede visa reikiama informacija. 
+        Interlocked.Increment(ref Database.Instance.TileSelfSignedAssignmentComplete);
+
     }
 
 
@@ -265,33 +298,33 @@ public class BuildingScript : MonoBehaviour
 
                 foreach (Transform child in transform)
                 {
-                  
-                    if (child.name == thistile.NAME + "(Clone)"|| child.name == thistile.NAME)
+
+                    if (child.name == thistile.NAME + "(Clone)" || child.name == thistile.NAME)
                     {//cia multi-tile shell modelis
 
-                        foreach(Transform vais in child)
+                        foreach (Transform vais in child)
                         {
-                            if(vais.name== thistile.NAME + "_vaisiai(Clone)")//vaisiai, destroy.
+                            if (vais.name == thistile.NAME + "_vaisiai(Clone)")//vaisiai, destroy.
                             {
                                 Destroy(vais.gameObject);
 
                             }
 
                         }
-             
+
 
 
                     }
 
                 }
-              
+
                 thistile.START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
 
-               
+
                 TileGrown = false;
 
 
-               
+
 
                 notifyOfProduceAmount(float.Parse(evt.data.GetField("harvestAmount").ToString()));
 
@@ -314,7 +347,7 @@ public class BuildingScript : MonoBehaviour
                 Debug.Log("this just in");
 
 
-                Debug.Log("reaching for "+ thistile.WORK_NAME + "_sultys");
+                Debug.Log("reaching for " + thistile.WORK_NAME + "_sultys");
                 Database.Instance.Inventory[thistile.WORK_NAME + "_sultys"] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
 
                 Debug.Log("new amount: " + float.Parse(evt.data.GetField("currentProduceAmount").ToString()));
@@ -413,13 +446,14 @@ public class BuildingScript : MonoBehaviour
             }
 
 
-        }else if(thistileInfo.BUILDING_TYPE == 2)
+        }
+        else if (thistileInfo.BUILDING_TYPE == 2)
         {
 
             WorkAssigned = false;
             WorkDone = false;
 
-}
+        }
 
     }
 

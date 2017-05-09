@@ -16,7 +16,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour
     public int UserLastOnline;
     public int UserPlotSize;
     GlobalControl globalcontr;
-    Database db;
+
     HelperScripts helperscript;
     AssignTiles assigner;
 
@@ -27,7 +27,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour
     void Start()
     {
 
-        db = gameObject.GetComponent<Database>();
+
 
         assigner = gameObject.GetComponent<AssignTiles>();
         

@@ -7,7 +7,7 @@ public class MoneyTracker : MonoBehaviour
 {
 
     float lastDollars;
-    bool moneyChanging;
+    bool moneyChanging=false;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +24,7 @@ public class MoneyTracker : MonoBehaviour
             }
             else
             {
-
+                moneyChanging = true;
                 StartCoroutine(changeMoney_Effect(lastDollars));
             }
 
@@ -67,7 +67,7 @@ public class MoneyTracker : MonoBehaviour
         }
 
 
-
+        moneyChanging = false;
 
 
     }

@@ -94,7 +94,7 @@ public class AssignTiles : MonoBehaviour
 
         Database.Instance.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);// assignment
 
- 
+
 
         Database.Instance.Inventory = HelperScripts.Instance.ReassignInventory(Database.Instance.inventory[0]);
 
@@ -123,9 +123,7 @@ public class AssignTiles : MonoBehaviour
         }
 
 
-        DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TileOperator>().StartGrowthCompletrionCheckRepeat();
-
-
+        StartCoroutine(Database.Instance.waitForTileAssignmentCompletion());
 
     }
 
@@ -157,7 +155,7 @@ public class AssignTiles : MonoBehaviour
     AudioClip randomShovel()
     {
         AudioClip randomShovelClip = new AudioClip();
-        int randomizer = Random.Range(1,2);
+        int randomizer = Random.Range(1, 2);
 
         switch (randomizer)
         {
@@ -469,7 +467,7 @@ public class AssignTiles : MonoBehaviour
 
 
         GameObject currentTilePrefab = Resources.Load("Plants/" + tilename) as GameObject;
-        GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(X, 0f, Z), Quaternion.Euler(new Vector3(xRot,0, 0)), GameObject.Find("Tiles").transform) as GameObject;
+        GameObject currentTile = Instantiate(currentTilePrefab, new Vector3(X, 0f, Z), Quaternion.Euler(new Vector3(xRot, 0, 0)), GameObject.Find("Tiles").transform) as GameObject;
 
         foreach (Transform child in currentTile.transform)
         {
@@ -510,14 +508,15 @@ public class AssignTiles : MonoBehaviour
 
         foreach (Transform model in tile.transform)
         {
-           
 
 
-            if(model.name== "SelectionGlow") //isskirtiniai atvejai
+
+            if (model.name == "SelectionGlow") //isskirtiniai atvejai
             {
 
 
-            }else
+            }
+            else
             {
                 model.gameObject.transform.localScale = new Vector3(Random.Range(0.85f, 1.2f), Random.Range(0.85f, 1.2f), Random.Range(0.85f, 1.2f));
             }

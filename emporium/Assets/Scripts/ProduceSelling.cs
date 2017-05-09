@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ProduceSelling : MonoBehaviour
 {
 
-    private bool firstPricesTaken = false;
+
     private Prices newPrices;
     private Prices oldprices;
     public ListItemPrice totalWeightCache;

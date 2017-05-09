@@ -19,11 +19,11 @@ public class Database : MonoBehaviour
 
 
     //TRANSPORT
-    private Transport currentVehichle;
     public Transport CurrentVehichle;
 
+    //STOGRAGE
 
-
+    public Storage Storage;
 
     //MAIN DATBASES
     public Tile[] tile;
@@ -36,6 +36,10 @@ public class Database : MonoBehaviour
     public Dictionary<string, float> Oldprices;  // main inventory
 
     public List<GameObject> ActiveTiles = new List<GameObject>(); //tiles su kuriom daromos operacijos main update cikle.
+    public int TileSelfSignedAssignmentComplete = 0;
+
+    public List<BuildingScript> ActiveProduceStorage = new List<BuildingScript>(); //tiles kurios skirtos laikyti vaisius/darzoves (PRODUCE)
+    public List<BuildingScript> ActiveJuiceStorage = new List<BuildingScript>(); //tiles kurios skirtos laikyti sultis (JUICE)
 
 
     void Awake()
@@ -44,9 +48,6 @@ public class Database : MonoBehaviour
 
 
     }
-
-
-
     //irenginiai
 
     public Building press_1 = new Building();
@@ -73,12 +74,61 @@ public class Database : MonoBehaviour
     public Building sukvezimis = new Building();
     public Building sunkvezimis_2 = new Building();
 
+    public IEnumerator waitForTileAssignmentCompletion()
+    {
+
+
+        while (TileSelfSignedAssignmentComplete != ActiveTiles.Count)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+        }
+
+        //visos tiles baige assignintis
+
+        DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TileOperator>().StartGrowthCompletrionCheckRepeat();
+
+        InvAmounts am = amountsInInventory();
+        Storage.TakenJuiceStorage = am.CURJuiceAmount;
+        Storage.TakenProduceStorage = am.CURProduceAmount;
+
+        Debug.Log("storage yra " + Storage.TakenJuiceStorage+" sulciu ir "+ Storage.TakenProduceStorage + " produce");
+
+        //TODO: parodyt on Header in HUD kartu su total storage amount
+
+    }
+
+    private InvAmounts amountsInInventory()
+    {
+        InvAmounts amount;
+        amount.CURJuiceAmount = 0; amount.CURProduceAmount = 0;
+
+        foreach (KeyValuePair<string, float> produktas in Inventory)
+        {
+            if (produktas.Key.Contains("_sultys")) // sudedam visu sulciu suma
+            {
+                amount.CURJuiceAmount += produktas.Value;
+            }else
+            {
+                amount.CURProduceAmount += produktas.Value;
+            }
+
+        }
+
+
+        return amount;
+
+    }
 
 
 
+}
 
-
-
+public struct InvAmounts
+{
+    //add daugiau jei sugalvosiu kitokiu produce types
+    public float CURJuiceAmount;
+    public float CURProduceAmount;
 
 
 }
@@ -153,6 +203,18 @@ public class Prices
     public int ID;
     public string NAME;
     public float PRICE;
+
+}
+
+
+[System.Serializable]
+public class Storage
+{//EXPNEWTREES
+
+    public float TotalProduceStorage;
+    public float TotalJuiceStorage;
+    public float TakenProduceStorage;
+    public float TakenJuiceStorage;
 
 }
 

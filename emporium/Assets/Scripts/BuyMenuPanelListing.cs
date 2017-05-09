@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuyMenuPanelListing : MonoBehaviour {
+public class BuyMenuPanelListing : MonoBehaviour
+{
 
     public AudioSource audio;
 

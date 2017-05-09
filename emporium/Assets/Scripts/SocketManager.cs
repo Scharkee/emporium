@@ -12,7 +12,7 @@ public class SocketManager : MonoBehaviour
 {
 
 
-    Database db;
+
     bool ver = false;
     public int unix;
     HelperScripts helperscript;
@@ -24,7 +24,7 @@ public class SocketManager : MonoBehaviour
     void Start()
     {
 
-        db = gameObject.GetComponent<Database>();
+
         socket = DisabledObjectsGameScene.Instance.socket;
 
 
