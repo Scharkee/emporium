@@ -31,6 +31,9 @@ public class Globals : MonoBehaviour
     public Color buttonActiveColor1;
     public Color buttonColor1;
 
+    public Color RedTextColor;
+    public Color WhiteTextColor;
+
     // Use this for initialization
     void Start()
     {

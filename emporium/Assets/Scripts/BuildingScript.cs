@@ -416,15 +416,12 @@ public class BuildingScript : MonoBehaviour
 
             thistile = Database.Instance.tile[idInTileDatabase];
 
-            Debug.Log("curent work amount = " + Database.Instance.tile[idInTileDatabase].BUILDING_CURRENT_WORK_AMOUNT);
-            Debug.Log("workname is " + Database.Instance.tile[idInTileDatabase].WORK_NAME + " and " + thistile.WORK_NAME);
             WorkAssigned = true;
             WorkDone = false;
 
             thistile = Database.Instance.tile[idInTileDatabase];
 
             //start some sort of work effects.
-
 
             transform.FindChild("PressCube").GetComponent<Renderer>().material.color = new Color(1f, 0.1f, 0.2f);
 
@@ -514,11 +511,17 @@ public class BuildingScript : MonoBehaviour
 
     }
 
-    private void notifyOfProduceAmount(string produceAmount)
+    private void notifyOfProduceAmount(string text)
     {
 
-        GameObject alert = Instantiate(Resources.Load("produceAmountAlert"), new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0), Quaternion.identity, GameObject.Find("Canvas").transform) as GameObject;
-        alert.GetComponent<Text>().text = produceAmount;
+        GameObject alert = Instantiate(Resources.Load("produceAmountText"), new Vector3(thistile.X,0f, thistile.Z), Quaternion.identity,transform) as GameObject;
+        alert.GetComponent<TextMesh>().text = text;
+
+
+
+
+
+
     }
 
 

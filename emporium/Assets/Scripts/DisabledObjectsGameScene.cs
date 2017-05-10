@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using SocketIO;
 
 public class DisabledObjectsGameScene : MonoBehaviour
@@ -34,6 +35,9 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public SocketManager SocketManager;
     public CurrentVehicle CurrentVehicle;
     public CameraController Camcontroller;
+
+    public Text ProduceStorageEdit;
+    public Text JuicetorageEdit;
 
     public static DisabledObjectsGameScene Instance;
 

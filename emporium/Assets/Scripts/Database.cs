@@ -95,7 +95,21 @@ public class Database : MonoBehaviour
         Debug.Log("storage yra " + Storage.TakenJuiceStorage+" sulciu ir "+ Storage.TakenProduceStorage + " produce");
 
         //TODO: parodyt on Header in HUD kartu su total storage amount
+        Debug.Log(Storage.TakenJuiceStorage);
+        Debug.Log(Storage.TotalJuiceStorage);
+        DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/"+ Storage.TotalJuiceStorage;
+        DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
 
+        if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
+        {
+            DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
+
+        }
+        if (Storage.TakenProduceStorage>=Storage.TotalProduceStorage)
+        {
+            DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
+
+        }
     }
 
     private InvAmounts amountsInInventory()
@@ -213,10 +227,10 @@ public class Prices
 public class Storage
 {//EXPNEWTREES
 
-    public float TotalProduceStorage;
-    public float TotalJuiceStorage;
-    public float TakenProduceStorage;
-    public float TakenJuiceStorage;
+    public float TotalProduceStorage=0;
+    public float TotalJuiceStorage=0;
+    public float TakenProduceStorage=0;
+    public float TakenJuiceStorage=0;
 
 }
 
