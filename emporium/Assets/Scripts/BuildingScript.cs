@@ -219,7 +219,7 @@ public class BuildingScript : MonoBehaviour
             lock (Database.Instance.ActiveProduceStorage)
             {
 
-                Interlocked.Exchange(ref Database.Instance.Storage.TotalProduceStorage, Database.Instance.Storage.TotalProduceStorage + thistileInfo.PROG_AMOUNT);
+                Database.Instance.AddToMaxStorageAmounts(thistileInfo.PROG_AMOUNT,0);
                 Database.Instance.ActiveProduceStorage.Add(this);
 
             }
@@ -231,7 +231,7 @@ public class BuildingScript : MonoBehaviour
             lock (Database.Instance.ActiveJuiceStorage)
             {
 
-                Interlocked.Exchange(ref Database.Instance.Storage.TotalJuiceStorage, Database.Instance.Storage.TotalJuiceStorage + thistileInfo.PROG_AMOUNT);
+                Database.Instance.AddToMaxStorageAmounts(thistileInfo.PROG_AMOUNT,1);
                 Database.Instance.ActiveJuiceStorage.Add(this);
 
             }
@@ -301,9 +301,7 @@ public class BuildingScript : MonoBehaviour
 
                 Database.Instance.Inventory[thistileInfo.TILEPRODUCENAME] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory
 
-                Interlocked.Exchange(ref Database.Instance.Storage.TakenProduceStorage, Database.Instance.Storage.TakenProduceStorage + float.Parse(evt.data.GetField("harvestAmount").ToString()));
-                //TODO: nusiust update i HUD updater kad pakeistu kieki headeryje
-
+                Database.Instance.AddToStoredAmounts(float.Parse(evt.data.GetField("harvestAmount").ToString()), 0);
 
 
                 //tik augalai gali tureti multiple buildings per tile. Cia sunaikinami VISI vaisiai.
@@ -357,18 +355,22 @@ public class BuildingScript : MonoBehaviour
             {
 
 
-
-
                 Database.Instance.Inventory[thistile.WORK_NAME + "_sultys"] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory 
 
 
-                Interlocked.Exchange(ref Database.Instance.Storage.TakenJuiceStorage, Database.Instance.Storage.TakenJuiceStorage + float.Parse(evt.data.GetField("juiceYield").ToString()));
+                Database.Instance.AddToStoredAmounts(float.Parse(evt.data.GetField("juiceYield").ToString()), 1);
 
-                Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
+
+                try
+                {
+                    Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
+                }
+                catch
+                {
+
+                }
 
                 //TODO: pridet i ingame inventoriu IR sutvarkyt inventory expander (kad disablintu o ne nuimtu alpha iki 0)
-
-
 
 
                 Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
@@ -385,15 +387,8 @@ public class BuildingScript : MonoBehaviour
 
                 transform.FindChild("PressCube").GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
 
-
-
             }
-
-
         }
-
-
-
     }
 
 
@@ -514,7 +509,7 @@ public class BuildingScript : MonoBehaviour
     private void notifyOfProduceAmount(string text)
     {
 
-        GameObject alert = Instantiate(Resources.Load("produceAmountText"), new Vector3(thistile.X,0f, thistile.Z), Quaternion.identity,transform) as GameObject;
+        GameObject alert = Instantiate(Resources.Load("produceAmountText"), new Vector3(thistile.X, 0f, thistile.Z), Quaternion.identity, transform) as GameObject;
         alert.GetComponent<TextMesh>().text = text;
 
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
-
+using System.Threading;
 
 public class Database : MonoBehaviour
 {
@@ -94,9 +94,7 @@ public class Database : MonoBehaviour
 
         Debug.Log("storage yra " + Storage.TakenJuiceStorage+" sulciu ir "+ Storage.TakenProduceStorage + " produce");
 
-        //TODO: parodyt on Header in HUD kartu su total storage amount
-        Debug.Log(Storage.TakenJuiceStorage);
-        Debug.Log(Storage.TotalJuiceStorage);
+        
         DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/"+ Storage.TotalJuiceStorage;
         DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
 
@@ -110,6 +108,177 @@ public class Database : MonoBehaviour
             DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
 
         }
+    }
+
+    public void AddToStoredAmounts(float amount, int solidOrJuice)
+    {
+
+        switch (solidOrJuice)
+        {
+            case 0: //solid
+                Interlocked.Exchange(ref Storage.TakenProduceStorage, Storage.TakenProduceStorage+amount);
+                DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
+
+                if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
+                {
+                    DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
+
+                }else
+                {
+                    DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.WhiteTextColor;
+
+                }
+                break;
+            case 1: //juice
+
+                Interlocked.Exchange(ref Storage.TakenJuiceStorage, Storage.TakenJuiceStorage + amount);
+                DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/" + Storage.TotalJuiceStorage;
+
+                if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
+                {
+                    DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
+
+                }
+                else
+                {
+                    DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.WhiteTextColor;
+
+                }
+
+                break;
+
+        }
+
+
+    }
+
+    public void RemoveFromStoredAmounts(float amount, int solidOrJuice)
+    {
+
+        switch (solidOrJuice)
+        {
+            case 0: //solid
+                Interlocked.Exchange(ref Storage.TakenProduceStorage, Storage.TakenProduceStorage - amount);
+                DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
+
+                if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
+                {
+                    DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
+
+                }
+                else
+                {
+                    DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.WhiteTextColor;
+
+                }
+                break;
+            case 1: //juice
+
+                Interlocked.Exchange(ref Storage.TakenJuiceStorage, Storage.TakenJuiceStorage - amount);
+                DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/" + Storage.TotalJuiceStorage;
+
+                if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
+                {
+                    DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
+
+                }
+                else
+                {
+                    DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.WhiteTextColor;
+
+                }
+
+                break;
+
+        }
+
+
+    }
+
+    public void AddToMaxStorageAmounts(float amount, int solidOrJuice)
+    {
+
+        switch (solidOrJuice)
+        {
+            case 0: //solid
+                Interlocked.Exchange(ref Storage.TotalProduceStorage, Storage.TotalProduceStorage + amount);
+                DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
+
+                if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
+                {
+                    DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
+
+                }
+                else
+                {
+                    DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.WhiteTextColor;
+
+                }
+                break;
+            case 1: //juice
+
+                Interlocked.Exchange(ref Storage.TotalJuiceStorage, Storage.TotalJuiceStorage + amount);
+                DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/" + Storage.TotalJuiceStorage;
+
+                if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
+                {
+                    DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
+
+                }
+                else
+                {
+                    DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.WhiteTextColor;
+
+                }
+
+                break;
+
+        }
+
+
+    }
+
+    public void RemoveFromMaxStorageAmounts(float amount, int solidOrJuice)
+    {
+
+        switch (solidOrJuice)
+        {
+            case 0: //solid
+                Interlocked.Exchange(ref Storage.TotalProduceStorage, Storage.TotalProduceStorage - amount);
+                DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
+
+                if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
+                {
+                    DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
+
+                }
+                else
+                {
+                    DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.WhiteTextColor;
+
+                }
+                break;
+            case 1: //juice
+
+                Interlocked.Exchange(ref Storage.TotalJuiceStorage, Storage.TotalJuiceStorage - amount);
+                DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/" + Storage.TotalJuiceStorage;
+
+                if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
+                {
+                    DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
+
+                }
+                else
+                {
+                    DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.WhiteTextColor;
+
+                }
+
+                break;
+
+        }
+
+
     }
 
     private InvAmounts amountsInInventory()

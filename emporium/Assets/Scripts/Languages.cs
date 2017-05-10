@@ -97,6 +97,8 @@ public class Languages : MonoBehaviour
             english.Add("vysnia_1", "Cherry tree");
 
             english.Add("presas_1", "Small juicer");
+            english.Add("deze_1", "Storage Box");
+            english.Add("statine_1", "Barrel");
 
             english.Add("mopedas_1", "Moped");
             english.Add("masina_1", "Car");

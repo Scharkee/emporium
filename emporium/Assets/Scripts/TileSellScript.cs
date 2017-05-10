@@ -50,7 +50,7 @@ public class TileSellScript : MonoBehaviour
 
 
         }
-       
+
         if (DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)
         {
 
@@ -87,7 +87,7 @@ public class TileSellScript : MonoBehaviour
         if (sell)
         {
             DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonActiveColor1;
-            
+
             DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
 
         }
@@ -95,7 +95,7 @@ public class TileSellScript : MonoBehaviour
         {
             DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
             DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
-            
+
 
         }
 
@@ -118,13 +118,51 @@ public class TileSellScript : MonoBehaviour
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        SellTile(hit.transform.gameObject.GetComponent<BuildingScript>().thistile.ID, hit.transform.gameObject.GetComponent<BuildingScript>().thistile.NAME);
-                        Destroy(hit.transform.gameObject);
 
-                        GetComponent<AudioSource>().clip = coinSound();
-                        GetComponent<AudioSource>().Play();
+                        if (hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 3) //ziurim ar galime parduoti PRODUCE storage
+                        {
 
-                        Database.Instance.ActiveTiles.Remove(hit.transform.gameObject);
+                            if (Database.Instance.Storage.TakenProduceStorage > Database.Instance.Storage.TotalProduceStorage - hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT)
+                            { //negalim parduot nes netalpa vaisiai
+                                GameAlerts.Instance.AlertWithMessage("You have too much produce! You cannot sell produce storage at this moment.");
+
+                            }
+                            else
+                            {
+                                Database.Instance.RemoveFromMaxStorageAmounts((hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT), 0);
+                                Database.Instance.ActiveProduceStorage.Remove((hit.transform.gameObject.GetComponent<BuildingScript>()));
+                                Sell(hit);
+
+                            }
+
+
+                        }
+                        else if (hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 4) //ziurim ar galime parduoti JUICE storage
+                        {
+                            if (Database.Instance.Storage.TakenJuiceStorage > Database.Instance.Storage.TotalJuiceStorage - hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT)
+                            { //negalim parduot nes netalpa sultys
+                                GameAlerts.Instance.AlertWithMessage("You have too much juice! You cannot sell juice storage at this moment.");
+
+                            }
+                            else
+                            {
+                                Database.Instance.RemoveFromMaxStorageAmounts((hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT),1);
+                                Database.Instance.ActiveJuiceStorage.Remove((hit.transform.gameObject.GetComponent<BuildingScript>()));
+                                Sell(hit);
+                                
+
+                            }
+
+
+                        } else //galim parduot
+                        {
+                            Sell(hit);
+                          
+
+                        }
+
+
+
 
                     }
 
@@ -134,6 +172,18 @@ public class TileSellScript : MonoBehaviour
             }
 
         }
+    }
+
+    private void Sell(RaycastHit hit)
+    {
+        SellTile(hit.transform.gameObject.GetComponent<BuildingScript>().thistile.ID, hit.transform.gameObject.GetComponent<BuildingScript>().thistile.NAME);
+        Destroy(hit.transform.gameObject);
+
+        GetComponent<AudioSource>().clip = coinSound();
+        GetComponent<AudioSource>().Play();
+
+        Database.Instance.ActiveTiles.Remove(hit.transform.gameObject);
+
     }
 
     public void SellTile(int ID, string name)
