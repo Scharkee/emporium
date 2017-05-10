@@ -154,6 +154,8 @@ public class Building
     public float PRICE;
     public int PROG_AMOUNT;
     public string TILEPRODUCENAME;
+    public float TILEPRODUCERANGE_1; //TODO: pazet ar tinkami pavadinimai cia
+    public float TILEPRODUCERANGE_2;
     public int BUILDING_TYPE;
     public int SINGLE_USE;
 
