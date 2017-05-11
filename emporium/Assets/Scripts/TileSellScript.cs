@@ -13,9 +13,7 @@ public class TileSellScript : MonoBehaviour
     public AudioClip coin4;
 
     public bool sellModeEnabled;
-
-
-
+    
 
     SocketIOComponent socket;
 
@@ -87,7 +85,7 @@ public class TileSellScript : MonoBehaviour
         if (sell)
         {
             DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonActiveColor1;
-
+            DisabledObjectsGameScene.Instance.CancelPanel.SetActive(false);
             DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
 
         }
@@ -95,7 +93,7 @@ public class TileSellScript : MonoBehaviour
         {
             DisabledObjectsGameScene.Instance.SellButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
             DisabledObjectsGameScene.Instance.Camcontroller.PerformCamElevetion();
-
+            DisabledObjectsGameScene.Instance.CancelPanel.SetActive(true);
 
         }
 
@@ -113,7 +111,7 @@ public class TileSellScript : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.tag == "Building")
+                if (hit.transform.tag == "Building" && !DisabledObjectsGameScene.Instance.alertPanel.activeSelf)
                 {
 
                     if (Input.GetMouseButtonDown(0))

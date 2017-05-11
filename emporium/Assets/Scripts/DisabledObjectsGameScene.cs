@@ -32,6 +32,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public PriceManager pricemanager;
     public GameObject EconomyButton;
     public GameObject EconomyPanel;
+    public GameObject CancelPanel;
     public SocketManager SocketManager;
     public CurrentVehicle CurrentVehicle;
     public CameraController Camcontroller;
