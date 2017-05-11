@@ -8,6 +8,8 @@ public class HelperScripts : MonoBehaviour
 
     public static HelperScripts Instance;
 
+    private int testInt=0;
+
 
     void Start()
     {
@@ -30,9 +32,6 @@ public class HelperScripts : MonoBehaviour
         {
             Debug.Log("-------------testfunc-----------");
             testThing();
-
-
-
         }
 
 
@@ -41,8 +40,8 @@ public class HelperScripts : MonoBehaviour
 
     private void testThing()
     {
-        GameObject.Find("Tiles").BroadcastMessage("activateColliders", true);
-
+        GameAlerts.Instance.AlertWithMessage(testInt.ToString());
+        testInt++;
 
     }
 

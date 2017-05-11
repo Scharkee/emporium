@@ -40,24 +40,25 @@ public class GameAlerts : MonoBehaviour
     {
 
 
-        if (!alertQueue.Count.Equals(0) && !alertUp)
+        if (!alertQueue.Count.Equals(0))
         {
 
-            //TODO: veikia tik 2 alertai max. tyngiu taisyt mb later.
-
-
-
-
-
-            for (int i = 0; i < alertQueue.Count; i++) // Loop through List with for
+            lock (alertQueue)
             {
+                foreach (string alertContent in alertQueue)
+                {
 
 
-                StartCoroutine(startAlert(alertQueue[i]));
+                    StartCoroutine(startAlert(alertContent));
+
+                }
+
+                alertQueue.Clear();
+
+
 
             }
 
-            alertQueue.Clear();
 
         }
     }
@@ -65,8 +66,13 @@ public class GameAlerts : MonoBehaviour
 
     public void AlertWithMessage(string content)
     {
+        lock (alertQueue)
+        {
 
-        alertQueue.Add(content);
+            alertQueue.Add(content);
+
+        }
+        
 
         //TODO
 
@@ -79,16 +85,12 @@ public class GameAlerts : MonoBehaviour
 
         while (alertUp)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.8f);
             Debug.Log("waiting for alert to be closed");
         }
 
-
-
         DisabledObjectsGameScene.Instance.alertPanel.SetActive(true);
         DisabledObjectsGameScene.Instance.alertPanel.transform.FindChild("Alert_Text").GetComponent<Text>().text = str;
-
-
 
         while (DisabledObjectsGameScene.Instance.alertPanel.GetComponent<CanvasGroup>().alpha < 1)
         {
@@ -104,7 +106,7 @@ public class GameAlerts : MonoBehaviour
 
 
         alertUp = true;
-        Debug.Log("alertups is" + alertUp);
+        
 
     }
 

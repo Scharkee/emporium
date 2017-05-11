@@ -85,6 +85,7 @@ public class ProduceSelling : MonoBehaviour
         Dictionary<string, string> sale = new Dictionary<string, string>();
         int salesNum = 0;
 
+
         if (GameObject.Find("SellListItem_produce_InputField_apples").GetComponent<InputField>().text != "")
         {
             sale[salesNum + "name"] = "obuoliai";

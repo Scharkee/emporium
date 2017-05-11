@@ -85,17 +85,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AssignTiles.cs" />
+    <Compile Include="Assets\Scripts\BugReporter.cs" />
     <Compile Include="Assets\Scripts\BuildingScript.cs" />
     <Compile Include="Assets\Scripts\BuyButtonScript.cs" />
     <Compile Include="Assets\Scripts\BuyMenuInfoLoader.cs" />
+    <Compile Include="Assets\Scripts\BuyMenuPanelListing.cs" />
     <Compile Include="Assets\Scripts\BuyMode.cs" />
     <Compile Include="Assets\Scripts\BuyScript.cs" />
     <Compile Include="Assets\Scripts\BuyTile.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\ContextManager.cs" />
+    <Compile Include="Assets\Scripts\CurrentVehicle.cs" />
     <Compile Include="Assets\Scripts\Database.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsGameScene.cs" />
     <Compile Include="Assets\Scripts\DisabledObjectsMain.cs" />
-    <Compile Include="Assets\Scripts\ForgotPassScript.cs" />
+    <Compile Include="Assets\Scripts\EconomyButtonScript.cs" />
+    <Compile Include="Assets\Scripts\EconomyPanelListItem.cs" />
+    <Compile Include="Assets\Scripts\EconomyPanelScript.cs" />
+    <Compile Include="Assets\Scripts\ForgotPassword.cs" />
     <Compile Include="Assets\Scripts\GameAlerts.cs" />
     <Compile Include="Assets\Scripts\GlobalControl.cs" />
     <Compile Include="Assets\Scripts\Globals.cs" />
@@ -105,15 +112,20 @@
     <Compile Include="Assets\Scripts\InvExpander.cs" />
     <Compile Include="Assets\Scripts\InventoryPanel.cs" />
     <Compile Include="Assets\Scripts\Languages.cs" />
+    <Compile Include="Assets\Scripts\ListItemPrice.cs" />
+    <Compile Include="Assets\Scripts\LoadingPanelSafetyNetTimer.cs" />
     <Compile Include="Assets\Scripts\LoginCheck.cs" />
+    <Compile Include="Assets\Scripts\MainMenuMute.cs" />
+    <Compile Include="Assets\Scripts\MenuMusic.cs" />
     <Compile Include="Assets\Scripts\MoneyTracker.cs" />
+    <Compile Include="Assets\Scripts\PasswordStrength.cs" />
     <Compile Include="Assets\Scripts\PlayerInfoLoaderBank.cs" />
     <Compile Include="Assets\Scripts\PlotSelector.cs" />
     <Compile Include="Assets\Scripts\PlotSelectorScript.cs" />
     <Compile Include="Assets\Scripts\PressContextPanelScript.cs" />
+    <Compile Include="Assets\Scripts\PriceManager.cs" />
     <Compile Include="Assets\Scripts\ProduceSelling.cs" />
     <Compile Include="Assets\Scripts\RegisterScript.cs" />
-    <Compile Include="Assets\Scripts\RotationScript.cs" />
     <Compile Include="Assets\Scripts\SellListItem_maxButtonScript.cs" />
     <Compile Include="Assets\Scripts\SellingButtonScript.cs" />
     <Compile Include="Assets\Scripts\ShopTabSwitcher.cs" />
@@ -129,8 +141,10 @@
     <Compile Include="Assets\Scripts\alertPanelScript.cs" />
     <Compile Include="Assets\Scripts\produceAmountAlertScript.cs" />
     <Compile Include="Assets\Scripts\templog.cs" />
+    <Compile Include="Assets\TransportOperator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Materials\AlwaysOnTop.shader" />
     <None Include="Assets\Misc\Fonts\Roboto\NOTICE.txt" />
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
