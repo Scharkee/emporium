@@ -18,7 +18,6 @@ public class TileOperator : MonoBehaviour
 
     private IEnumerator CheckForGrowthCompletionRepeat()
     {
-        Debug.Log("ok?");
         CheckForGrowthCompletion(); //pirmas expedited checkas uzkrovimui
 
         while (true)

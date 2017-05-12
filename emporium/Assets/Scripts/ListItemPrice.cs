@@ -51,5 +51,15 @@ public class ListItemPrice : MonoBehaviour
         }
 
         text.text = total.ToString();
+
+        checkForWeightOverflow(total, text);
+    }
+
+    private void checkForWeightOverflow(float total, Text text)
+    {
+        if (total > Database.Instance.CurrentVehichle.amount)  //per daug prikrauta visko
+        {
+            text.color = Globals.Instance.RedTextColor;
+        }
     }
 }

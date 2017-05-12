@@ -33,12 +33,45 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 {
                 }
             }
-            else
+            else if (building.BUILDING_TYPE == 1)
             {
                 try
                 {
                     GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
                     GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = "Depends on load.";
+                }
+                catch
+                {
+                }
+            }
+            else if (building.BUILDING_TYPE == 2)
+            {
+                try
+                {
+                    GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
+                    GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " seconds.";
+                }
+                catch
+                {
+                }
+            }
+            else if (building.BUILDING_TYPE == 3) //TODO: fix visa sita bloka, perdaryt buyPanelButtonus kad butu text1 text2 kuriuos galima keisti pagal BUILDING_TYPE
+            {
+                try
+                {
+                    GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
+                    GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " KG.";
+                }
+                catch
+                {
+                }
+            }
+            else if (building.BUILDING_TYPE == 3)
+            {
+                try
+                {
+                    GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
+                    GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " L.";
                 }
                 catch
                 {

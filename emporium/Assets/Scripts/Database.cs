@@ -353,3 +353,10 @@ public class Transport
     public float amount;
     public float time;
 }
+
+[System.Serializable]
+public class TransportJob
+{//EXPNEWTREES
+    public Dictionary<string, string> sale;
+    public float time;
+}

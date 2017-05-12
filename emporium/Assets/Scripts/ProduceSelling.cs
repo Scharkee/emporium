@@ -37,9 +37,19 @@ public class ProduceSelling : MonoBehaviour
 
     public void SaleClick()
     {
-        AskForSaleVerification(formSalePackage());
+        if (float.Parse(GameObject.Find("Selling_totalsPanel_total_edit").GetComponent<Text>().text) > Database.Instance.CurrentVehichle.amount) //netilps
+        {
+            GameAlerts.Instance.AlertWithMessage("Your current transport cannot support this amount of weight!");
+        }
+        else
+        {
+            TransportJob newJob = new TransportJob();
+            newJob.time = Database.Instance.CurrentVehichle.time;
+            newJob.sale = formSalePackage();
+            DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TransportOperator>().transportJobs.Add(newJob);
 
-        resetSellingPanel();
+            resetSellingPanel();
+        }
     }
 
     public void CancelContext()
