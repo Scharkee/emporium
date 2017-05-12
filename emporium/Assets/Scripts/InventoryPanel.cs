@@ -1,39 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InventoryPanel : MonoBehaviour
 {
-
-    UIManager uimanager;
+    private UIManager uimanager;
     private bool firstStart = true;
 
-    void Start()
+    private void Start()
     {
-
         uimanager = GameObject.Find("_ManagerialScripts").GetComponent<UIManager>();
-
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
-
         if (!firstStart)
         {
-
             adjustValues();
         }
         else
         {
-
             firstStart = false;
-
         }
-
     }
-
-
-
 
     public void adjustValues()
     {
@@ -48,12 +35,9 @@ public class InventoryPanel : MonoBehaviour
         UIManager.Instance.ChangeUIText("kiviai_Editable", Database.Instance.Inventory["kiviai"].ToString());
         UIManager.Instance.ChangeUIText("slyvos_Editable", Database.Instance.Inventory["slyvos"].ToString());
 
-
-
         UIManager.Instance.ChangeUIText("kriauses_Sultys_Editable", Database.Instance.Inventory["kriauses_sultys"].ToString());
         UIManager.Instance.ChangeUIText("apelsinai_Sultys_Editable", Database.Instance.Inventory["apelsinai_sultys"].ToString());
         UIManager.Instance.ChangeUIText("persikai_Sultys_Editable", Database.Instance.Inventory["persikai_sultys"].ToString());
         UIManager.Instance.ChangeUIText("slyvos_Sultys_Editable", Database.Instance.Inventory["slyvos_sultys"].ToString());
-
     }
 }

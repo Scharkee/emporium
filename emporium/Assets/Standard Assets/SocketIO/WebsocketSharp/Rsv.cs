@@ -1,4 +1,5 @@
 #region License
+
 /*
  * Rsv.cs
  *
@@ -24,15 +25,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
 
-using System;
+#endregion License
 
 namespace WebSocketSharp
 {
-  internal enum Rsv : byte
-  {
-    Off = 0x0,
-    On = 0x1
-  }
+    internal enum Rsv : byte
+    {
+        Off = 0x0,
+        On = 0x1
+    }
 }

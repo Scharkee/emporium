@@ -1,21 +1,16 @@
-﻿using System.Collections;
+﻿using SocketIO;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
-using SocketIO;
+using UnityEngine.UI;
 
 public class BugReporter : MonoBehaviour
 {
-
     public bool BugReporterOpen = false;
 
     private void Start()
     {
-
-
         DisabledObjectsMain.Instance.socket.On("RECEIVED_BUGREPORT", reportConfirmation);
-
-
     }
 
     public void TheClick()
@@ -31,21 +26,15 @@ public class BugReporter : MonoBehaviour
             BugReporterOpen = false;
             StartCoroutine(ManageBugReporter(false));
         }
-
-
-
     }
 
     public IEnumerator ManageBugReporter(bool open)
     {
-
         if (open)
         {
             DisabledObjectsMain.Instance.BugReportPanel.SetActive(open);
             DisabledObjectsMain.Instance.Menumusic.HaltBeats = true;
         }
-
-
 
         if (open)
         {
@@ -54,9 +43,6 @@ public class BugReporter : MonoBehaviour
                 yield return new WaitForSeconds(0.005f);
                 DisabledObjectsMain.Instance.BugReportPanel.GetComponent<CanvasGroup>().alpha += 0.1f;
             }
-
-
-
         }
         else
         {
@@ -65,7 +51,6 @@ public class BugReporter : MonoBehaviour
                 yield return new WaitForSeconds(0.005f);
                 DisabledObjectsMain.Instance.BugReportPanel.GetComponent<CanvasGroup>().alpha -= 0.1f;
             }
-
         }
 
         if (!open)
@@ -73,26 +58,18 @@ public class BugReporter : MonoBehaviour
             DisabledObjectsMain.Instance.BugReportPanel.SetActive(open);
             DisabledObjectsMain.Instance.Menumusic.HaltBeats = false;
         }
-
-
-
     }
 
     private void reportConfirmation(SocketIOEvent evt)
     {
-
-
         Debug.Log("report successfull");
-
     }
 
     public void SendReport(string report)
     {
-
         Dictionary<string, string> data = new Dictionary<string, string>();
 
         data["report"] = report;
-
 
         DisabledObjectsMain.Instance.socket.Emit("SUBMIT_BUGREPORT", new JSONObject(data));
     }
@@ -106,7 +83,6 @@ public class BugReporter : MonoBehaviour
 
         StartCoroutine(DisabledObjectsMain.Instance.ShowMessage("Thank You! Your bug report has been submitted.", DisabledObjectsMain.Instance.NormalTextColor, 2f));
         CancelReporting();
-
     }
 
     public void CancelReporting()

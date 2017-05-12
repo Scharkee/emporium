@@ -1,4 +1,5 @@
 #region License
+
 /*
  * Fin.cs
  *
@@ -24,15 +25,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
 
-using System;
+#endregion License
 
 namespace WebSocketSharp
 {
-  internal enum Fin : byte
-  {
-    More = 0x0,
-    Final = 0x1
-  }
+    internal enum Fin : byte
+    {
+        More = 0x0,
+        Final = 0x1
+    }
 }

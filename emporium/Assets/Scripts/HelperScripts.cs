@@ -1,50 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using SocketIO;
 
 public class HelperScripts : MonoBehaviour
 {
-
     public static HelperScripts Instance;
 
-    private int testInt=0;
+    private int testInt = 0;
 
-
-    void Start()
+    private void Start()
     {
-
-
     }
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
-
-
-
     }
 
-
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log("-------------testfunc-----------");
             testThing();
         }
-
-
-
     }
 
     private void testThing()
     {
         GameAlerts.Instance.AlertWithMessage(testInt.ToString());
         testInt++;
-
     }
-
 
     public bool LyginisPlotsize()
     {
@@ -88,8 +73,6 @@ public class HelperScripts : MonoBehaviour
         dic.Add("nektarinai", inv.nektarinai);
         dic.Add("nektarinai_sultys", inv.nektarinai_sultys);
 
-
-
         return dic;
     }
 
@@ -100,13 +83,7 @@ public class HelperScripts : MonoBehaviour
         foreach (Prices price in pric)
         {
             dic.Add(price.NAME, price.PRICE);
-
-
-
         }
-
-        
-       
 
         return dic;
     }

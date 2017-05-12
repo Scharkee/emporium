@@ -1,4 +1,5 @@
 #region License
+
 /*
  * HttpStreamAsyncResult.cs
  *
@@ -28,106 +29,118 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
+
+#endregion License
 
 #region Authors
+
 /*
  * Authors:
  * - Gonzalo Paniagua Javier <gonzalo@novell.com>
  */
-#endregion
+
+#endregion Authors
 
 using System;
 using System.Threading;
 
 namespace WebSocketSharp.Net
 {
-  internal class HttpStreamAsyncResult : IAsyncResult
-  {
-    #region Private Fields
-
-    private AsyncCallback    _callback;
-    private bool             _completed;
-    private object           _state;
-    private object           _sync;
-    private ManualResetEvent _waitHandle;
-
-    #endregion
-
-    #region Internal Fields
-
-    internal byte []   Buffer;
-    internal int       Count;
-    internal Exception Error;
-    internal int       Offset;
-    internal int       SyncRead;
-
-    #endregion
-
-    #region Public Constructors
-
-    public HttpStreamAsyncResult (AsyncCallback callback, object state)
+    internal class HttpStreamAsyncResult : IAsyncResult
     {
-      _callback = callback;
-      _state = state;
-      _sync = new object ();
+        #region Private Fields
+
+        private AsyncCallback _callback;
+        private bool _completed;
+        private object _state;
+        private object _sync;
+        private ManualResetEvent _waitHandle;
+
+        #endregion Private Fields
+
+        #region Internal Fields
+
+        internal byte[] Buffer;
+        internal int Count;
+        internal Exception Error;
+        internal int Offset;
+        internal int SyncRead;
+
+        #endregion Internal Fields
+
+        #region Public Constructors
+
+        public HttpStreamAsyncResult(AsyncCallback callback, object state)
+        {
+            _callback = callback;
+            _state = state;
+            _sync = new object();
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public object AsyncState
+        {
+            get
+            {
+                return _state;
+            }
+        }
+
+        public WaitHandle AsyncWaitHandle
+        {
+            get
+            {
+                lock (_sync)
+                    return _waitHandle ?? (_waitHandle = new ManualResetEvent(_completed));
+            }
+        }
+
+        public bool CompletedSynchronously
+        {
+            get
+            {
+                return SyncRead == Count;
+            }
+        }
+
+        public bool IsCompleted
+        {
+            get
+            {
+                lock (_sync)
+                    return _completed;
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void Complete()
+        {
+            lock (_sync)
+            {
+                if (_completed)
+                    return;
+
+                _completed = true;
+                if (_waitHandle != null)
+                    _waitHandle.Set();
+
+                if (_callback != null)
+                    _callback.BeginInvoke(this, ar => _callback.EndInvoke(ar), null);
+            }
+        }
+
+        public void Complete(Exception exception)
+        {
+            Error = exception;
+            Complete();
+        }
+
+        #endregion Public Methods
     }
-
-    #endregion
-
-    #region Public Properties
-
-    public object AsyncState {
-      get {
-        return _state;
-      }
-    }
-
-    public WaitHandle AsyncWaitHandle {
-      get {
-        lock (_sync)
-          return _waitHandle ?? (_waitHandle = new ManualResetEvent (_completed));
-      }
-    }
-
-    public bool CompletedSynchronously {
-      get {
-        return SyncRead == Count;
-      }
-    }
-
-    public bool IsCompleted {
-      get {
-        lock (_sync)
-          return _completed;
-      }
-    }
-
-    #endregion
-
-    #region Public Methods
-
-    public void Complete ()
-    {
-      lock (_sync) {
-        if (_completed)
-          return;
-
-        _completed = true;
-        if (_waitHandle != null)
-          _waitHandle.Set ();
-
-        if (_callback != null)
-          _callback.BeginInvoke (this, ar => _callback.EndInvoke (ar), null);
-      }
-    }
-
-    public void Complete (Exception exception)
-    {
-      Error = exception;
-      Complete ();
-    }
-
-    #endregion
-  }
 }

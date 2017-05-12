@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using System.Text.RegularExpressions;
 using System.Threading;
+using UnityEngine;
 
 public class Database : MonoBehaviour
 {
@@ -14,10 +12,6 @@ public class Database : MonoBehaviour
 
     public static Database Instance;
 
-
-
-
-
     //TRANSPORT
     public Transport CurrentVehichle;
 
@@ -27,6 +21,7 @@ public class Database : MonoBehaviour
 
     //MAIN DATBASES
     public Tile[] tile;
+
     public Building[] buildinginfo;
     public Inventory[] inventory; //one temp invo for JSON conversion
     public Prices[] prices;
@@ -41,13 +36,11 @@ public class Database : MonoBehaviour
     public List<BuildingScript> ActiveProduceStorage = new List<BuildingScript>(); //tiles kurios skirtos laikyti vaisius/darzoves (PRODUCE)
     public List<BuildingScript> ActiveJuiceStorage = new List<BuildingScript>(); //tiles kurios skirtos laikyti sultis (JUICE)
 
-
-    void Awake()
+    private void Awake()
     {
         Instance = this;
-
-
     }
+
     //irenginiai
 
     public Building press_1 = new Building();
@@ -60,7 +53,6 @@ public class Database : MonoBehaviour
     public Building sterilizuotojas_2 = new Building();
     public Building buteliavimas_1 = new Building();
     public Building buteliavimas_2 = new Building();
-
 
     //pastatai
 
@@ -76,12 +68,9 @@ public class Database : MonoBehaviour
 
     public IEnumerator waitForTileAssignmentCompletion()
     {
-
-
         while (TileSelfSignedAssignmentComplete != ActiveTiles.Count)
         {
             yield return new WaitForSeconds(0.1f);
-
         }
 
         //visos tiles baige assignintis
@@ -92,43 +81,39 @@ public class Database : MonoBehaviour
         Storage.TakenJuiceStorage = am.CURJuiceAmount;
         Storage.TakenProduceStorage = am.CURProduceAmount;
 
-        Debug.Log("storage yra " + Storage.TakenJuiceStorage+" sulciu ir "+ Storage.TakenProduceStorage + " produce");
+        Debug.Log("storage yra " + Storage.TakenJuiceStorage + " sulciu ir " + Storage.TakenProduceStorage + " produce");
 
-        
-        DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/"+ Storage.TotalJuiceStorage;
+        DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/" + Storage.TotalJuiceStorage;
         DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
 
         if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
         {
             DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
-
         }
-        if (Storage.TakenProduceStorage>=Storage.TotalProduceStorage)
+        if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
         {
             DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
-
         }
     }
 
     public void AddToStoredAmounts(float amount, int solidOrJuice)
     {
-
         switch (solidOrJuice)
         {
             case 0: //solid
-                Interlocked.Exchange(ref Storage.TakenProduceStorage, Storage.TakenProduceStorage+amount);
+                Interlocked.Exchange(ref Storage.TakenProduceStorage, Storage.TakenProduceStorage + amount);
                 DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
 
                 if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
                 {
                     DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
-
-                }else
+                }
+                else
                 {
                     DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.WhiteTextColor;
-
                 }
                 break;
+
             case 1: //juice
 
                 Interlocked.Exchange(ref Storage.TakenJuiceStorage, Storage.TakenJuiceStorage + amount);
@@ -137,24 +122,18 @@ public class Database : MonoBehaviour
                 if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
                 {
                     DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
-
                 }
                 else
                 {
                     DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.WhiteTextColor;
-
                 }
 
                 break;
-
         }
-
-
     }
 
     public void RemoveFromStoredAmounts(float amount, int solidOrJuice)
     {
-
         switch (solidOrJuice)
         {
             case 0: //solid
@@ -164,14 +143,13 @@ public class Database : MonoBehaviour
                 if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
                 {
                     DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
-
                 }
                 else
                 {
                     DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.WhiteTextColor;
-
                 }
                 break;
+
             case 1: //juice
 
                 Interlocked.Exchange(ref Storage.TakenJuiceStorage, Storage.TakenJuiceStorage - amount);
@@ -180,24 +158,18 @@ public class Database : MonoBehaviour
                 if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
                 {
                     DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
-
                 }
                 else
                 {
                     DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.WhiteTextColor;
-
                 }
 
                 break;
-
         }
-
-
     }
 
     public void AddToMaxStorageAmounts(float amount, int solidOrJuice)
     {
-
         switch (solidOrJuice)
         {
             case 0: //solid
@@ -207,14 +179,13 @@ public class Database : MonoBehaviour
                 if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
                 {
                     DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
-
                 }
                 else
                 {
                     DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.WhiteTextColor;
-
                 }
                 break;
+
             case 1: //juice
 
                 Interlocked.Exchange(ref Storage.TotalJuiceStorage, Storage.TotalJuiceStorage + amount);
@@ -223,24 +194,18 @@ public class Database : MonoBehaviour
                 if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
                 {
                     DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
-
                 }
                 else
                 {
                     DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.WhiteTextColor;
-
                 }
 
                 break;
-
         }
-
-
     }
 
     public void RemoveFromMaxStorageAmounts(float amount, int solidOrJuice)
     {
-
         switch (solidOrJuice)
         {
             case 0: //solid
@@ -250,14 +215,13 @@ public class Database : MonoBehaviour
                 if (Storage.TakenProduceStorage >= Storage.TotalProduceStorage)
                 {
                     DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
-
                 }
                 else
                 {
                     DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.WhiteTextColor;
-
                 }
                 break;
+
             case 1: //juice
 
                 Interlocked.Exchange(ref Storage.TotalJuiceStorage, Storage.TotalJuiceStorage - amount);
@@ -266,19 +230,14 @@ public class Database : MonoBehaviour
                 if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
                 {
                     DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.RedTextColor;
-
                 }
                 else
                 {
                     DisabledObjectsGameScene.Instance.JuicetorageEdit.color = Globals.Instance.WhiteTextColor;
-
                 }
 
                 break;
-
         }
-
-
     }
 
     private InvAmounts amountsInInventory()
@@ -291,29 +250,23 @@ public class Database : MonoBehaviour
             if (produktas.Key.Contains("_sultys")) // sudedam visu sulciu suma
             {
                 amount.CURJuiceAmount += produktas.Value;
-            }else
+            }
+            else
             {
                 amount.CURProduceAmount += produktas.Value;
             }
-
         }
 
-
         return amount;
-
     }
-
-
-
 }
 
 public struct InvAmounts
 {
     //add daugiau jei sugalvosiu kitokiu produce types
     public float CURJuiceAmount;
+
     public float CURProduceAmount;
-
-
 }
 
 [System.Serializable]
@@ -341,7 +294,6 @@ public class Building
     public float TILEPRODUCERANGE_2;
     public int BUILDING_TYPE;
     public int SINGLE_USE;
-
 }
 
 [System.Serializable]
@@ -350,12 +302,9 @@ public class BuyButtons
     public string NAME;
 }
 
-
 [System.Serializable]
 public class Inventory
 {//EXPNEWTREES
-
-
     public float apelsinai;
     public float apelsinai_sultys;
     public float obuoliai;
@@ -376,31 +325,23 @@ public class Inventory
     public float kiviai_sultys;
     public float persikai;
     public float persikai_sultys;
-
-
 }
-
 
 [System.Serializable]
 public class Prices
 {//EXPNEWTREES
-
     public int ID;
     public string NAME;
     public float PRICE;
-
 }
-
 
 [System.Serializable]
 public class Storage
 {//EXPNEWTREES
-
-    public float TotalProduceStorage=0;
-    public float TotalJuiceStorage=0;
-    public float TakenProduceStorage=0;
-    public float TakenJuiceStorage=0;
-
+    public float TotalProduceStorage = 0;
+    public float TotalJuiceStorage = 0;
+    public float TakenProduceStorage = 0;
+    public float TakenJuiceStorage = 0;
 }
 
 [System.Serializable]
@@ -412,16 +353,3 @@ public class Transport
     public float amount;
     public float time;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

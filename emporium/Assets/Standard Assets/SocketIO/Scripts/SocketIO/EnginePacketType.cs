@@ -1,4 +1,5 @@
 #region License
+
 /*
  * EnginePacketType.cs
  *
@@ -17,30 +18,31 @@
  * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,	
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
-using System;
+
+#endregion License
 
 /**
  * Message types
- */ 
+ */
+
 namespace SocketIO
 {
-	public enum EnginePacketType
-	{
-		UNKNOWN	 = -1,
-		OPEN 	 =  0,
-		CLOSE 	 =  1,
-		PING 	 =  2,
-		PONG	 =  3,
-		MESSAGE	 =  4,
-		UPGRADE  =  5,
-		NOOP   	 =  6
-	}
+    public enum EnginePacketType
+    {
+        UNKNOWN = -1,
+        OPEN = 0,
+        CLOSE = 1,
+        PING = 2,
+        PONG = 3,
+        MESSAGE = 4,
+        UPGRADE = 5,
+        NOOP = 6
+    }
 }

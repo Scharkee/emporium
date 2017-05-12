@@ -1,4 +1,5 @@
 #region License
+
 /*
  * SocketIOException.cs
  *
@@ -24,15 +25,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
+
+#endregion License
+
 using System;
 
 namespace SocketIO
 {
-	public class SocketIOException  : Exception
-	{
-		public SocketIOException(){}		
-		public SocketIOException(string message): base(message){}
-		public SocketIOException(string message, Exception innerException): base(message, innerException){}
-	}
+    public class SocketIOException : Exception
+    {
+        public SocketIOException()
+        {
+        }
+
+        public SocketIOException(string message) : base(message)
+        {
+        }
+
+        public SocketIOException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
 }

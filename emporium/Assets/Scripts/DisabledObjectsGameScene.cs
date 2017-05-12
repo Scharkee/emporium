@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using SocketIO;
 using UnityEngine;
 using UnityEngine.UI;
-using SocketIO;
 
 public class DisabledObjectsGameScene : MonoBehaviour
 {
-
     //issaugomi ivairus objektai kuriu reikia kitoms klasems. Islieka references net kai disablinami patys objektai
     public GameObject PressContextPanel;
+
     public GameObject LoadingPanel;
     public GameObject Inventory_Fruit_panel;
     public GameObject Tiles;
@@ -42,35 +40,22 @@ public class DisabledObjectsGameScene : MonoBehaviour
 
     public static DisabledObjectsGameScene Instance;
 
-
-
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-
         alertPanel.SetActive(false);
         StatsContextPanel.SetActive(false);
         SellingPanel.SetActive(false);
         EconomyPanel.SetActive(false);
 
         //  StartCoroutine(delayedDisable());
-
-
-
-
-
     }
-    void Awake()
+
+    private void Awake()
     {
         Instance = this;
         Inventory_Fruit_panel.SetActive(false);
         socket = GlobalControl.Instance.gameObject.GetComponent<SocketIOComponent>();
         Selector = GameObject.Find("Selector");
-
-
     }
-
-
-
-
 }

@@ -1,31 +1,23 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PressContextPanelScript : MonoBehaviour
 {
-
     public bool aliveForHalfSec;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         aliveForHalfSec = false;
         StartCoroutine(waitForALittleBeforeAllowingCancellationsOfPanel());
-
-
-
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         aliveForHalfSec = false;
         StartCoroutine(waitForALittleBeforeAllowingCancellationsOfPanel());
-
     }
-
-
 
     public void AcceptPanelInput()
     {
@@ -39,7 +31,6 @@ public class PressContextPanelScript : MonoBehaviour
             }
             else
             {
-
                 int workAmount = int.Parse(amounttext.text);
                 string workName = IDHelper.Instance.PressContextPanelIDtoName(GameObject.Find("Press_AssignJob_ProdTypeDropdown").GetComponent<Dropdown>().value);
 
@@ -48,46 +39,25 @@ public class PressContextPanelScript : MonoBehaviour
                 pkg.workName = workName;
 
                 DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("ReceiveWork", pkg);
-
             }
-
-
         }
-
-
-
-
-
-
     }
 
-
-    IEnumerator waitForALittleBeforeAllowingCancellationsOfPanel()
+    private IEnumerator waitForALittleBeforeAllowingCancellationsOfPanel()
     {
-
         yield return new WaitForSeconds(0.5f);
         aliveForHalfSec = true;
     }
 
-
     public void CancelContext() //parejo broadcastas, isjungti VISUS context panels
     {
         gameObject.SetActive(false);
-
-
-
     }
-
-
 }
-
 
 [System.Serializable]
 public struct PressWorkPKG
 {
     public string workName;
     public int workAmount;
-
-
-
 }

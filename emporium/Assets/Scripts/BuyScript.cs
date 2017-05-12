@@ -1,40 +1,27 @@
-﻿using System.Collections;
+﻿using SocketIO;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
-using SocketIO;
 
 public class BuyScript : MonoBehaviour
 {
-
     public string tilename;
-    RaycastHit hit;
-    SocketIOComponent socket;
-
+    private RaycastHit hit;
+    private SocketIOComponent socket;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         socket = DisabledObjectsGameScene.Instance.socket;
-  
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-
     }
 
     public void EnableSelector(string tilename)
     {
-
-
-
         DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
-
-
-
 
         DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled = true;
 
@@ -45,10 +32,7 @@ public class BuyScript : MonoBehaviour
 
     public void ChoosePlot(string buildingname, float X, float Z)
     {
-
         Debug.Log("requesting " + buildingname + " at " + X + " " + Z);
-
-
 
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = GlobalControl.Instance.Uname;
@@ -69,7 +53,6 @@ public class BuyScript : MonoBehaviour
             {
                 Debug.Log("Cant purchase any more.");
                 GameAlerts.Instance.AlertWithMessage("Tile cannot host any more trees.");
-               
             }
             else if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT != 0)
             {
@@ -79,7 +62,6 @@ public class BuyScript : MonoBehaviour
                 socket.Emit("BUY_TILE", new JSONObject(data));
                 Debug.Log("2");
                 Debug.Log("551");
-
             }
         }
         else //tile does not exist.
@@ -88,46 +70,28 @@ public class BuyScript : MonoBehaviour
             data["TileCount"] = 1.ToString();
             socket.Emit("BUY_TILE", new JSONObject(data));
         }
-
-
-
-
-
     }
 
     private int tileExistsAt(float X, float Z)
     {
         int currentDBpos = -9898;
 
-
-
-
-
         foreach (GameObject tile in Database.Instance.ActiveTiles)
         {
-
             try
             {
-                
                 if (tile.transform.position.x == X && tile.transform.position.z == Z)
                 {
-
                     currentDBpos = Database.Instance.ActiveTiles.IndexOf(tile);
-
                 }
-
             }
             catch
             {
-
             }
-
-
         }
 
         Debug.Log("tile at Activetiles index " + currentDBpos);
 
         return currentDBpos;
-
     }
 }

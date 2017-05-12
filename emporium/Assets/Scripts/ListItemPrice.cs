@@ -1,20 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ListItemPrice : MonoBehaviour
 {
-
-
     public Dictionary<string, float> PriceCache = new Dictionary<string, float>();  // laikomos vieno listItem kainos (juice ir produce)
 
     public Dictionary<string, float> WeightCache = new Dictionary<string, float>();  // laikomos visu listitem bendras svoris;
 
-
     private void Start()
     {
-
         //preinitialization visiems dictionaries;
         WeightCache.Add("kriauses", 0);
         WeightCache.Add("kriauses_sultys", 0);
@@ -39,16 +34,11 @@ public class ListItemPrice : MonoBehaviour
 
         PriceCache.Add("juice", 0);
         PriceCache.Add("produce", 0);
-
-
     }
-
 
     public void UpdatePrice(Text text)
     {
-
         text.text = "+" + (PriceCache["produce"] + PriceCache["juice"]).ToString() + "$";
-
     }
 
     public void UpdateTotalWeight(Text text)
@@ -58,13 +48,8 @@ public class ListItemPrice : MonoBehaviour
         foreach (KeyValuePair<string, float> entry in WeightCache)
         {
             total += entry.Value;
-
         }
 
         text.text = total.ToString();
-
     }
-
-
-
 }

@@ -1,32 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Languages : MonoBehaviour
 {
-
     public static Dictionary<string, string> lithuanian = new Dictionary<string, string>();
     public static Dictionary<string, string> english = new Dictionary<string, string>();
     public static bool initiated = false;
 
-
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-
     }
-
-
-
-
-
-
 
     public static void initDicts()
     {
         if (!initiated)
         {
-
             initiated = true;
             /////////
             //LITHUANIAN
@@ -45,7 +34,6 @@ public class Languages : MonoBehaviour
             lithuanian.Add("Press_ProduceTypeText", "Produktas");
             lithuanian.Add("Press_AssignJob_AmountText", "Kiekis");
 
-
             //TODO: dropdown
 
             //NAMES
@@ -60,13 +48,9 @@ public class Languages : MonoBehaviour
 
             lithuanian.Add("presas_1", "Maža sulčiaspaudė");
 
-
-
-
             /////////
             //ENGLISH
             /////////
-
 
             //MAIN
             english.Add("login", "Login");
@@ -76,14 +60,12 @@ public class Languages : MonoBehaviour
             english.Add("job_unassigned", "Idle.");
             english.Add("done_collect", "Ready to Collect.");
 
-
             //GAMESCENE
 
             //preso context table
             english.Add("Press_AssignJobText", "Assign Job");
             english.Add("Press_ProduceTypeText", "Produce");
             english.Add("Press_AssignJob_AmountText", "Amount");
-
 
             //NAMES
 
@@ -104,12 +86,6 @@ public class Languages : MonoBehaviour
             english.Add("masina_1", "Car");
             english.Add("pikapas_1", "Pickup Truck");
             english.Add("sunkvezimis_1", "Truck");
-
         }
-
-
     }
-
-
 }
-

@@ -1,4 +1,5 @@
 #region License
+
 /*
  * ByteOrder.cs
  *
@@ -24,24 +25,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
 
-using System;
+#endregion License
 
 namespace WebSocketSharp
 {
-  /// <summary>
-  /// Contains the values that indicate whether the byte order is a Little-endian or Big-endian.
-  /// </summary>
-  public enum ByteOrder : byte
-  {
     /// <summary>
-    /// Indicates a Little-endian.
+    /// Contains the values that indicate whether the byte order is a Little-endian or Big-endian.
     /// </summary>
-    Little,
-    /// <summary>
-    /// Indicates a Big-endian.
-    /// </summary>
-    Big
-  }
+    public enum ByteOrder : byte
+    {
+        /// <summary>
+        /// Indicates a Little-endian.
+        /// </summary>
+        Little,
+
+        /// <summary>
+        /// Indicates a Big-endian.
+        /// </summary>
+        Big
+    }
 }

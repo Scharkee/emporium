@@ -1,4 +1,5 @@
 #region License
+
 /*
  * HandshakeBase.cs
  *
@@ -24,98 +25,104 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
+
+#endregion License
 
 using System;
 using System.Collections.Specialized;
 using System.Text;
-using WebSocketSharp.Net;
 
 namespace WebSocketSharp
 {
-  internal abstract class HandshakeBase
-  {
-    #region Private Fields
-
-    private NameValueCollection _headers;
-    private Version             _version;
-
-    #endregion
-
-    #region Internal Fields
-
-    internal byte[] EntityBodyData;
-
-    #endregion
-
-    #region Protected Const Fields
-
-    protected const string CrLf = "\r\n";
-
-    #endregion
-
-    #region Protected Constructors
-
-    protected HandshakeBase (Version version, NameValueCollection headers)
+    internal abstract class HandshakeBase
     {
-      _version = version;
-      _headers = headers;
+        #region Private Fields
+
+        private NameValueCollection _headers;
+        private Version _version;
+
+        #endregion Private Fields
+
+        #region Internal Fields
+
+        internal byte[] EntityBodyData;
+
+        #endregion Internal Fields
+
+        #region Protected Const Fields
+
+        protected const string CrLf = "\r\n";
+
+        #endregion Protected Const Fields
+
+        #region Protected Constructors
+
+        protected HandshakeBase(Version version, NameValueCollection headers)
+        {
+            _version = version;
+            _headers = headers;
+        }
+
+        #endregion Protected Constructors
+
+        #region Public Properties
+
+        public string EntityBody
+        {
+            get
+            {
+                return EntityBodyData != null && EntityBodyData.LongLength > 0
+                       ? getEncoding(_headers["Content-Type"]).GetString(EntityBodyData)
+                       : String.Empty;
+            }
+        }
+
+        public NameValueCollection Headers
+        {
+            get
+            {
+                return _headers;
+            }
+        }
+
+        public Version ProtocolVersion
+        {
+            get
+            {
+                return _version;
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Private Methods
+
+        private static Encoding getEncoding(string contentType)
+        {
+            if (contentType == null || contentType.Length == 0)
+                return Encoding.UTF8;
+
+            var i = contentType.IndexOf("charset=", StringComparison.Ordinal);
+            if (i == -1)
+                return Encoding.UTF8;
+
+            var charset = contentType.Substring(i + 8);
+            i = charset.IndexOf(';');
+            if (i != -1)
+                charset = charset.Substring(0, i);
+
+            return Encoding.GetEncoding(charset);
+        }
+
+        #endregion Private Methods
+
+        #region Public Methods
+
+        public byte[] ToByteArray()
+        {
+            return Encoding.UTF8.GetBytes(ToString());
+        }
+
+        #endregion Public Methods
     }
-
-    #endregion
-
-    #region Public Properties
-
-    public string EntityBody {
-      get {
-        return EntityBodyData != null && EntityBodyData.LongLength > 0
-               ? getEncoding (_headers["Content-Type"]).GetString (EntityBodyData)
-               : String.Empty;
-      }
-    }
-
-    public NameValueCollection Headers {
-      get {
-        return _headers;
-      }
-    }
-
-    public Version ProtocolVersion {
-      get {
-        return _version;
-      }
-    }
-
-    #endregion
-
-    #region Private Methods
-
-    private static Encoding getEncoding (string contentType)
-    {
-      if (contentType == null || contentType.Length == 0)
-        return Encoding.UTF8;
-
-      var i = contentType.IndexOf ("charset=", StringComparison.Ordinal);
-      if (i == -1)
-        return Encoding.UTF8;
-
-      var charset = contentType.Substring (i + 8);
-      i = charset.IndexOf (';');
-      if (i != -1)
-        charset = charset.Substring (0, i);
-
-      return Encoding.GetEncoding (charset);
-    }
-
-    #endregion
-
-    #region Public Methods
-
-    public byte[] ToByteArray ()
-    {
-      return Encoding.UTF8.GetBytes (ToString ());
-    }
-    
-    #endregion
-  }
 }

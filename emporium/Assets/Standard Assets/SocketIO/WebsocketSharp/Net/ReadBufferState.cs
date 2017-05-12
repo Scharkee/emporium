@@ -1,4 +1,5 @@
 #region License
+
 /*
  * ReadBufferState.cs
  *
@@ -28,57 +29,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
+
+#endregion License
 
 #region Authors
+
 /*
  * Authors:
  * - Gonzalo Paniagua Javier <gonzalo@novell.com>
  */
-#endregion
 
-using System;
+#endregion Authors
 
 namespace WebSocketSharp.Net
 {
-  internal class ReadBufferState
-  {
-    #region Public Constructors
-
-    public ReadBufferState (
-      byte [] buffer, int offset, int count, HttpStreamAsyncResult asyncResult)
+    internal class ReadBufferState
     {
-      Buffer = buffer;
-      Offset = offset;
-      Count = count;
-      InitialCount = count;
-      AsyncResult = asyncResult;
+        #region Public Constructors
+
+        public ReadBufferState(
+          byte[] buffer, int offset, int count, HttpStreamAsyncResult asyncResult)
+        {
+            Buffer = buffer;
+            Offset = offset;
+            Count = count;
+            InitialCount = count;
+            AsyncResult = asyncResult;
+        }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public HttpStreamAsyncResult AsyncResult
+        {
+            get; set;
+        }
+
+        public byte[] Buffer
+        {
+            get; set;
+        }
+
+        public int Count
+        {
+            get; set;
+        }
+
+        public int InitialCount
+        {
+            get; set;
+        }
+
+        public int Offset
+        {
+            get; set;
+        }
+
+        #endregion Public Properties
     }
-
-    #endregion
-
-    #region Public Properties
-
-    public HttpStreamAsyncResult AsyncResult {
-      get; set;
-    }
-
-    public byte [] Buffer {
-      get; set;
-    }
-
-    public int Count {
-      get; set;
-    }
-
-    public int InitialCount {
-      get; set;
-    }
-
-    public int Offset {
-      get; set;
-    }
-
-    #endregion
-  }
 }

@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TitleText : MonoBehaviour
 {
-
     private float startTimer = 1.5f;
     private Color currentColor;
     private Color nextColor;
@@ -13,12 +10,9 @@ public class TitleText : MonoBehaviour
     private bool nextColorGenerated = false;
     private float transitionTimer = 3f;
 
-    GameObject ghost;
-
-
+    private GameObject ghost;
 
     public float colorChangeAdditive = 0;
-
 
     private void Start()
     {
@@ -28,22 +22,16 @@ public class TitleText : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-
-
-
         if (startTimer > 0)
         {
             startTimer -= Time.deltaTime;
         }
         else
         {
-
-
             if (!nextColorGenerated)
             {
-
                 nextColor = Random.ColorHSV(0f, 1f, 0.7f, 1f, 1f, 1f, 1f, 1f);
 
                 nextColorGenerated = true;
@@ -53,29 +41,19 @@ public class TitleText : MonoBehaviour
             {
                 //do transit
 
-
                 transitionTimer -= Time.deltaTime;
-
 
                 gameObject.GetComponent<Text>().color = Color.Lerp(gameObject.GetComponent<Text>().color, nextColor, colorChangeAdditive);
                 ghost.GetComponent<Text>().color = Color.Lerp(new Color(gameObject.GetComponent<Text>().color.r, gameObject.GetComponent<Text>().color.g, gameObject.GetComponent<Text>().color.b, 0.05f), nextColor, colorChangeAdditive);
 
-
                 ghost.transform.localScale = Vector3.Lerp(ghost.transform.localScale, gameObject.transform.localScale * (1 + colorChangeAdditive / 2), 0.5f);
-
             }
             else
             {
                 transitionTimer = 3f;
 
                 nextColorGenerated = false;
-
             }
-
         }
-
-
     }
-
-
 }

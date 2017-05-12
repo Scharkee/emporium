@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using SocketIO;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using SocketIO;
 
 public class DisabledObjectsMain : MonoBehaviour
 {
-
     public static DisabledObjectsMain Instance;
 
     public GameObject SubmitButton;
@@ -32,47 +30,33 @@ public class DisabledObjectsMain : MonoBehaviour
 
     public Color NormalTextColor, RedTextColor, BlueTextColor;
 
-
     public SocketIOComponent socket;
-
 
     public Color blueish;
     public Color defaultcolor;
-    // Use this for initialization
-    void Start()
-    {
 
+    // Use this for initialization
+    private void Start()
+    {
         SubmitButton.SetActive(false);
         UnamePassInputField.SetActive(false);
         UnamePassText.SetActive(false);
-
-
-
-
     }
 
     public void ResetLoginButton()
     {
-
         LoginButton.SetActive(true);
         UnamePassInputField.SetActive(false);
         SubmitButton.SetActive(false);
         UnamePassText.SetActive(false);
-
-
-
     }
 
     public IEnumerator ShowMessage(string message, Color color, float waitAmount)
     {
-        
-
         while (DisabledObjectsMain.Instance.FullScreenMessagePanel.activeSelf) // mesage is already being shown. Wait.
         {
             yield return new WaitForSeconds(0.4f);
-
         }
-
 
         DisabledObjectsMain.Instance.FullScreenMessagePanel.SetActive(true);
         DisabledObjectsMain.Instance.MessageText.GetComponent<Text>().text = message;
@@ -84,9 +68,7 @@ public class DisabledObjectsMain : MonoBehaviour
             DisabledObjectsMain.Instance.FullScreenMessagePanel.GetComponent<CanvasGroup>().alpha += 0.07f;
         }
 
-
         yield return new WaitForSeconds(waitAmount);
-
 
         while (DisabledObjectsMain.Instance.FullScreenMessagePanel.GetComponent<CanvasGroup>().alpha > 0f)
         {
@@ -94,17 +76,11 @@ public class DisabledObjectsMain : MonoBehaviour
             DisabledObjectsMain.Instance.FullScreenMessagePanel.GetComponent<CanvasGroup>().alpha -= 0.07f;
         }
 
-
-
         DisabledObjectsMain.Instance.FullScreenMessagePanel.SetActive(false);
-
-
     }
 
-
-    void Awake()
+    private void Awake()
     {
         Instance = this;
-
     }
 }

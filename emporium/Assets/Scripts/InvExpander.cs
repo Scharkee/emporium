@@ -1,24 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InvExpander : MonoBehaviour
 {
-
-
-    void Start()
+    private void Start()
     {
-
-
-
-
     }
-
-
 
     public void expandContract()
     {
-
         if (DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.activeSelf)
         {
             Debug.Log("disabling");
@@ -31,5 +20,4 @@ public class InvExpander : MonoBehaviour
             Debug.Log("enabling");
         }
     }
-
 }

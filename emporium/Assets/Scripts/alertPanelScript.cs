@@ -1,22 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class alertPanelScript : MonoBehaviour
 {
-
-
-
     public void closeAlert()
     {
-        
         GameAlerts.Instance.closeAlert();
     }
 
-    public void CancelContext() //parejo broadcastas, 
+    public void CancelContext() //parejo broadcastas,
     {
         GameAlerts.Instance.closeAlert();
-
-
     }
 }

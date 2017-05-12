@@ -1,4 +1,5 @@
 #region License
+
 /*
  * HttpHeaderInfo.cs
  *
@@ -24,96 +25,107 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#endregion
 
-using System;
+#endregion License
 
 namespace WebSocketSharp.Net
 {
-  internal class HttpHeaderInfo
-  {
-    #region Private Fields
-
-    private HttpHeaderType _type;
-
-    #endregion
-
-    #region Public Constructors
-
-    public HttpHeaderInfo ()
+    internal class HttpHeaderInfo
     {
+        #region Private Fields
+
+        private HttpHeaderType _type;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public HttpHeaderInfo()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Internal Properties
+
+        internal bool IsMultiValueInRequest
+        {
+            get
+            {
+                return (_type & HttpHeaderType.MultiValueInRequest) == HttpHeaderType.MultiValueInRequest;
+            }
+        }
+
+        internal bool IsMultiValueInResponse
+        {
+            get
+            {
+                return (_type & HttpHeaderType.MultiValueInResponse) == HttpHeaderType.MultiValueInResponse;
+            }
+        }
+
+        #endregion Internal Properties
+
+        #region Public Properties
+
+        public bool IsRequest
+        {
+            get
+            {
+                return (_type & HttpHeaderType.Request) == HttpHeaderType.Request;
+            }
+        }
+
+        public bool IsResponse
+        {
+            get
+            {
+                return (_type & HttpHeaderType.Response) == HttpHeaderType.Response;
+            }
+        }
+
+        public string Name
+        {
+            get; set;
+        }
+
+        public HttpHeaderType Type
+        {
+            get
+            {
+                return _type;
+            }
+
+            set
+            {
+                _type = value;
+            }
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public bool IsMultiValue(bool response)
+        {
+            return (_type & HttpHeaderType.MultiValue) != HttpHeaderType.MultiValue
+                   ? response
+                     ? IsMultiValueInResponse
+                     : IsMultiValueInRequest
+                   : response
+                     ? IsResponse
+                     : IsRequest;
+        }
+
+        public bool IsRestricted(bool response)
+        {
+            return (_type & HttpHeaderType.Restricted) != HttpHeaderType.Restricted
+                   ? false
+                   : response
+                     ? IsResponse
+                     : IsRequest;
+        }
+
+        #endregion Public Methods
     }
-
-    #endregion
-
-    #region Internal Properties
-
-    internal bool IsMultiValueInRequest {
-      get {
-        return (_type & HttpHeaderType.MultiValueInRequest) == HttpHeaderType.MultiValueInRequest;
-      }
-    }
-
-    internal bool IsMultiValueInResponse {
-      get {
-        return (_type & HttpHeaderType.MultiValueInResponse) == HttpHeaderType.MultiValueInResponse;
-      }
-    }
-
-    #endregion
-
-    #region Public Properties
-
-    public bool IsRequest {
-      get {
-        return (_type & HttpHeaderType.Request) == HttpHeaderType.Request;
-      }
-    }
-
-    public bool IsResponse {
-      get {
-        return (_type & HttpHeaderType.Response) == HttpHeaderType.Response;
-      }
-    }
-
-    public string Name {
-      get; set;
-    }
-
-    public HttpHeaderType Type {
-      get {
-        return _type;
-      }
-
-      set {
-        _type = value;
-      }
-    }
-
-    #endregion
-
-    #region Public Methods
-
-    public bool IsMultiValue (bool response)
-    {
-      return (_type & HttpHeaderType.MultiValue) != HttpHeaderType.MultiValue
-             ? response
-               ? IsMultiValueInResponse
-               : IsMultiValueInRequest
-             : response
-               ? IsResponse
-               : IsRequest;
-    }
-
-    public bool IsRestricted (bool response)
-    {
-      return (_type & HttpHeaderType.Restricted) != HttpHeaderType.Restricted
-             ? false
-             : response
-               ? IsResponse
-               : IsRequest;
-    }
-
-    #endregion
-  }
 }

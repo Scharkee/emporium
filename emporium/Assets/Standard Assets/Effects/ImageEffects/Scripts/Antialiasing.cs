@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
@@ -15,7 +14,7 @@ namespace UnityStandardAssets.ImageEffects
     }
 
     [ExecuteInEditMode]
-    [RequireComponent(typeof (Camera))]
+    [RequireComponent(typeof(Camera))]
     [AddComponentMenu("Image Effects/Other/Antialiasing")]
     public class Antialiasing : PostEffectsBase
     {
@@ -46,7 +45,6 @@ namespace UnityStandardAssets.ImageEffects
         public Shader shaderFXAAIII;
         private Material materialFXAAIII;
 
-
         public Material CurrentAAMaterial()
         {
             Material returnValue = null;
@@ -56,24 +54,31 @@ namespace UnityStandardAssets.ImageEffects
                 case AAMode.FXAA3Console:
                     returnValue = materialFXAAIII;
                     break;
+
                 case AAMode.FXAA2:
                     returnValue = materialFXAAII;
                     break;
+
                 case AAMode.FXAA1PresetA:
                     returnValue = materialFXAAPreset2;
                     break;
+
                 case AAMode.FXAA1PresetB:
                     returnValue = materialFXAAPreset3;
                     break;
+
                 case AAMode.NFAA:
                     returnValue = nfaa;
                     break;
+
                 case AAMode.SSAA:
                     returnValue = ssaa;
                     break;
+
                 case AAMode.DLAA:
                     returnValue = dlaa;
                     break;
+
                 default:
                     returnValue = null;
                     break;
@@ -81,7 +86,6 @@ namespace UnityStandardAssets.ImageEffects
 
             return returnValue;
         }
-
 
         public override bool CheckResources()
         {
@@ -104,7 +108,6 @@ namespace UnityStandardAssets.ImageEffects
             return isSupported;
         }
 
-
         public void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
             if (CheckResources() == false)
@@ -113,7 +116,7 @@ namespace UnityStandardAssets.ImageEffects
                 return;
             }
 
-			// ----------------------------------------------------------------
+            // ----------------------------------------------------------------
             // FXAA antialiasing modes
 
             if (mode == AAMode.FXAA3Console && (materialFXAAIII != null))
@@ -140,14 +143,14 @@ namespace UnityStandardAssets.ImageEffects
             }
             else if (mode == AAMode.SSAA && ssaa != null)
             {
-				// ----------------------------------------------------------------
+                // ----------------------------------------------------------------
                 // SSAA antialiasing
                 Graphics.Blit(source, destination, ssaa);
             }
             else if (mode == AAMode.DLAA && dlaa != null)
             {
-				// ----------------------------------------------------------------
-				// DLAA antialiasing
+                // ----------------------------------------------------------------
+                // DLAA antialiasing
 
                 source.anisoLevel = 0;
                 RenderTexture interim = RenderTexture.GetTemporary(source.width, source.height);

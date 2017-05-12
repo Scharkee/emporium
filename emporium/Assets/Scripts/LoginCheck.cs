@@ -1,36 +1,27 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using SocketIO;
 using System.Collections;
-
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
-using SocketIO;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityStandardAssets.ImageEffects;
-
 
 public class LoginCheck : MonoBehaviour
 {
     public string inputusername;
     public string inputpassword;
 
-   
-
     public SocketIOComponent socket;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-
         socket = DisabledObjectsMain.Instance.socket;
         socket.On("PASS_CHECK_CALLBACK", OnLoginCheckCallback);
-
     }
 
-
-
-
-    void CheckLoginDetails(string username, string password)
+    private void CheckLoginDetails(string username, string password)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = username;
@@ -40,32 +31,22 @@ public class LoginCheck : MonoBehaviour
 
     private void OnLoginCheckCallback(SocketIOEvent evt)
     {
-
-
-
         LoginorCreate(int.Parse(evt.data.GetField("passStatus").ToString()));
     }
-
-
 
     public void LogInCh(string un, string pass)
     {
         CheckLoginDetails(un, pass);
-
-
     }
 
-
-    string JsonToString(string target, string s)
+    private string JsonToString(string target, string s)
     {
-
         string[] newString = Regex.Split(target, s);
 
         return newString[1];
-
     }
 
-    void LoginorCreate(int stat)
+    private void LoginorCreate(int stat)
     {
         if (stat == 0)
         {  //pass incorrect
@@ -73,9 +54,7 @@ public class LoginCheck : MonoBehaviour
         }
         else if (stat == 1)
         { //pass correct
-
             proceedToGameScene();
-
         }
         else if (stat == 2)
         { //user not in DB
@@ -86,19 +65,17 @@ public class LoginCheck : MonoBehaviour
             Debug.Log("user already logged in.");
             //user already logged in from another PC.
             //TODO: Flash "logged in already" here, and reask for password
-
         }
-
-
     }
-    void proceedToGameScene()
+
+    private void proceedToGameScene()
     {
         StartCoroutine(LVLLoadCamEffect());
         SceneManager.LoadScene("GameScene");
     }
-    void Reaskforlogininfo()
-    {
 
+    private void Reaskforlogininfo()
+    {
         Debug.Log("REASKING FOR LOGIN INFO");
         GlobalControl.Instance.Pass = null;
         GlobalControl.Instance.Uname = null;
@@ -108,10 +85,9 @@ public class LoginCheck : MonoBehaviour
 
         StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "Wrong Password.", DisabledObjectsMain.Instance.RedTextColor));
     }
-    
-    void NoUser()
-    {
 
+    private void NoUser()
+    {
         Debug.Log("asking to create a user");
         GlobalControl.Instance.Pass = null;
         GlobalControl.Instance.Uname = null;
@@ -119,30 +95,23 @@ public class LoginCheck : MonoBehaviour
         DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
 
         StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "No user found.", DisabledObjectsMain.Instance.BlueTextColor));
-
     }
 
-    IEnumerator NotifyText(GameObject txtobject, string notification, Color notificationColor)
+    private IEnumerator NotifyText(GameObject txtobject, string notification, Color notificationColor)
     {
         string Oldtext = txtobject.GetComponent<Text>().text;
-
-
 
         txtobject.GetComponent<Text>().text = notification;
         txtobject.GetComponent<Text>().color = notificationColor;
 
-
         yield return new WaitForSeconds(1.5f);
-
 
         txtobject.GetComponent<Text>().text = "Enter your username:";
         txtobject.GetComponent<Text>().color = DisabledObjectsMain.Instance.NormalTextColor;
     }
 
-
-    IEnumerator LVLLoadCamEffect()
+    private IEnumerator LVLLoadCamEffect()
     {
-
         while (Camera.main.GetComponent<Bloom>().bloomThreshold > 0.01)
         {
             //fadeoutas
@@ -150,7 +119,4 @@ public class LoginCheck : MonoBehaviour
             Globals.Instance.cameraBloom.bloomThreshold -= 0.01f;
         }
     }
-
-
-
 }

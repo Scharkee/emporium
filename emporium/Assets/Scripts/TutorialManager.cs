@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-
     public void StartTutorial()
     {
         //TODO:
-
-
     }
 }

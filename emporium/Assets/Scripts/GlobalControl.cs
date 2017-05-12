@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,8 +14,7 @@ public class GlobalControl : MonoBehaviour
     public bool ConnectedOnceNoDupeStatRequests = false;
     private bool firstLaunch = true;
 
-
-    void Start()
+    private void Start()
     {
         Userlanguage = 0;
         Logincount = 1;
@@ -26,9 +24,8 @@ public class GlobalControl : MonoBehaviour
         currentLangDict = Languages.english;
     }
 
-    void Awake()
+    private void Awake()
     {
-
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -38,15 +35,10 @@ public class GlobalControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
-
-
     }
 
     public void reset()
     {
-
         Uname = null;
         Pass = null;
         Logincount = 1;
@@ -62,7 +54,6 @@ public class GlobalControl : MonoBehaviour
         }
         else
         {
-
             Userlanguage = lang;
 
             switch (Userlanguage)
@@ -70,9 +61,11 @@ public class GlobalControl : MonoBehaviour
                 case 0:
                     currentLangDict = Languages.english;
                     break;
+
                 case 1:
                     currentLangDict = Languages.lithuanian;
                     break;
+
                 default:
                     Debug.Log("error in dict selection");
                     break;
@@ -82,14 +75,7 @@ public class GlobalControl : MonoBehaviour
             {
                 GameObject.Find("LoginButtonText").GetComponent<Text>().text = currentLangDict["login"];
                 GameObject.Find("tempLoginButtonText").GetComponent<Text>().text = currentLangDict["templog"];
-
             }
-
-
         }
-
-
-
     }
-
 }

@@ -15,7 +15,6 @@ Shader "Custom/AlwaysOnTop" {
 	}
 
 		SubShader{
-
 		Tags
 	{
 		"Queue" = "Transparent"

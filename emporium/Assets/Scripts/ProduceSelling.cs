@@ -1,90 +1,66 @@
-﻿using System.Collections;
+﻿using SocketIO;
 using System.Collections.Generic;
 using UnityEngine;
-using SocketIO;
 using UnityEngine.UI;
 
 public class ProduceSelling : MonoBehaviour
 {
-
-
     private Prices newPrices;
     private Prices oldprices;
     public ListItemPrice totalWeightCache;
     public Text SalePanelTotalstext;
 
-    SocketIOComponent socket;
-    // Use this for initialization
-    void Start()
-    {
+    private SocketIOComponent socket;
 
+    // Use this for initialization
+    private void Start()
+    {
         socket = DisabledObjectsGameScene.Instance.socket;
         socket.On("SALE_VERIFICATION", ReceiveSaleVerification);
-
     }
 
     public void AdaptPrices()
     {
-
         DisabledObjectsGameScene.Instance.SellingPanel.transform.BroadcastMessage("AdaptListingPrices");
     }
-
-
-
-
-
 
     public void AskForSaleVerification(Dictionary<string, string> sale)
     {
         socket.Emit("VERIFY_SOLD_PRODUCE", new JSONObject(sale));
-
     }
+
     public void ReceiveSaleVerification(SocketIOEvent evt)
     {
-
         Database.Instance.UserDollars = float.Parse(evt.data.GetField("dollars").ToString());
         DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.GetComponent<InventoryPanel>().adjustValues();
-
     }
 
     public void SaleClick()
     {
-
         AskForSaleVerification(formSalePackage());
 
         resetSellingPanel();
-
-
-
     }
 
     public void CancelContext()
     {
         resetSellingPanel();
-
     }
 
     public void SellAllClick()
     {
         DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("maxOutValues");
-
-
     }
 
     public void ResetClick()
     {
         DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("resetValues");
-
-
     }
-
 
     private Dictionary<string, string> formSalePackage()
     {
-
         Dictionary<string, string> sale = new Dictionary<string, string>();
         int salesNum = 0;
-
 
         if (GameObject.Find("SellListItem_produce_InputField_apples").GetComponent<InputField>().text != "")
         {
@@ -177,14 +153,11 @@ public class ProduceSelling : MonoBehaviour
         return sale;
     }
 
-
     private void resetSellingPanel()
     {
-        //savarankiskai issitrina visi values pries uzdaryma    
+        //savarankiskai issitrina visi values pries uzdaryma
         DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("resetValues");
 
         GameObject.Find("SellingButton").GetComponent<SellingButtonScript>().expandContract();
     }
-
-
 }

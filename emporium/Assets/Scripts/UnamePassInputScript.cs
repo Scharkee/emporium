@@ -1,20 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 using UnityEngine.UI;
 
-
-
 public class UnamePassInputScript : MonoBehaviour
 {
-
-    IdentifierScript identscr;
+    private IdentifierScript identscr;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-
-
         identscr = GameObject.Find("IdentifierPanel").GetComponent<IdentifierScript>();
         InputField input = gameObject.GetComponent<InputField>();
         InputField.SubmitEvent se = new InputField.SubmitEvent();
@@ -23,20 +17,15 @@ public class UnamePassInputScript : MonoBehaviour
 
         input.ActivateInputField();
         input.Select();
-
-
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
     }
 
-    void pushInput(string val)
+    private void pushInput(string val)
     {
         identscr.setPlayerInfo(val);
-
     }
 }

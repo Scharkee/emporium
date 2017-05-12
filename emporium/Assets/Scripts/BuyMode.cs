@@ -1,63 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BuyMode : MonoBehaviour
 {
+    private string buildingName;
+    private string TileName;
+    private bool darken;
+    private bool disableQueued;
+    private int camspeed = 10;
+    private RaycastHit hit;
 
-
-    string buildingName;
-    string TileName;
-    bool darken;
-    bool disableQueued;
-    int camspeed = 10;
-    RaycastHit hit;
-
-
-    BuyButtonScript buybuttonscript;
+    private BuyButtonScript buybuttonscript;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         buybuttonscript = DisabledObjectsGameScene.Instance.BuyButton.GetComponent<BuyButtonScript>();
 
         buybuttonscript.panelEnabled = false;
         disableQueued = false;
-
     }
-    void OnEnable()
+
+    private void OnEnable()
     {
         disableQueued = false;
     }
 
-    void Awake()
+    private void Awake()
     {
-
-
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        
-
-
-
-
         if (DisabledObjectsGameScene.Instance.PlotSelectors.activeSelf)
         {
             RaycastHit oldHit = hit;
 
-
             try
             {
-                
                 if (hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat == 2)
                 {
-                   
                     oldHit.transform.gameObject.GetComponent<Renderer>().material = Globals.Instance.plotselector_standard;
                     hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat = 1;
                 }
@@ -66,28 +49,21 @@ public class BuyMode : MonoBehaviour
                     oldHit.transform.gameObject.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable;
                     hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat = 3;
                 }
-
-
             }
             catch
             {
-
             }
 
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-  
 
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag == "Selector")
                 {
-
                     if (hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat == 1)
                     {
                         hit.transform.gameObject.GetComponent<Renderer>().material = Globals.Instance.plotselector_standard_mouseover;
                         hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat = 2;
-
                     }
                     else if (hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat == 3)
                     {
@@ -95,10 +71,8 @@ public class BuyMode : MonoBehaviour
                         hit.transform.gameObject.GetComponent<PlotSelectorScript>().currentMat = 4;
                     }
 
-
                     if (Input.GetMouseButtonDown(0))
                     {
-
                         EnableGroundCol(true);
                         float X = hit.transform.localPosition.x;
                         float Z = hit.transform.localPosition.z;
@@ -111,38 +85,23 @@ public class BuyMode : MonoBehaviour
                         //if multi-buy TODO
 
                         DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", true);
-            
 
                         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
-
-
 
                         GameObject.Find("BuyScript").GetComponent<BuyScript>().ChoosePlot(buildingName, X, Z);
                         DisabledObjectsGameScene.Instance.BuyButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
                         Globals.Instance.cameraBlur.blurSize = 0;
-                        
-
                     }
-
                 }
-
-
-
             }
-
         }
-
-
-
     }
 
     public void receiveName(string name)
     {
-
         buildingName = name;
 
         buybuttonscript.panelEnabled = false;
-
 
         Globals.Instance.cameraBlur.enabled = false;
         //effects and pltoselectors
@@ -155,7 +114,6 @@ public class BuyMode : MonoBehaviour
         EnableGroundCol(false);
 
         adaptPlotSelectors(name);
-
     }
 
     public void EnableGroundCol(bool enabled)
@@ -163,16 +121,11 @@ public class BuyMode : MonoBehaviour
         DisabledObjectsGameScene.Instance.RealGround.GetComponent<BoxCollider>().enabled = enabled;
     }
 
-
-
-   
-
     public void DisableBuyMode(bool MenupanelActive)
     {
         if (DisabledObjectsGameScene.Instance.PlotSelectors.activeSelf) //compatibility with sell mode & protection against crashing out
         {
             DisabledObjectsGameScene.Instance.PlotSelectors.SetActive(false);
-
         }
 
         if (Globals.Instance.cameraUp)
@@ -182,74 +135,55 @@ public class BuyMode : MonoBehaviour
 
         // buybuttonscript.panelEnabled = false;
 
-    
-
         DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(MenupanelActive);
 
         try
         {
             DisabledObjectsGameScene.Instance.Tiles.BroadcastMessage("activateColliders", true);
-
         }
         catch
         {
-
         }
         EnableGroundCol(true);
 
         disableQueued = true;
-
     }
 
     public void CancelContext()
     {
-
         DisableBuyMode(false);
-
     }
 
     private void adaptPlotSelectors(string name)
     { //highlighter for upgradeable tiles + grey out for unavailable ones
-
         foreach (Transform selector in DisabledObjectsGameScene.Instance.PlotSelectors.transform)
         {
             //setting defaults for each selector before applying conditional modifications
             selector.GetComponent<BoxCollider>().enabled = true; //reeabling if it was disabled by last buymode
             selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_standard;
 
-
             foreach (GameObject tile in Database.Instance.ActiveTiles)
             {
-
                 if (tile.transform.position.x == selector.position.x && tile.transform.position.z == selector.position.z)//selector is overlaping a tile
                 {
-                    if (tile.GetComponent<BuildingScript>().thistile.NAME == name && tile.GetComponent<BuildingScript>().thistile.COUNT>=5)//max upgraded SAME tile. Mark unavailable.
+                    if (tile.GetComponent<BuildingScript>().thistile.NAME == name && tile.GetComponent<BuildingScript>().thistile.COUNT >= 5)//max upgraded SAME tile. Mark unavailable.
                     {
                         selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_unavailable;
                         selector.GetComponent<BoxCollider>().enabled = false;
-
                     }
                     else if (tile.GetComponent<BuildingScript>().thistile.NAME == name)//same tile, mark for upgrading
                     {
                         selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable;
 
                         selector.GetComponent<PlotSelectorScript>().currentMat = 3; //upgrade mat code
-
                     }
                     else //not the same type of tile, grey out and disable collider
                     {
-
                         selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_unavailable;
                         selector.GetComponent<BoxCollider>().enabled = false;
                     }
-
                 }
-
             }
-
         }
-
     }
-
-
 }
