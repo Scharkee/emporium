@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class PressContextPanelScript : MonoBehaviour
 {
     public bool aliveForHalfSec;
+    public GameObject Press_AssignJob_InputField;
+    public GameObject Press_AssignJob_ProdTypeDropdown;
+    public BuildingScript activePress;
 
     // Use this for initialization
     private void Start()
@@ -52,6 +55,27 @@ public class PressContextPanelScript : MonoBehaviour
     public void CancelContext() //parejo broadcastas, isjungti VISUS context panels
     {
         gameObject.SetActive(false);
+    }
+
+    public void KeepAtMaxValues(string str)
+    {
+        //kad negaletu parduot daugiau negu turi.
+        if (float.Parse(Press_AssignJob_InputField.GetComponent<InputField>().text) > activePress.thistileInfo.TILEPRODUCERANDOM2)
+        {
+            Press_AssignJob_InputField.GetComponent<InputField>().text = activePress.thistileInfo.TILEPRODUCERANDOM2.ToString();
+            //maxed out effect
+        }
+        else if (float.Parse(Press_AssignJob_InputField.GetComponent<InputField>().text) < activePress.thistileInfo.TILEPRODUCERANDOM1)
+        {
+            Press_AssignJob_InputField.GetComponent<InputField>().text = activePress.thistileInfo.TILEPRODUCERANDOM1.ToString();
+        }
+
+        //dar paziurim ar yra tiek inventoriuose
+
+        if ((float.Parse(Press_AssignJob_InputField.GetComponent<InputField>().text) > Database.Instance.Inventory[IDHelper.Instance.PressContextPanelIDtoName(Press_AssignJob_ProdTypeDropdown.GetComponent<Dropdown>().value)]))
+        {//per daug ivesta
+            Press_AssignJob_InputField.GetComponent<InputField>().text = Database.Instance.Inventory[IDHelper.Instance.PressContextPanelIDtoName(Press_AssignJob_ProdTypeDropdown.GetComponent<Dropdown>().value)] + "";
+        }
     }
 }
 

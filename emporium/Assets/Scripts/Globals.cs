@@ -34,6 +34,9 @@ public class Globals : MonoBehaviour
     public Color RedTextColor;
     public Color WhiteTextColor;
 
+    public Color RedNormalProduceAlertColorr;
+    public Color NormalProduceAlertColor;
+
     // Use this for initialization
     private void Start()
     {

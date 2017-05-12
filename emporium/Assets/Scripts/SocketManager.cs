@@ -22,7 +22,7 @@ public class SocketManager : MonoBehaviour
         StartCoroutine(delayedPrices());
 
         socket.On("VERIFY", Verification);
-        socket.On("DISCREPANCY", DiscrepancyAction);
+        socket.On("DISCREPANCY", DiscrepancyS);
         socket.On("RECEIVE_UNIX", ReceiveUnix);
 
         socket.On("BUILD_TILE", DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<AssignTiles>().BuildTile);
@@ -96,9 +96,17 @@ public class SocketManager : MonoBehaviour
         StartCoroutine(logOffWithDelay(delay));
     }
 
-    public void DiscrepancyAction(SocketIOEvent evt = default(SocketIOEvent)) //check ar veikia
+    public void DiscrepancyAction() //check ar veikia
     {
         GameAlerts.Instance.AlertWithMessage("Desynchronization detected. Logging off...");
+        StartCoroutine(logOffWithDelay(2f));
+
+        ContextManager.Instance.CancelContext();
+    }
+
+    public void DiscrepancyS(SocketIOEvent evt) //check ar veikia
+    {
+        GameAlerts.Instance.AlertWithMessage(evt.data.GetField("reasonString").ToString());
         StartCoroutine(logOffWithDelay(2f));
 
         ContextManager.Instance.CancelContext();
@@ -153,7 +161,6 @@ public class SocketManager : MonoBehaviour
     public IEnumerator logOffWithDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        socket.Emit("DISCONNECT");
         GlobalControl.Instance.reset();
         SceneManager.LoadScene(0);
     }

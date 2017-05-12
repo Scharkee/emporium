@@ -77,9 +77,9 @@ public class BuildingScript : MonoBehaviour
             {
                 if (TileGrown)
                 {
-                    if ((thistileInfo.TILEPRODUCERANGE_1 + thistileInfo.TILEPRODUCERANGE_2) / 2 > Database.Instance.Storage.TotalProduceStorage - Database.Instance.Storage.TakenProduceStorage)
+                    if ((thistileInfo.TILEPRODUCERANDOM1 + thistileInfo.TILEPRODUCERANDOM2) / 2 > Database.Instance.Storage.TotalProduceStorage - Database.Instance.Storage.TakenProduceStorage)
                     {//nera vietos tile produce range VIDURKIUI, buna perkrauta jeigu RNG isrollintu didesni (highlightint raudonai ant HUD)
-                        notifyOfProduceAmount("Not enough storage space!");
+                        notifyOfProduceAmount("Not enough storage space!", Globals.Instance.RedNormalProduceAlertColorr);
                     }
                     else
                     {
@@ -111,14 +111,14 @@ public class BuildingScript : MonoBehaviour
                     //ismetamaas meniu, todel sitas true iki value returno arba menu close*
                     ContextOpen = true;
 
-                    ContextManager.Instance.StartPressContext(WorkAssigned);
+                    ContextManager.Instance.StartPressContext(WorkAssigned, this);
                 }
                 else if (!WorkDone)
                 {
                     // spaudziama ant nebaigusio spausti preso, ismesti context menu su stats
                     Debug.Log("Checking stats on press progress");
 
-                    ContextManager.Instance.StartPressContext(WorkAssigned);
+                    ContextManager.Instance.StartPressContext(WorkAssigned, this);
                 }
             }
             else if (thistileInfo.BUILDING_TYPE == 2) //transporto dalykelis darbo net nera galima sakyt(nebent upgrades)
@@ -238,7 +238,7 @@ public class BuildingScript : MonoBehaviour
 
                 TileGrown = false;
 
-                notifyOfProduceAmount(evt.data.GetField("harvestAmount").ToString());
+                notifyOfProduceAmount(evt.data.GetField("harvestAmount").ToString(), Globals.Instance.NormalProduceAlertColor);
             }
         }
         else if (thistileInfo.BUILDING_TYPE == 1)//presas
@@ -259,8 +259,6 @@ public class BuildingScript : MonoBehaviour
                 catch
                 {
                 }
-
-                //TODO: pridet i ingame inventoriu IR sutvarkyt inventory expander (kad disablintu o ne nuimtu alpha iki 0)
 
                 Database.Instance.tile[idInTileDatabase].START_OF_GROWTH = int.Parse(Regex.Replace(evt.data.GetField("unixBuffer").ToString(), "[^0-9]", ""));
 
@@ -354,9 +352,11 @@ public class BuildingScript : MonoBehaviour
         }
     }
 
-    private void notifyOfProduceAmount(string text)
+    private void notifyOfProduceAmount(string text, Color color)
     {
         GameObject alert = Instantiate(Resources.Load("produceAmountText"), new Vector3(thistile.X, 0f, thistile.Z), Quaternion.identity, transform) as GameObject;
+
+        alert.GetComponent<TextMesh>().color = color;
         alert.GetComponent<TextMesh>().text = text;
     }
 }
