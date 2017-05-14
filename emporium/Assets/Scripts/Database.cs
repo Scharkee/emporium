@@ -22,6 +22,8 @@ public class Database : MonoBehaviour
     //MAIN DATBASES
     public Tile[] tile;
 
+    public TransportJob[] TransportJobs;
+
     public Building[] buildinginfo;
     public Inventory[] inventory; //one temp invo for JSON conversion
     public Prices[] prices;
@@ -329,7 +331,7 @@ public class Inventory
 
 [System.Serializable]
 public class Prices
-{//EXPNEWTREES
+{
     public int ID;
     public string NAME;
     public float PRICE;
@@ -337,7 +339,7 @@ public class Prices
 
 [System.Serializable]
 public class Storage
-{//EXPNEWTREES
+{
     public float TotalProduceStorage = 0;
     public float TotalJuiceStorage = 0;
     public float TakenProduceStorage = 0;
@@ -346,7 +348,7 @@ public class Storage
 
 [System.Serializable]
 public class Transport
-{//EXPNEWTREES
+{
     public string Name;
     public int IDinDB;
     public int IDinActiveTiles;
@@ -356,7 +358,9 @@ public class Transport
 
 [System.Serializable]
 public class TransportJob
-{//EXPNEWTREES
-    public Dictionary<string, string> sale;
-    public float time;
+{
+    public int ID;
+    public string DEST;
+    public int START_OF_TRANSPORTATION;
+    public int LENGTH_OF_TRANSPORTATION;
 }

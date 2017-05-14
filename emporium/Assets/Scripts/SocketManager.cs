@@ -33,6 +33,7 @@ public class SocketManager : MonoBehaviour
         socket.On("UPDATE_PLOT_SIZE", UpdatePlotSize);
         socket.On("UPGRADE_TILE", UpgradeTile);
         socket.On("RECEIVE_PRICES", ReceivePrices);
+        socket.On("RECEIVE_TRANSPORT_QUEUE", ReceiveTransportQueue);
     }
 
     private IEnumerator delayedPrices()
@@ -156,6 +157,11 @@ public class SocketManager : MonoBehaviour
     public void ReceivePrices(SocketIOEvent evt)
     {
         DisabledObjectsGameScene.Instance.pricemanager.ResolvePrices(evt);
+    }
+
+    public void ReceiveTransportQueue(SocketIOEvent evt)
+    {
+        DisabledObjectsGameScene.Instance.TransportOperator.AssignTransportQueues(evt);
     }
 
     public IEnumerator logOffWithDelay(float delay)

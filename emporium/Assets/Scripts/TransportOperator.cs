@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using SocketIO;
+using System.Text;
 
 public class TransportOperator : MonoBehaviour
 {
-    public List<TransportJob> transportJobs = new List<TransportJob>();
-
     // Use this for initialization
     private void Start()
     {
@@ -12,20 +12,34 @@ public class TransportOperator : MonoBehaviour
 
     private void Update()
     {
-        foreach (TransportJob job in transportJobs)
+        foreach (TransportJob job in Database.Instance.TransportJobs) //jobs updateris
         {
-            if (job.time <= 0) //jobs done, send off for verification
+            if (job.START_OF_TRANSPORTATION + job.LENGTH_OF_TRANSPORTATION >= DisabledObjectsGameScene.Instance.SocketManager.unix) //jobs done, send off for verification
             {
                 DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AskForSaleVerification(job.sale);
-            }
-            else
-            {
-                job.time -= Time.deltaTime;
             }
         }
     }
 
     public void AssignTransport()
     {
+    }
+
+    public void AssignTransportQueues(SocketIOEvent evt)
+    {
+        string evtStringRows = evt.data.ToString();
+
+        StringBuilder builder = new StringBuilder(evtStringRows);///////////////////////////////////////////////////////
+        builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
+        string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
+
+        Database.Instance.TransportJobs = JsonHelper.FromJson<TransportJob>(evtStringItems);//converting & assignment
+
+        Debug.Log("we did it reddit");
+    }
+
+    public void AskForTransportArrivalVerification(TransportJob job)
+    {
+        //send out
     }
 }

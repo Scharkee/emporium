@@ -39,13 +39,6 @@ public class LoginCheck : MonoBehaviour
         CheckLoginDetails(un, pass);
     }
 
-    private string JsonToString(string target, string s)
-    {
-        string[] newString = Regex.Split(target, s);
-
-        return newString[1];
-    }
-
     private void LoginorCreate(int stat)
     {
         if (stat == 0)

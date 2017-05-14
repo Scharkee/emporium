@@ -34,6 +34,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public SocketManager SocketManager;
     public CurrentVehicle CurrentVehicle;
     public CameraController Camcontroller;
+    public TransportOperator TransportOperator;
 
     public Text ProduceStorageEdit;
     public Text JuicetorageEdit;
