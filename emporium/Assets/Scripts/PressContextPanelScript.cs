@@ -54,7 +54,10 @@ public class PressContextPanelScript : MonoBehaviour
 
     public void CancelContext() //parejo broadcastas, isjungti VISUS context panels
     {
-        gameObject.SetActive(false);
+        if (aliveForHalfSec)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void KeepAtMaxValues(string str)

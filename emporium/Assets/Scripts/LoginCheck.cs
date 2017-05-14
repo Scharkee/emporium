@@ -17,7 +17,7 @@ public class LoginCheck : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        socket = DisabledObjectsMain.Instance.socket;
+        socket = GlobalControl.Instance.gameObject.GetComponent<SocketIOComponent>();
         socket.On("PASS_CHECK_CALLBACK", OnLoginCheckCallback);
     }
 

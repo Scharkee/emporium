@@ -39,12 +39,7 @@ public class GlobalControl : MonoBehaviour
 
     public void reset()
     {
-        Uname = null;
-        Pass = null;
-        Logincount = 1;
-        Userlanguage = 0;
-        firstLaunch = false;
-        ConnectedOnceNoDupeStatRequests = false;
+        Destroy(gameObject);
     }
 
     public void setLanguage(int lang)
