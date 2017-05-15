@@ -17,6 +17,7 @@ public class ProduceSelling : MonoBehaviour
     {
         socket = DisabledObjectsGameScene.Instance.socket;
         socket.On("SALE_VERIFICATION", ReceiveSaleVerification);
+        socket.On("SALE_JOB_VERIFICATION", ReceiveSaleJobAssignmentVerification);
     }
 
     public void AdaptPrices()
@@ -29,10 +30,21 @@ public class ProduceSelling : MonoBehaviour
         socket.Emit("VERIFY_SOLD_PRODUCE", new JSONObject(sale));
     }
 
+    public void AskForSaleJobAssignment(Dictionary<string, string> sale)
+    {
+        socket.Emit("VERIFY_SOLD_PRODUCE_STORE", new JSONObject(sale));
+    }
+
     public void ReceiveSaleVerification(SocketIOEvent evt)
     {
+        Debug.Log(float.Parse(evt.data.GetField("dollars").ToString()));
         Database.Instance.UserDollars = float.Parse(evt.data.GetField("dollars").ToString());
         DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.GetComponent<InventoryPanel>().adjustValues();
+    }
+
+    public void ReceiveSaleJobAssignmentVerification(SocketIOEvent evt)
+    {
+        //assignint ID in database i ta job
     }
 
     public void SaleClick()
@@ -43,11 +55,12 @@ public class ProduceSelling : MonoBehaviour
         }
         else
         {
-            TransportJob newJob = new TransportJob();
-            newJob.time = Database.Instance.CurrentVehichle.time;
-            newJob.sale = formSalePackage();
-            DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TransportOperator>().transportJobs.Add(newJob);
+            //TransportJob newJob = new TransportJob();
+            //newJob.START_OF_TRANSPORTATION =;
+            //newJob.LENGTH_OF_TRANSPORTATION = Database.Instance.CurrentVehichle.time;
+            //DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TransportOperator>().transportJobs.Add(newJob);
 
+            //figure this out
             resetSellingPanel();
         }
     }

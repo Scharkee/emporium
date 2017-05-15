@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
         axispoint = new Vector3(0, 0, 0);
 
         StartCoroutine(SpawnInCamEffect());
-        speed = 10000.0f;
+        speed = 100.0f;
         storePos = gameObject.transform.eulerAngles;  //keeps storePos up to date
 
         buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
@@ -45,11 +45,11 @@ public class CameraController : MonoBehaviour
 
         if (!buybuttonscript.panelEnabled)
         {
-            rot = Input.GetAxis("Mouse ScrollWheel") * speed * Time.deltaTime;
+            rot = Input.GetAxis("Mouse ScrollWheel") * speed;
         }
         else { rot = 0; }
 
-        rot = Mathf.LerpAngle(rotOld, rot, 0.03f);
+        rot = Mathf.LerpAngle(rotOld, rot, 0.04f);
 
         transform.RotateAround(currentCenter, Vector3.up, rot);
     }

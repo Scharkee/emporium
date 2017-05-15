@@ -27,8 +27,16 @@ public class HelperScripts : MonoBehaviour
 
     private void testThing()
     {
-        GameAlerts.Instance.AlertWithMessage(testInt.ToString());
-        testInt++;
+        Dictionary<string, string> dic = new Dictionary<string, string>();
+
+        dic[0 + "amount"] = 10.ToString();
+        dic[0 + "name"] = "kriauses";
+        dic["salesNum"] = 1.ToString();
+        dic["Uname"] = Database.Instance.UserUsername.ToString();
+
+        Debug.Log(dic["Uname"] + dic["salesNum"] + dic[0 + "name"]);
+
+        DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AskForSaleJobAssignment(dic);
     }
 
     public bool LyginisPlotsize()

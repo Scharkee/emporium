@@ -12,13 +12,17 @@ public class TransportOperator : MonoBehaviour
 
     private void Update()
     {
-        foreach (TransportJob job in Database.Instance.TransportJobs) //jobs updateris
+        try
         {
-            if (job.START_OF_TRANSPORTATION + job.LENGTH_OF_TRANSPORTATION >= DisabledObjectsGameScene.Instance.SocketManager.unix) //jobs done, send off for verification
+            foreach (TransportJob job in Database.Instance.TransportJobs) //jobs updateris
             {
-                DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AskForSaleVerification(job.sale);
+                if (job.START_OF_TRANSPORTATION + job.LENGTH_OF_TRANSPORTATION >= DisabledObjectsGameScene.Instance.SocketManager.unix) //jobs done, send off for verification
+                {
+                    AskForTransportArrivalVerification(job);
+                }
             }
         }
+        catch { }
     }
 
     public void AssignTransport()
