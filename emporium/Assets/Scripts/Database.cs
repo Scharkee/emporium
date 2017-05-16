@@ -23,6 +23,7 @@ public class Database : MonoBehaviour
     public Tile[] tile;
 
     public TransportJob[] TransportJobs;
+    public List<TransportJob> TransportJobList = new List<TransportJob>();
 
     public Building[] buildinginfo;
     public Inventory[] inventory; //one temp invo for JSON conversion
@@ -351,6 +352,8 @@ public class Transport
 {
     public string Name;
     public int IDinDB;
+    public int ID;
+    public int count;
     public int IDinActiveTiles;
     public float amount;
     public float time;

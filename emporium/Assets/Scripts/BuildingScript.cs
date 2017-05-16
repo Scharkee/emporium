@@ -150,6 +150,8 @@ public class BuildingScript : MonoBehaviour
             Database.Instance.CurrentVehichle.time = thistileInfo.PROG_AMOUNT;
             Database.Instance.CurrentVehichle.amount = float.Parse(thistileInfo.TILEPRODUCENAME);
             Database.Instance.CurrentVehichle.Name = thistile.NAME;
+            Database.Instance.CurrentVehichle.ID = thistile.ID;
+            Database.Instance.CurrentVehichle.count = thistile.COUNT;
             Database.Instance.CurrentVehichle.IDinDB = idInTileDatabase;
             Database.Instance.CurrentVehichle.IDinActiveTiles = idInActiveTiles;
 

@@ -45,6 +45,7 @@ public class ProduceSelling : MonoBehaviour
     public void ReceiveSaleJobAssignmentVerification(SocketIOEvent evt)
     {
         //assignint ID in database i ta job
+        Database.Instance.TransportJobList[int.Parse(evt.data.GetField("IndexInJobList").ToString())].ID = int.Parse(evt.data.GetField("ID").ToString());
     }
 
     public void SaleClick()

@@ -34,7 +34,14 @@ public class HelperScripts : MonoBehaviour
         dic["salesNum"] = 1.ToString();
         dic["Uname"] = Database.Instance.UserUsername.ToString();
 
-        Debug.Log(dic["Uname"] + dic["salesNum"] + dic[0 + "name"]);
+        TransportJob job = new TransportJob();
+
+        dic["Dest"] = "shop";
+        dic["Transport"] = Database.Instance.CurrentVehichle.Name;
+        dic["TransportID"] = Database.Instance.CurrentVehichle.ID.ToString();
+        dic["IndexInJobList"] = Database.Instance.TransportJobList.IndexOf(job).ToString();
+
+        Debug.Log("index is " + dic["IndexInJobList"]);
 
         DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AskForSaleJobAssignment(dic);
     }
@@ -82,6 +89,14 @@ public class HelperScripts : MonoBehaviour
         dic.Add("nektarinai_sultys", inv.nektarinai_sultys);
 
         return dic;
+    }
+
+    public void ReassignTransportJobs(TransportJob[] jobs)
+    {
+        foreach (TransportJob job in jobs)
+        {
+            Database.Instance.TransportJobList.Add(job);
+        }
     }
 
     public Dictionary<string, float> ReassignPrices(Prices[] pric)
