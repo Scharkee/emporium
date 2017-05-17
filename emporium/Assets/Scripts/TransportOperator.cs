@@ -2,6 +2,7 @@
 using UnityEngine;
 using SocketIO;
 using System.Text;
+using System;
 
 public class TransportOperator : MonoBehaviour
 {
@@ -12,14 +13,28 @@ public class TransportOperator : MonoBehaviour
 
     private void Update()
     {
-        if (Database.Instance.TransportJobs.Length != 0)
+        DisabledObjectsGameScene.Instance.TransportStatus.text = " idle";
+        if (Database.Instance.TransportJobList.Count != 0)
         {
-            foreach (TransportJob job in Database.Instance.TransportJobs) //jobs updateris
+            foreach (TransportJob job in Database.Instance.TransportJobList) //jobs updateris
             {
-                if (job.START_OF_TRANSPORTATION + job.LENGTH_OF_TRANSPORTATION >= DisabledObjectsGameScene.Instance.SocketManager.unix) //jobs done, send off for verification
+                string finishedString;
+                if (job.START_OF_TRANSPORTATION + job.LENGTH_OF_TRANSPORTATION <= DisabledObjectsGameScene.Instance.SocketManager.unix && !job.AskedForVerif) //jobs done, send off for verification
                 {
+                    Debug.Log("ok asking for verif");
                     AskForTransportArrivalVerification(job);
+                    finishedString = 0.ToString();
+                    job.AskedForVerif = true;
                 }
+                else
+                {
+                    TimeSpan ts = TimeSpan.FromSeconds((job.START_OF_TRANSPORTATION + job.LENGTH_OF_TRANSPORTATION) - DisabledObjectsGameScene.Instance.SocketManager.unix);
+
+                    finishedString = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+                }
+
+                //TIK VIENAS JOB sitoj implementacijoj gali but!
+                DisabledObjectsGameScene.Instance.TransportStatus.text = "busy | Time left: " + finishedString;
             }
         }
     }
@@ -38,8 +53,10 @@ public class TransportOperator : MonoBehaviour
 
     public void AskForTransportArrivalVerification(TransportJob job)
     {
+        Database.Instance.TransportJobList.Remove(job);
         Dictionary<string, string> dic = new Dictionary<string, string>();
         dic["ID"] = job.ID.ToString();
+        dic["Uname"] = Database.Instance.UserUsername;
 
         DisabledObjectsGameScene.Instance.socket.Emit("VERIFY_SOLD_PRODUCE", new JSONObject(dic));
     }

@@ -25,11 +25,6 @@ public class ProduceSelling : MonoBehaviour
         DisabledObjectsGameScene.Instance.SellingPanel.transform.BroadcastMessage("AdaptListingPrices");
     }
 
-    public void AskForSaleVerification(Dictionary<string, string> sale)
-    {
-        socket.Emit("VERIFY_SOLD_PRODUCE", new JSONObject(sale));
-    }
-
     public void AskForSaleJobAssignment(Dictionary<string, string> sale)
     {
         socket.Emit("VERIFY_SOLD_PRODUCE_STORE", new JSONObject(sale));
@@ -37,7 +32,6 @@ public class ProduceSelling : MonoBehaviour
 
     public void ReceiveSaleVerification(SocketIOEvent evt)
     {
-        Debug.Log(float.Parse(evt.data.GetField("dollars").ToString()));
         Database.Instance.UserDollars = float.Parse(evt.data.GetField("dollars").ToString());
         DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.GetComponent<InventoryPanel>().adjustValues();
     }

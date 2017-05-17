@@ -71,9 +71,11 @@ public class Database : MonoBehaviour
 
     public IEnumerator waitForTileAssignmentCompletion()
     {
+        Debug.Log("waiting");
         while (TileSelfSignedAssignmentComplete != ActiveTiles.Count)
         {
             yield return new WaitForSeconds(0.1f);
+            Debug.Log("waiting");
         }
 
         //visos tiles baige assignintis
@@ -97,6 +99,7 @@ public class Database : MonoBehaviour
         {
             DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
         }
+        Debug.Log("done");
     }
 
     public void AddToStoredAmounts(float amount, int solidOrJuice)
@@ -366,4 +369,5 @@ public class TransportJob
     public string DEST;
     public int START_OF_TRANSPORTATION;
     public int LENGTH_OF_TRANSPORTATION;
+    public bool AskedForVerif = false;
 }

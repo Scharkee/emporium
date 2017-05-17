@@ -155,6 +155,16 @@ public class BuildingScript : MonoBehaviour
             Database.Instance.CurrentVehichle.IDinDB = idInTileDatabase;
             Database.Instance.CurrentVehichle.IDinActiveTiles = idInActiveTiles;
 
+            DisabledObjectsGameScene.Instance.TransportCurrent.text = IDHelper.Instance.NameToRealName(Database.Instance.CurrentVehichle.Name);
+            if (Database.Instance.TransportJobList.Count == 0)
+            {
+                DisabledObjectsGameScene.Instance.TransportStatus.text = "Status: idle";
+            }
+            else
+            {
+                DisabledObjectsGameScene.Instance.TransportStatus.text = "Status: busy";
+            }
+
             DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = IDHelper.Instance.NameToRealName(Database.Instance.CurrentVehichle.Name);
 
             Debug.Log(Database.Instance.CurrentVehichle.Name);

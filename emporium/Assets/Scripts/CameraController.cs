@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
 
         rotOld = rot;
 
-        if (!buybuttonscript.panelEnabled)
+        if (!buybuttonscript.panelEnabled && DisabledObjectsGameScene.Instance.LoadingPanel == null)
         {
             rot = Input.GetAxis("Mouse ScrollWheel") * speed;
         }

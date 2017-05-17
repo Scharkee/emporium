@@ -1,32 +1,34 @@
 fileFormatVersion: 2
-guid: bce5b44f5ee591843b9c7e734c0cdd5a
-timeCreated: 1494439043
+guid: 815bbe5839b94484d8b3a4f4a8764424
+timeCreated: 1495026912
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Cube
-    100002: Cube_001
-    100004: Cube_002
-    100006: Cube_003
-    100008: //RootNode
-    400000: Cube
-    400002: Cube_001
-    400004: Cube_002
-    400006: Cube_003
-    400008: //RootNode
-    2300000: Cube
-    2300002: Cube_001
-    2300004: Cube_002
-    2300006: Cube_003
-    3300000: Cube
-    3300002: Cube_001
-    3300004: Cube_002
-    3300006: Cube_003
-    4300000: Cube_003
-    4300002: Cube_001
-    4300004: Cube
-    4300006: Cube_002
+    100000: //RootNode
+    100002: Plane
+    100004: Sphere
+    100006: Sphere_001
+    100008: woodenCrate
+    400000: //RootNode
+    400002: Plane
+    400004: Sphere
+    400006: Sphere_001
+    400008: woodenCrate
+    2300000: Plane
+    2300002: Sphere
+    2300004: Sphere_001
+    2300006: woodenCrate
+    2300008: //RootNode
+    3300000: Plane
+    3300002: Sphere
+    3300004: Sphere_001
+    3300006: woodenCrate
+    3300008: //RootNode
+    4300000: Sphere_001
+    4300002: Sphere
+    4300004: Plane
+    4300006: woodenCrate
     7400000: Default Take
     9500000: //RootNode
   materials:
@@ -55,7 +57,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.1
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

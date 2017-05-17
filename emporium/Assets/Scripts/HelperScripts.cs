@@ -35,7 +35,11 @@ public class HelperScripts : MonoBehaviour
         dic["Uname"] = Database.Instance.UserUsername.ToString();
 
         TransportJob job = new TransportJob();
+        job.DEST = "shop";
+        job.START_OF_TRANSPORTATION = DisabledObjectsGameScene.Instance.SocketManager.unix;
+        job.LENGTH_OF_TRANSPORTATION = int.Parse(Database.Instance.CurrentVehichle.time.ToString());
 
+        Database.Instance.TransportJobList.Add(job);
         dic["Dest"] = "shop";
         dic["Transport"] = Database.Instance.CurrentVehichle.Name;
         dic["TransportID"] = Database.Instance.CurrentVehichle.ID.ToString();

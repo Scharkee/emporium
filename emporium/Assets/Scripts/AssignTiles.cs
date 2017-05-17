@@ -73,7 +73,7 @@ public class AssignTiles : MonoBehaviour
         while (i < Database.Instance.tile.Length)
         {
             SpawnTile(i);
-
+            Debug.Log("spawning tile " + i);
             i++;
         }
 
@@ -296,10 +296,15 @@ public class AssignTiles : MonoBehaviour
             GameObject currentAdditional2 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X - 0.3f, 0f, Database.Instance.tile[i].Z - 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
             GameObject currentAdditional3 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 0.3f, 0f, Database.Instance.tile[i].Z - 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
         }
-
+        Debug.Log("ok");
         currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
         currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
+
+        Debug.Log("ok");
+        currentTile.GetComponent<BuildingScript>().RetrieveTileInfo();
+        Debug.Log("not-ok");
+        Debug.Log(currentTile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE);
 
         if (currentTile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 0) //plant
         {
@@ -311,8 +316,6 @@ public class AssignTiles : MonoBehaviour
         }
 
         Database.Instance.ActiveTiles.Add(currentTile);
-
-        currentTile.GetComponent<BuildingScript>().RetrieveTileInfo();
     }
 
     public void SpawnATile(string tilename, float X, float Z, int ID)

@@ -39,6 +39,9 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public Text ProduceStorageEdit;
     public Text JuicetorageEdit;
 
+    public Text TransportCurrent;
+    public Text TransportStatus;
+
     public static DisabledObjectsGameScene Instance;
 
     // Use this for initialization
