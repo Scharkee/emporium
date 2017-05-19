@@ -41,8 +41,8 @@ public class ContextManager : MonoBehaviour
 
     public void CloseAndResetPressContext()
     {
-        DisabledObjectsGameScene.Instance.PressContextPanel.transform.FindChild("Press_AssignJob_InputField").GetComponent<InputField>().text = "";
-        DisabledObjectsGameScene.Instance.PressContextPanel.transform.FindChild("Press_AssignJob_ProdTypeDropdown").GetComponent<Dropdown>().value = 0;
+        DisabledObjectsGameScene.Instance.PressContextPanel.transform.Find("Press_AssignJob_InputField").GetComponent<InputField>().text = "";
+        DisabledObjectsGameScene.Instance.PressContextPanel.transform.Find("Press_AssignJob_ProdTypeDropdown").GetComponent<Dropdown>().value = 0;
 
         DisabledObjectsGameScene.Instance.PressContextPanel.SetActive(false);
     }
@@ -96,9 +96,9 @@ public class ContextManager : MonoBehaviour
             }
 
             DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = "";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = "";
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 1) //pastatas
         {
@@ -122,27 +122,27 @@ public class ContextManager : MonoBehaviour
             }
 
             DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME;
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 2) //transportas
         {
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = "Capacity for 1 trip: ";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.TILEPRODUCENAME;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = "Capacity for 1 trip: ";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.TILEPRODUCENAME;
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 3) //solid storage
         {
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = "Capacity: ";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " KG";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = "Capacity: ";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " KG";
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 4) //liquid storage
         {
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Workname_editable").GetComponent<Text>().text = "Capacity: ";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.FindChild("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " L";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = "Capacity: ";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " L";
         }
     }
 }

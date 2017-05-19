@@ -24,7 +24,7 @@ public class PressContextPanelScript : MonoBehaviour
 
     public void AcceptPanelInput()
     {
-        InputField amounttext = transform.FindChild("Press_AssignJob_InputField").GetComponent<InputField>();
+        InputField amounttext = transform.Find("Press_AssignJob_InputField").GetComponent<InputField>();
 
         if (amounttext.text.Length >= 1 && amounttext.text.Length <= 100000000)
         {

@@ -49,6 +49,7 @@ public class TransportOperator : MonoBehaviour
 
         Database.Instance.TransportJobs = JsonHelper.FromJson<TransportJob>(evtStringItems);
         HelperScripts.Instance.ReassignTransportJobs(Database.Instance.TransportJobs);
+        Debug.Log(Database.Instance.TransportJobList[0].LENGTH_OF_TRANSPORTATION);
     }
 
     public void AskForTransportArrivalVerification(TransportJob job)

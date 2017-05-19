@@ -13,7 +13,7 @@ public class Database : MonoBehaviour
     public static Database Instance;
 
     //TRANSPORT
-    public Transport CurrentVehichle;
+    public Transport CurrentVehichle = null;
 
     //STOGRAGE
 
@@ -79,6 +79,16 @@ public class Database : MonoBehaviour
         }
 
         //visos tiles baige assignintis
+
+        if (CurrentVehichle == null) //nera transporto tile
+        {
+            CurrentVehichle.amount = 30;
+            CurrentVehichle.time = 600;
+            CurrentVehichle.Name = "none";
+            CurrentVehichle.IDinDB = 0;
+            CurrentVehichle.ID = 0;
+            CurrentVehichle.IDinActiveTiles = 0;
+        }
 
         DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TileOperator>().StartGrowthCompletrionCheckRepeat();
 

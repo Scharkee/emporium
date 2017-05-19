@@ -52,7 +52,7 @@ public class TileOperator : MonoBehaviour
                         GameObject vaisiaiPrefab = Resources.Load("Plants/done/" + tileScript.thistile.NAME + "_vaisiai") as GameObject;
                         tileScript.TileGrown = true;
 
-                        if (!tile.transform.FindChild(tileScript.thistile.NAME).FindChild(tileScript.thistile.NAME + "_vaisiai(Clone)"))
+                        if (!tile.transform.Find(tileScript.thistile.NAME).Find(tileScript.thistile.NAME + "_vaisiai(Clone)"))
                         {
                             foreach (Transform child in tile.transform)
                             {
@@ -78,7 +78,7 @@ public class TileOperator : MonoBehaviour
                     {
                         tileScript.WorkDone = true; //TODO: maybe change to building type of thing
 
-                        if (tile.transform.FindChild(tileScript.thistile.NAME + "_done(Clone)"))
+                        if (tile.transform.Find(tileScript.thistile.NAME + "_done(Clone)"))
                         {
                         }
                         else

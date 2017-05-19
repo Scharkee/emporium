@@ -31,7 +31,7 @@ public class SellListItem_maxButtonScript : MonoBehaviour
 
     private void Start()
     {
-        SalePanelTotalstext = DisabledObjectsGameScene.Instance.SellingPanel.transform.FindChild("Selling_totals_panel").transform.FindChild("Selling_totalsPanel_total_edit").gameObject.GetComponent<Text>();
+        SalePanelTotalstext = DisabledObjectsGameScene.Instance.SellingPanel.transform.Find("Selling_totals_panel").transform.Find("Selling_totalsPanel_total_edit").gameObject.GetComponent<Text>();
     }
 
     public void resetValues()

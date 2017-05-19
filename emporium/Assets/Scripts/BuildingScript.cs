@@ -266,7 +266,7 @@ public class BuildingScript : MonoBehaviour
 
                 try
                 {
-                    Destroy(transform.FindChild(thistile.NAME + "_done(Clone)").gameObject);
+                    Destroy(transform.Find(thistile.NAME + "_done(Clone)").gameObject);
                 }
                 catch
                 {
@@ -283,7 +283,7 @@ public class BuildingScript : MonoBehaviour
                 WorkAssigned = false;
                 WorkDone = false;
 
-                transform.FindChild("PressCube").GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
+                transform.Find("PressCube").GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f);
             }
         }
     }
@@ -307,7 +307,7 @@ public class BuildingScript : MonoBehaviour
 
             //start some sort of work effects.
 
-            transform.FindChild("PressCube").GetComponent<Renderer>().material.color = new Color(1f, 0.1f, 0.2f);
+            transform.Find("PressCube").GetComponent<Renderer>().material.color = new Color(1f, 0.1f, 0.2f);
         }
     }
 

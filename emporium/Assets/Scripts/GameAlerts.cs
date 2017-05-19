@@ -68,7 +68,7 @@ public class GameAlerts : MonoBehaviour
         }
 
         DisabledObjectsGameScene.Instance.alertPanel.SetActive(true);
-        DisabledObjectsGameScene.Instance.alertPanel.transform.FindChild("Alert_Text").GetComponent<Text>().text = str;
+        DisabledObjectsGameScene.Instance.alertPanel.transform.Find("Alert_Text").GetComponent<Text>().text = str;
 
         while (DisabledObjectsGameScene.Instance.alertPanel.GetComponent<CanvasGroup>().alpha < 1)
         {
