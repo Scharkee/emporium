@@ -28,6 +28,8 @@ public class BuyMenuInfoLoader : MonoBehaviour
                     TimeSpan ts = TimeSpan.FromSeconds(building.PROG_AMOUNT);
 
                     GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+                    GameObject.Find("OPGridText_" + building.NAME + "_efic").GetComponent<Text>().text = "Yield: ";
+                    GameObject.Find("OPGridText_" + building.NAME + "_efic_editable").GetComponent<Text>().text = building.TILEPRODUCERANDOM1 + " - " + building.TILEPRODUCERANDOM2 + " KG";
                 }
                 catch
                 {
@@ -37,8 +39,11 @@ public class BuyMenuInfoLoader : MonoBehaviour
             {
                 try
                 {
+                    GameObject.Find("OPGridText_" + building.NAME + "_efic_editable").GetComponent<Text>().text = building.EFIC * 100 + "%";
+                    GameObject.Find("OPGridText_" + building.NAME + "_efic").GetComponent<Text>().text = "Efficiency:";
+
                     GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
-                    GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = "Depends on load.";
+                    GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = "1 KG/s.";
                 }
                 catch
                 {
@@ -49,7 +54,8 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 try
                 {
                     GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
-                    GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " seconds.";
+                    GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " seconds per job.";
+                    GameObject.Find("OPGridText_" + building.NAME + "_time").GetComponent<Text>().text = "Job time:";
                 }
                 catch
                 {
@@ -61,17 +67,19 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 {
                     GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
                     GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " KG.";
+                    GameObject.Find("OPGridText_" + building.NAME + "_time").GetComponent<Text>().text = "Capacity:";
                 }
                 catch
                 {
                 }
             }
-            else if (building.BUILDING_TYPE == 3)
+            else if (building.BUILDING_TYPE == 4)
             {
                 try
                 {
                     GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
                     GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " L.";
+                    GameObject.Find("OPGridText_" + building.NAME + "_time").GetComponent<Text>().text = "Capacity:";
                 }
                 catch
                 {

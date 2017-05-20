@@ -304,6 +304,7 @@ public class Building
 {
     public string NAME = "";
     public float PRICE;
+    public float EFIC;
     public int PROG_AMOUNT;
     public string TILEPRODUCENAME;
     public float TILEPRODUCERANDOM1;
