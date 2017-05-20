@@ -16,11 +16,13 @@ public class MoneyTracker : MonoBehaviour
 
             if (moneyChanging)
             {
+                DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SoundStorage>().playSound(DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SoundStorage>().caching());
                 StopAllCoroutines();
                 StartCoroutine(changeMoney_Effect(lastDollars));
             }
             else
             {
+                DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SoundStorage>().playSound(DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SoundStorage>().caching());
                 moneyChanging = true;
                 StartCoroutine(changeMoney_Effect(lastDollars));
             }

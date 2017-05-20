@@ -35,6 +35,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public CurrentVehicle CurrentVehicle;
     public CameraController Camcontroller;
     public TransportOperator TransportOperator;
+    public GameObject Selling_Salepanel;
 
     public Text ProduceStorageEdit;
     public Text JuicetorageEdit;

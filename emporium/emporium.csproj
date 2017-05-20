@@ -130,6 +130,7 @@
     <Compile Include="Assets\Scripts\SellingButtonScript.cs" />
     <Compile Include="Assets\Scripts\ShopTabSwitcher.cs" />
     <Compile Include="Assets\Scripts\SocketManager.cs" />
+    <Compile Include="Assets\Scripts\SoundStorage.cs" />
     <Compile Include="Assets\Scripts\StatContextManager.cs" />
     <Compile Include="Assets\Scripts\TileOperator.cs" />
     <Compile Include="Assets\Scripts\TileSellScript.cs" />

@@ -6,7 +6,7 @@ public class PriceManager : MonoBehaviour
 {
     private bool firstPricesTaken = false;
 
-    public int priceUpdateInterval = 10; //CHANGE ON RELEASE
+    public int priceUpdateInterval = 30; //CHANGE ON RELEASE
 
     public long nextUpdate = 9999999999999;
 
