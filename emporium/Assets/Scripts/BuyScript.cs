@@ -14,7 +14,6 @@ public class BuyScript : MonoBehaviour
         socket = DisabledObjectsGameScene.Instance.socket;
     }
 
-    // Update is called once per frame
     private void Update()
     {
     }

@@ -21,7 +21,6 @@ public class TitleText : MonoBehaviour
         ghost = GameObject.Find("TitleTextGhost");
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         if (startTimer > 0)

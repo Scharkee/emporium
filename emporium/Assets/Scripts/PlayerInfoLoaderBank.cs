@@ -39,8 +39,6 @@ public class PlayerInfoLoaderBank : MonoBehaviour
         Instance = this;
     }
 
-    // Update is called once per frame
-
     private void LoadEverythingAndSetUI()
     {
         Text moneytext = DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>();

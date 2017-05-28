@@ -7,7 +7,6 @@ public class MoneyTracker : MonoBehaviour
     private float lastDollars;
     private bool moneyChanging = false;
 
-    // Update is called once per frame
     private void Update()
     {
         if (Database.Instance.UserDollars != lastDollars)

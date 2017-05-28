@@ -19,7 +19,6 @@ public class UnamePassInputScript : MonoBehaviour
         input.Select();
     }
 
-    // Update is called once per frame
     private void Update()
     {
     }

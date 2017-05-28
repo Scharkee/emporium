@@ -10,8 +10,6 @@ public class PriceManager : MonoBehaviour
 
     public long nextUpdate = 9999999999999;
 
-    // Update is called once per frame
-
     private void Update()
     {
         if (DisabledObjectsGameScene.Instance.SocketManager.unix >= nextUpdate)

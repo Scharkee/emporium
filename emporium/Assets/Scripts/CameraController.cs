@@ -36,7 +36,6 @@ public class CameraController : MonoBehaviour
         buybuttonscript = GameObject.Find("BuyButton").GetComponent<BuyButtonScript>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         transform.LookAt(currentCenter);

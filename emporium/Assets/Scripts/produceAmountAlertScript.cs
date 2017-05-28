@@ -8,7 +8,6 @@ public class produceAmountAlertScript : MonoBehaviour
     private Quaternion _lookRotation;
     private Vector3 _direction;
 
-    // Update is called once per frame
     private void Update()
     {
         //TODO make color transition based on fruit color?? idk idea

@@ -11,7 +11,6 @@ public class StatContextManager : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
     private void Update()
     {
         RaycastHit lasthit = hit;

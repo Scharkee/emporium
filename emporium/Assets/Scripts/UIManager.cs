@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour
         DisablePanels();
     }
 
-    // Update is called once per frame
     private void Update()
     {
     }

@@ -64,7 +64,6 @@ public class TileOperator : MonoBehaviour
                                 }
                                 else if (child.name != tileScript.thistile.NAME + "(Clone)" && child.name != tileScript.thistile.NAME + "_vaisiai(Clone)")
                                 {
-                                    Debug.Log("aptiktas pasalinis objektas");
                                 }
                             }
                         }

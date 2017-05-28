@@ -4,7 +4,6 @@ public class LoadingPanelSafetyNetTimer : MonoBehaviour
 {
     private float connectionFailureTimer = 4f;
 
-    // Update is called once per frame
     private void Update()
     {
         connectionFailureTimer -= Time.deltaTime;

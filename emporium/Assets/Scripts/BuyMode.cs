@@ -30,7 +30,6 @@ public class BuyMode : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (DisabledObjectsGameScene.Instance.PlotSelectors.activeSelf)

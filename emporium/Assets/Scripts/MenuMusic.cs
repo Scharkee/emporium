@@ -19,7 +19,6 @@ public class MenuMusic : MonoBehaviour
         audiosrc.Play();
     }
 
-    // Update is called once per frame
     private void Update()
     {
     }

@@ -20,8 +20,6 @@ public class AssignTiles : MonoBehaviour
         socman = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SocketManager>();
     }
 
-    // Update is called once per frame
-
     public void AssignReceivedTiles(SocketIOEvent evt)
     {
         string evtStringRows = evt.data.ToString();

@@ -9,7 +9,6 @@ public class EconomyPanelScript : MonoBehaviour
     public Sprite falling;
     public Sprite stable;
 
-    // Update is called once per frame
     private void Update()
     {
         EconomyPanel_refreshTimer_edit.GetComponent<Text>().text = (DisabledObjectsGameScene.Instance.pricemanager.nextUpdate - DisabledObjectsGameScene.Instance.SocketManager.unix).ToString("F1");
