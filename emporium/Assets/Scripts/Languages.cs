@@ -29,25 +29,6 @@ public class Languages : MonoBehaviour
             lithuanian.Add("done_collect", "Paruošta surinkimui.");
             //GAMESCENE
 
-            //preso context table
-            lithuanian.Add("Press_AssignJobText", "Darbo priskyrimas");
-            lithuanian.Add("Press_ProduceTypeText", "Produktas");
-            lithuanian.Add("Press_AssignJob_AmountText", "Kiekis");
-
-            //TODO: dropdown
-
-            //NAMES
-
-            lithuanian.Add("kriause_1", "Kriaušė");
-            lithuanian.Add("kivis_1", "Kivių medis");
-            lithuanian.Add("apelsinas_1", "Apelsinmedis");
-            lithuanian.Add("nektarinas_1", "Nektarinų medis");
-            lithuanian.Add("obuolys_1", "Obelis");
-            lithuanian.Add("persikas_1", "Persikų medis");
-            lithuanian.Add("slyva_1", "Slyva");
-
-            lithuanian.Add("presas_1", "Maža sulčiaspaudė");
-
             /////////
             //ENGLISH
             /////////
@@ -86,6 +67,15 @@ public class Languages : MonoBehaviour
             english.Add("masina_1", "Car");
             english.Add("pikapas_1", "Pickup Truck");
             english.Add("sunkvezimis_1", "Truck");
+
+            //UI
+            english.Add("price", "Price");
+            english.Add("growth_time", "Growth time");
+            english.Add("yield", "Yield");
+            english.Add("speed", "Speed");
+            english.Add("efic", "Efficiency");
+            english.Add("job_time", "Job time");
+            english.Add("capacity", "Capacity");
         }
     }
 }

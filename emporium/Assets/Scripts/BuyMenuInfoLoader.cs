@@ -5,10 +5,12 @@ using UnityEngine.UI;
 public class BuyMenuInfoLoader : MonoBehaviour
 {
     public static BuyMenuInfoLoader Instance;
+    private GameObject gridButtonPrefab, currentGridButton;
 
     // Use this for initialization
     private void Start()
     {
+        gridButtonPrefab = Resources.Load("UI/B1") as GameObject;
     }
 
     private void Awake()
@@ -18,42 +20,96 @@ public class BuyMenuInfoLoader : MonoBehaviour
 
     public void LoadBuyMenuInfo()
     {
+        Debug.Log("we in");
         foreach (Building building in Database.Instance.buildinginfo)
         {
             if (building.BUILDING_TYPE == 0)//augalas
             {
-                GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
                 TimeSpan ts = TimeSpan.FromSeconds(building.PROG_AMOUNT);
 
-                GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
-                GameObject.Find("OPGridText_" + building.NAME + "_efic").GetComponent<Text>().text = "Yield: ";
-                GameObject.Find("OPGridText_" + building.NAME + "_efic_editable").GetComponent<Text>().text = building.TILEPRODUCERANDOM1 + " - " + building.TILEPRODUCERANDOM2 + " KG";
+                currentGridButton = Instantiate(gridButtonPrefab, DisabledObjectsGameScene.Instance.gridPlants.transform) as GameObject;
+                currentGridButton.name = building.NAME;
+                currentGridButton.GetComponent<UniversalBank>().produceName = building.TILEPRODUCENAME;
+                currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
+
+                //cia asigninam tile name
+
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = building.NAME;
+
+                //cia asigninama informacija apie tile
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE + "$";
+
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["growth_time"] + " : " + string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["yield"] + " : " + building.TILEPRODUCERANDOM1 + "-" + building.TILEPRODUCERANDOM2 + " KG";
+
+                //paspaudimo delegatas
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
             }
             else if (building.BUILDING_TYPE == 1) //presas
             {
-                GameObject.Find("OPGridText_" + building.NAME + "_efic_editable").GetComponent<Text>().text = building.EFIC * 100 + "%";
-                GameObject.Find("OPGridText_" + building.NAME + "_efic").GetComponent<Text>().text = "Efficiency:";
+                currentGridButton = (Instantiate(gridButtonPrefab, DisabledObjectsGameScene.Instance.gridBuildings.transform) as GameObject).gameObject;
 
-                GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
-                GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = "1 KG/s.";
+                currentGridButton.GetComponent<UniversalBank>().produceName = building.TILEPRODUCENAME;
+                currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
+
+                //cia asigninam tile name
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = building.NAME;
+
+                //cia asigninama informacija apie tile
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE.ToString() + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["speed"] + " : " + "1 KG/s.";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["efic"] + " : " + building.EFIC * 100 + "%";
+
+                //paspaudimo delegatas
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
             }
             else if (building.BUILDING_TYPE == 2) //transporto priemone
             {
-                GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
-                GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " seconds per job.";
-                GameObject.Find("OPGridText_" + building.NAME + "_time").GetComponent<Text>().text = "Job time:";
+                currentGridButton = (Instantiate(gridButtonPrefab, DisabledObjectsGameScene.Instance.gridBuildings.transform) as GameObject).gameObject;
+
+                currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
+                //cia asigninam tile name
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = building.NAME;
+
+                //cia asigninama informacija apie tile
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE.ToString() + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["job_time"] + " : " + building.PROG_AMOUNT + " s/job.";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["capacity"] + " : " + building.TILEPRODUCENAME + " KG";
+
+                //paspaudimo delegatas
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
             }
             else if (building.BUILDING_TYPE == 3) //solid storage
             {
-                GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
-                GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " KG.";
-                GameObject.Find("OPGridText_" + building.NAME + "_time").GetComponent<Text>().text = "Capacity:";
+                currentGridButton = (Instantiate(gridButtonPrefab, DisabledObjectsGameScene.Instance.gridBuildings.transform) as GameObject).gameObject;
+
+                currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
+
+                //cia asigninam tile name
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = building.NAME;
+
+                //cia asigninama informacija apie tile
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE.ToString() + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["capacity"] + " : " + building.PROG_AMOUNT + " KG";
+
+                //paspaudimo delegatas
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
             }
             else if (building.BUILDING_TYPE == 4)//liquid storage
             {
-                GameObject.Find("OPGridText_" + building.NAME + "_price_editable").GetComponent<Text>().text = building.PRICE.ToString();
-                GameObject.Find("OPGridText_" + building.NAME + "_time_editable").GetComponent<Text>().text = building.PROG_AMOUNT + " L.";
-                GameObject.Find("OPGridText_" + building.NAME + "_time").GetComponent<Text>().text = "Capacity:";
+                currentGridButton = (Instantiate(gridButtonPrefab, DisabledObjectsGameScene.Instance.gridBuildings.transform) as GameObject).gameObject;
+
+                currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
+
+                //cia asigninam tile name
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = building.NAME;
+
+                //cia asigninama informacija apie tile
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE.ToString() + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["capacity"] + " : " + building.PROG_AMOUNT + " L";
+
+                //paspaudimo delegatas
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
             }
         }
 

@@ -37,6 +37,5 @@ public class UIManager : MonoBehaviour
 
     private void DisablePanels()
     {// disable all panels at start
-        PressContextPanel.SetActive(false);
     }
 }

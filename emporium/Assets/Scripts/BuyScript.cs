@@ -18,17 +18,6 @@ public class BuyScript : MonoBehaviour
     {
     }
 
-    public void EnableSelector(string tilename)
-    {
-        DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha = 0f;
-
-        DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().enabled = true;
-
-        DisabledObjectsGameScene.Instance.BuyMode.GetComponent<BuyMode>().receiveName(tilename);
-
-        DisabledObjectsGameScene.Instance.BuyMenuPanel.SetActive(false);
-    }
-
     public void ChoosePlot(string buildingname, float X, float Z)
     {
         Debug.Log("requesting " + buildingname + " at " + X + " " + Z);
