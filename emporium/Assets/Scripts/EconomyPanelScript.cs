@@ -16,7 +16,7 @@ public class EconomyPanelScript : MonoBehaviour
 
     public void Adapt()
     {
-        foreach (Transform listitem in transform.Find("EconomyPanel_panel"))
+        foreach (Transform listitem in DisabledObjectsGameScene.Instance.EconomyPanel_panel.transform)
         {
             //check if even works
 

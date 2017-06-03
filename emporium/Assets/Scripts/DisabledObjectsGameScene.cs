@@ -37,6 +37,8 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public CameraController Camcontroller;
     public TransportOperator TransportOperator;
     public GameObject Selling_Salepanel;
+    public GameObject EconomyPanel_panel;
+
     public GameObject BuyMenuBuildingTabBtn, BuyMenuPlantTabBtn;
 
     public Text ProduceStorageEdit;

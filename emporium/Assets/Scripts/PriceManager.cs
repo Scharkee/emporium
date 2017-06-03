@@ -65,7 +65,16 @@ public class PriceManager : MonoBehaviour
             Database.Instance.Prices = HelperScripts.Instance.ReassignPrices(Database.Instance.prices);
         }
 
-        DisabledObjectsGameScene.Instance.EconomyPanel.GetComponent<EconomyPanelScript>().Adapt();
+        if (!Globals.Instance.SalePanelGenerated)
+        {
+            Globals.Instance.SalePanelGenerated = true;
+            DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().GeneratePanels();
+            //activate generation
+        }
+        else
+        {
+            DisabledObjectsGameScene.Instance.EconomyPanel.GetComponent<EconomyPanelScript>().Adapt();
+        }
     }
 
     public Prices SalePanelAdaptingPrices()

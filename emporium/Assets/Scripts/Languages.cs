@@ -77,6 +77,18 @@ public class Languages : MonoBehaviour
             english.Add("efic", "Efficiency");
             english.Add("job_time", "Job time");
             english.Add("capacity", "Capacity");
+
+            //PRODUCE
+            english.Add("kriauses", "Pears");
+            english.Add("obuoliai", "Apples");
+            english.Add("apelsinai", "Oranges");
+            english.Add("persikai", "Peaches");
+            english.Add("nektarinai", "Nectarines");
+            english.Add("kiviai", "Kiwis");
+            english.Add("slyvos", "Plums");
+            english.Add("bananai", "Bananas");
+            english.Add("arbuzai", "Watermelons");
+            english.Add("vysnios", "Cherries");
         }
     }
 }

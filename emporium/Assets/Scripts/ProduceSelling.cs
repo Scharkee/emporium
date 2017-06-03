@@ -9,12 +9,16 @@ public class ProduceSelling : MonoBehaviour
     private Prices oldprices;
     public ListItemPrice totalWeightCache;
     public Text SalePanelTotalstext;
+    private GameObject salePanelItemPrefab, currentListItem;
+    private GameObject ecoPanelItemPrefab, currentEcoListItem;
 
     private SocketIOComponent socket;
 
     // Use this for initialization
     private void Start()
     {
+        salePanelItemPrefab = Resources.Load("UI/Selling_ListItem") as GameObject;
+        ecoPanelItemPrefab = Resources.Load("UI/EconomyPanel_ListItem") as GameObject;
         socket = DisabledObjectsGameScene.Instance.socket;
         socket.On("SALE_VERIFICATION", ReceiveSaleVerification);
         socket.On("SALE_JOB_VERIFICATION", ReceiveSaleJobAssignmentVerification);
@@ -23,6 +27,29 @@ public class ProduceSelling : MonoBehaviour
     public void AdaptPrices()
     {
         DisabledObjectsGameScene.Instance.SellingPanel.transform.BroadcastMessage("AdaptListingPrices");
+    }
+
+    public void GeneratePanels() //skirta sugeneruoti salePanel + economy panel
+    {
+        foreach (KeyValuePair<string, float> item in Database.Instance.Prices)
+        {
+            if (item.Key.Contains("_sultys")) //sultys nesiskaito sitam spawninime, reikia tik produce names
+            {
+            }
+            else
+            {
+                //SPAWNING ENTRY FOR SELLING PANEL
+                currentListItem = Instantiate(salePanelItemPrefab, DisabledObjectsGameScene.Instance.Selling_Salepanel.transform) as GameObject;
+                currentListItem.GetComponent<UniversalBank>().produceName = item.Key;
+                currentListItem.transform.Find("SellListItem_name").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[item.Key];
+
+                //SPAWNING ENTRY FOR ECONOMY PANEL
+                currentListItem = Instantiate(ecoPanelItemPrefab, DisabledObjectsGameScene.Instance.EconomyPanel_panel.transform) as GameObject;
+                currentListItem.GetComponent<EconomyPanelListItem>().bankProduce.produceName = item.Key;
+                currentListItem.GetComponent<EconomyPanelListItem>().bankJuice.produceName = item.Key + "_sultys";
+                currentListItem.transform.Find("EconomyPanelListItem_name").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[item.Key];
+            }
+        }
     }
 
     public void AskForSaleJobAssignment(Dictionary<string, string> sale)

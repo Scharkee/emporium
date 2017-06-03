@@ -5,7 +5,13 @@ public class Globals : MonoBehaviour
 {
     public static Globals Instance;
 
+    //bools
     public bool cameraUp = false;
+
+    public bool SalePanelGenerated = false;
+    public bool EcoPanelGenerated = false;
+    public bool InventoryExpandGenerated = false;
+
     public GameObject canvas;
 
     //skybox materials
