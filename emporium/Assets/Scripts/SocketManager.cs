@@ -100,7 +100,7 @@ public class SocketManager : MonoBehaviour
     public void DiscrepancyAction() //check ar veikia
     {
         GameAlerts.Instance.AlertWithMessage("Desynchronization detected. Logging off...");
-        StartCoroutine(logOffWithDelay(2f));
+        StartCoroutine(logOffWithDelay(1f));
 
         ContextManager.Instance.CancelContext();
     }

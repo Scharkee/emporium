@@ -34,7 +34,7 @@ public class BuyScript : MonoBehaviour
         if (tileExists != -9898)//placeholder
         {
             //tile exists
-            Debug.Log("551");
+
             Debug.Log(Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.ID);
 
             if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT >= 5)
@@ -44,17 +44,38 @@ public class BuyScript : MonoBehaviour
             }
             else if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT != 0)
             {
-                Debug.Log("551");
-                data["TileCount"] = Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT.ToString();
-                data["tileID"] = (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.ID).ToString();
-                socket.Emit("BUY_TILE", new JSONObject(data));
-                Debug.Log("2");
-                Debug.Log("551");
+                if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 0)//augalas, praleidziam
+                {
+                    data["TileCount"] = Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT.ToString();
+                    data["tileID"] = (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.ID).ToString();
+                    socket.Emit("BUY_TILE", new JSONObject(data));
+                }
+                else if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 1) //presas, stabdom
+                {
+                    Debug.Log("Discrepancy. Presu negalima stackinti");
+                    DisabledObjectsGameScene.Instance.SocketManager.DiscrepancyAction();
+                }
+                else if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 2) //transportas, currently unstackable
+                {
+                    Debug.Log("Discrepancy. Presu negalima stackinti");
+                    DisabledObjectsGameScene.Instance.SocketManager.DiscrepancyAction();
+                }
+                else if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 3) //solid storage, praleidziam
+                {
+                    data["TileCount"] = Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT.ToString();
+                    data["tileID"] = (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.ID).ToString();
+                    socket.Emit("BUY_TILE", new JSONObject(data));
+                }
+                else if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 4) //liquid storage, praleidziam
+                {
+                    data["TileCount"] = Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT.ToString();
+                    data["tileID"] = (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.ID).ToString();
+                    socket.Emit("BUY_TILE", new JSONObject(data));
+                }
             }
         }
         else //tile does not exist.
         {
-            Debug.Log("3");
             data["TileCount"] = 1.ToString();
             socket.Emit("BUY_TILE", new JSONObject(data));
         }
@@ -77,8 +98,6 @@ public class BuyScript : MonoBehaviour
             {
             }
         }
-
-        Debug.Log("tile at Activetiles index " + currentDBpos);
 
         return currentDBpos;
     }

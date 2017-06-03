@@ -89,7 +89,7 @@ public class TileSellScript : MonoBehaviour
                     {
                         if (hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 3) //ziurim ar galime parduoti PRODUCE storage
                         {
-                            if (Database.Instance.Storage.TakenProduceStorage > Database.Instance.Storage.TotalProduceStorage - hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT)
+                            if (Database.Instance.Storage.TakenProduceStorage > Database.Instance.Storage.TotalProduceStorage - hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT * hit.transform.gameObject.GetComponent<BuildingScript>().thistile.COUNT)
                             { //negalim parduot nes netalpa vaisiai
                                 GameAlerts.Instance.AlertWithMessage("You have too much produce! You cannot sell produce storage at this moment.");
                             }
@@ -102,7 +102,7 @@ public class TileSellScript : MonoBehaviour
                         }
                         else if (hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 4) //ziurim ar galime parduoti JUICE storage
                         {
-                            if (Database.Instance.Storage.TakenJuiceStorage > Database.Instance.Storage.TotalJuiceStorage - hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT)
+                            if (Database.Instance.Storage.TakenJuiceStorage > Database.Instance.Storage.TotalJuiceStorage - hit.transform.gameObject.GetComponent<BuildingScript>().thistileInfo.PROG_AMOUNT * hit.transform.gameObject.GetComponent<BuildingScript>().thistile.COUNT)
                             { //negalim parduot nes netalpa sultys
                                 GameAlerts.Instance.AlertWithMessage("You have too much juice! You cannot sell juice storage at this moment.");
                             }

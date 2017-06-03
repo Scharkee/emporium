@@ -82,10 +82,8 @@ public class AssignTiles : MonoBehaviour
     {
         GameObject tile = tileByID(ID);
 
-        Debug.Log(tile.GetComponent<BuildingScript>().idInActiveTiles);
-        int tileposinActiveTiles = tile.GetComponent<BuildingScript>().idInActiveTiles;
-
-        if (tile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 0)//plant
+        int tileposinActiveTiles = Database.Instance.ActiveTiles.IndexOf(tile);
+        if (tile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 0 || tile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 3 | tile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 4)//upgradeable pastatas
         {
             Database.Instance.ActiveTiles[tileposinActiveTiles].GetComponent<BuildingScript>().thistile.COUNT++;
         }
@@ -143,7 +141,6 @@ public class AssignTiles : MonoBehaviour
         }
         else if (Database.Instance.ActiveTiles[i].GetComponent<BuildingScript>().thistile.COUNT == 3)
         {
-            Debug.Log("here");
             currentTile = (Instantiate(currentTilePrefab, new Vector3(Database.Instance.tile[i].X, 0f, Database.Instance.tile[i].Z), Quaternion.identity, GameObject.Find("Tiles").transform) as GameObject).gameObject;
             GameObject n1 = currentTile.transform.Find(Database.Instance.tile[i].NAME).gameObject;
             n1.transform.localPosition = new Vector3(n1.transform.localPosition.x, 0f, n1.transform.localPosition.z - 0.25f);
@@ -152,8 +149,6 @@ public class AssignTiles : MonoBehaviour
             currentAdditionalPrefab = Resources.Load("Plants/additionalBuildings/" + Database.Instance.tile[i].NAME) as GameObject;
             GameObject currentAdditional = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 0.2f, 0f, Database.Instance.tile[i].Z - 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
             GameObject currentAdditional1 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 0.2f, 0f, Database.Instance.tile[i].Z + 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
-
-            Debug.Log("here");
         }
         else if (Database.Instance.ActiveTiles[i].GetComponent<BuildingScript>().thistile.COUNT == 4)
         {
@@ -294,14 +289,15 @@ public class AssignTiles : MonoBehaviour
             GameObject currentAdditional2 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X - 0.3f, 0f, Database.Instance.tile[i].Z - 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
             GameObject currentAdditional3 = (Instantiate(currentAdditionalPrefab, new Vector3(Database.Instance.tile[i].X + 0.3f, 0f, Database.Instance.tile[i].Z - 0.3f), Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0)), currentTile.transform) as GameObject).gameObject;
         }
-        Debug.Log("ok");
+
         currentTile.GetComponent<BuildingScript>().idInTileDatabase = i;
 
         currentTile.GetComponent<BuildingScript>().thistile = Database.Instance.tile[i];
 
-        Debug.Log("ok");
+        currentTile.GetComponent<BuildingScript>().idInTileDatabase = Database.Instance.ActiveTiles.IndexOf(currentTile);
+
         currentTile.GetComponent<BuildingScript>().RetrieveTileInfo();
-        Debug.Log("not-ok");
+
         Debug.Log(currentTile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE);
 
         if (currentTile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 0) //plant

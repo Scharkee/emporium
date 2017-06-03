@@ -94,8 +94,8 @@ public class Database : MonoBehaviour
         Storage.TakenJuiceStorage = am.CURJuiceAmount;
         Storage.TakenProduceStorage = am.CURProduceAmount;
 
-        DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/" + Storage.TotalJuiceStorage;
-        DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
+        DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/" + Storage.TotalJuiceStorage + " L";
+        DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage + " KG";
 
         if (Storage.TakenJuiceStorage >= Storage.TotalJuiceStorage)
         {

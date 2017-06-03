@@ -142,6 +142,7 @@ public class BuyMode : MonoBehaviour
         }
         catch
         {
+            Debug.Log("no tiles to be re-enabled");
         }
         EnableGroundCol(true);
 
@@ -165,21 +166,29 @@ public class BuyMode : MonoBehaviour
             {
                 if (tile.transform.position.x == selector.position.x && tile.transform.position.z == selector.position.z)//selector is overlaping a tile
                 {
-                    if (tile.GetComponent<BuildingScript>().thistile.NAME == name && tile.GetComponent<BuildingScript>().thistile.COUNT >= 5)//max upgraded SAME tile. Mark unavailable.
-                    {
+                    if (tile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 1 || tile.GetComponent<BuildingScript>().thistileInfo.BUILDING_TYPE == 2)
+                    {//visi neupgradinami pastatai
                         selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_unavailable;
                         selector.GetComponent<BoxCollider>().enabled = false;
                     }
-                    else if (tile.GetComponent<BuildingScript>().thistile.NAME == name)//same tile, mark for upgrading
-                    {
-                        selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable;
+                    else
+                    {//visi upgradiname pastatai
+                        if (tile.GetComponent<BuildingScript>().thistile.NAME == name && tile.GetComponent<BuildingScript>().thistile.COUNT >= 5)//max upgraded SAME tile. Mark unavailable.
+                        {
+                            selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_unavailable;
+                            selector.GetComponent<BoxCollider>().enabled = false;
+                        }
+                        else if (tile.GetComponent<BuildingScript>().thistile.NAME == name)//same tile, mark for upgrading
+                        {
+                            selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable;
 
-                        selector.GetComponent<PlotSelectorScript>().currentMat = 3; //upgrade mat code
-                    }
-                    else //not the same type of tile, grey out and disable collider
-                    {
-                        selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_unavailable;
-                        selector.GetComponent<BoxCollider>().enabled = false;
+                            selector.GetComponent<PlotSelectorScript>().currentMat = 3; //upgrade mat code
+                        }
+                        else //not the same type of tile, grey out and disable collider
+                        {
+                            selector.GetComponent<Renderer>().material = Globals.Instance.plotselector_unavailable;
+                            selector.GetComponent<BoxCollider>().enabled = false;
+                        }
                     }
                 }
             }

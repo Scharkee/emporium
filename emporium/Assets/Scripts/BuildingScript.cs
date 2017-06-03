@@ -143,8 +143,6 @@ public class BuildingScript : MonoBehaviour
 
         justSpawned = false;
 
-        idInActiveTiles = Database.Instance.ActiveTiles.IndexOf(gameObject);
-
         if (thistileInfo.BUILDING_TYPE == 2) //uzsiregistruojama kaip transportas.
         {//LOCK nenaudojamas, nes DB gali buti tik vienas transportas
             Database.Instance.CurrentVehichle.time = thistileInfo.PROG_AMOUNT;
@@ -173,7 +171,7 @@ public class BuildingScript : MonoBehaviour
         {
             lock (Database.Instance.ActiveProduceStorage)
             {
-                Database.Instance.AddToMaxStorageAmounts(thistileInfo.PROG_AMOUNT, 0);
+                Database.Instance.AddToMaxStorageAmounts(thistileInfo.PROG_AMOUNT * thistile.COUNT, 0);
                 Database.Instance.ActiveProduceStorage.Add(this);
             }
         }
@@ -181,7 +179,7 @@ public class BuildingScript : MonoBehaviour
         {
             lock (Database.Instance.ActiveJuiceStorage)
             {
-                Database.Instance.AddToMaxStorageAmounts(thistileInfo.PROG_AMOUNT, 1);
+                Database.Instance.AddToMaxStorageAmounts(thistileInfo.PROG_AMOUNT * thistile.COUNT, 1);
                 Database.Instance.ActiveJuiceStorage.Add(this);
             }
         }

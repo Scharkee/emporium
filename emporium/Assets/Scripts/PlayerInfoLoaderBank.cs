@@ -44,7 +44,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour
         Text moneytext = DisabledObjectsGameScene.Instance.moneyEdit.GetComponent<Text>();
         Text usertext = GameObject.Find("PlayingAsEdit").GetComponent<Text>();
 
-        moneytext.text = Database.Instance.UserDollars.ToString();
+        moneytext.text = Database.Instance.UserDollars.ToString() + "$";
         usertext.text = GlobalControl.Instance.Uname;
 
         CameraController rotscript = Camera.main.GetComponent<CameraController>();
