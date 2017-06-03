@@ -31,11 +31,13 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public GameObject EconomyButton;
     public GameObject EconomyPanel;
     public GameObject CancelPanel;
+    public GameObject TabGrids, TabButtons;
     public SocketManager SocketManager;
     public CurrentVehicle CurrentVehicle;
     public CameraController Camcontroller;
     public TransportOperator TransportOperator;
     public GameObject Selling_Salepanel;
+    public GameObject BuyMenuBuildingTabBtn, BuyMenuPlantTabBtn;
 
     public Text ProduceStorageEdit;
     public Text JuicetorageEdit;

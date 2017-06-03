@@ -6,6 +6,7 @@ public class UniversalBank : MonoBehaviour
     public int two;
 
     public string produceName, PurchaseName;
+    public GameObject go1;
 
     public void BuyWithTileName(string name)
     {

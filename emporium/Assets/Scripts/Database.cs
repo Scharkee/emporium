@@ -71,11 +71,9 @@ public class Database : MonoBehaviour
 
     public IEnumerator waitForTileAssignmentCompletion()
     {
-        Debug.Log("waiting");
         while (TileSelfSignedAssignmentComplete != ActiveTiles.Count)
         {
             yield return new WaitForSeconds(0.1f);
-            Debug.Log("waiting");
         }
 
         //visos tiles baige assignintis
@@ -96,8 +94,6 @@ public class Database : MonoBehaviour
         Storage.TakenJuiceStorage = am.CURJuiceAmount;
         Storage.TakenProduceStorage = am.CURProduceAmount;
 
-        Debug.Log("storage yra " + Storage.TakenJuiceStorage + " sulciu ir " + Storage.TakenProduceStorage + " produce");
-
         DisabledObjectsGameScene.Instance.JuicetorageEdit.text = Storage.TakenJuiceStorage + "/" + Storage.TotalJuiceStorage;
         DisabledObjectsGameScene.Instance.ProduceStorageEdit.text = Storage.TakenProduceStorage + "/" + Storage.TotalProduceStorage;
 
@@ -109,7 +105,6 @@ public class Database : MonoBehaviour
         {
             DisabledObjectsGameScene.Instance.ProduceStorageEdit.color = Globals.Instance.RedTextColor;
         }
-        Debug.Log("done");
     }
 
     public void AddToStoredAmounts(float amount, int solidOrJuice)

@@ -62,6 +62,7 @@ public class Languages : MonoBehaviour
             english.Add("presas_1", "Small juicer");
             english.Add("deze_1", "Storage Box");
             english.Add("statine_1", "Barrel");
+            english.Add("lempa_1", "Lamp");
 
             english.Add("mopedas_1", "Moped");
             english.Add("masina_1", "Car");

@@ -10,14 +10,11 @@ public class InvExpander : MonoBehaviour
     {
         if (DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.activeSelf)
         {
-            Debug.Log("disabling");
             DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(false);
         }
         else
         {
-            Debug.Log("enabling");
             DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(true);
-            Debug.Log("enabling");
         }
     }
 }

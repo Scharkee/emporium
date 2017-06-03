@@ -34,6 +34,9 @@ public class Globals : MonoBehaviour
     public Color RedTextColor;
     public Color WhiteTextColor;
 
+    public Color BuyMenuTabOn;
+    public Color BuyMenuTabOff;
+
     public Color RedNormalProduceAlertColorr;
     public Color NormalProduceAlertColor;
 
