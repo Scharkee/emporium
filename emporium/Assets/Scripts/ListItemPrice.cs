@@ -50,7 +50,7 @@ public class ListItemPrice : MonoBehaviour
             total += entry.Value;
         }
 
-        text.text = total.ToString();
+        text.text = total + "/" + Database.Instance.CurrentVehichle.amount + " KG";
 
         checkForWeightOverflow(total, text);
     }

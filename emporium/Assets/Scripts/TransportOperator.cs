@@ -13,7 +13,7 @@ public class TransportOperator : MonoBehaviour
 
     private void Update()
     {
-        DisabledObjectsGameScene.Instance.TransportStatus.text = " idle";
+        DisabledObjectsGameScene.Instance.TransportStatus.text = "Status: idle";
         if (Database.Instance.TransportJobList.Count != 0)
         {
             foreach (TransportJob job in Database.Instance.TransportJobList) //jobs updateris

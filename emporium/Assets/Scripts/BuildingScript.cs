@@ -162,10 +162,9 @@ public class BuildingScript : MonoBehaviour
             {
                 DisabledObjectsGameScene.Instance.TransportStatus.text = "Status: busy";
             }
-
-            DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = IDHelper.Instance.NameToRealName(Database.Instance.CurrentVehichle.Name);
-
-            Debug.Log(Database.Instance.CurrentVehichle.Name);
+            Debug.Log("ok?");
+            //   DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = GlobalControl.Instance.currentLangDict[Database.Instance.CurrentVehichle.Name];
+            Debug.Log("ok?");
         }
         else if (thistileInfo.BUILDING_TYPE == 3) //uzsiregistruojama kaip PRODUCE storage
         {
@@ -183,7 +182,7 @@ public class BuildingScript : MonoBehaviour
                 Database.Instance.ActiveJuiceStorage.Add(this);
             }
         }
-
+        Debug.Log("asdasd");
         //uzregistruojama, kad tile suvede visa reikiama informacija.
         Interlocked.Increment(ref Database.Instance.TileSelfSignedAssignmentComplete);
     }

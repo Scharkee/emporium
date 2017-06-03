@@ -33,7 +33,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public GameObject CancelPanel;
     public GameObject TabGrids, TabButtons;
     public SocketManager SocketManager;
-    public CurrentVehicle CurrentVehicle;
+
     public CameraController Camcontroller;
     public TransportOperator TransportOperator;
     public GameObject Selling_Salepanel;
@@ -44,6 +44,7 @@ public class DisabledObjectsGameScene : MonoBehaviour
 
     public Text TransportCurrent;
     public Text TransportStatus;
+    public Text TransportName;
 
     public static DisabledObjectsGameScene Instance;
 

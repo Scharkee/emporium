@@ -75,6 +75,7 @@ public class Database : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
         }
+        Debug.Log("tiles done assigning");
 
         //visos tiles baige assignintis
 
@@ -86,6 +87,10 @@ public class Database : MonoBehaviour
             CurrentVehichle.IDinDB = 0;
             CurrentVehichle.ID = 0;
             CurrentVehichle.IDinActiveTiles = 0;
+        }
+        else
+        {
+            DisabledObjectsGameScene.Instance.TransportName.text = "Current vehicle: " + GlobalControl.Instance.currentLangDict[CurrentVehichle.Name];
         }
 
         DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TileOperator>().StartGrowthCompletrionCheckRepeat();
