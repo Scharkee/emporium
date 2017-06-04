@@ -10,6 +10,8 @@ public class AssignTiles : MonoBehaviour
     public AudioClip shovel1, shovel2;
     private AudioSource sound;
 
+    private bool inventoryGenerated = false;
+
     // Use this for initialization
     private void Start()
     {
@@ -60,6 +62,12 @@ public class AssignTiles : MonoBehaviour
         Database.Instance.inventory = JsonHelper.FromJson<Inventory>(evtStringItems);// assignment
 
         Database.Instance.Inventory = HelperScripts.Instance.ReassignInventory(Database.Instance.inventory[0]);
+
+        if (!inventoryGenerated)
+        {
+            inventoryGenerated = true;
+            DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<InventoryManager>().GenerateInventory();
+        }
     }
 
     public void SpawnTiles()

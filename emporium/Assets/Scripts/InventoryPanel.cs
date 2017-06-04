@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryPanel : MonoBehaviour
 {
@@ -24,20 +26,18 @@ public class InventoryPanel : MonoBehaviour
 
     public void adjustValues()
     {
-        Debug.Log("adjusting values");
-
         //ADD NEW FRUITS AND JUICES
 
-        UIManager.Instance.ChangeUIText("kriauses_Editable", Database.Instance.Inventory["kriauses"].ToString());
-        UIManager.Instance.ChangeUIText("apelsinai_Editable", Database.Instance.Inventory["apelsinai"].ToString());
-        UIManager.Instance.ChangeUIText("persikai_Editable", Database.Instance.Inventory["persikai"].ToString());
-        UIManager.Instance.ChangeUIText("nektarinai_Editable", Database.Instance.Inventory["nektarinai"].ToString());
-        UIManager.Instance.ChangeUIText("kiviai_Editable", Database.Instance.Inventory["kiviai"].ToString());
-        UIManager.Instance.ChangeUIText("slyvos_Editable", Database.Instance.Inventory["slyvos"].ToString());
-
-        UIManager.Instance.ChangeUIText("kriauses_Sultys_Editable", Database.Instance.Inventory["kriauses_sultys"].ToString());
-        UIManager.Instance.ChangeUIText("apelsinai_Sultys_Editable", Database.Instance.Inventory["apelsinai_sultys"].ToString());
-        UIManager.Instance.ChangeUIText("persikai_Sultys_Editable", Database.Instance.Inventory["persikai_sultys"].ToString());
-        UIManager.Instance.ChangeUIText("slyvos_Sultys_Editable", Database.Instance.Inventory["slyvos_sultys"].ToString());
+        foreach (KeyValuePair<string, float> inventoryItem in Database.Instance.Inventory)
+        {
+            if (inventoryItem.Key.Contains("_sultys")) //handlinam sulciu inventory list-item'a
+            {
+                DisabledObjectsGameScene.Instance.Inventory_Juice_Panel.transform.Find(inventoryItem.Key + "/" + inventoryItem.Key + "_editable").GetComponent<Text>().text = inventoryItem.Value.ToString();
+            }
+            else //handlinam produce inventory list-item'a
+            {
+                DisabledObjectsGameScene.Instance.Inventory_Produce_Panel.transform.Find(inventoryItem.Key + "/" + inventoryItem.Key + "_editable").GetComponent<Text>().text = inventoryItem.Value.ToString();
+            }
+        }
     }
 }

@@ -27,11 +27,12 @@ public class PlayerInfoLoaderBank : MonoBehaviour
 
         globalcontr = GameObject.Find("GlobalObject").GetComponent<GlobalControl>();
 
-        RetrieveStats();
         socket.On("RETRIEVE_STATS", ReceiveStats);
         socket.On("RECEIVE_TILES", ReceiveTileData);
         socket.On("RECEIVE_TILE_INFORMATION", ReceiveTileInformation);
         socket.On("RECEIVE_INVENTORY", ReceiveInventory);
+
+        RetrieveStats();
     }
 
     private void Awake()

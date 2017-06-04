@@ -89,6 +89,18 @@ public class Languages : MonoBehaviour
             english.Add("bananai", "Bananas");
             english.Add("arbuzai", "Watermelons");
             english.Add("vysnios", "Cherries");
+
+            //JUICE
+            english.Add("kriauses_sultys", "Pear Juice");
+            english.Add("obuoliai_sultys", "Apple Juice");
+            english.Add("apelsinai_sultys", "Orange Juice");
+            english.Add("persikai_sultys", "Peach Juice");
+            english.Add("nektarinai_sultys", "Nectarine Juice");
+            english.Add("kiviai_sultys", "Kiwi Juice");
+            english.Add("slyvos_sultys", "Plum Juice");
+            english.Add("bananai_sultys", "Banana Juice");
+            english.Add("arbuzai_sultys", "Watermelon Juice");
+            english.Add("vysnios_sultys", "Cherry Juice");
         }
     }
 }

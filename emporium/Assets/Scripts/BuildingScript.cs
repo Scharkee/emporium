@@ -57,7 +57,7 @@ public class BuildingScript : MonoBehaviour
         socket.On("ASSIGN_TILE_WORK", AssignTileWork);
     }
 
-    public bool Harvestable()
+    public bool Harvestable() //patikrinimas, ar tile gali buti harvested.
     {
         if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled || DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf || DisabledObjectsGameScene.Instance.alertPanel.activeSelf || DisabledObjectsGameScene.Instance.PressContextPanel.activeSelf || DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)//something is on(sell mode, buy menu, press context panel etc.) Interacting with tile disabled for the time being.
         {
@@ -257,9 +257,8 @@ public class BuildingScript : MonoBehaviour
 
             if (int.Parse(Regex.Replace(evt.data.GetField("tileID").ToString(), "[^0-9]", "")) == thistile.ID)
             {
-                Database.Instance.Inventory[thistile.WORK_NAME + "_sultys"] = float.Parse(evt.data.GetField("currentProduceAmount").ToString()); //increasing ammount in inventory
-
-                Database.Instance.AddToStoredAmounts(float.Parse(evt.data.GetField("juiceYield").ToString()), 1);
+                //Updatinamas amountas inventoriuje
+                DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<InventoryManager>().UpdateInventoryPanelValue(thistile.WORK_NAME + "_sultys", float.Parse(evt.data.GetField("currentProduceAmount").ToString()), float.Parse(evt.data.GetField("juiceYield").ToString()), 1);
 
                 try
                 {
