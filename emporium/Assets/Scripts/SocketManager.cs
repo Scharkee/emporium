@@ -33,7 +33,8 @@ public class SocketManager : MonoBehaviour
         socket.On("UPDATE_PLOT_SIZE", UpdatePlotSize);
         socket.On("UPGRADE_TILE", UpgradeTile);
         socket.On("RECEIVE_PRICES", ReceivePrices);
-        socket.On("RECEIVE_TRANSPORT_QUEUE", ReceiveTransportQueue);
+        socket.On("RECEIVE_TRANSPORT_QUEUE", ReceiveTransportQueues);
+        socket.On("RECEIVE_WORKERS", ReceiveWorkers);
 
         //insta calls for starting up
         RetrievePrices();
@@ -162,9 +163,14 @@ public class SocketManager : MonoBehaviour
         DisabledObjectsGameScene.Instance.pricemanager.ResolvePrices(evt);
     }
 
-    public void ReceiveTransportQueue(SocketIOEvent evt)
+    public void ReceiveTransportQueues(SocketIOEvent evt)
     {
         DisabledObjectsGameScene.Instance.TransportOperator.AssignTransportQueues(evt);
+    }
+
+    public void ReceiveWorkers(SocketIOEvent evt)
+    {
+        DisabledObjectsGameScene.Instance.WorkerManager.AssignReceivedWorkers(evt);
     }
 
     public IEnumerator logOffWithDelay(float delay)

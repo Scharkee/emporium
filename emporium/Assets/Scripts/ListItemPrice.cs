@@ -7,6 +7,7 @@ public class ListItemPrice : MonoBehaviour
     public Dictionary<string, float> PriceCache = new Dictionary<string, float>();  // laikomos vieno listItem kainos (juice ir produce)
 
     public Dictionary<string, float> WeightCache = new Dictionary<string, float>();  // laikomos visu listitem bendras svoris;
+    public float CurrentWeightTotal;
 
     private void Start()
     {
@@ -34,6 +35,8 @@ public class ListItemPrice : MonoBehaviour
 
         PriceCache.Add("juice", 0);
         PriceCache.Add("produce", 0);
+
+        CurrentWeightTotal = 0;
     }
 
     public void UpdatePrice(Text text)
@@ -52,6 +55,7 @@ public class ListItemPrice : MonoBehaviour
 
         text.text = total + "/" + Database.Instance.CurrentVehichle.amount + " KG";
 
+        CurrentWeightTotal = total;
         checkForWeightOverflow(total, text);
     }
 

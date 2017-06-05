@@ -71,23 +71,27 @@ public class ProduceSelling : MonoBehaviour
 
     public void SaleClick()
     {
-        if (float.Parse(GameObject.Find("Selling_totalsPanel_total_edit").GetComponent<Text>().text) > Database.Instance.CurrentVehichle.amount) //netilps
+        if (DisabledObjectsGameScene.Instance.SellingPanel.transform.Find("Selling_totals_panel").GetComponent<ListItemPrice>().CurrentWeightTotal > Database.Instance.CurrentVehichle.amount) //netilps
         {
             GameAlerts.Instance.AlertWithMessage("Your current transport cannot support this amount of weight!");
         }
         else
         {
+            Debug.Log("packing0");
             Dictionary<string, string> dic = formSalePackage();
             TransportJob job = new TransportJob();
             job.DEST = "shop";
             job.START_OF_TRANSPORTATION = DisabledObjectsGameScene.Instance.SocketManager.unix;
             job.LENGTH_OF_TRANSPORTATION = int.Parse(Database.Instance.CurrentVehichle.time.ToString());
 
+            Debug.Log("packing1");
             Database.Instance.TransportJobList.Add(job);
             dic["Dest"] = "shop";
             dic["Transport"] = Database.Instance.CurrentVehichle.Name;
             dic["TransportID"] = Database.Instance.CurrentVehichle.ID.ToString();
             dic["IndexInJobList"] = Database.Instance.TransportJobList.IndexOf(job).ToString();
+
+            Debug.Log("packing2");
 
             DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AskForSaleJobAssignment(dic);
             resetSellingPanel();
@@ -116,16 +120,16 @@ public class ProduceSelling : MonoBehaviour
 
         foreach (Transform listItem in DisabledObjectsGameScene.Instance.Selling_Salepanel.transform)
         {
-            if (GameObject.Find("SellListItem_produce_InputField_" + listItem.GetComponent<UniversalBank>().produceName).GetComponent<InputField>().text != "")
+            if (listItem.Find("SellListItem_produce/SellListItem_produce_InputField").gameObject.GetComponent<InputField>().text != "")
             {
                 sale[salesNum + "name"] = listItem.GetComponent<UniversalBank>().produceName;
-                sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField_" + listItem.GetComponent<UniversalBank>().produceName).GetComponent<InputField>().text;
+                sale[salesNum + "amount"] = GameObject.Find("SellListItem_produce_InputField").GetComponent<InputField>().text;
                 salesNum++;
             }
-            if (GameObject.Find("SellListItem_juice_InputField_" + listItem.GetComponent<UniversalBank>().produceName).GetComponent<InputField>().text != "")
+            if (listItem.Find("SellListItem_juice/SellListItem_juice_InputField").gameObject.GetComponent<InputField>().text != "")
             {
                 sale[salesNum + "name"] = listItem.GetComponent<UniversalBank>().produceName + "_sultys";
-                sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField_" + listItem.GetComponent<UniversalBank>().produceName).GetComponent<InputField>().text;
+                sale[salesNum + "amount"] = GameObject.Find("SellListItem_juice_InputField").GetComponent<InputField>().text;
                 salesNum++;
             }
         }

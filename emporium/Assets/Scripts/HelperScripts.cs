@@ -103,6 +103,14 @@ public class HelperScripts : MonoBehaviour
         }
     }
 
+    public void ReassignReceivedWorkers(Worker[] workers)
+    {
+        foreach (Worker worker in workers)
+        {
+            Database.Instance.WorkerList.Add(worker);
+        }
+    }
+
     public Dictionary<string, float> ReassignPrices(Prices[] pric)
     {
         Dictionary<string, float> dic = new Dictionary<string, float>();

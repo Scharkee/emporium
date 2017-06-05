@@ -25,6 +25,9 @@ public class Database : MonoBehaviour
     public TransportJob[] TransportJobs;
     public List<TransportJob> TransportJobList = new List<TransportJob>();
 
+    public Worker[] ReceivedWorkers;
+    public List<Worker> WorkerList = new List<Worker>();
+
     public Building[] buildinginfo;
     public Inventory[] inventory; //one temp invo for JSON conversion
     public Prices[] prices;
@@ -381,4 +384,12 @@ public class TransportJob
     public int START_OF_TRANSPORTATION;
     public int LENGTH_OF_TRANSPORTATION;
     public bool AskedForVerif = false;
+}
+
+[System.Serializable]
+public class Worker
+{
+    public int ID;
+    public int ASSIGNEDTILEID;
+    public int SPEED;
 }

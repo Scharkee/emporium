@@ -41,6 +41,8 @@ public class SellListItem_maxButtonScript : MonoBehaviour
         {
             prodName = transform.parent.parent.parent.gameObject.GetComponent<UniversalBank>().produceName + "_sultys";
         }
+
+        totalWeightCache = DisabledObjectsGameScene.Instance.SellingPanel.transform.Find("Selling_totals_panel").GetComponent<ListItemPrice>();
     }
 
     public void resetValues()
@@ -98,7 +100,15 @@ public class SellListItem_maxButtonScript : MonoBehaviour
 
     public void AdaptListingPrices()
     {
-        float newamount = float.Parse(inp.text);
+        float newamount = 0;
+        try
+        {
+            newamount = float.Parse(inp.text);
+        }
+        catch
+        {
+        }
+
         priceLog.PriceCache[Typename] = newamount * Database.Instance.Prices[prodName];
         priceLog.UpdatePrice(pricetext);
     }

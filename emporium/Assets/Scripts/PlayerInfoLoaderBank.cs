@@ -129,6 +129,7 @@ public class PlayerInfoLoaderBank : MonoBehaviour
         socket.Emit("GET_TILE_INFORMATION", new JSONObject(data));
         socket.Emit("GET_TILE_DATA", new JSONObject(data));
         socket.Emit("GET_TRANSPORT_QUEUES", new JSONObject(data));
+        socket.Emit("GET_WORKERS", new JSONObject(data));
     }
 
     private void ReceiveTileData(SocketIOEvent evt)

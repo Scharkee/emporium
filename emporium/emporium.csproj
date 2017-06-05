@@ -140,6 +140,7 @@
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\UnamePassInputScript.cs" />
     <Compile Include="Assets\Scripts\UniversalBank.cs" />
+    <Compile Include="Assets\Scripts\WorkerManager.cs" />
     <Compile Include="Assets\Scripts\alertPanelScript.cs" />
     <Compile Include="Assets\Scripts\produceAmountAlertScript.cs" />
     <Compile Include="Assets\Scripts\templog.cs" />
