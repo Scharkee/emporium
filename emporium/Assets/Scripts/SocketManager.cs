@@ -177,6 +177,9 @@ public class SocketManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         GlobalControl.Instance.reset();
+        socket.reconnectDelay = 1;
+        socket.Close();
+        socket.Connect();
         SceneManager.LoadScene(0);
     }
 }
