@@ -21,7 +21,7 @@ public class LoginCheck : MonoBehaviour
         socket.On("PASS_CHECK_CALLBACK", OnLoginCheckCallback);
     }
 
-    private void CheckLoginDetails(string username, string password)
+    private void checkLoginDetails(string username, string password)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
         data["Uname"] = username;
@@ -31,15 +31,15 @@ public class LoginCheck : MonoBehaviour
 
     private void OnLoginCheckCallback(SocketIOEvent evt)
     {
-        LoginorCreate(int.Parse(evt.data.GetField("passStatus").ToString()));
+        loginorCreate(int.Parse(evt.data.GetField("passStatus").ToString()));
     }
 
     public void LogInCh(string un, string pass)
     {
-        CheckLoginDetails(un, pass);
+        checkLoginDetails(un, pass);
     }
 
-    private void LoginorCreate(int stat)
+    private void loginorCreate(int stat)
     {
         if (stat == 0)
         {  //pass incorrect
@@ -51,11 +51,13 @@ public class LoginCheck : MonoBehaviour
         }
         else if (stat == 2)
         { //user not in DB
-            NoUser();
+            noUser();
         }
         else if (stat == 3) //reimplement kad net neparodytu main screen jei pareina connection is kito PC;
         {
-            Debug.Log("user already logged in.");
+            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage("You are already logged in from an another location.", DisabledObjectsMain.Instance.NormalTextColor, 3f));
+
+            clearLoginInfo();
             //user already logged in from another PC.
             //TODO: Flash "logged in already" here, and reask for password
         }
@@ -76,10 +78,19 @@ public class LoginCheck : MonoBehaviour
         DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
         DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = "Enter your username:";
 
-        StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "Wrong Password.", DisabledObjectsMain.Instance.RedTextColor));
+        StartCoroutine(notifyText(GameObject.Find("UnamePassText"), "Wrong Password.", DisabledObjectsMain.Instance.RedTextColor));
     }
 
-    private void NoUser()
+    private void clearLoginInfo()
+    {
+        GlobalControl.Instance.Pass = null;
+        GlobalControl.Instance.Uname = null;
+        GlobalControl.Instance.Logincount = 1;
+        DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
+        DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = "Enter your username:";
+    }
+
+    private void noUser()
     {
         Debug.Log("asking to create a user");
         GlobalControl.Instance.Pass = null;
@@ -87,10 +98,10 @@ public class LoginCheck : MonoBehaviour
         GlobalControl.Instance.Logincount = 1;
         DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
 
-        StartCoroutine(NotifyText(GameObject.Find("UnamePassText"), "No user found.", DisabledObjectsMain.Instance.BlueTextColor));
+        StartCoroutine(notifyText(GameObject.Find("UnamePassText"), "No user found.", DisabledObjectsMain.Instance.BlueTextColor));
     }
 
-    private IEnumerator NotifyText(GameObject txtobject, string notification, Color notificationColor)
+    private IEnumerator notifyText(GameObject txtobject, string notification, Color notificationColor)
     {
         string Oldtext = txtobject.GetComponent<Text>().text;
 
