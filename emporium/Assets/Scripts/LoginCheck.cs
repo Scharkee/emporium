@@ -54,12 +54,16 @@ public class LoginCheck : MonoBehaviour
             noUser();
         }
         else if (stat == 3) //reimplement kad net neparodytu main screen jei pareina connection is kito PC;
-        {
+        {//user already logged in from another PC.
             StartCoroutine(DisabledObjectsMain.Instance.ShowMessage("You are already logged in from an another location.", DisabledObjectsMain.Instance.NormalTextColor, 3f));
 
             clearLoginInfo();
-            //user already logged in from another PC.
-            //TODO: Flash "logged in already" here, and reask for password
+        }
+        else if (stat == 4)
+        {//user banned
+            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage("You are banned. Please try again later.", DisabledObjectsMain.Instance.NormalTextColor, 3f));
+
+            clearLoginInfo();
         }
     }
 
