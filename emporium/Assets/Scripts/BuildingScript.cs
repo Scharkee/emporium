@@ -152,6 +152,7 @@ public class BuildingScript : MonoBehaviour
             Database.Instance.CurrentVehichle.count = thistile.COUNT;
             Database.Instance.CurrentVehichle.IDinDB = idInTileDatabase;
             Database.Instance.CurrentVehichle.IDinActiveTiles = idInActiveTiles;
+            Database.Instance.CurrentVehichle.status = "";
 
             DisabledObjectsGameScene.Instance.TransportCurrent.text = IDHelper.Instance.NameToRealName(Database.Instance.CurrentVehichle.Name);
             if (Database.Instance.TransportJobList.Count == 0)

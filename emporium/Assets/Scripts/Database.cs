@@ -90,6 +90,7 @@ public class Database : MonoBehaviour
             CurrentVehichle.IDinDB = 0;
             CurrentVehichle.ID = 0;
             CurrentVehichle.IDinActiveTiles = 0;
+            CurrentVehichle.status = "";
         }
         else
         {
@@ -374,6 +375,7 @@ public class Transport
     public int IDinActiveTiles;
     public float amount;
     public float time;
+    public string status;
 }
 
 [System.Serializable]

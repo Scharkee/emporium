@@ -13,7 +13,9 @@ public class TransportOperator : MonoBehaviour
 
     private void Update()
     {
-        DisabledObjectsGameScene.Instance.TransportStatus.text = "Status: idle";
+        Database.Instance.CurrentVehichle.status = "Status: idle";
+        DisabledObjectsGameScene.Instance.TransportStatus.text = Database.Instance.CurrentVehichle.status;
+
         if (Database.Instance.TransportJobList.Count != 0)
         {
             foreach (TransportJob job in Database.Instance.TransportJobList) //jobs updateris
@@ -34,7 +36,8 @@ public class TransportOperator : MonoBehaviour
                 }
 
                 //TIK VIENAS JOB sitoj implementacijoj gali but!
-                DisabledObjectsGameScene.Instance.TransportStatus.text = "busy | Time left: " + finishedString;
+                Database.Instance.CurrentVehichle.status = "busy | Time left: " + finishedString;
+                DisabledObjectsGameScene.Instance.TransportStatus.text = Database.Instance.CurrentVehichle.status;
             }
         }
     }

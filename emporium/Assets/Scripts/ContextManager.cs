@@ -86,7 +86,7 @@ public class ContextManager : MonoBehaviour
             int time = (buildingscript.thistile.START_OF_GROWTH + buildingscript.thistileInfo.PROG_AMOUNT) - socman.unix;
             TimeSpan ts = TimeSpan.FromSeconds(time);
 
-            if (time <= 0)
+            if (time <= 0) //progresas arba nustatomas laikas arba parasoma, kad finished growth
             {
                 finishedString = GlobalControl.Instance.currentLangDict["done_plant_growth"];
             }
@@ -96,9 +96,11 @@ public class ContextManager : MonoBehaviour
             }
 
             DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = "";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Progress:";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "Expected yield:";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = finishedString;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = buildingscript.thistileInfo.TILEPRODUCERANDOM1 + " - " + buildingscript.thistileInfo.TILEPRODUCERANDOM2 + " KG";
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 1) //pastatas
         {
@@ -122,27 +124,35 @@ public class ContextManager : MonoBehaviour
             }
 
             DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = finishedString;
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Progress:";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "Assigned:";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = finishedString;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME;
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 2) //transportas
         {
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = "Capacity for 1 trip: ";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.TILEPRODUCENAME;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = buildingscript.thistileInfo.TILEPRODUCENAME + " KG";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = Database.Instance.CurrentVehichle.status;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Status:";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "Capacity:";
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 3) //solid storage
         {
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = "Capacity: ";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " KG";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Capacity: ";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = "";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " KG";
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 4) //liquid storage
         {
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stats_Tilename_editable").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Workname_editable").GetComponent<Text>().text = "Capacity: ";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("Stat_Progress_editable").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " L";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Capacity: ";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = "";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " L";
         }
     }
 }
