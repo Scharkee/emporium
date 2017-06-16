@@ -107,7 +107,15 @@ public class HelperScripts : MonoBehaviour
     {
         foreach (Worker worker in workers)
         {
-            Database.Instance.WorkerList.Add(worker);
+            Database.Instance.HiredWorkerList.Add(worker);
+        }
+    }
+
+    public void ReassignReceivedAvailableWorkers(Worker[] workers)
+    {
+        foreach (Worker worker in workers)
+        {
+            Database.Instance.AvailableWorkerList.Add(worker);
         }
     }
 

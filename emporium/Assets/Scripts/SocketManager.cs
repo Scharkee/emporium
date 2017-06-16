@@ -35,6 +35,7 @@ public class SocketManager : MonoBehaviour
         socket.On("RECEIVE_PRICES", ReceivePrices);
         socket.On("RECEIVE_TRANSPORT_QUEUE", ReceiveTransportQueues);
         socket.On("RECEIVE_WORKERS", ReceiveWorkers);
+        socket.On("RECEIVE_AVAILABLE_WORKERS", ReceiveAvailableWorkers);
 
         //insta calls for starting up
         RetrievePrices();
@@ -171,6 +172,11 @@ public class SocketManager : MonoBehaviour
     public void ReceiveWorkers(SocketIOEvent evt)
     {
         DisabledObjectsGameScene.Instance.WorkerManager.AssignReceivedWorkers(evt);
+    }
+
+    public void ReceiveAvailableWorkers(SocketIOEvent evt)
+    {
+        DisabledObjectsGameScene.Instance.WorkerManager.AssignAvailableReceivedWorkers(evt);
     }
 
     public IEnumerator logOffWithDelay(float delay)

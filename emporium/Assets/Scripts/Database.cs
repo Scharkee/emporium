@@ -26,7 +26,9 @@ public class Database : MonoBehaviour
     public List<TransportJob> TransportJobList = new List<TransportJob>();
 
     public Worker[] ReceivedWorkers;
-    public List<Worker> WorkerList = new List<Worker>();
+    public Worker[] ReceivedAvailableWorkers;
+    public List<Worker> HiredWorkerList = new List<Worker>();
+    public List<Worker> AvailableWorkerList = new List<Worker>();
 
     public Building[] buildinginfo;
     public Inventory[] inventory; //one temp invo for JSON conversion

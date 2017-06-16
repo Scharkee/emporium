@@ -21,6 +21,22 @@ public class WorkerManager : MonoBehaviour
 
         Database.Instance.ReceivedWorkers = JsonHelper.FromJson<Worker>(evtStringItems);
         HelperScripts.Instance.ReassignReceivedWorkers(Database.Instance.ReceivedWorkers);
+
+        Debug.Log(Database.Instance.ReceivedWorkers);
+    }
+
+    public void AssignAvailableReceivedWorkers(SocketIOEvent evt)
+    {
+        string evtStringRows = evt.data.ToString();
+
+        StringBuilder builder = new StringBuilder(evtStringRows);///////////////////////////////////////////////////////
+        builder.Replace("rows", "Items");/////////////////////////JSON string paruosiamas konvertavimui i class object array.
+        string evtStringItems = builder.ToString(); //////////////////////////////////////////////////////////////////////
+
+        Database.Instance.ReceivedAvailableWorkers = JsonHelper.FromJson<Worker>(evtStringItems);
+        HelperScripts.Instance.ReassignReceivedAvailableWorkers(Database.Instance.ReceivedAvailableWorkers);
+
+        Debug.Log(Database.Instance.ReceivedAvailableWorkers);
     }
 
     // Update is called once per frame
