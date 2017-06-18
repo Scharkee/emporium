@@ -68,6 +68,7 @@ public class Languages : MonoBehaviour
             english.Add("masina_1", "Car");
             english.Add("pikapas_1", "Pickup Truck");
             english.Add("sunkvezimis_1", "Truck");
+            english.Add("", "None");
 
             //UI
             english.Add("price", "Price");

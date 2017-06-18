@@ -29,6 +29,7 @@ public class TileOperator : MonoBehaviour
 
     private void CheckForGrowthCompletion()
     {
+        Debug.Log("checking growth");
         foreach (GameObject tile in Database.Instance.ActiveTiles)
         {
             try //safety net for transitioning tiles(upgrades in progress and such)

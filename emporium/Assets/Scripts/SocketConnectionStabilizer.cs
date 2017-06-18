@@ -14,12 +14,6 @@ public class SocketConnectionStabilizer : MonoBehaviour
         StartCoroutine(flashConnectingStatus());
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        Debug.Log(DisabledObjectsMain.Instance.socket.IsConnected);
-    }
-
     private IEnumerator retryConnections()
     {
         DisabledObjectsMain.Instance.socket.Connect();

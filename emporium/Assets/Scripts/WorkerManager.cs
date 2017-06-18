@@ -37,10 +37,7 @@ public class WorkerManager : MonoBehaviour
         HelperScripts.Instance.ReassignReceivedAvailableWorkers(Database.Instance.ReceivedAvailableWorkers);
 
         Debug.Log(Database.Instance.ReceivedAvailableWorkers);
-    }
 
-    // Update is called once per frame
-    private void Update()
-    {
+        Debug.Log("ok, got workers");
     }
 }

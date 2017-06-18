@@ -96,6 +96,7 @@ public class Database : MonoBehaviour
         }
         else
         {
+            Debug.Log("Looking for " + CurrentVehichle.Name);
             DisabledObjectsGameScene.Instance.TransportName.text = "Current vehicle: " + GlobalControl.Instance.currentLangDict[CurrentVehichle.Name];
         }
 
