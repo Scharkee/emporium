@@ -27,7 +27,7 @@ public class DisabledObjectsMain : MonoBehaviour
     public GameObject TempLogButton;
     public GameObject FullScreenMessagePanel;
     public MenuMusic Menumusic;
-
+    public GameObject ConnectingText;
     public Color NormalTextColor, RedTextColor, BlueTextColor;
 
     public SocketIOComponent socket;

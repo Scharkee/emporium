@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\SellListItem_maxButtonScript.cs" />
     <Compile Include="Assets\Scripts\SellingButtonScript.cs" />
     <Compile Include="Assets\Scripts\ShopTabSwitcher.cs" />
+    <Compile Include="Assets\Scripts\SocketConnectionStabilizer.cs" />
     <Compile Include="Assets\Scripts\SocketManager.cs" />
     <Compile Include="Assets\Scripts\SoundStorage.cs" />
     <Compile Include="Assets\Scripts\StatContextManager.cs" />

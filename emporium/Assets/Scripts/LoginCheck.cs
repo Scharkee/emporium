@@ -11,7 +11,7 @@ public class LoginCheck : MonoBehaviour
 {
     public string inputusername;
     public string inputpassword;
-
+    private bool gotResponse = false;
     public SocketIOComponent socket;
 
     // Use this for initialization
@@ -41,6 +41,7 @@ public class LoginCheck : MonoBehaviour
 
     private void loginorCreate(int stat)
     {
+        gotResponse = true;
         if (stat == 0)
         {  //pass incorrect
             Reaskforlogininfo();
