@@ -23,6 +23,14 @@ public class TileSellScript : MonoBehaviour
 
     public void TheClick()
     {
+        try
+        {
+            Globals.Instance.canvas.BroadcastMessage("CancelContext");
+        }
+        catch
+        {
+        }
+
         if (DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf) //buymenu panel is currently open
         {
             StartCoroutine(DisabledObjectsGameScene.Instance.BuyButton.GetComponent<BuyButtonScript>().BuyMenuPanelCloser());
@@ -144,6 +152,10 @@ public class TileSellScript : MonoBehaviour
         data["TileName"] = name;
 
         socket.Emit("SELL_TILE", new JSONObject(data));
+    }
+
+    public void CancelContext()
+    {
     }
 
     public AudioClip coinSound()

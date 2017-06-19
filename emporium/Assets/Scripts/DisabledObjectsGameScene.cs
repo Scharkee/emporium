@@ -31,6 +31,8 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public GameObject EconomyButton;
     public GameObject EconomyPanel;
     public GameObject CancelPanel;
+    public GameObject Sellbutton_sounds;
+    public GameObject Sellbutton_options;
     public GameObject TabGrids, TabButtons;
     public SocketManager SocketManager;
 

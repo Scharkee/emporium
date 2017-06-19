@@ -40,4 +40,8 @@ public class WorkerManager : MonoBehaviour
 
         Debug.Log("ok, got workers");
     }
+
+    public void WorkerPanelToggle()
+    {
+    }
 }

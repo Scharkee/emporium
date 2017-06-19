@@ -126,6 +126,7 @@
     <Compile Include="Assets\Scripts\PriceManager.cs" />
     <Compile Include="Assets\Scripts\ProduceSelling.cs" />
     <Compile Include="Assets\Scripts\RegisterScript.cs" />
+    <Compile Include="Assets\Scripts\SellButtonExpander.cs" />
     <Compile Include="Assets\Scripts\SellListItem_maxButtonScript.cs" />
     <Compile Include="Assets\Scripts\SellingButtonScript.cs" />
     <Compile Include="Assets\Scripts\ShopTabSwitcher.cs" />

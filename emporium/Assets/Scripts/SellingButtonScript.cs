@@ -4,6 +4,14 @@ public class SellingButtonScript : MonoBehaviour
 {
     public void expandContract()
     {
+        try
+        {
+            Globals.Instance.canvas.BroadcastMessage("CancelContext");
+        }
+        catch
+        {
+        }
+
         if (DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)
         {
             DisabledObjectsGameScene.Instance.SellingPanel.SetActive(false);
@@ -24,11 +32,6 @@ public class SellingButtonScript : MonoBehaviour
         if (DisabledObjectsGameScene.Instance.EconomyPanel.activeSelf)
         {
             DisabledObjectsGameScene.Instance.EconomyPanel.SetActive(false);
-        }
-        if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled)
-        {
-            DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled = false;
-            DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().ApplyModeTransition(false);
         }
     }
 }
