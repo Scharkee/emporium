@@ -97,8 +97,8 @@ public class ContextManager : MonoBehaviour
 
             DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Progress:";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "Expected yield:";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["tile_progress"];
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["tile_expected_yield"];
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = finishedString;
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = buildingscript.thistileInfo.TILEPRODUCERANDOM1 + " - " + buildingscript.thistileInfo.TILEPRODUCERANDOM2 + " KG";
         }
@@ -125,23 +125,23 @@ public class ContextManager : MonoBehaviour
 
             DisabledObjectsGameScene.Instance.StatsContextPanel.SetActive(true);
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Progress:";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "Assigned:";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["tile_progress"];
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["tile_assigned"];
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = finishedString;
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME;
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = buildingscript.thistile.WORK_NAME; //TODO: localize
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 2) //transportas
         {
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = buildingscript.thistileInfo.TILEPRODUCENAME + " KG";
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = Database.Instance.CurrentVehichle.status;
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Status:";
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "Capacity:";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["tile_status"];
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["tile_capacity"];
         }
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 3) //solid storage
         {
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Capacity: ";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["tile_capacity"];
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "";
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = "";
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " KG";
@@ -149,7 +149,7 @@ public class ContextManager : MonoBehaviour
         else if (buildingscript.thistileInfo.BUILDING_TYPE == 4) //liquid storage
         {
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("t_e").GetComponent<Text>().text = IDHelper.Instance.NameToRealName(buildingscript.thistile.NAME);
-            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = "Capacity: ";
+            DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1name_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["tile_capacity"];
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2name_e").GetComponent<Text>().text = "";
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("2_e").GetComponent<Text>().text = "";
             DisabledObjectsGameScene.Instance.StatsContextPanel.transform.Find("1_e").GetComponent<Text>().text = buildingscript.thistileInfo.PROG_AMOUNT + " L";

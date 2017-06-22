@@ -79,7 +79,7 @@ public class BuildingScript : MonoBehaviour
                 {
                     if ((thistileInfo.TILEPRODUCERANDOM1 + thistileInfo.TILEPRODUCERANDOM2) / 2 > Database.Instance.Storage.TotalProduceStorage - Database.Instance.Storage.TakenProduceStorage)
                     {//nera vietos tile produce range VIDURKIUI, buna perkrauta jeigu RNG isrollintu didesni (highlightint raudonai ant HUD)
-                        notifyOfProduceAmount("Not enough storage space!", Globals.Instance.RedNormalProduceAlertColorr);
+                        notifyOfProduceAmount(GlobalControl.Instance.currentLangDict["not_enough_solid_storage_space"], Globals.Instance.RedNormalProduceAlertColorr);
                     }
                     else
                     {
@@ -157,15 +157,15 @@ public class BuildingScript : MonoBehaviour
             DisabledObjectsGameScene.Instance.TransportCurrent.text = IDHelper.Instance.NameToRealName(Database.Instance.CurrentVehichle.Name);
             if (Database.Instance.TransportJobList.Count == 0)
             {
-                DisabledObjectsGameScene.Instance.TransportStatus.text = "Status: idle";
+                DisabledObjectsGameScene.Instance.TransportStatus.text = GlobalControl.Instance.currentLangDict["status_idle"];
             }
             else
             {
-                DisabledObjectsGameScene.Instance.TransportStatus.text = "Status: busy";
+                DisabledObjectsGameScene.Instance.TransportStatus.text = GlobalControl.Instance.currentLangDict["status_busy"];
             }
-            Debug.Log("ok?");
+
             //   DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = GlobalControl.Instance.currentLangDict[Database.Instance.CurrentVehichle.Name];
-            Debug.Log("ok?");
+            Debug.Log("ok?"); //TODO: what is this? why commented?
         }
         else if (thistileInfo.BUILDING_TYPE == 3) //uzsiregistruojama kaip PRODUCE storage
         {
@@ -183,7 +183,6 @@ public class BuildingScript : MonoBehaviour
                 Database.Instance.ActiveJuiceStorage.Add(this);
             }
         }
-        Debug.Log("asdasd");
         //uzregistruojama, kad tile suvede visa reikiama informacija.
         Interlocked.Increment(ref Database.Instance.TileSelfSignedAssignmentComplete);
     }

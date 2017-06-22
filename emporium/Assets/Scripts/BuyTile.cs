@@ -7,6 +7,8 @@ public class BuyTile : MonoBehaviour
     {
     }
 
+    //TODO: fuckin empty? delete?
+
     private void Update()
     {
     }

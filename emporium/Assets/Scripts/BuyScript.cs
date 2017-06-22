@@ -38,9 +38,9 @@ public class BuyScript : MonoBehaviour
             Debug.Log(Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.ID);
 
             if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT >= 5)
-            {
-                Debug.Log("Cant purchase any more.");
-                GameAlerts.Instance.AlertWithMessage("Tile cannot host any more trees.");
+            { //TODO: pridet building types sitam shazamui + server sided too, gal statines gali ~10 stacks turet
+                Debug.Log("Cant purchase any more; tile full");
+                GameAlerts.Instance.AlertWithMessage(GlobalControl.Instance.currentLangDict["tile_full"]);
             }
             else if (Database.Instance.ActiveTiles[tileExists].GetComponent<BuildingScript>().thistile.COUNT != 0)
             {

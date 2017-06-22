@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AssignTiles : MonoBehaviour
 {
-    private UIManager uiManager;
     private SocketManager socman;
     public AudioClip shovel1, shovel2;
     private AudioSource sound;
@@ -16,8 +15,6 @@ public class AssignTiles : MonoBehaviour
     private void Start()
     {
         sound = gameObject.GetComponent<AudioSource>();
-
-        uiManager = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<UIManager>();
 
         socman = DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<SocketManager>();
     }

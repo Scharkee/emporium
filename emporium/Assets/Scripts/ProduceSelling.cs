@@ -73,7 +73,7 @@ public class ProduceSelling : MonoBehaviour
     {
         if (DisabledObjectsGameScene.Instance.SellingPanel.transform.Find("Selling_totals_panel").GetComponent<ListItemPrice>().CurrentWeightTotal > Database.Instance.CurrentVehichle.amount) //netilps
         {
-            GameAlerts.Instance.AlertWithMessage("Your current transport cannot support this amount of weight!");
+            GameAlerts.Instance.AlertWithMessage(GlobalControl.Instance.currentLangDict["transport_cannot_support_weight"]);
         }
         else
         {

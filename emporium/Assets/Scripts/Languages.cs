@@ -14,7 +14,7 @@ public class Languages : MonoBehaviour
 
     public static void initDicts()
     {
-        if (!initiated)
+        if (!initiated) //TODO: make sure kad initiated Main scenoje, kad veiktu locals
         {
             initiated = true;
             /////////
@@ -78,6 +78,35 @@ public class Languages : MonoBehaviour
             english.Add("efic", "Efficiency");
             english.Add("job_time", "Job time");
             english.Add("capacity", "Capacity");
+            english.Add("password_passable", "Passable");
+            english.Add("password_weak", "Strong");
+            english.Add("password_strong", "Too Weak");
+            english.Add("banned_message", "You are banned. Please try again later.");
+            english.Add("already_logged_in_message", "You are already logged in from an another location.");
+            english.Add("enter_username", "Enter your username:");
+            english.Add("enter_password", "Enter your password:");
+            english.Add("wrong_password", "Wrong Password.");
+            english.Add("bug_report_success", "Thank You! Your bug report has been submitted.");
+            english.Add("not_enough_solid_storage_space", "Not enough storage space!");
+            english.Add("status_busy", "Status: busy");
+            english.Add("status_idle", "Status: idle");
+            english.Add("tile_full", "Tile cannot host any more trees.");
+            english.Add("tile_progress", "Progress: ");
+            english.Add("tile_assigned", "Assigned: ");
+            english.Add("tile_capacity", "Capacity: ");
+            english.Add("tile_status", "Status: ");
+            english.Add("tile_expected_yield", "Expected yield:");
+            english.Add("vehicle_current", "Current vehicle: ");
+            english.Add("password_reset_email_sent", "Password reset email sent!");
+            english.Add("email_too_short", "Too Short!");
+            english.Add("transport_cannot_support_weight", "Your current transport cannot support this amount of weight!");
+            english.Add("plotsize_upgraded", "You have upgraded your plot size! Please log in again.");
+
+            english.Add("desync_detected", "Desynchronization detected. Logging off...");
+            english.Add("not_enough_money", "Not enough money!");
+            english.Add("sssssss", "ssssssss");
+
+            english.Add("sssssss", "ssssssss");
 
             //PRODUCE
             english.Add("kriauses", "Pears");

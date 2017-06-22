@@ -8,4 +8,9 @@ public class BuyMenuPanelListing : MonoBehaviour
     {
         audio.Play();
     }
+
+    private void Start()
+    {
+        //audio = DisabledObjectsGameScene.Instance.ListingAudio
+    }
 }

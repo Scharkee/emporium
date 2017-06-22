@@ -81,7 +81,7 @@ public class BugReporter : MonoBehaviour
         Debug.Log(str);
         DisabledObjectsMain.Instance.ReportInputField.GetComponent<InputField>().text = "";
 
-        StartCoroutine(DisabledObjectsMain.Instance.ShowMessage("Thank You! Your bug report has been submitted.", DisabledObjectsMain.Instance.NormalTextColor, 2f));
+        StartCoroutine(DisabledObjectsMain.Instance.ShowMessage(GlobalControl.Instance.currentLangDict["bug_report_success"], DisabledObjectsMain.Instance.NormalTextColor, 2f));
         CancelReporting();
     }
 
