@@ -47,7 +47,7 @@ public class IdentifierScript : MonoBehaviour
             {
                 GlobalControl.Instance.Uname = val;
                 GlobalControl.Instance.Logincount++;
-                DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["enter_password"];
+                DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = Languages.Instance.currentLanguage["enter_password"];
             }
             inpf.ActivateInputField();
             inpf.Select();

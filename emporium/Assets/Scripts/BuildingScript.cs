@@ -79,7 +79,7 @@ public class BuildingScript : MonoBehaviour
                 {
                     if ((thistileInfo.TILEPRODUCERANDOM1 + thistileInfo.TILEPRODUCERANDOM2) / 2 > Database.Instance.Storage.TotalProduceStorage - Database.Instance.Storage.TakenProduceStorage)
                     {//nera vietos tile produce range VIDURKIUI, buna perkrauta jeigu RNG isrollintu didesni (highlightint raudonai ant HUD)
-                        notifyOfProduceAmount(GlobalControl.Instance.currentLangDict["not_enough_solid_storage_space"], Globals.Instance.RedNormalProduceAlertColorr);
+                        notifyOfProduceAmount(Languages.Instance.currentLanguage["not_enough_solid_storage_space"], Globals.Instance.RedNormalProduceAlertColorr);
                     }
                     else
                     {
@@ -157,14 +157,14 @@ public class BuildingScript : MonoBehaviour
             DisabledObjectsGameScene.Instance.TransportCurrent.text = IDHelper.Instance.NameToRealName(Database.Instance.CurrentVehichle.Name);
             if (Database.Instance.TransportJobList.Count == 0)
             {
-                DisabledObjectsGameScene.Instance.TransportStatus.text = GlobalControl.Instance.currentLangDict["status_idle"];
+                DisabledObjectsGameScene.Instance.TransportStatus.text = Languages.Instance.currentLanguage["status_idle"];
             }
             else
             {
-                DisabledObjectsGameScene.Instance.TransportStatus.text = GlobalControl.Instance.currentLangDict["status_busy"];
+                DisabledObjectsGameScene.Instance.TransportStatus.text = Languages.Instance.currentLanguage["status_busy"];
             }
 
-            //   DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = GlobalControl.Instance.currentLangDict[Database.Instance.CurrentVehichle.Name];
+            //   DisabledObjectsGameScene.Instance.CurrentVehicle.currentVehichle.text = Languages.Instance.currentLanguage[Database.Instance.CurrentVehichle.Name];
             Debug.Log("ok?"); //TODO: what is this? why commented?
         }
         else if (thistileInfo.BUILDING_TYPE == 3) //uzsiregistruojama kaip PRODUCE storage

@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour
             {
                 currentInventoryListItem = Instantiate(inventoryListItemPrefab, DisabledObjectsGameScene.Instance.Inventory_Juice_Panel.transform) as GameObject;
                 currentInventoryListItem.name = inventoryItem.Key;
-                currentInventoryListItem.GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[inventoryItem.Key];
+                currentInventoryListItem.GetComponent<Text>().text = Languages.Instance.currentLanguage[inventoryItem.Key];
                 currentInventoryListItem.transform.Find("ListItem_Editable").GetComponent<Text>().text = inventoryItem.Value.ToString();
                 currentInventoryListItem.transform.Find("ListItem_Editable").name = inventoryItem.Key + "_editable";
             }
@@ -28,7 +28,7 @@ public class InventoryManager : MonoBehaviour
             {
                 currentInventoryListItem = Instantiate(inventoryListItemPrefab, DisabledObjectsGameScene.Instance.Inventory_Produce_Panel.transform) as GameObject;
                 currentInventoryListItem.name = inventoryItem.Key;
-                currentInventoryListItem.GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[inventoryItem.Key];
+                currentInventoryListItem.GetComponent<Text>().text = Languages.Instance.currentLanguage[inventoryItem.Key];
                 currentInventoryListItem.transform.Find("ListItem_Editable").GetComponent<Text>().text = inventoryItem.Value.ToString();
                 currentInventoryListItem.transform.Find("ListItem_Editable").name = inventoryItem.Key + "_editable";
             }

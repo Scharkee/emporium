@@ -41,13 +41,13 @@ public class ProduceSelling : MonoBehaviour
                 //SPAWNING ENTRY FOR SELLING PANEL
                 currentListItem = Instantiate(salePanelItemPrefab, DisabledObjectsGameScene.Instance.Selling_Salepanel.transform) as GameObject;
                 currentListItem.GetComponent<UniversalBank>().produceName = item.Key;
-                currentListItem.transform.Find("SellListItem_name").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[item.Key];
+                currentListItem.transform.Find("SellListItem_name").GetComponent<Text>().text = Languages.Instance.currentLanguage[item.Key];
 
                 //SPAWNING ENTRY FOR ECONOMY PANEL
                 currentListItem = Instantiate(ecoPanelItemPrefab, DisabledObjectsGameScene.Instance.EconomyPanel_panel.transform) as GameObject;
                 currentListItem.GetComponent<EconomyPanelListItem>().bankProduce.produceName = item.Key;
                 currentListItem.GetComponent<EconomyPanelListItem>().bankJuice.produceName = item.Key + "_sultys";
-                currentListItem.transform.Find("EconomyPanelListItem_name").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[item.Key];
+                currentListItem.transform.Find("EconomyPanelListItem_name").GetComponent<Text>().text = Languages.Instance.currentLanguage[item.Key];
             }
         }
     }
@@ -73,7 +73,7 @@ public class ProduceSelling : MonoBehaviour
     {
         if (DisabledObjectsGameScene.Instance.SellingPanel.transform.Find("Selling_totals_panel").GetComponent<ListItemPrice>().CurrentWeightTotal > Database.Instance.CurrentVehichle.amount) //netilps
         {
-            GameAlerts.Instance.AlertWithMessage(GlobalControl.Instance.currentLangDict["transport_cannot_support_weight"]);
+            GameAlerts.Instance.AlertWithMessage(Languages.Instance.currentLanguage["transport_cannot_support_weight"]);
         }
         else
         {

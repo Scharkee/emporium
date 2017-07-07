@@ -33,13 +33,13 @@ public class BuyMenuInfoLoader : MonoBehaviour
 
                 //cia asigninam tile name
 
-                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[building.NAME];
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = Languages.Instance.currentLanguage[building.NAME];
 
                 //cia asigninama informacija apie tile
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = "";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE + "$";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["growth_time"] + " : " + string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_4/B1_block1_item_4_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["yield"] + " : " + building.TILEPRODUCERANDOM1 + "-" + building.TILEPRODUCERANDOM2 + " KG";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["price"] + " : " + building.PRICE + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["growth_time"] + " : " + string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_4/B1_block1_item_4_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["yield"] + " : " + building.TILEPRODUCERANDOM1 + "-" + building.TILEPRODUCERANDOM2 + " KG";
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
                 //paspaudimo delegatas
@@ -53,13 +53,13 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
 
                 //cia asigninam tile name
-                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[building.NAME];
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = Languages.Instance.currentLanguage[building.NAME];
 
                 //cia asigninama informacija apie tile
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = "";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE.ToString() + "$";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["speed"] + " : " + "1 KG/s.";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_4/B1_block1_item_4_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["efic"] + " : " + building.EFIC * 100 + "%";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["price"] + " : " + building.PRICE.ToString() + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["speed"] + " : " + "1 KG/s.";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_4/B1_block1_item_4_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["efic"] + " : " + building.EFIC * 100 + "%";
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
                 //paspaudimo delegatas
@@ -71,13 +71,13 @@ public class BuyMenuInfoLoader : MonoBehaviour
 
                 currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
                 //cia asigninam tile name
-                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[building.NAME];
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = Languages.Instance.currentLanguage[building.NAME];
 
                 //cia asigninama informacija apie tile
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = "";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE.ToString() + "$";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["job_time"] + " : " + building.PROG_AMOUNT + " s/job.";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_4/B1_block1_item_4_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["capacity"] + " : " + building.TILEPRODUCENAME + " KG";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["price"] + " : " + building.PRICE.ToString() + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["job_time"] + " : " + building.PROG_AMOUNT + " s/job.";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_4/B1_block1_item_4_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["capacity"] + " : " + building.TILEPRODUCENAME + " KG";
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
                 //paspaudimo delegatas
@@ -90,12 +90,12 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
 
                 //cia asigninam tile name
-                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[building.NAME];
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = Languages.Instance.currentLanguage[building.NAME];
 
                 //cia asigninama informacija apie tile
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = "";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE.ToString() + "$";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["capacity"] + " : " + building.PROG_AMOUNT + " KG";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["price"] + " : " + building.PRICE.ToString() + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["capacity"] + " : " + building.PROG_AMOUNT + " KG";
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_4/B1_block1_item_4_e").GetComponent<Text>().text = "";
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
@@ -109,12 +109,12 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 currentGridButton.GetComponent<UniversalBank>().PurchaseName = building.NAME;
 
                 //cia asigninam tile name
-                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict[building.NAME];
+                currentGridButton.transform.Find("B1_name_block/B1_name_block_e").GetComponent<Text>().text = Languages.Instance.currentLanguage[building.NAME];
 
                 //cia asigninama informacija apie tile
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_1/B1_block1_item_1_e").GetComponent<Text>().text = "";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["price"] + " : " + building.PRICE.ToString() + "$";
-                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["capacity"] + " : " + building.PROG_AMOUNT + " L";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_2/B1_block1_item_2_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["price"] + " : " + building.PRICE.ToString() + "$";
+                currentGridButton.transform.Find("B1_info_block/B1_info_block_item_3/B1_block1_item_3_e").GetComponent<Text>().text = Languages.Instance.currentLanguage["capacity"] + " : " + building.PROG_AMOUNT + " L";
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_4/B1_block1_item_4_e").GetComponent<Text>().text = "";
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 

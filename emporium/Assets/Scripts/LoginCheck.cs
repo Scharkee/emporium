@@ -56,13 +56,13 @@ public class LoginCheck : MonoBehaviour
         }
         else if (stat == 3) //reimplement kad net neparodytu main screen jei pareina connection is kito PC;
         {//user already logged in from another PC.
-            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage(GlobalControl.Instance.currentLangDict["already_logged_in_message"], DisabledObjectsMain.Instance.NormalTextColor, 3f));
+            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage(Languages.Instance.currentLanguage["already_logged_in_message"], DisabledObjectsMain.Instance.NormalTextColor, 3f));
 
             clearLoginInfo();
         }
         else if (stat == 4)
         {//user banned
-            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage(GlobalControl.Instance.currentLangDict["banned_message"], DisabledObjectsMain.Instance.NormalTextColor, 3f));
+            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage(Languages.Instance.currentLanguage["banned_message"], DisabledObjectsMain.Instance.NormalTextColor, 3f));
 
             clearLoginInfo();
         }
@@ -81,9 +81,9 @@ public class LoginCheck : MonoBehaviour
         GlobalControl.Instance.Uname = null;
         GlobalControl.Instance.Logincount = 1;
         DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
-        DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["enter_username"];
+        DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = Languages.Instance.currentLanguage["enter_username"];
 
-        StartCoroutine(notifyText(GameObject.Find("UnamePassText"), GlobalControl.Instance.currentLangDict["wrong_password"], DisabledObjectsMain.Instance.RedTextColor));
+        StartCoroutine(notifyText(GameObject.Find("UnamePassText"), Languages.Instance.currentLanguage["wrong_password"], DisabledObjectsMain.Instance.RedTextColor));
     }
 
     private void clearLoginInfo()
@@ -92,7 +92,7 @@ public class LoginCheck : MonoBehaviour
         GlobalControl.Instance.Uname = null;
         GlobalControl.Instance.Logincount = 1;
         DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>().text = "";
-        DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = GlobalControl.Instance.currentLangDict["enter_username"];
+        DisabledObjectsMain.Instance.UnamePassText.GetComponent<Text>().text = Languages.Instance.currentLanguage["enter_username"];
     }
 
     private void noUser()

@@ -92,7 +92,7 @@ public class SocketManager : MonoBehaviour
     {
         ContextManager.Instance.CancelContext();
 
-        GameAlerts.Instance.AlertWithMessage(GlobalControl.Instance.currentLangDict["plotsize_upgraded"]);
+        GameAlerts.Instance.AlertWithMessage(Languages.Instance.currentLanguage["plotsize_upgraded"]);
         StartCoroutine(logOffWithDelay(2f));
     }
 
@@ -104,7 +104,7 @@ public class SocketManager : MonoBehaviour
 
     public void DiscrepancyAction() //check ar veikia
     {
-        GameAlerts.Instance.AlertWithMessage(GlobalControl.Instance.currentLangDict["desync_detected"]);
+        GameAlerts.Instance.AlertWithMessage(Languages.Instance.currentLanguage["desync_detected"]);
         StartCoroutine(logOffWithDelay(1f));
 
         ContextManager.Instance.CancelContext();
@@ -135,7 +135,7 @@ public class SocketManager : MonoBehaviour
     {
         ContextManager.Instance.CancelContext();
 
-        GameAlerts.Instance.AlertWithMessage(GlobalControl.Instance.currentLangDict["not_enough_money"]); //TODO: finsih and test this.
+        GameAlerts.Instance.AlertWithMessage(Languages.Instance.currentLanguage["not_enough_money"]); //TODO: finsih and test this.
     }
 
     private void AddFunds(SocketIOEvent evt)

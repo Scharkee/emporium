@@ -3,21 +3,28 @@ using UnityEngine;
 
 public class Languages : MonoBehaviour
 {
-    public static Dictionary<string, string> lithuanian = new Dictionary<string, string>();
-    public static Dictionary<string, string> english = new Dictionary<string, string>();
-    public static bool initiated = false;
+    public Dictionary<string, string> lithuanian = new Dictionary<string, string>();
+    public Dictionary<string, string> english = new Dictionary<string, string>();
+    public Dictionary<string, string> currentLanguage = new Dictionary<string, string>();
+    public bool initiated = false;
+    public static Languages Instance;
 
     // Use this for initialization
     private void Start()
     {
     }
 
+    private void OnEnable()
+    {
+    }
+
     private void Awake()
     {
+        Instance = this;
         initDicts();
     }
 
-    public static void initDicts()
+    public void initDicts()
     {
         if (!initiated) //TODO: make sure kad initiated Main scenoje, kad veiktu locals
         {
@@ -111,8 +118,6 @@ public class Languages : MonoBehaviour
             english.Add("not_enough_money", "Not enough money!");
             english.Add("sssssss", "ssssssss");
 
-            english.Add("sssssss", "ssssssss");
-
             //PRODUCE
             english.Add("kriauses", "Pears");
             english.Add("obuoliai", "Apples");
@@ -136,6 +141,8 @@ public class Languages : MonoBehaviour
             english.Add("bananai_sultys", "Banana Juice");
             english.Add("arbuzai_sultys", "Watermelon Juice");
             english.Add("vysnios_sultys", "Cherry Juice");
+
+            currentLanguage = english;
         }
     }
 }

@@ -9,7 +9,7 @@ public class GlobalControl : MonoBehaviour
     public string Pass;
     public int Logincount;
     public int Userlanguage;
-    public Dictionary<string, string> currentLangDict;
+    public Dictionary<string, string> currentLangDict = new Dictionary<string, string>();
     public static GlobalControl Instance;
     public bool ConnectedOnceNoDupeStatRequests = false;
     private bool firstLaunch = true;
@@ -18,23 +18,10 @@ public class GlobalControl : MonoBehaviour
     {
         Userlanguage = 0;
         Logincount = 1;
-
-        Languages.initDicts();
-
-        currentLangDict = Languages.english;
     }
 
     private void Awake()
     {
-        try
-        {
-            setLanguage(0);
-        }
-        catch
-        {
-            Debug.Log("Couldnt set lang");
-        }
-
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -53,33 +40,31 @@ public class GlobalControl : MonoBehaviour
 
     public void setLanguage(int lang)
     {
-        if (Userlanguage == lang)
+        Userlanguage = lang;
+        if (!Languages.Instance.initiated)
         {
+            Languages.Instance.initDicts();
         }
-        else
+
+        switch (Userlanguage)
         {
-            Userlanguage = lang;
+            case 0:
+                currentLangDict = Languages.Instance.english;
+                break;
 
-            switch (Userlanguage)
-            {
-                case 0:
-                    currentLangDict = Languages.english;
-                    break;
+            case 1:
+                currentLangDict = Languages.Instance.lithuanian;
+                break;
 
-                case 1:
-                    currentLangDict = Languages.lithuanian;
-                    break;
-
-                default:
-                    Debug.Log("error in dict selection");
-                    break;
-            }
-
-            if (SceneManager.GetActiveScene().name == "Main") // pakeista login screene (tik ten ir galima keisti is esmes)
-            {
-                GameObject.Find("LoginButtonText").GetComponent<Text>().text = currentLangDict["login"];
-                GameObject.Find("tempLoginButtonText").GetComponent<Text>().text = currentLangDict["templog"];
-            }
+            default:
+                Debug.Log("error in dict selection");
+                break;
         }
+
+        //if (SceneManager.GetActiveScene().name == "Main") // pakeista login screene (tik ten ir galima keisti is esmes)
+        //{
+        //    GameObject.Find("LoginButtonText").GetComponent<Text>().text = currentLangDict["login"];
+        //    GameObject.Find("tempLoginButtonText").GetComponent<Text>().text = currentLangDict["templog"];
+        //}
     }
 }

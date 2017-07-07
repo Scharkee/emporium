@@ -65,14 +65,14 @@ public class ForgotPassword : MonoBehaviour
         else if (emailInput.text.Length < 6) // email too short
         {
             RequiredAlertTextEM.gameObject.SetActive(true);
-            RequiredAlertTextEM.text = GlobalControl.Instance.currentLangDict["email_too_short"];
+            RequiredAlertTextEM.text = Languages.Instance.currentLanguage["email_too_short"];
         }
         else
         {
             AskForPasswordReset(emailInput.text);
 
             Debug.Log("doing the message");
-            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage(GlobalControl.Instance.currentLangDict["password_reset_email_sent"], DisabledObjectsMain.Instance.NormalTextColor, 2f));
+            StartCoroutine(DisabledObjectsMain.Instance.ShowMessage(Languages.Instance.currentLanguage["password_reset_email_sent"], DisabledObjectsMain.Instance.NormalTextColor, 2f));
 
             CancelForgotPassword();
         }
