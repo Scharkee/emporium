@@ -12,6 +12,11 @@ public class Languages : MonoBehaviour
     {
     }
 
+    private void Awake()
+    {
+        initDicts();
+    }
+
     public static void initDicts()
     {
         if (!initiated) //TODO: make sure kad initiated Main scenoje, kad veiktu locals

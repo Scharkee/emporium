@@ -26,6 +26,15 @@ public class GlobalControl : MonoBehaviour
 
     private void Awake()
     {
+        try
+        {
+            setLanguage(0);
+        }
+        catch
+        {
+            Debug.Log("Couldnt set lang");
+        }
+
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);

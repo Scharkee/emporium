@@ -97,7 +97,8 @@ public class Database : MonoBehaviour
         else
         {
             Debug.Log("Looking for " + CurrentVehichle.Name);
-            DisabledObjectsGameScene.Instance.TransportName.text = GlobalControl.Instance.currentLangDict["vehicle_current"] + GlobalControl.Instance.currentLangDict[CurrentVehichle.Name];
+            //TODO: doesnt work for some reason, might be connected to dicts in general
+            //   DisabledObjectsGameScene.Instance.TransportName.text = GlobalControl.Instance.currentLangDict["vehicle_current"] + GlobalControl.Instance.currentLangDict[CurrentVehichle.Name];
         }
 
         DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<TileOperator>().StartGrowthCompletrionCheckRepeat();
