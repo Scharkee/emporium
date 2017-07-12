@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class BuyMode : MonoBehaviour
 {
     private string buildingName;
+    private int buildingType;
     private string TileName;
     private bool darken;
     private bool disableQueued;
@@ -24,10 +25,6 @@ public class BuyMode : MonoBehaviour
     private void OnEnable()
     {
         disableQueued = false;
-    }
-
-    private void Awake()
-    {
     }
 
     private void Update()
@@ -72,6 +69,8 @@ public class BuyMode : MonoBehaviour
 
                     if (Input.GetMouseButtonDown(0))
                     {
+                        //normal buy mode
+                        Debug.Log("Normal-Buy");
                         EnableGroundCol(true);
                         float X = hit.transform.localPosition.x;
                         float Z = hit.transform.localPosition.z;
@@ -91,14 +90,41 @@ public class BuyMode : MonoBehaviour
                         DisabledObjectsGameScene.Instance.BuyButton.GetComponent<Image>().color = Globals.Instance.buttonColor1;
                         Globals.Instance.cameraBlur.blurSize = 0;
                     }
+                    else if (Input.GetKeyDown(KeyCode.Q))
+                    {
+                        Debug.Log("Quick-Buy");
+
+                        hit.transform.gameObject.SetActive(false); //TODO: remove this, work out adaptSinglePlotselector();.
+                        float Xmult = hit.transform.localPosition.x;
+                        float Zmult = hit.transform.localPosition.z;
+                        adaptSinglePlotselector(buildingName, buildingType, hit.transform);
+
+                        GameObject.Find("BuyScript").GetComponent<BuyScript>().ChoosePlot(buildingName, Xmult, Zmult);
+                    }
                 }
             }
         }
     }
 
-    public void receiveName(string name)
+    private void adaptSinglePlotselector(string BuildingName, int BuildingType, Transform Plotselector) //TODO: prideti tileCount kad kai maxed out isjungtu plotsel
+    {
+        if (Plotselector.GetComponent<Renderer>().material == Globals.Instance.plotselector_standard) //first buy, set to upgradeable IF building is upgradeable
+        {
+            if (BuildingType == 0 || BuildingType == 3 || BuildingType == 4) //upgradeable
+            {
+                Plotselector.GetComponent<Renderer>().material = Globals.Instance.plotselector_upgradeable;
+            }
+            else //non-upgradeable
+            {
+                Plotselector.GetComponent<Renderer>().material = Globals.Instance.plotselector_standard;
+            }
+        }
+    }
+
+    public void receiveBuilding(string name, int buildingtype)
     {
         buildingName = name;
+        buildingType = buildingtype;
 
         buybuttonscript.panelEnabled = false;
 

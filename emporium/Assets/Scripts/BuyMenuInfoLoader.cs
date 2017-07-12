@@ -43,7 +43,7 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
                 //paspaudimo delegatas
-                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME, building.BUILDING_TYPE); });
             }
             else if (building.BUILDING_TYPE == 1) //presas
             {
@@ -63,7 +63,7 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
                 //paspaudimo delegatas
-                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME, building.BUILDING_TYPE); });
             }
             else if (building.BUILDING_TYPE == 2) //transporto priemone
             {
@@ -81,7 +81,7 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
                 //paspaudimo delegatas
-                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME, building.BUILDING_TYPE); });
             }
             else if (building.BUILDING_TYPE == 3) //solid storage
             {
@@ -100,7 +100,7 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
                 //paspaudimo delegatas
-                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME, building.BUILDING_TYPE); });
             }
             else if (building.BUILDING_TYPE == 4)//liquid storage
             {
@@ -119,7 +119,7 @@ public class BuyMenuInfoLoader : MonoBehaviour
                 currentGridButton.transform.Find("B1_info_block/B1_info_block_item_5/B1_block1_item_5_e").GetComponent<Text>().text = "";
 
                 //paspaudimo delegatas
-                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME); });
+                currentGridButton.GetComponent<Button>().onClick.AddListener(delegate () { currentGridButton.GetComponent<UniversalBank>().BuyWithTileName(building.NAME, building.BUILDING_TYPE); });
             }
         }
 

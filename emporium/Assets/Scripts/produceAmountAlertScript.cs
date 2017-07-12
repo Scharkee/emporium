@@ -2,7 +2,7 @@
 
 public class produceAmountAlertScript : MonoBehaviour
 {
-    private float timeAlive = 1f;
+    private float timeAlive = 2f;
     private Color color1;
 
     private Quaternion _lookRotation;
