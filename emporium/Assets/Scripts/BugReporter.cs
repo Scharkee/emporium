@@ -15,6 +15,7 @@ public class BugReporter : MonoBehaviour
 
     public void TheClick()
     {
+        ClickEngine.Instance.Click();
         if (!BugReporterOpen)
         {
             BugReporterOpen = true;
@@ -76,6 +77,7 @@ public class BugReporter : MonoBehaviour
 
     public void SubmitReport()
     {
+        ClickEngine.Instance.Click();
         string str = DisabledObjectsMain.Instance.ReportInputField.GetComponent<InputField>().text;
         SendReport(str);
         Debug.Log(str);

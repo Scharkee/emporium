@@ -16,6 +16,7 @@ public class RegisterScript : MonoBehaviour
 
     public void TheClick()
     {
+        ClickEngine.Instance.Click();
         if (!RegisterPanelOpen)
         {
             RegisterPanelOpen = true;
@@ -84,6 +85,7 @@ public class RegisterScript : MonoBehaviour
 
     public void SubmitRegisterForm()
     {
+        ClickEngine.Instance.Click();
         if (usernameInput.text.Length == 0) // no username
         {
             RequiredAlertTextUN.gameObject.SetActive(true);

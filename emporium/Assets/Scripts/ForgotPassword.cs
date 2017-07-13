@@ -11,6 +11,7 @@ public class ForgotPassword : MonoBehaviour
 
     public void TheClick()
     {
+        ClickEngine.Instance.Click();
         if (!ForgotPasswordPanelOpen)
         {
             ForgotPasswordPanelOpen = true;
@@ -58,6 +59,7 @@ public class ForgotPassword : MonoBehaviour
 
     public void SubmitPasswordReset()
     {
+        ClickEngine.Instance.Click();
         if (emailInput.text.Length == 0) // no email
         {
             RequiredAlertTextEM.gameObject.SetActive(true);

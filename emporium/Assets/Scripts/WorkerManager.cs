@@ -43,5 +43,6 @@ public class WorkerManager : MonoBehaviour
 
     public void WorkerPanelToggle()
     {
+        ClickEngine.Instance.Click();
     }
 }

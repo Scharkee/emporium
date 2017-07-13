@@ -39,6 +39,7 @@ public class IdentifierScript : MonoBehaviour
 
     public void setPlayerInfo(string val)
     {
+        ClickEngine.Instance.Click();
         InputField inpf = DisabledObjectsMain.Instance.UnamePassInputField.GetComponent<InputField>();
 
         if (GlobalControl.Instance.Logincount == 1)

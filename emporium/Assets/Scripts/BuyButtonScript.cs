@@ -19,6 +19,7 @@ public class BuyButtonScript : MonoBehaviour
 
     public void TheClick()
     {
+        ClickEngine.Instance.Click();
         if (DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf) //buymenu panel is currently open
         {
             StartCoroutine(DisabledObjectsGameScene.Instance.BuyButton.GetComponent<BuyButtonScript>().BuyMenuPanelCloser());

@@ -8,6 +8,8 @@ public class InvExpander : MonoBehaviour
 
     public void expandContract()
     {
+        ClickEngine.Instance.Click();
+
         if (DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.activeSelf)
         {
             DisabledObjectsGameScene.Instance.Inventory_Fruit_panel.SetActive(false);

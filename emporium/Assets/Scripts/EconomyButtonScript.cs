@@ -4,6 +4,8 @@ public class EconomyButtonScript : MonoBehaviour
 {
     public void TheClick()
     {
+        ClickEngine.Instance.Click();
+
         Globals.Instance.UIBloomActive(!DisabledObjectsGameScene.Instance.EconomyPanel.activeSelf);
         DisabledObjectsGameScene.Instance.EconomyPanel.SetActive(!DisabledObjectsGameScene.Instance.EconomyPanel.activeSelf);
 

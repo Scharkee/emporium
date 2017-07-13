@@ -14,6 +14,7 @@ public class MainMenuMute : MonoBehaviour
 
     public void TheClick()
     {
+        ClickEngine.Instance.Click();
         if (muted)
         {
             muted = false;

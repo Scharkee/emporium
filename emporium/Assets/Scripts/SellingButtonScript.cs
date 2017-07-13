@@ -4,6 +4,7 @@ public class SellingButtonScript : MonoBehaviour
 {
     public void expandContract()
     {
+        ClickEngine.Instance.Click();
         try
         {
             Globals.Instance.canvas.BroadcastMessage("CancelContext");

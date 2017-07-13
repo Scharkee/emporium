@@ -8,6 +8,7 @@ public class SellButtonExpander : MonoBehaviour
 
     public void ExpandOrContractOptions()
     {
+        ClickEngine.Instance.Click();
         if (expanded) //uzdarom
         {
             expanded = false;

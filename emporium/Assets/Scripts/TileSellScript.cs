@@ -23,6 +23,7 @@ public class TileSellScript : MonoBehaviour
 
     public void TheClick()
     {
+        ClickEngine.Instance.Click();
         try
         {
             Globals.Instance.canvas.BroadcastMessage("CancelContext");
