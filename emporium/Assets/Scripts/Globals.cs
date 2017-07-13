@@ -63,4 +63,18 @@ public class Globals : MonoBehaviour
         buttonColor1 = new Color(26f / 255, 89f / 255, 112f / 255);
         buttonActiveColor1 = new Color(17f / 255, 158f / 255, 210f / 255);
     }
+
+    public void UIBloomActive(bool active)
+    {
+        if (active == true)
+        {
+            Globals.Instance.cameraBlur.enabled = true;
+            cameraBlur.blurSize = 2.5f;
+        }
+        else
+        {
+            Globals.Instance.cameraBlur.enabled = false;
+            cameraBlur.blurSize = 0f;
+        }
+    }
 }

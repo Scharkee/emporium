@@ -17,6 +17,7 @@ public class ProduceSelling : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        Debug.Log("SELLING PANEL IS UP");
         salePanelItemPrefab = Resources.Load("UI/Selling_ListItem") as GameObject;
         ecoPanelItemPrefab = Resources.Load("UI/EconomyPanel_ListItem") as GameObject;
         socket = DisabledObjectsGameScene.Instance.socket;
@@ -143,8 +144,14 @@ public class ProduceSelling : MonoBehaviour
     private void resetSellingPanel()
     {
         //savarankiskai issitrina visi values pries uzdaryma
-        DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("resetValues");
+        try
+        {
+            DisabledObjectsGameScene.Instance.SellingPanel.BroadcastMessage("resetValues");
+        }
+        catch { }
 
-        GameObject.Find("SellingButton").GetComponent<SellingButtonScript>().expandContract();
+        Globals.Instance.UIBloomActive(false);
+
+        DisabledObjectsGameScene.Instance.SellingPanel.SetActive(false);
     }
 }

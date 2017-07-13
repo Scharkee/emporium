@@ -4,6 +4,7 @@ public class EconomyButtonScript : MonoBehaviour
 {
     public void TheClick()
     {
+        Globals.Instance.UIBloomActive(!DisabledObjectsGameScene.Instance.EconomyPanel.activeSelf);
         DisabledObjectsGameScene.Instance.EconomyPanel.SetActive(!DisabledObjectsGameScene.Instance.EconomyPanel.activeSelf);
 
         if (DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf) //buymenu panel is currently open

@@ -12,14 +12,8 @@ public class SellingButtonScript : MonoBehaviour
         {
         }
 
-        if (DisabledObjectsGameScene.Instance.SellingPanel.activeSelf)
-        {
-            DisabledObjectsGameScene.Instance.SellingPanel.SetActive(false);
-        }
-        else
-        {
-            DisabledObjectsGameScene.Instance.SellingPanel.SetActive(true);
-        }
+        Globals.Instance.UIBloomActive(!DisabledObjectsGameScene.Instance.SellingPanel.activeSelf);
+        DisabledObjectsGameScene.Instance.SellingPanel.SetActive(!DisabledObjectsGameScene.Instance.SellingPanel.activeSelf);
 
         if (DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf) //buymenu panel is currently open
         {

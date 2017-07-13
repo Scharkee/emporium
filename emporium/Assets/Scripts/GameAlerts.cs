@@ -69,6 +69,7 @@ public class GameAlerts : MonoBehaviour
 
         DisabledObjectsGameScene.Instance.alertPanel.SetActive(true);
         DisabledObjectsGameScene.Instance.alertPanel.transform.Find("Alert_Text").GetComponent<Text>().text = str;
+        Globals.Instance.UIBloomActive(true);
 
         while (DisabledObjectsGameScene.Instance.alertPanel.GetComponent<CanvasGroup>().alpha < 1)
         {
@@ -84,6 +85,7 @@ public class GameAlerts : MonoBehaviour
 
     public void closeAlert()
     {
+        Globals.Instance.UIBloomActive(false);
         DisabledObjectsGameScene.Instance.alertPanel.GetComponent<CanvasGroup>().alpha = 0f;
         DisabledObjectsGameScene.Instance.alertPanel.transform.position = alertDefaultPos;
         DisabledObjectsGameScene.Instance.alertPanel.SetActive(false);

@@ -57,6 +57,7 @@ public class BuyButtonScript : MonoBehaviour
             while (DisabledObjectsGameScene.Instance.BuyMenuPanel.GetComponent<CanvasGroup>().alpha < 1f)
             {
                 //fadeoutas
+                //TODO: gal pakeist i Globals.instance.UIbluractive
 
                 yield return new WaitForSeconds(0.001f);
                 //didinam alpha kas cikla
@@ -118,6 +119,7 @@ public class BuyButtonScript : MonoBehaviour
 
     public void CancelContext() //parejo broadcastas, isjungti VISUS context panels
     {
+        Globals.Instance.UIBloomActive(false);
         StartCoroutine(BuyMenuPanelCloser());
     }
 }

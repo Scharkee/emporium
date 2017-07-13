@@ -125,6 +125,7 @@
     <Compile Include="Assets\Scripts\PressContextPanelScript.cs" />
     <Compile Include="Assets\Scripts\PriceManager.cs" />
     <Compile Include="Assets\Scripts\ProduceSelling.cs" />
+    <Compile Include="Assets\Scripts\ProduceSellingPanel.cs" />
     <Compile Include="Assets\Scripts\RegisterScript.cs" />
     <Compile Include="Assets\Scripts\SellButtonExpander.cs" />
     <Compile Include="Assets\Scripts\SellListItem_maxButtonScript.cs" />

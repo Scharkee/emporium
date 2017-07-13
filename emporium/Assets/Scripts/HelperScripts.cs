@@ -21,7 +21,7 @@ public class HelperScripts : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log("-------------testfunc-----------");
-            testThing();
+            testThing2();
         }
     }
 
@@ -48,6 +48,11 @@ public class HelperScripts : MonoBehaviour
         Debug.Log("index is " + dic["IndexInJobList"]);
 
         DisabledObjectsGameScene.Instance.managerialScripts.GetComponent<ProduceSelling>().AskForSaleJobAssignment(dic);
+    }
+
+    private void testThing2()
+    {
+        GameAlerts.Instance.AlertWithMessage("testsetset");
     }
 
     public bool LyginisPlotsize()

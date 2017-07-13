@@ -177,6 +177,7 @@ public class BuyMode : MonoBehaviour
 
     public void CancelContext()
     {
+        Globals.Instance.UIBloomActive(false);
         DisableBuyMode(false);
     }
 

@@ -7,8 +7,13 @@ public class alertPanelScript : MonoBehaviour
         GameAlerts.Instance.closeAlert();
     }
 
+    public void openAlert()
+    {
+    }
+
     public void CancelContext() //parejo broadcastas,
     {
+        Globals.Instance.UIBloomActive(false);
         GameAlerts.Instance.closeAlert();
     }
 }
