@@ -41,6 +41,10 @@ public class BuyButtonScript : MonoBehaviour
         {
             DisabledObjectsGameScene.Instance.SellingPanel.SetActive(false);
         }
+        if (DisabledObjectsGameScene.Instance.Worker_panel.activeSelf)
+        {
+            DisabledObjectsGameScene.Instance.Worker_panel.SetActive(false);
+        }
 
         StartCoroutine(BuyMenuPanelFader());
     }

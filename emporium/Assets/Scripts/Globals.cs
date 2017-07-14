@@ -43,6 +43,9 @@ public class Globals : MonoBehaviour
     public Color BuyMenuTabOn;
     public Color BuyMenuTabOff;
 
+    public Color WorkerPanelTabOn;
+    public Color WorkerPanelTabOff;
+
     public Color RedNormalProduceAlertColorr;
     public Color NormalProduceAlertColor;
 

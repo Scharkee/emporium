@@ -49,6 +49,10 @@ public class TileSellScript : MonoBehaviour
         {
             DisabledObjectsGameScene.Instance.SellingPanel.SetActive(false);
         }
+        if (DisabledObjectsGameScene.Instance.Worker_panel.activeSelf)
+        {
+            DisabledObjectsGameScene.Instance.Worker_panel.SetActive(false);
+        }
 
         EnableDisableSellMode();
     }

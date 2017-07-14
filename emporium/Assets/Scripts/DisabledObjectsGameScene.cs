@@ -45,6 +45,12 @@ public class DisabledObjectsGameScene : MonoBehaviour
     public GameObject EconomyPanel_panel;
     public GameObject Worker_panel;
 
+    public GameObject Worker_panel_available_panel;
+    public GameObject Worker_panel_hired_panel;
+    public GameObject Worker_panel_hired_panel_button;
+    public GameObject Worker_panel_available_panel_button;
+    public GameObject WorkerPanel_panel_hired_getSomeWorkersButton;
+
     public GameObject BuyMenuBuildingTabBtn, BuyMenuPlantTabBtn;
 
     public Text ProduceStorageEdit;
