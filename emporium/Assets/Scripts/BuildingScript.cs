@@ -21,6 +21,7 @@ public class BuildingScript : MonoBehaviour
     public AudioClip noh;
 
     public GameObject SelectionGlowObject;
+    public GameObject SaleParticles;
 
     //both
     private SocketIOComponent socket;

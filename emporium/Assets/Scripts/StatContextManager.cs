@@ -40,6 +40,11 @@ public class StatContextManager : MonoBehaviour
                     {
                         lasthit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(false);
                     }
+
+                    if (lasthit.transform.gameObject.GetComponent<BuildingScript>().SaleParticles.activeSelf)
+                    {
+                        lasthit.transform.gameObject.GetComponent<BuildingScript>().SaleParticles.SetActive(false);
+                    }
                 }
                 catch
                 {
@@ -48,9 +53,20 @@ public class StatContextManager : MonoBehaviour
             else if (hit.transform.tag == "Building" && !DisabledObjectsGameScene.Instance.alertPanel.activeSelf && !DisabledObjectsGameScene.Instance.BuyMenuPanel.activeSelf)
             {
                 ContextManager.Instance.ShowStats(hit.transform.gameObject);
-                if (!hit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.activeSelf)
+
+                if (DisabledObjectsGameScene.Instance.tileSellScript.GetComponent<TileSellScript>().sellModeEnabled) //enablinam sell particles
                 {
-                    hit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(true);
+                    if (!hit.transform.gameObject.GetComponent<BuildingScript>().SaleParticles.activeSelf)
+                    {
+                        hit.transform.gameObject.GetComponent<BuildingScript>().SaleParticles.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (!hit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.activeSelf)
+                    {
+                        hit.transform.gameObject.GetComponent<BuildingScript>().SelectionGlowObject.SetActive(true);
+                    }
                 }
 
                 try

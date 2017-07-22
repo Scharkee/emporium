@@ -331,10 +331,7 @@ public class AssignTiles : MonoBehaviour
 
         foreach (Transform child in currentTile.transform)
         {
-            if (child.name == "SelectionGlow")
-            {
-            }
-            else
+            if (child.name != "SelectionGlow" && child.name != "SaleParticles")
             {
                 child.localRotation = Quaternion.Euler(new Vector3(xRot, Random.Range(-350.0f, 350.0f), 0));
             }
