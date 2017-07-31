@@ -398,4 +398,7 @@ public class Worker
     public int ID;
     public int ASSIGNEDTILEID;
     public int SPEED;
+    public string NAME;
+    public float COST;
+    public float COST_UPFRONT;
 }

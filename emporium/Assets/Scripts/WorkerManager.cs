@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using SocketIO;
 using System.Text;
+using UnityEngine.UI;
 
 public class WorkerManager : MonoBehaviour
 {
+    private GameObject currentAvailableWorkerListItem, AvailableWorkerListItemPrefab, currentHiredWorkerListItem, HiredWorkerListItemPrefab;
+
     // Use this for initialization
     private void Start()
     {
+        AvailableWorkerListItemPrefab = Resources.Load("UI/WorkerPanel_availablePrefab") as GameObject;
+        HiredWorkerListItemPrefab = Resources.Load("UI/WorkerPanel_hiredPrefab") as GameObject;
     }
 
     public void AssignReceivedWorkers(SocketIOEvent evt)
@@ -78,10 +83,38 @@ public class WorkerManager : MonoBehaviour
 
     public void PopulateWorkerPanel()
     {
+        int availableWorkerCount = 0, hiredWorkerCount = 0;
+        //AVAILABLE WORKERS
+        if (Database.Instance.AvailableWorkerList.Count > 0) //yra workeriu pasamdytu
+        {
+            //spawn kiekvienam workeriui po list item'a
+            foreach (Worker workeris in Database.Instance.AvailableWorkerList)
+            {
+                availableWorkerCount++;
+
+                //SPAWNING ENTRY FOR AVAILABLE WORKER PANEL
+                currentAvailableWorkerListItem = Instantiate(AvailableWorkerListItemPrefab, DisabledObjectsGameScene.Instance.Worker_panel_available_panel.transform) as GameObject;
+                currentAvailableWorkerListItem.transform.Find("WorkerPanel_availablePrefab_number").GetComponent<Text>().text = "" + availableWorkerCount;
+                currentAvailableWorkerListItem.transform.Find("WorkerPanel_availablePrefab_name_e").GetComponent<Text>().text = workeris.NAME;
+                currentAvailableWorkerListItem.transform.Find("WorkerPanel_availablePrefab_wage_e").GetComponent<Text>().text = "" + workeris.COST;
+                currentAvailableWorkerListItem.transform.Find("WorkerPanel_availablePrefab_upfront_e").GetComponent<Text>().text = "" + workeris.COST_UPFRONT;
+            }
+        }
+
+        //HIRED WORKERS
         if (Database.Instance.HiredWorkerList.Count > 0) //yra workeriu pasamdytu
         {
             //istrinam suggestion mygtuka
             Destroy(DisabledObjectsGameScene.Instance.WorkerPanel_panel_hired_getSomeWorkersButton);
+
+            //spawn kiekvienam workeriui po list item'a
+            foreach (Worker workeris in Database.Instance.HiredWorkerList)
+            {
+                hiredWorkerCount++;
+                //SPAWNING ENTRY FOR HIRED WORKER PANEL
+                currentHiredWorkerListItem = Instantiate(HiredWorkerListItemPrefab, DisabledObjectsGameScene.Instance.Selling_Salepanel.transform) as GameObject;
+                currentAvailableWorkerListItem.transform.Find("WorkerPanel_availablePrefab_number").GetComponent<Text>().text = "" + hiredWorkerCount;
+            }
         }
     }
 }

@@ -37,6 +37,8 @@ public class SocketManager : MonoBehaviour
         socket.On("RECEIVE_WORKERS", ReceiveWorkers);
         socket.On("RECEIVE_AVAILABLE_WORKERS", ReceiveAvailableWorkers);
 
+        socket.On("WORKER_HIRED_CONF", handleWorkerHiredConfirmation);
+
         //insta calls for starting up
         RetrievePrices();
     }
@@ -143,6 +145,11 @@ public class SocketManager : MonoBehaviour
         float additive = float.Parse(evt.data.GetField("addFunds").ToString());
 
         Database.Instance.UserDollars += additive;
+    }
+
+    private void handleWorkerHiredConfirmation(SocketIOEvent evt)
+    {
+        //pridet prie hired workers listo + spawn entry in hired worker tab
     }
 
     public void ExpandPlotsize()
